@@ -1,0 +1,209 @@
+"use client"
+
+import { useState } from "react"
+import Image from "next/image"
+import { motion } from "framer-motion"
+import { Twitter, Linkedin, Mail, ExternalLink } from "lucide-react"
+
+export default function TeamSection() {
+  const [activeTeamMember, setActiveTeamMember] = useState(null)
+
+  const team = [
+    {
+      name: "Alex Rivera",
+      role: "Founder & Creative Director",
+      bio: "Former documentary filmmaker with a passion for authentic storytelling and brand narratives. Alex has led creative teams at major production studios before founding Moons Out Media.",
+      image: "/placeholder.svg?height=400&width=400",
+      social: {
+        twitter: "#",
+        linkedin: "#",
+        email: "alex@moonsoutmedia.com",
+      },
+    },
+    {
+      name: "Maya Chen",
+      role: "Head of Digital Strategy",
+      bio: "Digital marketing expert specializing in data-driven campaign development and optimization. Maya brings 8+ years of experience working with Fortune 500 brands.",
+      image: "/placeholder.svg?height=400&width=400",
+      social: {
+        twitter: "#",
+        linkedin: "#",
+        email: "maya@moonsoutmedia.com",
+      },
+    },
+    {
+      name: "Jordan Taylor",
+      role: "Lead Cinematographer",
+      bio: "Award-winning visual storyteller with expertise in documentary-style brand content. Jordan's work has been featured in international film festivals and major advertising campaigns.",
+      image: "/placeholder.svg?height=400&width=400",
+      social: {
+        twitter: "#",
+        linkedin: "#",
+        email: "jordan@moonsoutmedia.com",
+      },
+    },
+    {
+      name: "Zoe Williams",
+      role: "Social Media Director",
+      bio: "Social media strategist focused on building engaged communities through authentic content. Zoe previously managed social for several major entertainment brands.",
+      image: "/placeholder.svg?height=400&width=400",
+      social: {
+        twitter: "#",
+        linkedin: "#",
+        email: "zoe@moonsoutmedia.com",
+      },
+    },
+  ]
+
+  const container = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  }
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6 },
+    },
+  }
+
+  return (
+    <section className="py-16">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="container mx-auto px-4"
+      >
+        <h2 className="text-4xl font-bold mb-16 text-center">
+          Meet Our <span className="text-cyberpunk-green">Team</span>
+        </h2>
+
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
+          {team.map((member, index) => (
+            <motion.div
+              key={index}
+              variants={item}
+              className="group relative overflow-hidden rounded-lg bg-black/40 hover:bg-black/60 transition-all duration-300"
+              whileHover={{
+                y: -5,
+                boxShadow: `0 10px 25px -5px rgba(0, 240, 255, 0.2)`,
+              }}
+              onClick={() => setActiveTeamMember(member)}
+            >
+              <div className="aspect-square relative overflow-hidden">
+                <Image
+                  src={member.image || "/placeholder.svg"}
+                  alt={member.name}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
+              </div>
+
+              <div className="absolute bottom-0 left-0 w-full p-6 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
+                <p className="text-cyberpunk-blue font-medium mb-3">{member.role}</p>
+                <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                  {member.bio.substring(0, 80)}...
+                </p>
+                <div className="mt-4 flex space-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
+                  <a href={member.social.twitter} className="text-gray-400 hover:text-cyberpunk-blue transition-colors">
+                    <Twitter size={16} />
+                  </a>
+                  <a
+                    href={member.social.linkedin}
+                    className="text-gray-400 hover:text-cyberpunk-blue transition-colors"
+                  >
+                    <Linkedin size={16} />
+                  </a>
+                  <a
+                    href={`mailto:${member.social.email}`}
+                    className="text-gray-400 hover:text-cyberpunk-pink transition-colors"
+                  >
+                    <Mail size={16} />
+                  </a>
+                </div>
+              </div>
+
+              <div className="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-cyberpunk-pink opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+              <div className="absolute bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-cyberpunk-blue opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Team Member Modal */}
+        {activeTeamMember && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div className="absolute inset-0 bg-black/80" onClick={() => setActiveTeamMember(null)}></div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="bg-black/90 border border-cyberpunk-blue/30 rounded-lg p-6 max-w-2xl w-full relative z-10"
+            >
+              <button
+                onClick={() => setActiveTeamMember(null)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-white"
+              >
+                <ExternalLink size={20} />
+              </button>
+
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="w-full md:w-1/3 aspect-square relative rounded-lg overflow-hidden">
+                  <Image
+                    src={activeTeamMember.image || "/placeholder.svg"}
+                    alt={activeTeamMember.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+
+                <div className="w-full md:w-2/3">
+                  <h3 className="text-2xl font-bold text-white">{activeTeamMember.name}</h3>
+                  <p className="text-cyberpunk-blue font-medium mb-4">{activeTeamMember.role}</p>
+                  <p className="text-gray-300 mb-6">{activeTeamMember.bio}</p>
+
+                  <div className="flex space-x-4">
+                    <a
+                      href={activeTeamMember.social.twitter}
+                      className="p-2 rounded-full bg-cyberpunk-blue/10 text-cyberpunk-blue hover:bg-cyberpunk-blue/20 transition-colors"
+                    >
+                      <Twitter size={18} />
+                    </a>
+                    <a
+                      href={activeTeamMember.social.linkedin}
+                      className="p-2 rounded-full bg-cyberpunk-blue/10 text-cyberpunk-blue hover:bg-cyberpunk-blue/20 transition-colors"
+                    >
+                      <Linkedin size={18} />
+                    </a>
+                    <a
+                      href={`mailto:${activeTeamMember.social.email}`}
+                      className="p-2 rounded-full bg-cyberpunk-pink/10 text-cyberpunk-pink hover:bg-cyberpunk-pink/20 transition-colors"
+                    >
+                      <Mail size={18} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </motion.div>
+    </section>
+  )
+}
+
