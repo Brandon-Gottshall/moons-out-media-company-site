@@ -26,7 +26,7 @@ const painPoints: PainPoint[] = [
     solution: {
       title: "Authentic Storytelling",
       description:
-        "We create documentary-style content that captures your unique brand story and connects with your audience on an emotional level.",
+        "Documentary-style storytelling, targeted digital advertising, and custom web, AI & DevOps solutions — all designed to connect with your audience and accelerate your business.",
       results: [
         "43% increase in audience engagement",
         "2.7x longer view time compared to industry average",

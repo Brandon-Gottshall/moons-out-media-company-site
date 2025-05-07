@@ -1,30 +1,30 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
-import { ChevronDown } from "lucide-react"
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 
 export default function Hero() {
-  const [scrollY, setScrollY] = useState(0)
-  const [mounted, setMounted] = useState(false)
+  const [scrollY, setScrollY] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
+    setMounted(true);
     const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
+      setScrollY(window.scrollY);
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Don't apply parallax effect during SSR
   const parallaxStyle = mounted
     ? {
         transform: `translateY(${scrollY * 0.5}px)`,
       }
-    : {}
+    : {};
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -66,7 +66,10 @@ export default function Hero() {
           className="text-center max-w-4xl mx-auto"
         >
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-            <span className="block glitch-text font-extrabold tracking-tight" data-text="Authentic Stories">
+            <span
+              className="block glitch-text font-extrabold tracking-tight"
+              data-text="Authentic Stories"
+            >
               Authentic Stories
             </span>
             <span className="block mt-2 text-cyberpunk-pink font-black tracking-tight text-shadow-lg">
@@ -74,8 +77,9 @@ export default function Hero() {
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto font-medium">
-            We create documentary-style content that captures the essence of your brand and connects with your audience
-            on a deeper level.
+            Documentary-style storytelling, targeted digital advertising, and
+            custom web, AI & DevOps solutions— all designed to connect with your
+            audience and accelerate your business.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button
@@ -102,11 +106,13 @@ export default function Hero() {
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30"
       >
-        <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}>
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
+        >
           <ChevronDown className="h-8 w-8 text-cyberpunk-pink" />
         </motion.div>
       </motion.div>
     </section>
-  )
+  );
 }
-
