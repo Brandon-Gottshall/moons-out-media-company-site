@@ -1,0 +1,52 @@
+---
+description: If following specification.
+globs: 
+alwaysApply: false
+---
+# Specification Tracking
+
+When implementing features that are part of a formal specification, this workflow must be followed to ensure proper tracking and adherence to the plan.
+
+## Process
+
+1. **Check for Specification First**: Before implementing any significant feature, ask "Am I following a specification?" If yes, locate the specification document (typically in `ai-docs/[feature-name]-specification.md`).
+
+2. **Review Current Tasks**: Identify which specific tasks from the implementation checklist you're currently working on.
+
+3. **Follow the Plan**: Implement the feature according to the architecture, data models, and technical requirements outlined in the specification.
+
+4. **Update Progress**: After completing each task or subtask:
+   - Mark the corresponding checkbox as complete in the specification document
+   - Add any implementation notes that might be helpful for future reference
+   - Format: `- [x] Completed task <!-- Implemented on [date] using [approach] -->`
+
+5. **Handle Changes**: If implementation details need to differ from the specification:
+   - Document the change reason directly in the specification
+   - Update any affected sections of the specification to reflect the new approach
+   - Format: `<!-- Change: [description of change] Reason: [justification] -->`
+
+6. **Cross-Reference**: When committing code related to specification tasks, reference the specification section in commit messages.
+
+## Example Tracking Update
+
+```markdown
+### Phase 1: Setup & Configuration
+- [x] Install Payload CMS and dependencies <!-- Implemented on 2023-06-01 using Bun instead of npm -->
+  - [x] `payload`
+  - [x] `@payloadcms/next`
+  - [x] `mongodb`
+  - [x] `dotenv`
+- [ ] Create `.env` file with required variables
+```
+
+## Guidelines for AI Assistance
+
+When an AI assistant is asked to help with specification tasks:
+
+1. The AI should first identify if the request relates to a specification document
+2. If yes, the AI should:
+   - Locate and review the relevant specification
+   - Identify which tasks are being addressed
+   - Implement according to the specification guidelines
+   - Recommend updating the progress tracking in the specification
+   - If changes are needed, suggest specific updates to the specification

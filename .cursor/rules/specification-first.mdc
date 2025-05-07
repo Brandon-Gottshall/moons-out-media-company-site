@@ -1,0 +1,83 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Specification-First Development
+
+For any major feature addition, system integration, or architectural change, a formal specification document must be created and approved before implementation begins.
+
+## Process
+
+1. **Identify Need**: Determine that a change requires formal specification (typically any feature that will take >1 day to implement)
+
+2. **Create Specification Document**: Structure as follows:
+   - Overview/Purpose
+   - Architecture/Components 
+   - Data Models/Schemas
+   - Implementation Plan
+   - Technical Requirements
+   - Migration Strategy (if applicable)
+   - Success Criteria
+
+3. **Develop Implementation Checklist**: Create a detailed, phased checklist with:
+   - Major phases of work
+   - Individual tasks within each phase
+   - Subtasks where needed
+   - Use markdown checkboxes for progress tracking
+
+4. **Review and Approval**: Get stakeholder sign-off before beginning implementation
+
+5. **Track Progress**: Use the checklist during implementation to track progress
+
+## Template
+
+```markdown
+# [Feature Name] Specification
+
+## 1. Overview
+[Brief description of what this feature/system is and why it's needed]
+
+## 2. Architecture
+[Description of technical architecture, components, and how they interact]
+
+## 3. Data Models
+[Define data structures, schemas, relationships]
+
+## 4. Implementation Plan
+[High-level implementation approach and strategy]
+
+### 4.1 [Phase 1]
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
+
+### 4.2 [Phase 2]
+[...]
+
+## 5. Technical Requirements
+[Dependencies, environment variables, performance considerations, security requirements]
+
+## 6. Migration Strategy (if applicable)
+[How to migrate from existing system/data to the new implementation]
+
+## 7. Success Criteria
+[How will we know when this implementation is successful?]
+
+## 8. Implementation Checklist
+
+### Phase 1: [Phase Name]
+- [ ] [Task 1]
+  - [ ] [Subtask 1.1]
+  - [ ] [Subtask 1.2]
+- [ ] [Task 2]
+- [ ] [Task 3]
+
+### Phase 2: [Phase Name]
+- [ ] [Task 1]
+- [ ] [Task 2]
+[...]
+```
+
+## Example
+See the Payload CMS integration specification at `ai-docs/payload-cms-integration.md` for a complete example.

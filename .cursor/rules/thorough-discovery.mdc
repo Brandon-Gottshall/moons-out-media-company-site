@@ -1,0 +1,68 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Thorough Discovery and Verification
+
+When working with existing codebases, thorough discovery is essential before making changes or adding new code. This rule mandates verification of existing files and code patterns before proceeding with implementation.
+
+## Core Principles
+
+1. **Verify Before Creating**: Always check if a file, component, or functionality already exists before creating a new one
+
+2. **Explicit Uncertainty Communication**: When expected files or components cannot be found, stop and explicitly notify the user
+
+3. **Prevent Duplication**: Avoid creating redundant code, files, or functionality
+
+## Process
+
+### File Verification Workflow
+
+1. **Initial Search**: Before creating any new file or implementing functionality, search for existing implementations:
+   - Use `file_search`, `grep_search`, and `list_dir` tools to find relevant files
+   - Check obvious and standard locations based on project structure
+
+2. **When Not Found**: If an expected file cannot be found:
+   - Explicitly state: "I cannot find [file/component/pattern] that I expected to exist"
+   - Ask the user: "Does [file/component/pattern] exist, or should I create it?"
+   - Provide specific location(s) that were checked
+
+3. **Wait for Confirmation**: Do not proceed with creation until receiving explicit confirmation
+
+4. **Consider Hidden Files**: Be aware that some files may be hidden from the indexer via .gitignore or other mechanisms
+
+### Example Dialogue
+
+```
+AI: I need to modify the PayloadCMS configuration, but I cannot find a payload.config.ts file. 
+    I checked in the project root, /src, and /config directories.
+    Does this file exist elsewhere, or should I create it?
+
+User: It's in /cms/payload.config.ts but that directory is gitignored.
+
+AI: Thank you. I'll modify the file at that location instead of creating a new one.
+```
+
+## Implementation Guidelines
+
+1. **Comprehensive Search Strategy**: Use multiple search methods:
+   - Filename search: `file_search`
+   - Content search: `grep_search`
+   - Directory inspection: `list_dir`
+   - Look in conventional locations based on framework (e.g., Next.js app directory)
+
+2. **Common Verification Targets**:
+   - Configuration files
+   - Core utilities and helpers
+   - Component libraries
+   - API endpoints
+   - Database schemas/models
+   - Type definitions
+
+3. **Report Search Strategy**: When reporting a file was not found, include:
+   - Specific directories/locations checked
+   - Search patterns used
+   - Any clues that might help locate the file
+
+4. **Document Findings**: After a file is located, note its location for future reference
