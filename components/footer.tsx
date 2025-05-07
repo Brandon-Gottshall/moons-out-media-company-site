@@ -46,10 +46,10 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               <li className="text-gray-300">
-                123 Creative Ave, Digital City, DC 10101
+                Dayton, Ohio, USA
               </li>
-              <li className="text-gray-300">(555) 123-4567</li>
-              <li className="text-gray-300">hello@moonsoutmedia.com</li>
+              <li className="text-gray-300">(937) 451 - 0042</li>
+              <li className="text-gray-300">help@moonsoutmedia.com</li>
             </ul>
           </div>
         </div>
