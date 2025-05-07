@@ -7,6 +7,23 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: [
+    'border-cyberpunk-teal',
+    'border-cyberpunk-teal/30',
+    'border-cyberpunk-yellow',
+    'border-cyberpunk-yellow/30',
+    'border-cyberpunk-cyan',
+    'border-cyberpunk-cyan/30',
+    'text-cyberpunk-teal',
+    'text-cyberpunk-yellow',
+    'text-cyberpunk-cyan',
+    'bg-cyberpunk-teal/10',
+    'bg-cyberpunk-teal/30',
+    'bg-cyberpunk-yellow/10',
+    'bg-cyberpunk-yellow/30',
+    'bg-cyberpunk-cyan/10',
+    'bg-cyberpunk-cyan/30',
+  ],
   theme: {
     extend: {
       colors: {
@@ -47,14 +64,41 @@ const config: Config = {
         cyberpunk: {
           background: "#121212",
           purple: {
-            light: "#6A5ACD", // Slate Blue (light purple)
-            DEFAULT: "#483D8B", // Dark Slate Blue (rich purple)
+            light: "#6A5ACD",
+            DEFAULT: "#483D8B",
           },
-          blue: "#00CCFF", // Cyan (slightly darker for better contrast)
-          pink: "#FF69B4", // Hot pink
-          green: "#00FF7F", // Spring green
-          gold: "#FFD700", // Metallic gold
-          silver: "#C0C0C0", // Metallic silver
+          blue: {
+            light: "#66F0FF",
+            DEFAULT: "#00CCFF",
+          },
+          pink: {
+            light: "#FF85C1",
+            DEFAULT: "#FF69B4",
+          },
+          green: {
+            light: "#66FF99",
+            DEFAULT: "#00FF7F",
+          },
+          teal: {
+            light: "#5EEAD4",
+            DEFAULT: "#14B8A6",
+          },
+          yellow: {
+            light: "#FFF382",
+            DEFAULT: "#FACC15",
+          },
+          cyan: {
+            light: "#9DECF9",
+            DEFAULT: "#22D3EE",
+          },
+          gold: {
+            light: "#FFE066",
+            DEFAULT: "#FFD700",
+          },
+          silver: {
+            light: "#E0E0E0",
+            DEFAULT: "#C0C0C0",
+          },
         },
       },
       borderRadius: {
