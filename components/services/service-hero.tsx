@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
+import { useTypewriter, Cursor } from 'react-simple-typewriter'
 
 export default function ServiceHero() {
   const [mounted, setMounted] = useState(false)
@@ -118,23 +119,9 @@ export default function ServiceHero() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <span className="block text-white mb-2">Our Services</span>
-            <motion.span
-              className="block neon-text relative inline-block"
-              animate={{
-                textShadow: [
-                  "0 0 3px rgba(255, 255, 255, 0.8), 0 0 8px rgba(0, 204, 255, 0.6), 0 0 12px rgba(0, 204, 255, 0.4)",
-                  "0 0 3px rgba(255, 255, 255, 0.8), 0 0 10px rgba(0, 204, 255, 0.7), 0 0 15px rgba(0, 204, 255, 0.5)",
-                  "0 0 3px rgba(255, 255, 255, 0.8), 0 0 8px rgba(0, 204, 255, 0.6), 0 0 12px rgba(0, 204, 255, 0.4)",
-                ],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-              }}
-            >
-              Crafting Authentic Stories
-            </motion.span>
+            <span className="block text-cyberpunk-blue relative inline-block min-h-[60px] md:min-h-[80px] lg:min-h-[100px]">
+              <TypewriterEffect />
+            </span>
           </motion.h1>
 
           <motion.div
@@ -163,8 +150,7 @@ export default function ServiceHero() {
             ></motion.div>
 
             <p className="text-white text-lg md:text-xl leading-relaxed">
-              We blend cinematic artistry with strategic marketing to create content that captivates your audience and
-              drives measurable results.
+            Cinematic artistry meets cutting-edge tech: documentary storytelling, strategic ad campaigns, and end-to-end web, AI & cloud engineering—all under one roof to drive real results.
             </p>
           </motion.div>
 
@@ -224,6 +210,24 @@ export default function ServiceHero() {
         </motion.div>
       </motion.div>
     </section>
+  )
+}
+
+// Helper component for the typewriter effect
+function TypewriterEffect() {
+  const [text] = useTypewriter({
+    words: ["Authentic Stories", "Scalable Tech"],
+    loop: 0, // Loop indefinitely
+    typeSpeed: 100,
+    deleteSpeed: 70,
+    delaySpeed: 1500,
+  })
+
+  return (
+    <>
+      {text}
+      <Cursor cursorStyle="_" />
+    </>
   )
 }
 
