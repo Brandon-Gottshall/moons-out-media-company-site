@@ -25,3 +25,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# macos
+.DS_Store
+
+# video files
+*.mov
+*.mp4
+

@@ -1,10 +1,20 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { ChevronRight, ExternalLink } from "lucide-react"
+import { ChevronRight, ExternalLink, ChevronLeft } from "lucide-react"
 import Link from "next/link"
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react"
+import type { Swiper as SwiperInstance } from "swiper"
+import { Navigation, A11y, EffectFade } from "swiper/modules"
+
+// Import Swiper styles
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/effect-fade"
 
 type Service = {
   id: string
@@ -29,7 +39,7 @@ const services: Service[] = [
       "Company Culture Films",
       "Product Origin Stories",
     ],
-    image: "/images/documentary.png",
+    image: "/images/documentary.gif",
     caseStudyLink: "/portfolio/documentary",
     color: "blue",
   },
@@ -45,7 +55,7 @@ const services: Service[] = [
       "Performance Analytics",
       "A/B Testing & Optimization",
     ],
-    image: "/images/digital-marketing.png",
+    image: "/images/digital-marketing.webp",
     caseStudyLink: "/portfolio/digital-marketing",
     color: "pink",
   },
@@ -61,7 +71,7 @@ const services: Service[] = [
       "Audience Connection Mapping",
       "Emotional Engagement Tactics",
     ],
-    image: "/images/brand-storytelling.png",
+    image: "/images/storytelling.gif",
     caseStudyLink: "/portfolio/storytelling",
     color: "purple",
   },
@@ -81,223 +91,292 @@ const services: Service[] = [
     caseStudyLink: "/portfolio/social-media",
     color: "green",
   },
+  {
+    id: "web-app",
+    title: "Web Application Development",
+    description:
+      "We build scalable, secure web applications with Next.js, React & Node.js—designed for performance, reliability and ease-of-use.",
+    features: [
+      "Responsive UI/UX design",
+      "API & microservices architecture",
+      "Performance optimization & caching",
+      "Security best practices & compliance",
+    ],
+    image: "/images/web-app-development.gif",
+    caseStudyLink: "/portfolio/web-app-development",
+    color: "teal",
+  },
+  {
+    id: "ai-automation",
+    title: "AI & Automation Engineering",
+    description:
+      "Tailored AI/ML pipelines, chatbots and workflow automations (n8n, Langflow, etc.) that streamline operations and unlock data-driven insights.",
+    features: [
+      "Custom ML model development",
+      "Conversational chatbot integration",
+      "End-to-end workflow orchestration",
+      "Data preprocessing & ETL pipelines",
+    ],
+    image: "/images/ai-automation.jpeg",
+    caseStudyLink: "/portfolio/ai-automation",
+    color: "yellow",
+  },
+  {
+    id: "cloud-devops",
+    title: "Cloud & DevOps Solutions",
+    description:
+      "End-to-end containerized infrastructure, CI/CD pipelines and hybrid-cloud hosting to keep your apps up, fast and secure at any scale.",
+    features: [
+      "Kubernetes & Docker orchestration",
+      "Automated CI/CD pipelines",
+      "Monitoring, alerting & auto-scaling",
+      "Infrastructure as Code (Terraform/Ansible)",
+    ],
+    image: "/images/cloud-devops.webp",
+    caseStudyLink: "/portfolio/cloud-devops",
+    color: "cyan",
+  },
 ]
 
-const getServiceColor = (color: string) => {
-  switch (color) {
-    case "blue":
-      return "rgba(0, 204, 255, 1)"
-    case "pink":
-      return "rgba(255, 105, 180, 1)"
-    case "purple":
-      return "rgba(106, 90, 205, 1)"
-    case "green":
-      return "rgba(0, 255, 127, 1)"
-    default:
-      return "rgba(0, 204, 255, 1)"
+const getServiceRgbaColor = (colorName: string, opacity: number = 1): string => {
+  const colors: Record<string, string> = {
+    blue: "0, 204, 255",
+    pink: "255, 105, 180",
+    purple: "106, 90, 205",
+    green: "0, 255, 127",
+    teal: "32, 178, 170",
+    yellow: "255, 223, 0",
+    cyan: "0, 255, 255",
   }
+  return `rgba(${(colors[colorName] || colors.blue)}, ${opacity})`
 }
 
 export default function ServiceShowcase() {
-  const [activeService, setActiveService] = useState<Service>(services[0])
+  const [activeIndex, setActiveIndex] = useState(0)
+  const swiperRef = useRef<SwiperInstance | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(containerRef, { once: true, amount: 0.2 })
+  const isInView = useInView(containerRef, { once: true, amount: 0.1 })
 
-  // Get color values for the active service
-  const activeColor = getServiceColor(activeService.color)
+  const activeService = services[activeIndex]
+  const activeRgbaColor = getServiceRgbaColor(activeService.color)
+  const activeTailwindColorName = activeService.color // e.g. "blue", "pink"
+  // Pre-construct strings for dynamic Tailwind classes that involve interpolation
+  const activeBorderClass = `border-cyberpunk-${activeTailwindColorName}`
+  const activeTextClass = `text-cyberpunk-${activeTailwindColorName}`
+  const activeBgClass = `bg-cyberpunk-${activeTailwindColorName}`
+  const activeRingClass = `focus:ring-cyberpunk-${activeTailwindColorName}`
 
+  const handleSlideChange = (swiper: SwiperInstance) => {
+    setActiveIndex(swiper.realIndex)
+  }
+
+  const slideTo = (index: number) => {
+    if (swiperRef.current) {
+      swiperRef.current.slideToLoop(index)
+    }
+  }
+
+  useEffect(() => {
+    if (swiperRef.current && swiperRef.current.realIndex !== activeIndex) {
+      swiperRef.current.slideToLoop(activeIndex)
+    }
+  }, [activeIndex])
+  
   return (
     <motion.div
       ref={containerRef}
       id="services-showcase"
-      className="relative bg-black/60 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden w-full max-w-5xl mx-auto"
+      className="relative w-full max-w-6xl mx-auto py-12 md:py-16"
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      {/* Background glow effect */}
-      <motion.div
-        className="absolute -inset-1 rounded-lg opacity-20 z-0 blur-xl"
-        animate={{
-          background: `radial-gradient(circle at 50% 50%, ${activeColor} 0%, transparent 70%)`,
-        }}
-        transition={{ duration: 0.8 }}
-      ></motion.div>
-
-      <div className="flex flex-col md:flex-row relative z-10">
-        {/* Service Selection - Left Column */}
-        <div className="md:w-1/3 border-b md:border-b-0 md:border-r border-gray-800">
-          <div className="p-6 border-b border-gray-800 bg-black/40">
-            <h3 className="text-xl font-bold text-white">Our Services</h3>
-            <p className="text-gray-400 text-sm mt-1">Select a service to learn more</p>
-          </div>
-
-          <div className="divide-y divide-gray-800">
-            {services.map((service, index) => (
-              <motion.button
-                key={service.id}
-                className={`w-full text-left p-6 transition-all relative ${
-                  activeService.id === service.id
-                    ? `bg-black/70 border-l-4 border-cyberpunk-${service.color}`
-                    : "hover:bg-black/40 border-l-4 border-transparent"
-                }`}
-                onClick={() => setActiveService(service)}
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
-              >
-                {/* Hover effect */}
-                {activeService.id !== service.id && (
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r opacity-0"
-                    style={{
-                      background: `linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(${getServiceColor(service.color).replace("1)", "0.1)")}) 100%)`,
-                    }}
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  ></motion.div>
-                )}
-
-                <h4
-                  className={`text-lg font-medium relative z-10 ${
-                    activeService.id === service.id ? `text-cyberpunk-${service.color}` : "text-white"
-                  }`}
+      <div className="relative mb-8 md:mb-12 px-4">
+        <Swiper
+          modules={[Navigation, A11y, EffectFade]}
+          onSwiper={(swiper: SwiperInstance) => { swiperRef.current = swiper }}
+          onSlideChange={handleSlideChange}
+          loop={true}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={1.2}
+          spaceBetween={16}
+          breakpoints={{
+            768: { slidesPerView: 2.5, spaceBetween: 24 },
+            1024: { slidesPerView: 3, spaceBetween: 32 },
+          }}
+          navigation={{
+            nextEl: ".swiper-button-next-custom",
+            prevEl: ".swiper-button-prev-custom",
+          }}
+          className="!py-8"
+        >
+          {services.map((service, index) => {
+            const isServiceActive = index === activeIndex;
+            const serviceBorderClass = isServiceActive ? activeBorderClass : 'border-gray-800 hover:border-gray-700';
+            const serviceTitleClass = isServiceActive ? activeTextClass : 'text-white';
+            
+            return (
+              <SwiperSlide key={service.id} className="h-auto">
+                <motion.div
+                  className={`relative aspect-[3/4] rounded-xl overflow-hidden cursor-pointer group border-2 ${serviceBorderClass} transition-all duration-300 ease-in-out bg-black/30`}
+                  onClick={() => slideTo(index)}
+                  whileHover={{ scale: 1.03 }}
+                  animate={{ scale: isServiceActive ? 1.05 : 1, y: isServiceActive ? -5 : 0}}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
                 >
-                  {service.title}
-                </h4>
-                <p className="text-gray-400 text-sm mt-1 line-clamp-2 relative z-10">{service.description}</p>
-              </motion.button>
-            ))}
-          </div>
-        </div>
-
-        {/* Service Details - Right Column */}
-        <div className="md:w-2/3">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeService.id}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.5 }}
-              className="h-full"
-            >
-              <div className="relative aspect-video overflow-hidden group">
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                ></motion.div>
-
-                <motion.img
-                  src={activeService.image || "/placeholder.svg"}
-                  alt={activeService.title}
-                  className="w-full h-full object-cover"
-                  initial={{ scale: 1.1 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.8 }}
-                />
-
-                {/* Animated overlay on hover */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r opacity-0 z-20"
-                  style={{
-                    background: `linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(${activeColor.replace("1)", "0.2)")}) 100%)`,
-                  }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                ></motion.div>
-
-                {/* Service title overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-30">
-                  <motion.h3
-                    className={`text-3xl font-bold text-white inline-block`}
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                  >
-                    {activeService.title}
-                    <motion.div
-                      className={`h-1 bg-cyberpunk-${activeService.color} mt-2`}
-                      initial={{ width: 0 }}
-                      animate={{ width: "100%" }}
-                      transition={{ duration: 0.5, delay: 0.4 }}
-                    ></motion.div>
-                  </motion.h3>
-                </div>
-              </div>
-
-              <div className="p-8">
-                <motion.div
-                  className="bg-black/40 p-5 rounded-lg mb-6 border border-gray-800"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                >
-                  <p className="text-white text-lg leading-relaxed">{activeService.description}</p>
+                  <motion.img
+                    src={service.image}
+                    alt={service.title}
+                    className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-300"
+                    initial={{ scale: 1.1 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.8 }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 z-10">
+                    <h4 className={`text-lg md:text-xl font-semibold transition-colors duration-300 ${serviceTitleClass}`}>
+                      {service.title}
+                    </h4>
+                  </div>
+                  {isServiceActive && (
+                     <motion.div 
+                      className="absolute top-2 right-2 w-3 h-3 rounded-full"
+                      style={{ backgroundColor: activeRgbaColor }}
+                      layoutId="active-indicator"
+                    />
+                  )}
                 </motion.div>
+              </SwiperSlide>
+            )}
+          )}
+        </Swiper>
 
-                <motion.div
-                  className="mb-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                >
-                  <h4 className={`text-lg font-medium text-cyberpunk-${activeService.color} mb-4 flex items-center`}>
-                    <span className={`w-2 h-2 rounded-full bg-cyberpunk-${activeService.color} mr-2`}></span>
-                    Key Features:
-                  </h4>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {activeService.features.map((feature, index) => (
-                      <motion.li
-                        key={index}
-                        className="flex items-start"
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
-                      >
-                        <div
-                          className={`w-6 h-6 rounded-full bg-cyberpunk-${activeService.color}/20 flex-shrink-0 flex items-center justify-center mt-0.5 mr-3 border border-cyberpunk-${activeService.color}/30`}
-                        >
-                          <ChevronRight className={`h-3 w-3 text-cyberpunk-${activeService.color}`} />
-                        </div>
-                        <span className="text-white">{feature}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.7 }}
-                >
-                  <Button
-                    className={`bg-cyberpunk-${activeService.color} hover:bg-cyberpunk-${activeService.color}/80 text-white py-6 text-base relative overflow-hidden group`}
-                    asChild
-                  >
-                    <Link href={activeService.caseStudyLink}>
-                      <span className="relative z-10 flex items-center">
-                        View Case Studies <ExternalLink className="ml-2 h-4 w-4" />
-                      </span>
-                      <motion.div
-                        className="absolute inset-0 bg-black/20"
-                        initial={{ x: "-100%", opacity: 0 }}
-                        whileHover={{ x: "100%", opacity: 1 }}
-                        transition={{ duration: 0.5 }}
-                      ></motion.div>
-                    </Link>
-                  </Button>
-                </motion.div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+        <button
+          aria-label="Previous service"
+          className={`swiper-button-prev-custom absolute top-1/2 -translate-y-1/2 left-0 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-all text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black ${activeRingClass}`}
+          style={{ marginLeft: '-10px' }}
+        >
+          <ChevronLeft className="h-6 w-6" />
+        </button>
+        <button
+          aria-label="Next service"
+          className={`swiper-button-next-custom absolute top-1/2 -translate-y-1/2 right-0 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-all text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black ${activeRingClass}`}
+          style={{ marginRight: '-10px' }}
+        >
+          <ChevronRight className="h-6 w-6" />
+        </button>
       </div>
 
-      {/* Digital noise overlay */}
-      <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 z-20 pointer-events-none"></div>
+      <div 
+        className="relative bg-black/60 backdrop-blur-md border border-gray-800 rounded-lg overflow-hidden w-full max-w-4xl mx-auto p-6 md:p-8"
+        aria-live="polite"
+      >
+        <motion.div
+          className="absolute -inset-2 rounded-lg opacity-20 blur-2xl z-0"
+          key={`${activeService.id}-glow`}
+          initial={{ background: `radial-gradient(circle at 50% 50%, ${getServiceRgbaColor(activeService.color, 0)} 0%, transparent 70%)` }}
+          animate={{
+            background: `radial-gradient(circle at 50% 50%, ${getServiceRgbaColor(activeService.color, 0.5)} 0%, transparent 70%)`,
+          }}
+          transition={{ duration: 0.8 }}
+        />
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeService.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className="relative z-10"
+          >
+            <div className="mb-6 md:mb-8 text-center">
+              <motion.h3
+                className="text-3xl md:text-4xl font-bold text-white inline-block"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                {activeService.title}
+              </motion.h3>
+              <motion.div
+                className={`h-1 ${activeBgClass} mt-2 mx-auto w-1/3 md:w-1/4`}
+                initial={{ width: "0%" }}
+                animate={{ width: "33%" }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              />
+            </div>
+            
+            <motion.div
+              className="bg-black/40 p-5 rounded-lg mb-6 border border-gray-700"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <p className="text-gray-300 text-base md:text-lg leading-relaxed">{activeService.description}</p>
+            </motion.div>
+
+            <motion.div
+              className="mb-6 md:mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <h4 className={`text-xl font-medium ${activeTextClass} mb-4 flex items-center`}>
+                <span className={`w-2.5 h-2.5 rounded-full ${activeBgClass} mr-2.5`}></span>
+                Key Features:
+              </h4>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                {activeService.features.map((feature, index) => {
+                  const featureIconContainerClass = `w-5 h-5 rounded-full bg-cyberpunk-${activeTailwindColorName}/20 flex-shrink-0 flex items-center justify-center mt-0.5 mr-2.5 border border-cyberpunk-${activeTailwindColorName}/30`;
+                  const featureIconClass = `h-3 w-3 text-cyberpunk-${activeTailwindColorName}`;
+                  return (
+                    <motion.li
+                      key={index}
+                      className="flex items-start"
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: 0.4 + index * 0.05 }}
+                    >
+                      <div className={featureIconContainerClass}>
+                        <ChevronRight className={featureIconClass} />
+                      </div>
+                      <span className="text-gray-300">{feature}</span>
+                    </motion.li>
+                  )}
+                )}
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="text-center md:text-left"
+            >
+              <Button
+                className={`${activeBgClass} hover:bg-cyberpunk-${activeTailwindColorName}/80 text-white py-3 px-6 text-base relative overflow-hidden group`}
+                asChild
+              >
+                <Link href={activeService.caseStudyLink}>
+                  <span className="relative z-10 flex items-center">
+                    View Case Studies <ExternalLink className="ml-2 h-4 w-4" />
+                  </span>
+                  <motion.div
+                    className="absolute inset-0 bg-white/10"
+                    initial={{ x: "-100%", opacity: 0.5 }}
+                    whileHover={{ x: 0, opacity: 0.2 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                  ></motion.div>
+                </Link>
+              </Button>
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+      
+      <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] z-[-1] pointer-events-none"></div>
     </motion.div>
   )
 }
