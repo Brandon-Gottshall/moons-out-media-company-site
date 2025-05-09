@@ -10,29 +10,29 @@ export default function TeamSection() {
 
   const team = [
     {
-      name: "Alex Rivera",
-      role: "Founder & Creative Director",
-      bio: "Former documentary filmmaker with a passion for authentic storytelling and brand narratives. Alex has led creative teams at major production studios before founding Moons Out Media.",
+      name: "Levi Armentrout",
+      role: "HNIC",
+      bio: "Levi Armentrout, HNIC at Moons Out Media, brings Marine Corps discipline and a documentary cinematographer’s eye to every project. After multiple tours of duty, he immersed himself in authentic storytelling—directing and shooting films that uncover untold personal narratives. As HNIC, Levi shapes narrative strategy, oversees brand-film direction, and guides creative execution, ensuring each story combines cinematic polish with genuine human emotion. His steady leadership and visual expertise drive Moons Out’s mission to craft memorable, human-centered experiences that linger long after the credits roll.",
       image: "/placeholder.svg?height=400&width=400",
       social: {
         twitter: "#",
         linkedin: "#",
-        email: "alex@moonsoutmedia.com",
+        email: "levi@moonsoutmedia.com",
       },
     },
     {
-      name: "Maya Chen",
-      role: "Head of Digital Strategy",
-      bio: "Digital marketing expert specializing in data-driven campaign development and optimization. Maya brings 8+ years of experience working with Fortune 500 brands.",
+      name: "Brandon Gottshall",
+      role: "Technical Alchemist & Systems Wrangler",
+      bio: "Brandon Gottshall is a Marine Corps veteran who architects containerized infrastructures, secure reverse-proxy gateways, and AI-driven automation pipelines for Moons Out Media. He leverages Vercel, Docker, Next.js, Tailwind, ShadCN, and PostgreSQL to deploy scalable web platforms. At Moons Out Labs, he implemented Authelia for internal AI-service authentication and orchestrated n8n, Langflow, and LibreChat workflows to eliminate repetitive tasks. With a focus on CI/CD best practices, infrastructure as code, and maintainability, Brandon transforms complex requirements into robust systems that empower creative teams to focus on storytelling.",
       image: "/placeholder.svg?height=400&width=400",
       social: {
         twitter: "#",
         linkedin: "#",
-        email: "maya@moonsoutmedia.com",
+        email: "brandon@moonsoutmedia.com",
       },
     },
     {
-      name: "Jordan Taylor",
+      name: "Jacai ",
       role: "Lead Cinematographer",
       bio: "Award-winning visual storyteller with expertise in documentary-style brand content. Jordan's work has been featured in international film festivals and major advertising campaigns.",
       image: "/placeholder.svg?height=400&width=400",
