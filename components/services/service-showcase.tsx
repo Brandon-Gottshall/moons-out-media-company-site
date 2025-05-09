@@ -87,7 +87,7 @@ const services: Service[] = [
       "Influencer Collaborations",
       "Viral Content Development",
     ],
-    image: "/images/social-media.png",
+    image: "/images/Whiteboard Colab Scene.webp",
     caseStudyLink: "/portfolio/social-media",
     color: "green",
   },
