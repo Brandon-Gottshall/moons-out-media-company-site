@@ -99,6 +99,10 @@ const config: Config = {
             light: "#E0E0E0",
             DEFAULT: "#C0C0C0",
           },
+          red: {
+            light: "#FFBFB7",
+            DEFAULT: "#A6192E",
+          },
         },
       },
       borderRadius: {

@@ -36,7 +36,7 @@ const serviceCategories: ServiceCategory[] = [
     description:
       "Our documentary-style approach captures authentic moments and creates emotional connections with your audience, perfect for brands looking to build depth and trust.",
     serviceType: "Documentary Production",
-    caseStudyLink: "/case-studies/documentary-storytelling",
+    caseStudyLink: "/portfolio/documentary-storytelling",
     image: "/placeholder.svg?height=300&width=500&text=DocuStory",
   },
   {
@@ -45,7 +45,7 @@ const serviceCategories: ServiceCategory[] = [
     description:
       "We craft strategic ad campaigns that combine compelling storytelling with data-driven optimization to drive measurable conversions and maximize your ROI.",
     serviceType: "Digital Ad Campaigns",
-    caseStudyLink: "/case-studies/conversion-campaigns",
+    caseStudyLink: "/portfolio/conversion-campaigns",
     image: "/placeholder.svg?height=300&width=500&text=AdCampaigns",
   },
   {
@@ -54,7 +54,7 @@ const serviceCategories: ServiceCategory[] = [
     description:
       "Your brand can thrive with our authentic social media approach, building a strong community and driving consistent engagement through genuine interaction.",
     serviceType: "Social Media Marketing",
-    caseStudyLink: "/case-studies/social-media-storytelling",
+    caseStudyLink: "/portfolio/social-media-strategy",
     image: "/placeholder.svg?height=300&width=500&text=SocialMedia",
   },
   {
@@ -63,7 +63,7 @@ const serviceCategories: ServiceCategory[] = [
     description:
       "Need a bespoke web application or a high-performance landing page? We build tailored digital experiences that are both functional and engaging.",
     serviceType: "Web Development",
-    caseStudyLink: "/case-studies/web-applications",
+    caseStudyLink: "/portfolio/custom-web-applications",
     image: "/placeholder.svg?height=300&width=500&text=WebApps",
   },
   {
@@ -72,7 +72,7 @@ const serviceCategories: ServiceCategory[] = [
     description:
       "Leverage the power of AI and automation to streamline your processes, gain insights, and create innovative solutions for your business challenges.",
     serviceType: "AI & Automation",
-    caseStudyLink: "/case-studies/ai-automation",
+    caseStudyLink: "/portfolio/ai-driven-automation",
     image: "/placeholder.svg?height=300&width=500&text=AI+Automation",
   },
   {
@@ -81,7 +81,7 @@ const serviceCategories: ServiceCategory[] = [
     description:
       "Build a scalable and resilient infrastructure with our enterprise-grade DevOps and cloud solutions, ensuring your technology foundation is robust and future-proof.",
     serviceType: "Cloud & DevOps",
-    caseStudyLink: "/case-studies/cloud-devops",
+    caseStudyLink: "/portfolio/enterprise-cloud-devops",
     image: "/placeholder.svg?height=300&width=500&text=CloudDevOps",
   },
 ]

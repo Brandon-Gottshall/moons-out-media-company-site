@@ -1,92 +1,30 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, Filter } from "lucide-react"
-
-type Project = {
-  id: string
-  title: string
-  client: string
-  category: string
-  description: string
-  image: string
-  year: string
-}
-
-const projects: Project[] = [
-  {
-    id: "ecotech-documentary",
-    title: "Sustainable Innovation Documentary",
-    client: "EcoTech Innovations",
-    category: "Documentary",
-    description: "A documentary series showcasing revolutionary sustainable technologies and their real-world impact.",
-    image: "/images/project1.png",
-    year: "2023",
-  },
-  {
-    id: "urban-fitness-campaign",
-    title: "Fitness Transformation Campaign",
-    client: "Urban Fitness",
-    category: "Social Media",
-    description: "A social media campaign featuring authentic customer transformation stories.",
-    image: "/images/project2.png",
-    year: "2022",
-  },
-  {
-    id: "artisan-series",
-    title: "Artisan Craftsmanship Series",
-    client: "Artisan Collective",
-    category: "Brand Storytelling",
-    description: "A series of intimate artisan profiles showcasing craftsmanship and passion.",
-    image: "/images/project3.png",
-    year: "2022",
-  },
-  {
-    id: "techstart-impact",
-    title: "Tech Impact Stories",
-    client: "TechStart Inc.",
-    category: "Digital Marketing",
-    description: "A campaign translating complex technology into relatable human stories.",
-    image: "/images/project4.png",
-    year: "2023",
-  },
-  {
-    id: "global-brands-campaign",
-    title: "Global Market Expansion",
-    client: "Global Brands",
-    category: "Digital Marketing",
-    description: "A strategic digital campaign supporting international market expansion.",
-    image: "/images/project5.png",
-    year: "2021",
-  },
-  {
-    id: "city-tourism-documentary",
-    title: "Urban Explorers",
-    client: "City Tourism Board",
-    category: "Documentary",
-    description: "A documentary series showcasing hidden gems and local stories from the city.",
-    image: "/images/project6.png",
-    year: "2022",
-  },
-]
-
-type FilterOption = "All" | "Documentary" | "Digital Marketing" | "Social Media" | "Brand Storytelling"
+import { Filter } from "lucide-react"
+import { allPortfolioItems, type PortfolioItem } from "@/lib/placeholder-data/portfolio-items"
+import { PortfolioItemCard } from "@/components/portfolio/portfolio-item-card"
 
 export default function PortfolioGallery() {
-  const [activeFilter, setActiveFilter] = useState<FilterOption>("All")
+  const [activeFilter, setActiveFilter] = useState<string>("All")
   const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false)
-  const [hoveredProject, setHoveredProject] = useState<string | null>(null)
   const [isSearchContext, setIsSearchContext] = useState(false)
 
-  // Check if we're in search context by looking at URL params or parent state
+  // Generate filter options from the tags in allPortfolioItems
+  const filterOptions = useMemo(() => {
+    const allTags = new Set<string>()
+    allPortfolioItems.forEach(item => {
+      item.tags?.forEach(tag => allTags.add(tag))
+    })
+    return ["All", ...Array.from(allTags).sort()]
+  }, [])
+
   useEffect(() => {
-    // This is a simplified check - in a real app, you'd use URL params or context
     const searchParams = new URLSearchParams(window.location.search)
     setIsSearchContext(searchParams.has("search") || window.location.hash === "#search")
 
-    // Listen for custom events from parent components
     const handleSearchStateChange = (e: CustomEvent) => {
       setIsSearchContext(e.detail.isSearchActive)
     }
@@ -97,8 +35,13 @@ export default function PortfolioGallery() {
     }
   }, [])
 
-  const filteredProjects =
-    activeFilter === "All" ? projects : projects.filter((project) => project.category === activeFilter)
+  const filteredItems = useMemo(() => 
+    activeFilter === "All"
+      ? allPortfolioItems.filter(item => item.status === 'published') // Only show published items
+      : allPortfolioItems.filter(
+          (item) => item.status === 'published' && item.tags?.includes(activeFilter)
+        )
+  , [activeFilter])
 
   return (
     <motion.div
@@ -111,8 +54,6 @@ export default function PortfolioGallery() {
     >
       {/* Filter Controls */}
       <div className="mb-8 mt-8">
-        {" "}
-        {/* Added margin-top */}
         {/* Mobile Filter */}
         <div className="md:hidden relative mb-6">
           <Button
@@ -129,9 +70,9 @@ export default function PortfolioGallery() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="absolute top-full left-0 right-0 mt-2 bg-black/90 border border-gray-800 rounded-md overflow-hidden z-20"
+              className="absolute top-full left-0 right-0 mt-2 bg-black/90 border border-gray-800 rounded-md overflow-hidden z-20 shadow-lg"
             >
-              {["All", "Documentary", "Digital Marketing", "Social Media", "Brand Storytelling"].map((filter) => (
+              {filterOptions.map((filter) => (
                 <motion.button
                   key={filter}
                   whileHover={{ backgroundColor: "rgba(0, 255, 255, 0.1)" }}
@@ -139,7 +80,7 @@ export default function PortfolioGallery() {
                     activeFilter === filter ? "bg-cyberpunk-purple/20 text-white" : "text-gray-300"
                   }`}
                   onClick={() => {
-                    setActiveFilter(filter as FilterOption)
+                    setActiveFilter(filter)
                     setIsFilterMenuOpen(false)
                   }}
                 >
@@ -149,107 +90,51 @@ export default function PortfolioGallery() {
             </motion.div>
           )}
         </div>
+
+        {/* Desktop Filter - You might want to add a similar one if needed */}
+        <div className="hidden md:flex flex-wrap gap-2 mb-6 justify-center">
+          {filterOptions.map((filter) => (
+            <Button
+              key={filter}
+              variant={activeFilter === filter ? "default" : "outline"}
+              onClick={() => setActiveFilter(filter)}
+              className={`${activeFilter === filter ? 'bg-cyberpunk-blue text-black hover:bg-cyberpunk-blue/80' : 'border-gray-700 text-gray-300 hover:border-cyberpunk-blue/50 hover:text-white'} transition-all`}
+            >
+              {filter}
+            </Button>
+          ))}
+        </div>
       </div>
 
-      {/* Projects Grid */}
+      {/* Items Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <AnimatePresence mode="wait">
-          {filteredProjects.map((project) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.4 }}
-              className={`bg-black/60 backdrop-blur-sm border rounded-lg overflow-hidden group transition-all duration-300 ${
-                hoveredProject === project.id
-                  ? "border-cyberpunk-blue/70 shadow-glow-blue transform scale-[1.02]"
-                  : "border-gray-800 hover:border-cyberpunk-blue/50"
-              }`}
-              onMouseEnter={() => setHoveredProject(project.id)}
-              onMouseLeave={() => setHoveredProject(null)}
-            >
-              <div className="relative aspect-video overflow-hidden">
-                <motion.img
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  className="w-full h-full object-cover"
-                  animate={{
-                    scale: hoveredProject === project.id ? 1.05 : 1,
-                  }}
-                  transition={{ duration: 0.5 }}
-                />
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: hoveredProject === project.id ? 1 : 0,
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Button
-                    className="cyberpunk-button scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 py-6 px-8 text-base shadow-glow-blue"
-                    onClick={() => (window.location.href = `/portfolio/${project.id}`)}
-                  >
-                    View Project
-                  </Button>
-                </motion.div>
-                <div className="absolute top-4 right-4">
-                  <span className="px-3 py-1 bg-black/70 backdrop-blur-sm rounded-md text-sm text-white">
-                    {project.year}
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-3">
-                  <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-black/50 text-cyberpunk-blue">
-                    {project.category}
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2 line-clamp-1">{project.title}</h3>
-                <p className="text-base text-cyberpunk-pink mb-3">Client: {project.client}</p>
-                <p className="text-base text-white leading-relaxed line-clamp-2 mb-6">{project.description}</p>
-
-                <motion.div whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start text-cyberpunk-blue hover:bg-cyberpunk-blue/10 p-0 h-auto group"
-                    onClick={() => (window.location.href = `/portfolio/${project.id}`)}
-                  >
-                    <span className="flex items-center text-base">
-                      View Case Study
-                      <motion.div
-                        animate={{
-                          x: hoveredProject === project.id ? 5 : 0,
-                        }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <ExternalLink className="ml-2 h-4 w-4" />
-                      </motion.div>
-                    </span>
-                  </Button>
-                </motion.div>
-              </div>
-            </motion.div>
+        <AnimatePresence>
+          {filteredItems.map((item, index) => (
+            <PortfolioItemCard key={item.slug} item={item} index={index} />
           ))}
         </AnimatePresence>
       </div>
 
+      {filteredItems.length === 0 && activeFilter !== "All" && (
+        <div className="text-center py-12">
+          <p className="text-xl text-gray-400">No projects found for the filter "{activeFilter}".</p>
+          <Button variant="ghost" onClick={() => setActiveFilter("All")} className="text-cyberpunk-blue mt-2">
+            Show all projects
+          </Button>
+        </div>
+      )}
+
       {/* Load More Button - Hide when in search context */}
+      {/* This might need adjustment if pagination is implemented based on allPortfolioItems */}
       {!isSearchContext && (
         <div className="mt-12 text-center">
           <Button
-            className="cyberpunk-button py-6 px-10 text-base relative overflow-hidden group"
-            onClick={() => console.log("Load more projects")}
+            className="cyberpunk-button py-6 px-10 text-base relative overflow-hidden group disabled:opacity-50"
+            onClick={() => console.log("Load more projects - (Placeholder: currently shows all published)")}
+            // Consider disabling if all items are shown, or implement actual pagination
+            disabled={true} 
           >
-            <span className="relative z-10">Load More Projects</span>
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-cyberpunk-blue/0 via-cyberpunk-blue/30 to-cyberpunk-blue/0"
-              initial={{ x: "-100%" }}
-              whileHover={{ x: "100%" }}
-              transition={{ duration: 1, ease: "easeInOut" }}
-            />
+            <span className="relative z-10">Load More Projects (Placeholder)</span>
           </Button>
         </div>
       )}

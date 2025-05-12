@@ -41,9 +41,9 @@ const processSteps: ProcessStep[] = [
   },
   {
     id: 5,
-    title: "Analysis",
+    title: "Analysis & Optimization",
     description:
-      "We measure performance against KPIs, providing detailed analytics and insights to optimize future content.",
+      "We measure performance against KPIs, providing detailed analytics and insights to optimize future content. Using the data we collect, we can make adjustments to the strategy to improve results.",
     icon: "📊",
   },
 ]

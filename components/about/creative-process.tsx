@@ -28,8 +28,8 @@ export default function CreativeProcess() {
     },
     {
       number: "05",
-      title: "Optimization",
-      description: "We continuously analyze performance and refine our approach to maximize impact and ROI.",
+      title: "Analysis & Optimization",
+      description: "We measure performance against KPIs, providing detailed analytics and insights to optimize future content. Using the data we collect, we can make adjustments to the strategy to improve results.",
     },
   ]
 

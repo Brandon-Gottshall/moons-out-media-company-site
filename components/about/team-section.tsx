@@ -21,8 +21,8 @@ export default function TeamSection() {
       },
     },
     {
-      name: "Brandon Gottshall",
-      role: "Technical Alchemist & Systems Wrangler",
+      name: "Brandon",
+      role: "Software Alchemist",
       bio: "Brandon Gottshall is a Marine Corps veteran who architects containerized infrastructures, secure reverse-proxy gateways, and AI-driven automation pipelines for Moons Out Media. He leverages Vercel, Docker, Next.js, Tailwind, ShadCN, and PostgreSQL to deploy scalable web platforms. At Moons Out Labs, he implemented Authelia for internal AI-service authentication and orchestrated n8n, Langflow, and LibreChat workflows to eliminate repetitive tasks. With a focus on CI/CD best practices, infrastructure as code, and maintainability, Brandon transforms complex requirements into robust systems that empower creative teams to focus on storytelling.",
       image: "/placeholder.svg?height=400&width=400",
       social: {
@@ -33,24 +33,35 @@ export default function TeamSection() {
     },
     {
       name: "Jacai ",
-      role: "Lead Cinematographer",
-      bio: "Award-winning visual storyteller with expertise in documentary-style brand content. Jordan's work has been featured in international film festivals and major advertising campaigns.",
-      image: "/placeholder.svg?height=400&width=400",
+      role: "Audio Engineering/Sound Design",
+      bio: "Audio engineering/sound design Independent artist and audio engineer  Jacai, is deeply immersed in crafting his authentic sound. His mastery of audio engineering and production fuels his growth as a songwriter, recording artist, and mixing engineer across diverse musical projects. Beyond his solo work, Jacai collaborates with other artists, using his keen ear and technical skills to realize their sonic visions. Driven by a passion for music and a commitment to his community, Jacai supports fellow artists and shares his unique creative approach, aiming to create impactful art and be a positive influence. His burgeoning fanbase and love for music continue to propel this mission.",
+      image: "/images/jacai_cropped.jpeg",
       social: {
         twitter: "#",
         linkedin: "#",
-        email: "jordan@moonsoutmedia.com",
+        email: "",
       },
     },
     {
-      name: "Zoe Williams",
-      role: "Social Media Director",
-      bio: "Social media strategist focused on building engaged communities through authentic content. Zoe previously managed social for several major entertainment brands.",
+      name: "Doora Black",
+      role: "Social Media, Advertisement & Marketing Manager",
+      bio: "Dora is a recent college graduate who brings imagination, personality, and charm to the Moons Out Media team. Dora is the manager of digital marketing and advertisements. As the creative director of ads, Dora implements her ability to recognize a brand’s untapped audience and assists in cultivating new and stronger relationships between brands, companies, and consumers. Dora brings an eye for authenticity and incorporates culture into each project. Dora combines her curiosity with practicality and tests the boundaries of society with her creative ideas.",
       image: "/placeholder.svg?height=400&width=400",
       social: {
         twitter: "#",
         linkedin: "#",
-        email: "zoe@moonsoutmedia.com",
+        email: "dorab5282@gmail.com",
+      },
+    },
+    {
+      name: "Jazz Jefferson",
+      role: "Cinematography Intern",
+      bio: "",
+      image: "/placeholder.svg?height=400&width=400",
+      social: {
+        twitter: "#",
+        linkedin: "#",
+        email: "jzz.d.jefferson@gmail.com",
       },
     },
   ]
@@ -91,7 +102,7 @@ export default function TeamSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {team.map((member, index) => (
             <motion.div
@@ -108,16 +119,17 @@ export default function TeamSection() {
                 <Image
                   src={member.image || "/placeholder.svg"}
                   alt={member.name}
-                  fill
+                  width={400}
+                  height={400}
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
               </div>
 
-              <div className="absolute bottom-0 left-0 w-full p-6 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
-                <p className="text-cyberpunk-blue font-medium mb-3">{member.role}</p>
-                <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+              <div className="absolute bottom-0 left-0 w-full p-6 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-300 flex flex-col justify-center items-center">
+                <h3 className="text-xl font-bold text-white">{member.name}</h3>
+                <p className="text-cyberpunk-blue font-small mb-3 text-center">{member.role}</p>
+                <p className="text-gray-300 text-sm opacity-0 hidden transition-display group-hover:block group-hover:opacity-100 transition-opacity duration-300 delay-100">
                   {member.bio.substring(0, 80)}...
                 </p>
                 <div className="mt-4 flex space-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">

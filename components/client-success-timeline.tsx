@@ -37,7 +37,7 @@ const successStories: SuccessStory[] = [
       { label: "New Partnerships", value: "14", change: "+250%" },
     ],
     image: "/placeholder.svg?height=400&width=600",
-    caseStudyLink: "/case-studies/ecotech-innovations",
+    caseStudyLink: "/portfolio/ecotech-innovations-documentary",
   },
   {
     id: 2,
@@ -53,7 +53,7 @@ const successStories: SuccessStory[] = [
       { label: "Retention Rate", value: "92%", change: "+24%" },
     ],
     image: "/placeholder.svg?height=400&width=600",
-    caseStudyLink: "/case-studies/urban-fitness",
+    caseStudyLink: "/portfolio/urban-fitness-transformation",
   },
   {
     id: 3,
@@ -69,7 +69,7 @@ const successStories: SuccessStory[] = [
       { label: "Customer Loyalty", value: "78%", change: "+47%" },
     ],
     image: "/placeholder.svg?height=400&width=600",
-    caseStudyLink: "/case-studies/artisan-collective",
+    caseStudyLink: "/portfolio/artisan-collective-showcase",
   },
   {
     id: 4,
@@ -85,7 +85,7 @@ const successStories: SuccessStory[] = [
       { label: "Market Share", value: "23%", change: "+15%" },
     ],
     image: "/placeholder.svg?height=400&width=600",
-    caseStudyLink: "/case-studies/techstart-inc",
+    caseStudyLink: "/portfolio/techstart-growth-engine",
   },
 ]
 

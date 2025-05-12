@@ -40,7 +40,7 @@ const services: Service[] = [
       "Product Origin Stories",
     ],
     image: "/images/documentary.gif",
-    caseStudyLink: "/portfolio/documentary",
+    caseStudyLink: "/portfolio/documentary-storytelling",
     color: "blue",
   },
   {
@@ -56,7 +56,7 @@ const services: Service[] = [
       "A/B Testing & Optimization",
     ],
     image: "/images/digital-marketing.webp",
-    caseStudyLink: "/portfolio/digital-marketing",
+    caseStudyLink: "/portfolio/conversion-campaigns",
     color: "pink",
   },
   {
@@ -72,7 +72,7 @@ const services: Service[] = [
       "Emotional Engagement Tactics",
     ],
     image: "/images/storytelling.gif",
-    caseStudyLink: "/portfolio/storytelling",
+    caseStudyLink: "/portfolio/documentary-storytelling",
     color: "purple",
   },
   {
@@ -88,7 +88,7 @@ const services: Service[] = [
       "Viral Content Development",
     ],
     image: "/images/Whiteboard Colab Scene.webp",
-    caseStudyLink: "/portfolio/social-media",
+    caseStudyLink: "/portfolio/social-media-strategy",
     color: "green",
   },
   {
@@ -103,7 +103,7 @@ const services: Service[] = [
       "Security best practices & compliance",
     ],
     image: "/images/web-app-development.gif",
-    caseStudyLink: "/portfolio/web-app-development",
+    caseStudyLink: "/portfolio/custom-web-applications",
     color: "teal",
   },
   {
@@ -118,7 +118,7 @@ const services: Service[] = [
       "Data preprocessing & ETL pipelines",
     ],
     image: "/images/ai-automation.jpeg",
-    caseStudyLink: "/portfolio/ai-automation",
+    caseStudyLink: "/portfolio/ai-driven-automation",
     color: "yellow",
   },
   {
@@ -133,7 +133,7 @@ const services: Service[] = [
       "Infrastructure as Code (Terraform/Ansible)",
     ],
     image: "/images/cloud-devops.webp",
-    caseStudyLink: "/portfolio/cloud-devops",
+    caseStudyLink: "/portfolio/enterprise-cloud-devops",
     color: "cyan",
   },
 ]
@@ -355,11 +355,10 @@ export default function ServiceShowcase() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="text-center md:text-left"
             >
-              <Button
-                className={`${activeBgClass} hover:bg-cyberpunk-${activeTailwindColorName}/80 text-white py-3 px-6 text-base relative overflow-hidden group`}
-                asChild
-              >
-                <Link href={activeService.caseStudyLink}>
+              <Link href={activeService.caseStudyLink}>
+                <Button
+                  className={`${activeBgClass} hover:bg-cyberpunk-${activeTailwindColorName}/80 text-white py-3 px-6 text-base relative overflow-hidden group`}
+                >
                   <span className="relative z-10 flex items-center">
                     View Case Studies <ExternalLink className="ml-2 h-4 w-4" />
                   </span>
@@ -369,8 +368,8 @@ export default function ServiceShowcase() {
                     whileHover={{ x: 0, opacity: 0.2 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                   ></motion.div>
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </motion.div>
           </motion.div>
         </AnimatePresence>

@@ -2,82 +2,68 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, ExternalLink, Play, ChevronDown, Calendar, Clock, Tag, Award } from "lucide-react"
+import {
+  ArrowLeft,
+  ExternalLink,
+  Play,
+  ChevronDown,
+  Calendar,
+  Clock,
+  Tag,
+  Award,
+  Briefcase, // For services
+  Target, // For Challenge
+  Lightbulb, // For Solution
+  BarChart2, // For Results
+  Camera // For Gallery
+} from "lucide-react"
 import CallToAction from "@/components/call-to-action"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
+import { allPortfolioItems, type PortfolioItem } from "@/lib/placeholder-data/portfolio-items"
+import Image from "next/image"
+import { Badge } from "@/components/ui/badge"
+import { notFound } from "next/navigation"
+import { PortfolioItemCard } from "@/components/portfolio/portfolio-item-card"
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
+// Helper to simulate RichText rendering (replace with actual RichText renderer if you have one)
+function SimpleRichText({ content }: { content?: string }) {
+  if (!content) return null
+  return (
+    <div className="prose prose-invert prose-sm md:prose-base max-w-none text-white whitespace-pre-line leading-relaxed">
+      {content.split('\n').map((paragraph, index) => (
+        <p key={index}>{paragraph}</p>
+      ))}
+    </div>
+  )
+}
+
+export default function PortfolioItemPage({ params }: { params: { slug: string } }) {
   const [mounted, setMounted] = useState(false)
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
-  const [activeTab, setActiveTab] = useState("overview")
+  // Default to challenge or solution as they are key parts of a case study
+  const [activeTab, setActiveTab] = useState("challenge") 
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  // In a real app, you would fetch the project data based on the slug
-  const project = {
-    id: params.slug,
-    title: "Sustainable Innovation Documentary",
-    client: "EcoTech Innovations",
-    category: "Documentary",
-    description:
-      "A documentary series showcasing EcoTech's revolutionary sustainable technologies and their real-world impact on communities and the environment.",
-    fullDescription: `
-      This five-part documentary series follows the journey of EcoTech Innovations as they develop and deploy sustainable technologies in communities around the world. 
-      
-      Our team spent six months capturing the stories of the engineers, community members, and environmental experts involved in these groundbreaking projects. The result is a compelling narrative that not only showcases the technology but also the human impact and environmental benefits.
-      
-      The series was distributed across multiple platforms, including the client's website, social media channels, and select streaming services, reaching a global audience and significantly increasing brand awareness and investor interest.
-    `,
-    challenge: `
-      EcoTech Innovations faced a significant challenge: their groundbreaking sustainable technologies were revolutionary, but highly technical and difficult for the average person to understand. This created barriers to adoption and investment.
-      
-      Additionally, they needed to demonstrate the real-world impact of their solutions beyond technical specifications and data points. The human stories and environmental benefits were getting lost in technical presentations.
-    `,
-    approach: `
-      We took a documentary-style approach that focused on the human stories behind the technology. Our strategy included:
-      
-      1. **Narrative-Driven Storytelling**: Following the journey from concept to implementation
-      2. **Character Development**: Highlighting the engineers, community members, and environmental experts
-      3. **Visual Demonstration**: Using cinematic techniques to visualize complex technical concepts
-      4. **Emotional Connection**: Capturing authentic moments of impact and transformation
-      5. **Multi-Platform Distribution**: Creating versions optimized for different channels and audiences
-    `,
-    image: "/images/project1.png",
-    year: "2023",
-    duration: "5-part series, 25 minutes per episode",
-    services: ["Documentary Production", "Storytelling Strategy", "Distribution Planning"],
-    technologies: ["RED Cinema Cameras", "Drone Cinematography", "4K HDR Production", "Dolby Atmos Sound"],
-    team: ["Alex Chen - Director", "Sarah Johnson - Producer", "Michael Wong - Cinematographer", "Lisa Park - Editor"],
-    results: [
-      { label: "Brand Awareness", value: "87%", change: "+42%" },
-      { label: "Investor Interest", value: "$12M", change: "+156%" },
-      { label: "New Partnerships", value: "14", change: "+250%" },
-      { label: "Audience Engagement", value: "3.2M", change: "+320%" },
-    ],
-    testimonial: {
-      quote:
-        "Moons Out Media transformed our brand story into a compelling documentary that not only showcased our technology but the human impact behind it. The results were immediate—increased engagement, deeper customer connections, and a significant boost in investor interest.",
-      author: "Alex Johnson",
-      position: "Marketing Director, EcoTech Innovations",
-    },
-    relatedProjects: [
-      { id: "urban-fitness-campaign", title: "Fitness Transformation Campaign", image: "/images/project2.png" },
-      { id: "techstart-impact", title: "Tech Impact Stories", image: "/images/project4.png" },
-    ],
-    gallery: [
-      { image: "/images/project1.png", caption: "Behind the scenes with EcoTech engineers" },
-      { image: "/images/project2.png", caption: "Community implementation in rural areas" },
-      { image: "/images/project3.png", caption: "Interview with environmental experts" },
-      { image: "/images/project4.png", caption: "Technology demonstration" },
-    ],
-  }
+  const currentItem = allPortfolioItems.find(item => item.slug === params.slug && item.status === 'published');
 
   if (!mounted) {
-    return null // Prevent hydration issues
+    return null // Prevent hydration issues during initial render
   }
+
+  if (!currentItem) {
+    // In a real app, you might redirect to a 404 page or use Next.js notFound()
+    // For now, just return a simple message or call notFound() if on server component (though this is client)
+    // For client components, you might redirect or show an inline not-found UI.
+    // For a page component like this, `notFound()` from `next/navigation` is appropriate if no data.
+    notFound(); 
+  }
+
+  // Determine a primary category/tag for display if available
+  const displayCategory = currentItem.tags?.[0] || currentItem.industry || "Case Study";
 
   return (
     <div className="min-h-screen bg-cyberpunk-background">
@@ -86,11 +72,15 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-cyberpunk-background z-10"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,90,205,0.15)_0%,transparent_70%)] z-20"></div>
-          <img
-            src={project.image || "/placeholder.svg"}
-            alt={project.title}
-            className="absolute w-full h-full object-cover"
-          />
+          {currentItem.heroImage && (
+            <Image
+              src={currentItem.heroImage.url}
+              alt={currentItem.heroImage.alt}
+              fill
+              className="absolute w-full h-full object-cover"
+              priority
+            />
+          )}
         </div>
 
         <div className="container mx-auto px-4 relative z-30">
@@ -104,32 +94,42 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
           <div className="max-w-4xl">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-              <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-cyberpunk-blue/20 text-cyberpunk-blue mb-4">
-                {project.category}
-              </span>
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">{project.title}</h1>
-              <p className="text-xl text-cyberpunk-pink mb-6">Client: {project.client}</p>
-              <p className="text-base md:text-xl text-white mb-8 max-w-3xl bg-black/30 backdrop-blur-sm p-4 rounded-md border border-gray-800/50">
-                {project.description}
-              </p>
+              <Badge variant="outline" className="bg-cyberpunk-blue/20 text-cyberpunk-blue border-cyberpunk-blue/30 mb-4">
+                {displayCategory}
+              </Badge>
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">{currentItem.title}</h1>
+              <p className="text-xl text-cyberpunk-pink mb-6">Client: {currentItem.clientName}</p>
+              {currentItem.summary && (
+                <p className="text-base md:text-xl text-white mb-8 max-w-3xl bg-black/30 backdrop-blur-sm p-4 rounded-md border border-gray-800/50">
+                  {currentItem.summary}
+                </p>
+              )}
 
               <div className="flex flex-wrap gap-4">
-                <Button className="cyberpunk-button" onClick={() => setIsVideoModalOpen(true)}>
+                {/* Placeholder for video modal trigger - adapt if video URLs are added to data model */}
+                {/* <Button className="cyberpunk-button" onClick={() => setIsVideoModalOpen(true)}>
                   <Play className="mr-2 h-4 w-4" /> Watch Trailer
-                </Button>
-                <Button
-                  variant="outline"
-                  className="border-cyberpunk-blue text-cyberpunk-blue hover:bg-cyberpunk-blue/10"
-                  onClick={() => (window.location.href = "/contact")}
-                >
-                  Start Your Project
-                </Button>
+                </Button> */}
+                {currentItem.callToAction && currentItem.callToAction.ctaType === 'external' && (
+                   <Link href={currentItem.callToAction.ctaUrl} target="_blank" rel="noopener noreferrer">
+                     <Button className="cyberpunk-button">
+                       {currentItem.callToAction.ctaLabel || 'View Project'} <ExternalLink className="ml-2 h-4 w-4" />
+                     </Button>
+                   </Link>
+                )}
+                <Link href="/contact">
+                  <Button
+                    variant="outline"
+                    className="border-cyberpunk-blue text-cyberpunk-blue hover:bg-cyberpunk-blue/10"
+                  >
+                    Start Your Project
+                  </Button>
+                </Link>
               </div>
             </motion.div>
           </div>
         </div>
 
-        {/* Scroll indicator */}
         <motion.div
           className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-4 flex flex-col items-center z-50"
           initial={{ opacity: 0 }}
@@ -143,243 +143,202 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </motion.div>
       </section>
 
-      {/* Project Quick Stats */}
+      {/* Project Quick Stats - Adapted for PortfolioItem */}
       <section className="py-8 border-y border-gray-800/50 bg-black/20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="flex items-center space-x-3">
-              <Calendar className="h-8 w-8 text-cyberpunk-blue" />
-              <div>
-                <p className="text-sm text-gray-400">Year</p>
-                <p className="text-white font-medium">{project.year}</p>
+            {currentItem.projectYear && (
+              <div className="flex items-center space-x-3">
+                <Calendar className="h-8 w-8 text-cyberpunk-blue" />
+                <div>
+                  <p className="text-sm text-gray-400">Year</p>
+                  <p className="text-white font-medium">{currentItem.projectYear}</p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Clock className="h-8 w-8 text-cyberpunk-pink" />
-              <div>
-                <p className="text-sm text-gray-400">Duration</p>
-                <p className="text-white font-medium">5-Part Series</p>
+            )}
+            {currentItem.industry && (
+              <div className="flex items-center space-x-3">
+                <Briefcase className="h-8 w-8 text-cyberpunk-pink" />
+                <div>
+                  <p className="text-sm text-gray-400">Industry</p>
+                  <p className="text-white font-medium">{currentItem.industry}</p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Tag className="h-8 w-8 text-cyberpunk-green" />
-              <div>
-                <p className="text-sm text-gray-400">Category</p>
-                <p className="text-white font-medium">{project.category}</p>
+            )}
+            {currentItem.servicesRendered && currentItem.servicesRendered.length > 0 && (
+              <div className="flex items-center space-x-3">
+                <Tag className="h-8 w-8 text-cyberpunk-green" />
+                <div>
+                  <p className="text-sm text-gray-400">Key Service</p>
+                  {/* Display first service, or join them. For simplicity, first one. */}
+                  <p className="text-white font-medium">{currentItem.servicesRendered[0]}</p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Award className="h-8 w-8 text-cyberpunk-gold" />
-              <div>
-                <p className="text-sm text-gray-400">Recognition</p>
-                <p className="text-white font-medium">Industry Award Finalist</p>
+            )}
+             {currentItem.metrics && currentItem.metrics.length > 0 && (
+              <div className="flex items-center space-x-3">
+                <Award className="h-8 w-8 text-cyberpunk-gold" />
+                <div>
+                  <p className="text-sm text-gray-400">Key Metric</p>
+                  <p className="text-white font-medium">
+                    {currentItem.metrics[0].metricLabel}: {currentItem.metrics[0].metricValue} {currentItem.metrics[0].metricChange || ''}
+                  </p>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Project Details */}
+      {/* Project Details Tabs */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
             <div className="lg:col-span-2">
-              {/* Tabs Navigation */}
-              <div className="flex overflow-x-auto space-x-2 mb-8 pb-2 border-b border-gray-800/50">
+              <div className="flex overflow-x-auto space-x-1 sm:space-x-2 mb-8 pb-2 border-b border-gray-800/50">
                 <button
-                  className={`px-4 py-2 whitespace-nowrap ${
-                    activeTab === "overview"
-                      ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
-                      : "text-gray-400 hover:text-white"
-                  }`}
-                  onClick={() => setActiveTab("overview")}
-                >
-                  Overview
-                </button>
-                <button
-                  className={`px-4 py-2 whitespace-nowrap ${
+                  className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
                     activeTab === "challenge"
                       ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
                       : "text-gray-400 hover:text-white"
                   }`}
                   onClick={() => setActiveTab("challenge")}
                 >
-                  Challenge
+                  <Target className="inline h-4 w-4 mr-1.5 sm:mr-2" /> Challenge
                 </button>
                 <button
-                  className={`px-4 py-2 whitespace-nowrap ${
-                    activeTab === "approach"
+                  className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
+                    activeTab === "solution"
                       ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
                       : "text-gray-400 hover:text-white"
                   }`}
-                  onClick={() => setActiveTab("approach")}
+                  onClick={() => setActiveTab("solution")}
                 >
-                  Our Approach
+                  <Lightbulb className="inline h-4 w-4 mr-1.5 sm:mr-2" /> Solution
                 </button>
                 <button
-                  className={`px-4 py-2 whitespace-nowrap ${
+                  className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
                     activeTab === "results"
                       ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
                       : "text-gray-400 hover:text-white"
                   }`}
                   onClick={() => setActiveTab("results")}
                 >
-                  Results
+                 <BarChart2 className="inline h-4 w-4 mr-1.5 sm:mr-2" /> Results
                 </button>
-                <button
-                  className={`px-4 py-2 whitespace-nowrap ${
-                    activeTab === "gallery"
-                      ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
-                      : "text-gray-400 hover:text-white"
-                  }`}
-                  onClick={() => setActiveTab("gallery")}
-                >
-                  Gallery
-                </button>
+                {currentItem.galleryImages && currentItem.galleryImages.length > 0 && (
+                  <button
+                    className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
+                      activeTab === "gallery"
+                        ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
+                        : "text-gray-400 hover:text-white"
+                    }`}
+                    onClick={() => setActiveTab("gallery")}
+                  >
+                    <Camera className="inline h-4 w-4 mr-1.5 sm:mr-2" /> Gallery
+                  </button>
+                )}
               </div>
 
-              {/* Tab Content */}
               <AnimatePresence mode="wait">
-                {activeTab === "overview" && (
-                  <motion.div
-                    key="overview"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">About the Project</h2>
-                    <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6 mb-8">
-                      <p className="text-white whitespace-pre-line leading-relaxed">{project.fullDescription}</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                      <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6">
-                        <h3 className="text-xl font-bold mb-4 text-white">Technologies Used</h3>
-                        <ul className="space-y-2">
-                          {project.technologies.map((tech, index) => (
-                            <li key={index} className="flex items-start">
-                              <span className="text-cyberpunk-blue mr-2">•</span>
-                              <span className="text-white">{tech}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6">
-                        <h3 className="text-xl font-bold mb-4 text-white">Team</h3>
-                        <ul className="space-y-2">
-                          {project.team.map((member, index) => (
-                            <li key={index} className="flex items-start">
-                              <span className="text-cyberpunk-pink mr-2">•</span>
-                              <span className="text-white">{member}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-
                 {activeTab === "challenge" && (
-                  <motion.div
-                    key="challenge"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                  <motion.div key="challenge" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
                     <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">The Challenge</h2>
-                    <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6 mb-8">
-                      <p className="text-white whitespace-pre-line leading-relaxed">{project.challenge}</p>
+                    <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6 md:p-8 mb-8">
+                      <SimpleRichText content={currentItem.challenge} />
                     </div>
                   </motion.div>
                 )}
 
-                {activeTab === "approach" && (
-                  <motion.div
-                    key="approach"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Our Approach</h2>
-                    <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6 mb-8">
-                      <p className="text-white whitespace-pre-line leading-relaxed">{project.approach}</p>
+                {activeTab === "solution" && (
+                  <motion.div key="solution" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
+                    <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Our Solution</h2>
+                    <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6 md:p-8 mb-8">
+                      <SimpleRichText content={currentItem.solution} />
                     </div>
+                    {currentItem.keyFeatures && currentItem.keyFeatures.length > 0 && (
+                      <div className="mb-8">
+                        <h3 className="text-xl md:text-2xl font-semibold mb-4 text-white">Key Features Delivered</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {currentItem.keyFeatures.map((feature, index) => (
+                            <div key={index} className="bg-black/50 border border-gray-700/70 p-4 rounded-md">
+                              {feature.featureIcon && <Lightbulb className="h-6 w-6 text-cyberpunk-blue mb-2" />}
+                              <h4 className="font-bold text-white mb-1">{feature.featureTitle}</h4>
+                              <p className="text-sm text-gray-300">{feature.featureDescription}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </motion.div>
                 )}
 
                 {activeTab === "results" && (
-                  <motion.div
-                    key="results"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                  <motion.div key="results" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
                     <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Project Results</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                      {project.results.map((result, index) => (
-                        <motion.div
-                          key={index}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.3, delay: index * 0.1 }}
-                          className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-4 text-center"
-                        >
-                          <p className="text-2xl font-bold text-white">{result.value}</p>
-                          <p className="text-sm text-white">{result.label}</p>
-                          <p className="text-xs text-cyberpunk-green">{result.change}</p>
-                        </motion.div>
-                      ))}
+                    <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6 md:p-8 mb-8">
+                      <SimpleRichText content={currentItem.results} />
                     </div>
-
-                    <div className="bg-black/60 backdrop-blur-sm border border-cyberpunk-pink/30 rounded-lg p-6 mb-8">
-                      <blockquote className="text-lg italic text-white mb-4">"{project.testimonial.quote}"</blockquote>
-                      <div className="flex items-center">
-                        <div className="mr-4 w-12 h-12 bg-cyberpunk-pink/20 rounded-full flex items-center justify-center">
-                          <span className="text-cyberpunk-pink text-xl font-bold">
-                            {project.testimonial.author.charAt(0)}
-                          </span>
-                        </div>
-                        <div>
-                          <p className="font-bold text-white">{project.testimonial.author}</p>
-                          <p className="text-sm text-gray-400">{project.testimonial.position}</p>
+                    {currentItem.metrics && currentItem.metrics.length > 0 && (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                        {currentItem.metrics.map((metric, index) => (
+                          <motion.div
+                            key={index}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.3, delay: index * 0.1 }}
+                            className="bg-black/50 border border-gray-700/70 rounded-lg p-4 text-center flex flex-col justify-center items-center"
+                          >
+                            <p className="text-2xl font-bold text-cyberpunk-green">{metric.metricValue}</p>
+                            <p className="text-sm text-white mt-1">{metric.metricLabel}</p>
+                            {metric.metricChange && <p className="text-xs text-gray-400">({metric.metricChange})</p>}
+                            {metric.metricDescription && <p className="text-xs text-gray-500 mt-1">{metric.metricDescription}</p>}
+                          </motion.div>
+                        ))}
+                      </div>
+                    )}
+                    {currentItem.testimonial && (
+                      <div className="bg-black/70 backdrop-blur-sm border border-cyberpunk-pink/30 rounded-lg p-6 md:p-8 mb-8">
+                        {currentItem.testimonial.authorImage && (
+                          <Image 
+                            src={currentItem.testimonial.authorImage.url} 
+                            alt={currentItem.testimonial.authorImage.alt} 
+                            width={60} height={60} 
+                            className="rounded-full mx-auto mb-4 border-2 border-cyberpunk-pink" />
+                        )}
+                        <blockquote className="text-lg italic text-white mb-4 text-center">"{currentItem.testimonial.quote}"</blockquote>
+                        <div className="text-center">
+                          <p className="font-bold text-white">{currentItem.testimonial.authorName}</p>
+                          {currentItem.testimonial.authorTitle && <p className="text-sm text-gray-400">{currentItem.testimonial.authorTitle}</p>}
                         </div>
                       </div>
-                    </div>
+                    )}
                   </motion.div>
                 )}
 
-                {activeTab === "gallery" && (
-                  <motion.div
-                    key="gallery"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                {activeTab === "gallery" && currentItem.galleryImages && currentItem.galleryImages.length > 0 && (
+                  <motion.div key="gallery" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
                     <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Project Gallery</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                      {project.gallery.map((item, index) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-8">
+                      {currentItem.galleryImages.map((galleryItem, index) => (
                         <motion.div
                           key={index}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.5, delay: index * 0.1 }}
-                          className="group relative overflow-hidden rounded-lg border border-gray-800/50"
+                          className="group relative overflow-hidden rounded-lg border border-gray-800/50 aspect-video"
                         >
-                          <div className="aspect-video overflow-hidden">
-                            <img
-                              src={item.image || "/placeholder.svg"}
-                              alt={item.caption}
-                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            />
-                          </div>
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end">
-                            <p className="p-4 text-white">{item.caption}</p>
-                          </div>
+                          <Image
+                            src={galleryItem.image.url}
+                            alt={galleryItem.caption || `Gallery image ${index + 1}`}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          {galleryItem.caption && (
+                            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3">
+                              <p className="text-white text-sm">{galleryItem.caption}</p>
+                            </div>
+                          )}
                         </motion.div>
                       ))}
                     </div>
@@ -388,139 +347,127 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               </AnimatePresence>
             </div>
 
-            <div>
-              <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6 mb-8 sticky top-24">
-                <h3 className="text-xl font-bold mb-4 text-white">Project Details</h3>
-
-                <div className="space-y-4 mb-6">
+            {/* Sidebar Details */}
+            <div className="lg:sticky top-24 self-start">
+              <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6">
+                <h3 className="text-xl font-bold mb-6 text-white">Project At a Glance</h3>
+                <div className="space-y-5 mb-6">
                   <div>
-                    <p className="text-sm text-gray-400">Client</p>
-                    <p className="text-white">{project.client}</p>
+                    <p className="text-sm text-gray-400 flex items-center"><Briefcase className="h-4 w-4 mr-2 text-cyberpunk-blue"/> Client</p>
+                    <p className="text-white mt-1">{currentItem.clientName}</p>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-400">Year</p>
-                    <p className="text-white">{project.year}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-400">Category</p>
-                    <p className="text-white">{project.category}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-400">Duration</p>
-                    <p className="text-white">{project.duration}</p>
-                  </div>
+                  {currentItem.projectYear && (
+                    <div>
+                      <p className="text-sm text-gray-400 flex items-center"><Calendar className="h-4 w-4 mr-2 text-cyberpunk-blue"/> Year</p>
+                      <p className="text-white mt-1">{currentItem.projectYear}</p>
+                    </div>
+                  )}
+                  {currentItem.industry && (
+                    <div>
+                      <p className="text-sm text-gray-400 flex items-center"><Tag className="h-4 w-4 mr-2 text-cyberpunk-blue"/> Industry</p>
+                      <p className="text-white mt-1">{currentItem.industry}</p>
+                    </div>
+                  )}
                 </div>
 
-                <h4 className="text-lg font-medium mb-2 text-white">Services Provided</h4>
-                <ul className="space-y-2 mb-6">
-                  {project.services.map((service, index) => (
-                    <li key={index} className="flex items-start">
-                      <span className="text-cyberpunk-green mr-2">✓</span>
-                      <span className="text-white">{service}</span>
-                    </li>
-                  ))}
-                </ul>
+                {currentItem.servicesRendered && currentItem.servicesRendered.length > 0 && (
+                  <>
+                    <h4 className="text-lg font-medium mb-3 text-white">Services Provided</h4>
+                    <ul className="space-y-2 mb-6">
+                      {currentItem.servicesRendered.map((service, index) => (
+                        <li key={index} className="flex items-start">
+                          <span className="text-cyberpunk-green mr-2 mt-1">✓</span>
+                          <span className="text-white capitalize">{service.replace(/-/g, ' ')}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+                
+                {currentItem.tags && currentItem.tags.length > 0 && (
+                  <>
+                    <h4 className="text-lg font-medium mb-3 text-white">Project Tags</h4>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                        {currentItem.tags.map(tag => (
+                            <Badge key={tag} variant="secondary" className="bg-gray-700/50 text-gray-300">{tag}</Badge>
+                        ))}
+                    </div>
+                  </>
+                )}
 
-                <Button className="w-full cyberpunk-button mb-3" onClick={() => (window.location.href = "/contact")}>
-                  Start Your Project
-                </Button>
-                <Button
-                  variant="outline"
-                  className="w-full border-cyberpunk-blue text-cyberpunk-blue hover:bg-cyberpunk-blue/10"
-                  onClick={() => (window.location.href = "/services")}
-                >
-                  Explore Our Services
-                </Button>
+                <Link href="/contact">
+                  <Button className="w-full cyberpunk-button mb-3">
+                    Discuss Your Project
+                  </Button>
+                </Link>
+                <Link href="/services">
+                  <Button
+                    variant="outline"
+                    className="w-full border-cyberpunk-blue text-cyberpunk-blue hover:bg-cyberpunk-blue/10"
+                  >
+                    Explore Our Services
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Related Projects */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-black/50 to-cyberpunk-background">
-        <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-white text-center">Related Projects</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {project.relatedProjects.map((relatedProject, index) => (
-              <motion.div
-                key={relatedProject.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg overflow-hidden group hover:border-cyberpunk-blue/50 transition-colors"
-              >
-                <div className="relative aspect-video overflow-hidden">
-                  <img
-                    src={relatedProject.image || "/placeholder.svg"}
-                    alt={relatedProject.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                </div>
-
-                <div className="p-4">
-                  <h3 className="text-lg font-bold text-white mb-4">{relatedProject.title}</h3>
-                  <Button
-                    className="w-full cyberpunk-button"
-                    onClick={() => (window.location.href = `/portfolio/${relatedProject.id}`)}
-                  >
-                    View Project <ExternalLink className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-              </motion.div>
-            ))}
+      {/* Related Projects - Simplified for now */}
+      {/* This would ideally fetch related items based on tags or services */}
+      {/* For now, it will show the first 2 items from the main list, excluding the current one */}
+      {((): PortfolioItem[] => {
+        const related = allPortfolioItems.filter(p => p.slug !== currentItem.slug && p.status === 'published').slice(0, 2);
+        if (related.length === 0) return []; // Ensure it returns empty array if no related items found
+        return related;
+      })().length > 0 && (
+        <section className="py-16 md:py-24 bg-gradient-to-b from-black/50 to-cyberpunk-background">
+          <div className="container mx-auto px-4">
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-white text-center">Other Projects You Might Like</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {allPortfolioItems
+                .filter(p => p.slug !== currentItem.slug && p.status === 'published')
+                .slice(0, 2)
+                .map((relatedItem, index) => (
+                  <PortfolioItemCard key={relatedItem.slug} item={relatedItem} index={index} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <CallToAction />
 
-      {/* Video Modal */}
+      {/* Video Modal - Keep for potential future use if video links are added */}
       <AnimatePresence>
         {isVideoModalOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative bg-cyberpunk-background border border-cyberpunk-blue/30 rounded-lg w-full max-w-5xl overflow-hidden"
+              className="relative bg-cyberpunk-background border border-cyberpunk-blue/30 rounded-lg w-full max-w-5xl overflow-hidden shadow-2xl"
             >
               <button
-                className="absolute top-4 right-4 z-10 p-2 bg-black/50 rounded-full text-white hover:bg-black/70 transition-colors"
+                className="absolute top-2 right-2 md:top-4 md:right-4 z-10 p-2 bg-black/50 rounded-full text-white hover:bg-black/70 transition-colors"
                 onClick={() => setIsVideoModalOpen(false)}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
               </button>
-
-              <div className="aspect-video bg-black">
-                <img
-                  src="/images/project1.png"
-                  alt="EcoTech Innovations Documentary"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Play className="h-16 w-16 text-white opacity-50" />
-                </div>
+              <div className="aspect-video bg-black flex items-center justify-center">
+                {/* Replace with actual video player if a video URL is available in currentItem */}
+                {/* For example: <iframe src={currentItem.videoUrl} allowFullScreen></iframe> */}
+                <p className="text-white text-xl">Video Player Placeholder</p>
+                <Play className="h-16 w-16 text-white opacity-30 absolute" />
               </div>
             </motion.div>
           </motion.div>

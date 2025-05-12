@@ -32,7 +32,7 @@ const painPoints: PainPoint[] = [
         "2.7x longer view time compared to industry average",
         "87% of viewers reported stronger brand connection",
       ],
-      caseStudyLink: "/case-studies/authentic-storytelling",
+      caseStudyLink: "/portfolio/authentic-brand-narrative-revamp",
     },
   },
   {
@@ -49,7 +49,7 @@ const painPoints: PainPoint[] = [
         "3.2x higher comment rate on campaign content",
         "52% increase in conversion from engaged viewers",
       ],
-      caseStudyLink: "/case-studies/emotional-narrative",
+      caseStudyLink: "/portfolio/emotional-connection-campaign",
     },
   },
   {
@@ -66,7 +66,7 @@ const painPoints: PainPoint[] = [
         "2.3x ROI improvement over previous campaigns",
         "Predictable growth pattern established over 6-month period",
       ],
-      caseStudyLink: "/case-studies/data-driven-creativity",
+      caseStudyLink: "/portfolio/data-driven-creative-roi",
     },
   },
   {
@@ -83,82 +83,69 @@ const painPoints: PainPoint[] = [
         "3.8x increase in qualified leads",
         "47% improvement in customer retention metrics",
       ],
-      caseStudyLink: "/case-studies/audience-centric-approach",
+      caseStudyLink: "/portfolio/audience-centric-engagement",
     },
   },
 ]
 
 export default function PainToGain() {
   const [activePain, setActivePain] = useState<PainPoint>(painPoints[0])
-  const [showSolution, setShowSolution] = useState(false)
 
   const handlePainClick = (pain: PainPoint) => {
-    if (activePain.id === pain.id) {
-      setShowSolution(!showSolution)
-    } else {
-      setActivePain(pain)
-      setShowSolution(true)
-    }
+    setActivePain(pain)
   }
 
   return (
     <div className="bg-black/60 backdrop-blur-sm border border-gray-800 rounded-lg overflow-hidden max-w-6xl mx-auto">
       <div className="flex flex-col md:flex-row">
-        {/* Solution Details - Left Column */}
+        {/* Challenge & Solution Details - Left Column */}
         <div className="md:w-1/2 p-8">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`${activePain.id}-${showSolution ? "solution" : "pain"}`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
+          {/* --- Challenge Section --- */}
+          <div className="mb-8">
+            <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-orange-400/20 text-orange-400 mb-3">
+              Challenge
+            </span>
+            <h3 className="text-2xl font-bold text-white mb-4">
+              {activePain.title}
+            </h3>
+            <div className="bg-black/40 p-5 rounded-lg">
+              <p className="text-white text-lg leading-relaxed">
+                {activePain.description}
+              </p>
+            </div>
+          </div>
+
+          {/* --- Solution Section --- */}
+          <div className="mb-6">
+            <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-cyberpunk-pink/20 text-cyberpunk-pink mb-3">
+              Solution
+            </span>
+            <h3 className="text-2xl font-bold text-white mb-4">
+              {activePain.solution.title}
+            </h3>
+            <div className="bg-black/40 p-5 rounded-lg mb-6">
+              <p className="text-white text-lg leading-relaxed">
+                {activePain.solution.description}
+              </p>
+            </div>
+            <div className="mb-6">
+              <h4 className="text-lg font-medium text-cyberpunk-blue mb-4">Measurable Results:</h4>
+              <ul className="space-y-3">
+                {activePain.solution.results.map((result, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="text-cyberpunk-green mr-2 text-lg">✓</span>
+                    <span className="text-white">{result}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <Button
+              className="cyberpunk-button"
+              onClick={() => (window.location.href = activePain.solution.caseStudyLink)}
             >
-              <div className="mb-6">
-                <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-cyberpunk-pink/20 text-cyberpunk-pink mb-3">
-                  {showSolution ? "Solution" : "Challenge"}
-                </span>
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  {showSolution ? activePain.solution.title : activePain.title}
-                </h3>
-              </div>
-
-              <div className="bg-black/40 p-5 rounded-lg mb-6">
-                <p className="text-white text-lg leading-relaxed">
-                  {showSolution ? activePain.solution.description : activePain.description}
-                </p>
-              </div>
-
-              {showSolution && (
-                <>
-                  <div className="mb-6">
-                    <h4 className="text-lg font-medium text-cyberpunk-blue mb-4">Measurable Results:</h4>
-                    <ul className="space-y-3">
-                      {activePain.solution.results.map((result, index) => (
-                        <li key={index} className="flex items-start">
-                          <span className="text-cyberpunk-green mr-2 text-lg">✓</span>
-                          <span className="text-white">{result}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <Button
-                    className="cyberpunk-button"
-                    onClick={() => (window.location.href = activePain.solution.caseStudyLink)}
-                  >
-                    View Case Study
-                  </Button>
-                </>
-              )}
-
-              {!showSolution && (
-                <Button className="cyberpunk-button" onClick={() => setShowSolution(true)}>
-                  Discover Our Solution
-                </Button>
-              )}
-            </motion.div>
-          </AnimatePresence>
+              View Case Study
+            </Button>
+          </div>
         </div>
 
         {/* Challenge Selection - Right Column */}
