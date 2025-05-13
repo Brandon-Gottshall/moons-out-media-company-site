@@ -150,7 +150,7 @@ export default function ServiceHero() {
             ></motion.div>
 
             <p className="text-white text-lg md:text-xl leading-relaxed">
-            Cinematic artistry meets cutting-edge tech: documentary storytelling, strategic ad campaigns, and end-to-end web, AI & cloud engineering—all under one roof to drive real results.
+            Cinematic artistry meets cutting-edge tech: narrative driven storytelling, strategic ad campaigns, and end-to-end web, AI & cloud engineering—all under one roof to drive real results.
             </p>
           </motion.div>
 
@@ -176,7 +176,7 @@ export default function ServiceHero() {
             <Button
               variant="outline"
               className="border-cyberpunk-blue text-cyberpunk-blue hover:bg-cyberpunk-blue/10 bg-black/50 py-6 text-base relative overflow-hidden group"
-              onClick={() => document.getElementById("services-showcase")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() => document.getElementById("services-showcase")?.scrollIntoView({ behavior: "smooth"})}
             >
               <span className="relative z-10">Explore Services</span>
               <motion.div

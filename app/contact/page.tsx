@@ -44,7 +44,7 @@ export default function ContactPage() {
             </h2>
             <div className="bg-black/40 backdrop-blur-sm p-6 rounded-lg max-w-3xl mx-auto border border-gray-800">
               <p className="text-white text-lg leading-relaxed">
-                Tell us what's holding your brand back, and we'll show you how our documentary-style approach can
+                Tell us what's holding your brand back, and we'll show you how our authentic story telling approach can
                 transform your results. Our team is ready to craft a custom solution for your specific needs.
               </p>
             </div>
@@ -139,14 +139,14 @@ export default function ContactPage() {
               <div className="space-y-6">
                 {[
                   {
-                    question: "What makes your documentary-style approach different?",
+                    question: "What makes your authentic story telling approach different?",
                     answer:
-                      "Our documentary-style approach focuses on authentic storytelling that captures the real essence of your brand. Unlike traditional marketing videos, we create narrative-driven content that emotionally connects with your audience, resulting in higher engagement and conversion rates.",
+                      "Our authentic story telling approach focuses on authentic storytelling that captures the real essence of your brand. Unlike traditional marketing videos, we create narrative-driven content that emotionally connects with your audience, resulting in higher engagement and conversion rates.",
                   },
                   {
                     question: "How long does a typical project take?",
                     answer:
-                      "Project timelines vary based on complexity and scope. A standard documentary-style brand video typically takes 4-6 weeks from concept to final delivery. Digital marketing campaigns may take 2-3 weeks to develop, while comprehensive brand storytelling packages can take 8-12 weeks.",
+                      "Project timelines vary based on complexity and scope. A standard authentic story telling brand video typically takes 4-6 weeks from concept to final delivery. Digital marketing campaigns may take 2-3 weeks to develop, while comprehensive brand storytelling packages can take 8-12 weeks.",
                   },
                   {
                     question: "Do you work with clients outside your location?",

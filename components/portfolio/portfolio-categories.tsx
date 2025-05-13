@@ -17,9 +17,9 @@ type Category = {
 const categories: Category[] = [
   {
     id: "documentary",
-    title: "Documentary-Style Production",
+    title: "Narrative Driven",
     description:
-      "Cinematic documentary-style content that tells authentic stories and captures the essence of your brand.",
+      "Cinematic authentic story telling content that tells authentic stories and captures the essence of your brand.",
     image: "/images/documentary.png",
     projectCount: 12,
     color: "cyberpunk-blue",

@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Moons Out Media | Creative Agency",
   description:
-    "Cutting-edge creative agency and tech studio: documentary-style content, authentic storytelling, targeted digital campaigns—and custom web, AI & DevOps solutions.",
+    "Cutting-edge creative agency and tech studio: authentic story telling content, authentic storytelling, targeted digital campaigns—and custom web, AI & DevOps solutions.",
     generator: 'v0.dev'
 }
 

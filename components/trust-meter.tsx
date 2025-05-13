@@ -30,7 +30,7 @@ const testimonials: Testimonial[] = [
     position: "Chief Marketing Officer",
     company: "EcoTech Innovations",
     quote:
-      "Moons Out Media transformed our brand narrative. Their documentary-style approach captured the essence of our mission in a way traditional marketing never could.",
+      "Moons Out Media transformed our brand narrative. Their authentic story telling approach captured the essence of our mission in a way traditional marketing never could.",
     image: "/placeholder.svg?height=100&width=100",
   },
   {

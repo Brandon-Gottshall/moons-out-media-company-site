@@ -41,7 +41,7 @@ export default function CallToAction() {
               Ready to Tell Your Story?
             </h2>
             <p className="text-base md:text-xl text-gray-200 mb-6 md:mb-8 max-w-2xl mx-auto font-medium">
-              Let's create documentary-style content that captures the essence of your brand and connects with your
+              Let's create authentic story telling content that captures the essence of your brand and connects with your
               audience on a deeper level.
             </p>
 

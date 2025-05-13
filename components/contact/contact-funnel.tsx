@@ -92,7 +92,7 @@ const testimonials: Testimonial[] = [
   {
     id: 1,
     quote:
-      "Moons Out Media transformed our brand narrative with cinematic documentary-style content. They captured the essence of our mission in a way traditional video never could.",
+      "Moons Out Media transformed our brand narrative with cinematic authentic story telling content. They captured the essence of our mission in a way traditional video never could.",
     name: "Sarah Johnson",
     position: "Chief Marketing Officer",
     company: "EcoTech Innovations",

@@ -5,7 +5,13 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Play } from "lucide-react"
 
-export default function FeaturedProject({ hideDescription = false }: { hideDescription?: boolean }) {
+export default function FeaturedProject({ 
+  hideDescription = false,
+  customImageOverlay
+}: { 
+  hideDescription?: boolean
+  customImageOverlay?: React.ReactNode
+}) {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
 
   return (
@@ -17,21 +23,23 @@ export default function FeaturedProject({ hideDescription = false }: { hideDescr
         viewport={{ once: true }}
         className="bg-black/20 backdrop-blur-sm border border-cyberpunk-blue/30 rounded-lg overflow-hidden"
       >
-        <div className="relative aspect-video rounded-lg overflow-hidden">
+        <div className="relative rounded-lg overflow-hidden">
           <img
             src="/images/project1.png"
             alt="EcoTech Innovations Documentary"
-            className="w-full h-full object-cover"
+            className="w-full"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-center justify-center">
-            <button
-              onClick={() => setIsVideoModalOpen(true)}
-              className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-cyberpunk-blue/20 backdrop-blur-sm border border-cyberpunk-blue flex items-center justify-center transition-transform hover:scale-110"
-              aria-label="Play video"
-            >
-              <Play className="h-10 w-10 md:h-12 md:w-12 text-white fill-white" />
-            </button>
-          </div>
+          {customImageOverlay || (
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-center justify-center">
+              <button
+                onClick={() => setIsVideoModalOpen(true)}
+                className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-cyberpunk-blue/20 backdrop-blur-sm border border-cyberpunk-blue flex items-center justify-center transition-transform hover:scale-110"
+                aria-label="Play video"
+              >
+                <Play className="h-10 w-10 md:h-12 md:w-12 text-white fill-white" />
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="p-4 md:p-6">
@@ -127,7 +135,7 @@ export default function FeaturedProject({ hideDescription = false }: { hideDescr
               <img
                 src="/images/project1.png"
                 alt="EcoTech Innovations Documentary"
-                className="w-full h-full object-cover"
+                className="w-full"
               />
             </div>
           </div>

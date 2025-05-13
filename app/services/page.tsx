@@ -27,7 +27,7 @@ export default function ServicesPage() {
       <ServiceHero />
 
       {/* Main Services Section */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden scroll-m-48" id="services-showcase">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,204,255,0.15)_0%,transparent_50%)]"></div>
         <div className="container mx-auto px-4">
           <div className="text-center mb-10">
@@ -80,7 +80,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Client Success Stories Section */}
-      <section className="py-20 bg-gradient-to-b from-black/50 to-cyberpunk-background relative overflow-hidden">
+      {/* <section className="py-20 bg-gradient-to-b from-black/50 to-cyberpunk-background relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,255,127,0.1)_0%,transparent_70%)]"></div>
         <div className="container mx-auto px-4">
           <div className="text-center mb-10">
@@ -94,7 +94,7 @@ export default function ServicesPage() {
 
           <ServiceTestimonials />
         </div>
-      </section>
+      </section> */}
 
       {/* Find Your Perfect Story Section */}
       <section className="py-20 relative overflow-hidden">

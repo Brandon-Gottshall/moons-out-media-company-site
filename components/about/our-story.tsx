@@ -6,7 +6,7 @@ import { Quote } from "lucide-react"
 export default function OurStory() {
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
-    visible: (i) => ({
+    visible: (i: number) => ({
       opacity: 1,
       y: 0,
       transition: {
@@ -52,7 +52,7 @@ export default function OurStory() {
             className="text-lg leading-relaxed"
           >
             What began as a small documentary production team quickly evolved into a full-service creative agency. We
-            recognized that the documentary-style approach—with its emphasis on authenticity, emotional resonance, and
+            recognized that the authentic story telling approach—with its emphasis on authenticity, emotional resonance, and
             narrative depth—could revolutionize brand marketing in a digital landscape saturated with superficial
             content.
           </motion.p>
@@ -145,9 +145,8 @@ export default function OurStory() {
                 <div
                   className={`bg-black/40 border border-gray-800 rounded-lg p-4 md:w-[calc(50%-20px)] ${index % 2 === 0 ? "md:mr-auto" : "md:ml-auto"}`}
                 >
-                  <div className="text-cyberpunk-pink font-bold">{item.year}</div>
-                  <h4 className="text-white text-lg font-semibold">{item.title}</h4>
-                  <p className="text-gray-300 text-sm">{item.description}</p>
+                  <h4 className="text-xl font-bold mb-2">{item.title}</h4>
+                  <p className="text-gray-100">{item.description}</p>
                 </div>
               </div>
             ))}
@@ -157,4 +156,3 @@ export default function OurStory() {
     </section>
   )
 }
-

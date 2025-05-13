@@ -77,7 +77,7 @@ export default function Hero() {
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto font-medium">
-            Documentary-style storytelling, targeted digital advertising, and
+            Authentic story telling, targeted digital advertising, and
             custom web, AI & DevOps solutions— all designed to connect with your
             audience and accelerate your business.
           </p>

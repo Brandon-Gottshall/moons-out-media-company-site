@@ -238,7 +238,7 @@ export function VideoHero() {
           </h1>
           <div className="bg-black/40 backdrop-blur-sm p-6 rounded-lg border border-cyberpunk-blue/20 max-w-2xl mx-auto mb-8">
             <p className="text-xl md:text-2xl text-gray-200 leading-relaxed">
-            Documentary-style storytelling, targeted digital advertising, and custom web, AI & DevOps solutions — all designed to connect with your audience and accelerate your business.
+            Authentic story telling, targeted digital advertising, and custom web, AI & DevOps solutions — all designed to connect with your audience and accelerate your business.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row justify-center gap-4">

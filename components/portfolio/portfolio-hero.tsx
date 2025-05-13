@@ -324,7 +324,7 @@ export default function PortfolioHero({
 
       {/* Content */}
       <div
-        className={`px-6 md:px-8 lg:px-12 ${isSearchActive ? "" : "grid grid-cols-1 lg:grid-cols-10 gap-8 items-center min-h-[70vh]"}`}
+        className={`px-6 md:px-8 lg:px-12 ${isSearchActive ? "" : "grid grid-cols-1 lg:grid-cols-10 justify-items-center items-center min-h-[70vh]"}`}
       >
         {/* Left Column: Text, Search, Filters */}
         <motion.div
@@ -443,14 +443,13 @@ export default function PortfolioHero({
                 opacity: 1,
                 y: 0,
                 gridTemplateColumns: isSearchActive ? "repeat(4, 1fr)" : "repeat(2, 1fr)",
-                maxWidth: isSearchActive ? "md" : "xs",
+                maxWidth: isSearchActive ? "800px" : "xs",
                 position: isSearchActive ? "fixed" : "relative",
                 top: isSearchActive ? "9rem" : "auto", // Increased gap between search form and filters
                 left: isSearchActive ? "50%" : "auto",
                 transform: isSearchActive ? "translateX(-50%)" : "none",
                 zIndex: 100,
                 width: isSearchActive ? "calc(100% - 3rem)" : "auto",
-                maxWidth: isSearchActive ? "800px" : "xs",
               }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
@@ -523,7 +522,7 @@ export default function PortfolioHero({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20, position: "absolute", zIndex: -1 }}
               transition={{ duration: 0.3 }}
-              className="mt-12 lg:hidden"
+              className="mt-12 lg:hidden flex justify-center items-center"
             >
               {featuredProject}
             </motion.div>

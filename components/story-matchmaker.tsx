@@ -32,10 +32,10 @@ type Result = ServiceCategory & {
 const serviceCategories: ServiceCategory[] = [
   {
     id: "documentary",
-    title: "Documentary-Style Brand Storytelling",
+    title: "Authentic Story Telling Brand Storytelling",
     description:
-      "Our documentary-style approach captures authentic moments and creates emotional connections with your audience, perfect for brands looking to build depth and trust.",
-    serviceType: "Documentary Production",
+      "Our authentic story telling approach captures authentic moments and creates emotional connections with your audience, perfect for brands looking to build depth and trust.",
+    serviceType: "Narrative Driven Production",
     caseStudyLink: "/portfolio/documentary-storytelling",
     image: "/placeholder.svg?height=300&width=500&text=DocuStory",
   },

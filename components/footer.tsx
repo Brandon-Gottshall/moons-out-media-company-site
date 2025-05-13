@@ -10,7 +10,7 @@ export default function Footer() {
               MOONS<span className="text-cyberpunk-pink">OUT</span>
             </h3>
             <p className="text-gray-300 mb-4">
-              Cutting-edge creative agency and tech studio: documentary-style
+              Cutting-edge creative agency and tech studio: authentic story telling
               content, authentic storytelling, targeted digital campaigns—and
               custom web, AI & DevOps solutions.
             </p>

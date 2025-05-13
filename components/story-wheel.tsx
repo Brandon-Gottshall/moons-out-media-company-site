@@ -25,7 +25,7 @@ const categories: Category[] = [
   {
     id: 1,
     name: "Cinematography",
-    description: "Cinematic documentary-style content that tells authentic stories.",
+    description: "Cinematic authentic story telling content that tells authentic stories.",
     image: "/placeholder.svg?height=400&width=600",
     projects: [
       {

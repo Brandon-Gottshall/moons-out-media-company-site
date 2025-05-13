@@ -109,7 +109,7 @@ export default function ContactHero() {
             animate={{ opacity: isVisible ? 1 : 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            No generic solutions. Tell us your specific challenges, and we'll show you how our documentary-style
+            No generic solutions. Tell us your specific challenges, and we'll show you how our authentic story telling
             approach can transform your results. We collaborate virtually with clients worldwide.
           </motion.p>
 

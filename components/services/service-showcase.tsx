@@ -28,22 +28,6 @@ type Service = {
 
 const services: Service[] = [
   {
-    id: "documentary",
-    title: "Documentary-Style Production",
-    description:
-      "We create cinematic, documentary-style content that captures the authentic essence of your brand and connects with your audience on an emotional level.",
-    features: [
-      "Brand Documentaries",
-      "Behind-the-Scenes Features",
-      "Customer Journey Stories",
-      "Company Culture Films",
-      "Product Origin Stories",
-    ],
-    image: "/images/documentary.gif",
-    caseStudyLink: "/portfolio/documentary-storytelling",
-    color: "blue",
-  },
-  {
     id: "digital",
     title: "Digital Marketing Campaigns",
     description:
@@ -54,6 +38,7 @@ const services: Service[] = [
       "Conversion-Focused Content",
       "Performance Analytics",
       "A/B Testing & Optimization",
+      "Google and Meta Ad Campaigns",
     ],
     image: "/images/digital-marketing.webp",
     caseStudyLink: "/portfolio/conversion-campaigns",
@@ -84,8 +69,7 @@ const services: Service[] = [
       "Platform-Specific Content",
       "Community Building",
       "Engagement Strategies",
-      "Influencer Collaborations",
-      "Viral Content Development",
+      "Content Development",
     ],
     image: "/images/Whiteboard Colab Scene.webp",
     caseStudyLink: "/portfolio/social-media-strategy",
@@ -185,8 +169,7 @@ export default function ServiceShowcase() {
   return (
     <motion.div
       ref={containerRef}
-      id="services-showcase"
-      className="relative w-full max-w-6xl mx-auto py-12 md:py-16"
+      className="relative w-full max-w-6xl mx-auto py-12 md:py-16 before:hidden before:h-96 before:scroll-mt-96"
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, ease: "easeOut" }}

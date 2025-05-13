@@ -26,6 +26,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      backdropBlur: {
+        xxxsm: '1px',
+        xxsm: '2.5px',
+        xsm: '3px',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

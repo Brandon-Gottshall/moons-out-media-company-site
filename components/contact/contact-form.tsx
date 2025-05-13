@@ -164,10 +164,10 @@ export default function ContactForm() {
               className="w-full rounded-md border border-gray-700 bg-black/60 text-white py-2 px-3 focus:outline-none focus:border-cyberpunk-blue"
             >
               <option value="">Select a service</option>
-              <option value="documentary">Documentary-Style Production</option>
-              <option value="digital">Digital Marketing Campaigns</option>
-              <option value="storytelling">Brand Storytelling</option>
-              <option value="social">Social Media Content</option>
+              <option value="narrative-driven">Narrative Driven Production</option>
+              <option value="digital-marketing">Digital Marketing Campaigns</option>
+              <option value="brand-storytelling">Brand Storytelling</option>
+              <option value="social-media-content">Social Media Content</option>
               <option value="other">Other</option>
             </select>
           </motion.div>

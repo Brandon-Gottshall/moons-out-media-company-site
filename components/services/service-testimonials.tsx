@@ -20,7 +20,7 @@ const testimonials: Testimonial[] = [
     name: "Alex Johnson",
     position: "Marketing Director",
     company: "TechVision Inc.",
-    service: "Documentary-Style Production",
+    service: "Narrative Driven Production",
     quote:
       "Moons Out Media transformed our brand story into a compelling documentary that not only showcased our technology but the human impact behind it. The results were immediate—increased engagement, deeper customer connections, and a 40% boost in qualified leads.",
     image: "/images/testimonial-1.png",

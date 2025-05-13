@@ -122,7 +122,7 @@ export default function VideoElevatorPitch() {
               <div className="p-4">
                 <h3 className="text-lg font-bold text-white mb-2">Discover Moons Out Media</h3>
                 <p className="text-sm text-gray-300">
-                Documentary-style storytelling, targeted digital advertising, and custom web, AI & DevOps solutions — all designed to connect with your audience and accelerate your business.
+                Authentic story telling, targeted digital advertising, and custom web, AI & DevOps solutions — all designed to connect with your audience and accelerate your business.
                 </p>
               </div>
             </motion.div>

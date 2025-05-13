@@ -22,7 +22,7 @@ export default function Home() {
           </h2>
           <div className="bg-black/40 backdrop-blur-sm p-4 rounded-lg border border-gray-800 max-w-2xl mx-auto mb-12">
             <p className="text-gray-300">
-              Explore our portfolio of documentary-style content, authentic storytelling, and targeted digital
+              Explore our portfolio of authentic story telling content, authentic storytelling, and targeted digital
               campaigns that drive real results.
             </p>
           </div>
@@ -44,12 +44,6 @@ export default function Home() {
 // Static data that can be accessed by both server and client components
 // Static data that can be accessed by both server and client components
 export const SERVICES = [
-  {
-    title: "Documentary Production",
-    description: "Cinematic documentary-style content that tells authentic stories.",
-    color: "blue",
-    icon: "🎬",
-  },
   {
     title: "Digital Marketing",
     description: "Targeted digital ad campaigns that drive measurable results.",
