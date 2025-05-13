@@ -250,8 +250,8 @@ export default function PortfolioHero({
       className="relative overflow-hidden"
       animate={{
         paddingTop: isSearchActive ? "5rem" : "6rem",
-        paddingBottom: isSearchActive ? "4rem" : "8rem",
-        minHeight: isSearchActive ? "40vh" : "100vh", // Maintain some height when search is active
+        paddingBottom: isSearchActive ? "4rem" : "6rem",
+        height: isSearchActive ? "auto" : "100vh",
       }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >
@@ -324,7 +324,7 @@ export default function PortfolioHero({
 
       {/* Content */}
       <div
-        className={`px-6 md:px-8 lg:px-12 ${isSearchActive ? "" : "grid grid-cols-1 lg:grid-cols-10 justify-items-center items-center min-h-[70vh]"}`}
+        className={`px-6 md:px-8 lg:px-12 ${isSearchActive ? "" : "grid grid-cols-1 lg:grid-cols-10 gap-4 justify-items-center items-center"}`}
       >
         {/* Left Column: Text, Search, Filters */}
         <motion.div
@@ -338,7 +338,7 @@ export default function PortfolioHero({
             zIndex: isSearchActive ? 40 : 40,
           }}
           transition={{ duration: 0.8 }}
-          className={`relative h-full flex flex-col ${isSearchActive ? "mx-auto max-w-3xl items-center" : "text-center items-center lg:pr-0 justify-center lg:col-span-4 w-full"}`}
+          className={`relative h-full flex flex-col ${isSearchActive ? "mx-auto max-w-3xl items-center" : "text-center items-center lg:pr-0 justify-center lg:col-span-5 w-full"}`}
           onClick={() => {
             if (isSearchActive) {
               clearSearch()
@@ -507,9 +507,11 @@ export default function PortfolioHero({
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20, position: "absolute", zIndex: -1 }}
               transition={{ duration: 0.3 }}
-              className="relative z-40 hidden lg:block lg:col-span-6"
+              className="relative z-40 hidden lg:block lg:col-span-5 mt-0"
             >
-              {featuredProject}
+              <div className="h-full">
+                {featuredProject}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -522,7 +524,7 @@ export default function PortfolioHero({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20, position: "absolute", zIndex: -1 }}
               transition={{ duration: 0.3 }}
-              className="mt-12 lg:hidden flex justify-center items-center"
+              className="mt-8 mb-8 lg:hidden flex justify-center items-center"
             >
               {featuredProject}
             </motion.div>
@@ -538,15 +540,21 @@ export default function PortfolioHero({
 
       {/* Scroll indicator - positioned at the very bottom of the hero section */}
       <motion.div
-        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-4 flex flex-col items-center z-50"
+        className="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
       >
+      {
+        !isSearchActive && (
+        <>
         <span className="text-cyberpunk-pink text-sm mb-2">Explore Stories</span>
         <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}>
           <ChevronDown className="h-6 w-6 text-cyberpunk-pink" />
-        </motion.div>
+        </motion.div> 
+        </>
+        )
+      }
       </motion.div>
     </motion.section>
   )

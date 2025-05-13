@@ -27,7 +27,7 @@ export default function FeaturedProject({
           <img
             src="/images/project1.png"
             alt="EcoTech Innovations Documentary"
-            className="w-full"
+            className="w-full h-[50dvh]"
           />
           {customImageOverlay || (
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-center justify-center">
