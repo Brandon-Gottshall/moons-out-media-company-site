@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Search, X } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { useMobile } from "@/hooks/use-mobile"
-import { Typewriter } from "react-simple-typewriter"
-import { ChevronDown } from "lucide-react"
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Search, X } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { useMobile } from "@/hooks/use-mobile";
+import { Typewriter } from "react-simple-typewriter";
+import { ChevronDown } from "lucide-react";
 
-const TRANSITION_INTERVAL = 4000 // Time in milliseconds between transitions
-const TEXT_DELAY = 1000 // Delay in milliseconds before text changes after video
+const TRANSITION_INTERVAL = 4000; // Time in milliseconds between transitions
+const TEXT_DELAY = 1000; // Delay in milliseconds before text changes after video
 
 // Combined data structure for videos and words
 const storyContent = [
@@ -72,47 +72,47 @@ const storyContent = [
       alt: "A creative, thought-provoking scene that opens up possibilities, blending dreamy visuals with subtle motion.",
     },
   },
-]
+];
 
 export default function PortfolioHero({
   isSearchActive,
   setIsSearchActive,
   featuredProject,
 }: {
-  isSearchActive: boolean
-  setIsSearchActive: (active: boolean) => void
-  featuredProject?: React.ReactNode
+  isSearchActive: boolean;
+  setIsSearchActive: (active: boolean) => void;
+  featuredProject?: React.ReactNode;
 }) {
   // Use a single index for tracking position
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [searchQuery, setSearchQuery] = useState("")
-  const [mounted, setMounted] = useState(false)
-  const currentVideoRef = useRef<HTMLVideoElement>(null)
-  const searchInputRef = useRef<HTMLInputElement>(null)
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [mounted, setMounted] = useState(false);
+  const currentVideoRef = useRef<HTMLVideoElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const isMobile = useMobile()
+  const isMobile = useMobile();
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   // Single useEffect for transitions
   useEffect(() => {
-    if (!mounted || isSearchActive) return
+    if (!mounted || isSearchActive) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % storyContent.length)
-    }, TRANSITION_INTERVAL) // Use the constant instead of hardcoded value
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % storyContent.length);
+    }, TRANSITION_INTERVAL); // Use the constant instead of hardcoded value
 
-    return () => clearInterval(interval)
-  }, [mounted, storyContent.length, isSearchActive])
+    return () => clearInterval(interval);
+  }, [mounted, storyContent.length, isSearchActive]);
 
   // Video playback effect
   useEffect(() => {
-    if (!mounted) return
+    if (!mounted) return;
 
     // Get all video elements
-    const videoElements = document.querySelectorAll("video")
+    const videoElements = document.querySelectorAll("video");
 
     // For the current video, set a calculated start time and play
     videoElements.forEach((video, index) => {
@@ -122,103 +122,105 @@ export default function PortfolioHero({
           video.addEventListener(
             "loadedmetadata",
             () => {
-              setCalculatedTimeAndPlay(video)
+              setCalculatedTimeAndPlay(video);
             },
-            { once: true },
-          )
+            { once: true }
+          );
 
           // Start loading the video
-          video.load()
+          video.load();
         } else {
-          setCalculatedTimeAndPlay(video)
+          setCalculatedTimeAndPlay(video);
         }
       }
-    })
+    });
 
     // Helper function to set calculated time and play
     function setCalculatedTimeAndPlay(video: HTMLVideoElement) {
       // Get video duration (or use a default if not available)
-      const duration = video.duration || 10
+      const duration = video.duration || 10;
 
       // Calculate a start time that ensures we don't loop during our display time
       // We want to show exactly TRANSITION_INTERVAL seconds of the video
-      const transitionSeconds = TRANSITION_INTERVAL / 1000
+      const transitionSeconds = TRANSITION_INTERVAL / 1000;
 
       // If the video is shorter than our transition interval, start from the beginning
       if (duration <= transitionSeconds) {
-        video.currentTime = 0
+        video.currentTime = 0;
       } else {
         // Otherwise, pick a random start point that ensures we don't reach the end
         // during our transition interval
-        const maxStartTime = Math.max(0, duration - transitionSeconds)
-        const randomTime = Math.random() * maxStartTime
-        video.currentTime = randomTime
+        const maxStartTime = Math.max(0, duration - transitionSeconds);
+        const randomTime = Math.random() * maxStartTime;
+        video.currentTime = randomTime;
       }
 
-      video.play().catch((err) => console.log("Autoplay prevented:", err))
+      video.play().catch((err) => console.log("Autoplay prevented:", err));
     }
-  }, [currentIndex, mounted])
+  }, [currentIndex, mounted]);
 
   // Add this new effect after the existing video playback effect
   useEffect(() => {
-    if (!mounted || isSearchActive) return
+    if (!mounted || isSearchActive) return;
 
     // Handle page visibility changes
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
         // Page is now visible again, resume the current video
-        const videoElements = document.querySelectorAll("video")
-        const currentVideo = videoElements[currentIndex] as HTMLVideoElement
+        const videoElements = document.querySelectorAll("video");
+        const currentVideo = videoElements[currentIndex] as HTMLVideoElement;
 
         if (currentVideo && currentVideo.paused) {
-          currentVideo.play().catch((err) => console.log("Could not resume video:", err))
+          currentVideo
+            .play()
+            .catch((err) => console.log("Could not resume video:", err));
         }
       }
-    }
+    };
 
-    document.addEventListener("visibilitychange", handleVisibilityChange)
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange)
-    }
-  }, [mounted, currentIndex, isSearchActive])
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [mounted, currentIndex, isSearchActive]);
 
   // Reset typewriter when currentIndex changes
   useEffect(() => {
     // The Typewriter component will handle the animation
     // when it receives the new currentIndex prop
-  }, [currentIndex])
+  }, [currentIndex]);
 
   const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!isSearchActive) {
-      setIsSearchActive(true)
+      setIsSearchActive(true);
       // Focus the search input after animation completes
       setTimeout(() => {
-        searchInputRef.current?.focus()
-      }, 300)
+        searchInputRef.current?.focus();
+      }, 300);
     } else {
       // In a real implementation, this would trigger a search
-      console.log("Searching for:", searchQuery)
+      console.log("Searching for:", searchQuery);
     }
-  }
+  };
 
   const handleInputFocus = () => {
     if (!isSearchActive) {
-      setIsSearchActive(true)
+      setIsSearchActive(true);
     }
-  }
+  };
 
   const handleFilterClick = () => {
     if (!isSearchActive) {
-      setIsSearchActive(true)
+      setIsSearchActive(true);
     }
-  }
+  };
 
   const clearSearch = () => {
-    setSearchQuery("")
-    setIsSearchActive(false)
-  }
+    setSearchQuery("");
+    setIsSearchActive(false);
+  };
 
   // Don't render video content during SSR
   if (!mounted) {
@@ -242,7 +244,7 @@ export default function PortfolioHero({
           </div>
         </div>
       </section>
-    )
+    );
   }
 
   return (
@@ -280,7 +282,10 @@ export default function PortfolioHero({
                 <source src={content.video.url} type="video/mp4" />
               </video>
               {/* This overlay darkens the video - slightly less dark when search is active */}
-              <div className="absolute inset-0 bg-black/80 z-2" style={{ opacity: isSearchActive ? 0.75 : 0.8 }}></div>
+              <div
+                className="absolute inset-0 bg-black/80 z-2"
+                style={{ opacity: isSearchActive ? 0.75 : 0.8 }}
+              ></div>
             </div>
           ))}
         </div>
@@ -315,7 +320,7 @@ export default function PortfolioHero({
           }}
           onClick={() => {
             if (isSearchActive) {
-              clearSearch()
+              clearSearch();
             }
           }}
         ></motion.div>
@@ -341,7 +346,7 @@ export default function PortfolioHero({
           className={`relative h-full flex flex-col ${isSearchActive ? "mx-auto max-w-3xl items-center" : "text-center items-center lg:pr-0 justify-center lg:col-span-5 w-full"}`}
           onClick={() => {
             if (isSearchActive) {
-              clearSearch()
+              clearSearch();
             }
           }}
         >
@@ -356,7 +361,10 @@ export default function PortfolioHero({
               >
                 <div className="flex flex-col items-center">
                   <span className="text-white mb-1">Stories That</span>
-                  <div className="neon-text-accent text-center" key={currentIndex}>
+                  <div
+                    className="neon-text-accent text-center"
+                    key={currentIndex}
+                  >
                     <Typewriter
                       words={[storyContent[currentIndex].word]}
                       loop={1}
@@ -381,10 +389,14 @@ export default function PortfolioHero({
               marginTop: isSearchActive ? "0" : "0",
               scale: isSearchActive ? 1.02 : 1,
               width: isSearchActive ? "100%" : "100%",
-              backgroundColor: isSearchActive ? "rgba(0, 0, 0, 0.8)" : "transparent",
+              backgroundColor: isSearchActive
+                ? "rgba(0, 0, 0, 0.8)"
+                : "transparent",
               padding: isSearchActive ? "1.5rem" : "0",
               borderRadius: isSearchActive ? "0.5rem" : "0",
-              boxShadow: isSearchActive ? "0 8px 32px rgba(0, 0, 0, 0.8)" : "none",
+              boxShadow: isSearchActive
+                ? "0 8px 32px rgba(0, 0, 0, 0.8)"
+                : "none",
               position: isSearchActive ? "fixed" : "relative",
               top: isSearchActive ? "4rem" : "auto", // Position right below navbar
               left: isSearchActive ? "50%" : "auto",
@@ -402,9 +414,9 @@ export default function PortfolioHero({
                 className="bg-black/50 border-gray-700 focus:border-cyberpunk-blue text-white pl-10 h-10 text-sm"
                 value={searchQuery}
                 onChange={(e) => {
-                  setSearchQuery(e.target.value)
+                  setSearchQuery(e.target.value);
                   if (e.target.value && !isSearchActive) {
-                    setIsSearchActive(true)
+                    setIsSearchActive(true);
                   }
                 }}
                 onFocus={handleInputFocus}
@@ -416,8 +428,8 @@ export default function PortfolioHero({
                 <button
                   type="button"
                   onClick={(e) => {
-                    e.stopPropagation()
-                    clearSearch()
+                    e.stopPropagation();
+                    clearSearch();
                   }}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
                 >
@@ -442,7 +454,9 @@ export default function PortfolioHero({
               animate={{
                 opacity: 1,
                 y: 0,
-                gridTemplateColumns: isSearchActive ? "repeat(4, 1fr)" : "repeat(2, 1fr)",
+                gridTemplateColumns: isSearchActive
+                  ? "repeat(4, 1fr)"
+                  : "repeat(2, 1fr)",
                 maxWidth: isSearchActive ? "800px" : "xs",
                 position: isSearchActive ? "fixed" : "relative",
                 top: isSearchActive ? "9rem" : "auto", // Increased gap between search form and filters
@@ -459,8 +473,8 @@ export default function PortfolioHero({
                 variant="outline"
                 className={`bg-black/50 border-cyberpunk-blue/50 text-white hover:bg-cyberpunk-blue/20 text-xs py-1.5 px-2 ${isSearchActive ? "text-[10px]" : "text-xs"}`}
                 onClick={(e) => {
-                  e.stopPropagation()
-                  handleFilterClick()
+                  e.stopPropagation();
+                  handleFilterClick();
                 }}
               >
                 Documentary
@@ -469,8 +483,8 @@ export default function PortfolioHero({
                 variant="outline"
                 className={`bg-black/50 border-cyberpunk-pink/50 text-white hover:bg-cyberpunk-pink/20 text-xs py-1.5 px-2 ${isSearchActive ? "text-[10px]" : "text-xs"}`}
                 onClick={(e) => {
-                  e.stopPropagation()
-                  handleFilterClick()
+                  e.stopPropagation();
+                  handleFilterClick();
                 }}
               >
                 Digital Marketing
@@ -479,8 +493,8 @@ export default function PortfolioHero({
                 variant="outline"
                 className={`bg-black/50 border-cyberpunk-green/50 text-white hover:bg-cyberpunk-green/20 text-xs py-1.5 px-2 ${isSearchActive ? "text-[10px]" : "text-xs"}`}
                 onClick={(e) => {
-                  e.stopPropagation()
-                  handleFilterClick()
+                  e.stopPropagation();
+                  handleFilterClick();
                 }}
               >
                 Social Media
@@ -489,8 +503,8 @@ export default function PortfolioHero({
                 variant="outline"
                 className={`bg-black/50 border-cyberpunk-purple/50 text-white hover:bg-cyberpunk-purple/20 text-xs py-1.5 px-2 ${isSearchActive ? "text-[10px]" : "text-xs"}`}
                 onClick={(e) => {
-                  e.stopPropagation()
-                  handleFilterClick()
+                  e.stopPropagation();
+                  handleFilterClick();
                 }}
               >
                 Brand Storytelling
@@ -509,9 +523,7 @@ export default function PortfolioHero({
               transition={{ duration: 0.3 }}
               className="relative z-40 hidden lg:block lg:col-span-5 mt-0"
             >
-              <div className="h-full">
-                {featuredProject}
-              </div>
+              <div className="h-full">{featuredProject}</div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -545,18 +557,20 @@ export default function PortfolioHero({
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
       >
-      {
-        !isSearchActive && (
-        <>
-        <span className="text-cyberpunk-pink text-sm mb-2">Explore Stories</span>
-        <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}>
-          <ChevronDown className="h-6 w-6 text-cyberpunk-pink" />
-        </motion.div> 
-        </>
-        )
-      }
+        {!isSearchActive && (
+          <>
+            <span className="text-cyberpunk-pink text-sm mb-2">
+              Explore Stories
+            </span>
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
+            >
+              <ChevronDown className="h-6 w-6 text-cyberpunk-pink" />
+            </motion.div>
+          </>
+        )}
       </motion.div>
     </motion.section>
-  )
+  );
 }
-
