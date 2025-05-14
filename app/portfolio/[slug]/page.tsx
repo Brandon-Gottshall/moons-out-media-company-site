@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, use } from "react"
 import { Button } from "@/components/ui/button"
 import {
   ArrowLeft,
@@ -15,7 +15,8 @@ import {
   Target, // For Challenge
   Lightbulb, // For Solution
   BarChart2, // For Results
-  Camera // For Gallery
+  Camera, // For Gallery
+  Video // Added for potential use in Videos tab icon
 } from "lucide-react"
 import CallToAction from "@/components/call-to-action"
 import Link from "next/link"
@@ -23,8 +24,9 @@ import { motion, AnimatePresence } from "framer-motion"
 import { allPortfolioItems, type PortfolioItem } from "@/lib/placeholder-data/portfolio-items"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
-import { notFound } from "next/navigation"
+import { notFound, useSearchParams } from "next/navigation"
 import { PortfolioItemCard } from "@/components/portfolio/portfolio-item-card"
+import MuxPlayer from '@mux/mux-player-react';
 
 // Helper to simulate RichText rendering (replace with actual RichText renderer if you have one)
 function SimpleRichText({ content }: { content?: string }) {
@@ -38,31 +40,29 @@ function SimpleRichText({ content }: { content?: string }) {
   )
 }
 
-export default function PortfolioItemPage({ params }: { params: { slug: string } }) {
+export default function PortfolioItemPage({ params }: { params: Promise<{ slug: string }> }) {
+  const unwrappedParams = use(params)
+  const { slug } = unwrappedParams
+  
   const [mounted, setMounted] = useState(false)
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
-  // Default to challenge or solution as they are key parts of a case study
   const [activeTab, setActiveTab] = useState("challenge") 
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  const currentItem = allPortfolioItems.find(item => item.slug === params.slug && item.status === 'published');
+  const currentItem = allPortfolioItems.find(item => item.slug === slug && item.status === 'published');
+  const primaryVideo = currentItem?.showcaseVideos?.find(v => v.order === 1);
 
   if (!mounted) {
-    return null // Prevent hydration issues during initial render
+    return null
   }
 
   if (!currentItem) {
-    // In a real app, you might redirect to a 404 page or use Next.js notFound()
-    // For now, just return a simple message or call notFound() if on server component (though this is client)
-    // For client components, you might redirect or show an inline not-found UI.
-    // For a page component like this, `notFound()` from `next/navigation` is appropriate if no data.
     notFound(); 
   }
 
-  // Determine a primary category/tag for display if available
   const displayCategory = currentItem.tags?.[0] || currentItem.industry || "Case Study";
 
   return (
@@ -72,7 +72,16 @@ export default function PortfolioItemPage({ params }: { params: { slug: string }
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-cyberpunk-background z-10"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,90,205,0.15)_0%,transparent_70%)] z-20"></div>
-          {currentItem.heroImage && (
+          {primaryVideo?.muxPlaybackId ? (
+            <MuxPlayer
+              streamType="on-demand"
+              playbackId={primaryVideo.muxPlaybackId}
+              autoPlay="muted"
+              className="absolute w-full h-full object-cover"
+              poster={currentItem.heroImage?.url || ''}
+              accentColor="#00CCFF"
+            />
+          ) : currentItem.heroImage && (
             <Image
               src={currentItem.heroImage.url}
               alt={currentItem.heroImage.alt}
@@ -106,11 +115,7 @@ export default function PortfolioItemPage({ params }: { params: { slug: string }
               )}
 
               <div className="flex flex-wrap gap-4">
-                {/* Placeholder for video modal trigger - adapt if video URLs are added to data model */}
-                {/* <Button className="cyberpunk-button" onClick={() => setIsVideoModalOpen(true)}>
-                  <Play className="mr-2 h-4 w-4" /> Watch Trailer
-                </Button> */}
-                {currentItem.callToAction && currentItem.callToAction.ctaType === 'external' && (
+                {currentItem.callToAction && currentItem.callToAction.ctaType === 'external' && (!primaryVideo || currentItem.callToAction.ctaUrl !== `https://stream.mux.com/${primaryVideo.muxPlaybackId}.m3u8`) && (
                    <Link href={currentItem.callToAction.ctaUrl} target="_blank" rel="noopener noreferrer">
                      <Button className="cyberpunk-button">
                        {currentItem.callToAction.ctaLabel || 'View Project'} <ExternalLink className="ml-2 h-4 w-4" />
@@ -238,6 +243,18 @@ export default function PortfolioItemPage({ params }: { params: { slug: string }
                     <Camera className="inline h-4 w-4 mr-1.5 sm:mr-2" /> Gallery
                   </button>
                 )}
+                {currentItem.showcaseVideos && currentItem.showcaseVideos.length > 0 && (
+                  <button
+                    className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
+                      activeTab === "videos"
+                        ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
+                        : "text-gray-400 hover:text-white"
+                    }`}
+                    onClick={() => setActiveTab("videos")}
+                  >
+                    <Video className="inline h-4 w-4 mr-1.5 sm:mr-2" /> Videos
+                  </button>
+                )}
               </div>
 
               <AnimatePresence mode="wait">
@@ -344,6 +361,29 @@ export default function PortfolioItemPage({ params }: { params: { slug: string }
                     </div>
                   </motion.div>
                 )}
+
+                {activeTab === "videos" && currentItem.showcaseVideos && currentItem.showcaseVideos.length > 0 && (
+                  <motion.div key="videos" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
+                    <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Showcase Videos</h2>
+                    <div className="space-y-8">
+                      {currentItem.showcaseVideos.map((video, index) => (
+                        <div key={video.muxPlaybackId || index} className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg overflow-hidden shadow-lg">
+                          {video.title && <h3 className="text-xl font-semibold p-4 text-white bg-black/30">{video.title}</h3>}
+                          <div className="aspect-video bg-black">
+                            <MuxPlayer
+                              streamType="on-demand"
+                              playbackId={video.muxPlaybackId}
+                              className="w-full h-full"
+                              title={video.title || currentItem.title}
+                              accentColor="#00CCFF"
+                              poster={video.thumbnailUrl || currentItem.heroImage?.url || ''}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
               </AnimatePresence>
             </div>
 
@@ -418,7 +458,7 @@ export default function PortfolioItemPage({ params }: { params: { slug: string }
       {/* This would ideally fetch related items based on tags or services */}
       {/* For now, it will show the first 2 items from the main list, excluding the current one */}
       {((): PortfolioItem[] => {
-        const related = allPortfolioItems.filter(p => p.slug !== currentItem.slug && p.status === 'published').slice(0, 2);
+        const related = allPortfolioItems.filter(p => p.slug !== slug && p.status === 'published').slice(0, 2);
         if (related.length === 0) return []; // Ensure it returns empty array if no related items found
         return related;
       })().length > 0 && (
@@ -427,7 +467,7 @@ export default function PortfolioItemPage({ params }: { params: { slug: string }
             <h2 className="text-2xl md:text-3xl font-bold mb-8 text-white text-center">Other Projects You Might Like</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {allPortfolioItems
-                .filter(p => p.slug !== currentItem.slug && p.status === 'published')
+                .filter(p => p.slug !== slug && p.status === 'published')
                 .slice(0, 2)
                 .map((relatedItem, index) => (
                   <PortfolioItemCard key={relatedItem.slug} item={relatedItem} index={index} />
@@ -438,41 +478,6 @@ export default function PortfolioItemPage({ params }: { params: { slug: string }
       )}
 
       <CallToAction />
-
-      {/* Video Modal - Keep for potential future use if video links are added */}
-      <AnimatePresence>
-        {isVideoModalOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative bg-cyberpunk-background border border-cyberpunk-blue/30 rounded-lg w-full max-w-5xl overflow-hidden shadow-2xl"
-            >
-              <button
-                className="absolute top-2 right-2 md:top-4 md:right-4 z-10 p-2 bg-black/50 rounded-full text-white hover:bg-black/70 transition-colors"
-                onClick={() => setIsVideoModalOpen(false)}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
-              <div className="aspect-video bg-black flex items-center justify-center">
-                {/* Replace with actual video player if a video URL is available in currentItem */}
-                {/* For example: <iframe src={currentItem.videoUrl} allowFullScreen></iframe> */}
-                <p className="text-white text-xl">Video Player Placeholder</p>
-                <Play className="h-16 w-16 text-white opacity-30 absolute" />
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   )
 }

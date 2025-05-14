@@ -40,6 +40,14 @@ export interface PortfolioItem {
     ctaType: 'internal' | 'external'
     ctaVariant?: 'primary' | 'secondary'
   }
+  showcaseVideos?: Array<{  // Updated for Mux
+    muxPlaybackId: string // Changed from url to muxPlaybackId
+    title?: string
+    thumbnailUrl?: string
+    order: number
+    description?: string
+  }>
+  category: string // New field for category filtering
 }
 
 export const allPortfolioItems: PortfolioItem[] = [
@@ -80,10 +88,25 @@ export const allPortfolioItems: PortfolioItem[] = [
     tags: ["Documentary", "Sustainability", "Brand Storytelling", "Corporate Video"],
     callToAction: {
       ctaLabel: "Watch The Series",
-      ctaUrl: "https://example.com/ecotech-series", // Placeholder external link
+      ctaUrl: "https://example.com/ecotech-series",
       ctaType: "external",
       ctaVariant: "primary"
-    }
+    },
+    showcaseVideos: [
+      {
+        muxPlaybackId: "placeholderMuxIdEcoTechTrailer", // Placeholder Mux Playback ID
+        title: "EcoTech Innovations - Series Trailer",
+        order: 1,
+        description: "Official trailer for The Future is Green documentary series."
+      },
+      {
+        muxPlaybackId: "placeholderMuxIdEcoTechBTS", // Placeholder Mux Playback ID
+        title: "Behind the Scenes: EcoTech Solar Fields",
+        order: 2,
+        description: "A quick look at the making of our documentary."
+      }
+    ],
+    category: "documentary",
   },
   {
     title: "Urban Fitness: Powering Growth with Authentic Social Campaigns",
@@ -109,7 +132,16 @@ export const allPortfolioItems: PortfolioItem[] = [
       quote: "The #MyUrbanJourney campaign was a game-changer. Moons Out Media understood our ethos and brought our members' stories to life in a way that felt real and inspiring.",
       authorName: "Sarah Chen",
       authorTitle: "Founder, Urban Fitness Co."
-    }
+    },
+    showcaseVideos: [
+      {
+        muxPlaybackId: "placeholderMuxIdUrbanFitnessMontage", // Placeholder Mux Playback ID
+        title: "Urban Fitness - Member Transformation Montage",
+        order: 1,
+        description: "See the incredible journeys of Urban Fitness members."
+      }
+    ],
+    category: "documentary",
   },
   {
     title: "Artisan Collective: Weaving Narratives for E-commerce Success",
@@ -140,7 +172,8 @@ export const allPortfolioItems: PortfolioItem[] = [
       ctaLabel: "Shop The Collection",
       ctaUrl: "/shop", // Placeholder internal link
       ctaType: "internal"
-    }
+    },
+    category: "documentary",
   },
   {
     title: "Custom Web App for Innovate Solutions: Streamlining Complex Workflows",
@@ -166,7 +199,8 @@ export const allPortfolioItems: PortfolioItem[] = [
       quote: "The custom application Moons Out Media built for us is more than just software; it's the backbone of our new, more efficient operation. Their technical expertise and understanding of our business needs were exceptional.",
       authorName: "David Miller",
       authorTitle: "COO, Innovate Solutions Ltd."
-    }
+    },
+    category: "documentary",
   },
   {
     title: "AI-Driven Automation for DataCorp: Unlocking Insights & Efficiency",
@@ -197,6 +231,7 @@ export const allPortfolioItems: PortfolioItem[] = [
       quote: "Moons Out Media's AI expertise helped us leapfrog our competition. The automation solution is not just efficient; it's a strategic asset that unlocks new value from our data.",
       authorName: "Dr. Emily Carter",
       authorTitle: "Chief Data Scientist, DataCorp Analytics"
-    }
+    },
+    category: "documentary",
   }
 ] 
