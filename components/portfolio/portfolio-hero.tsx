@@ -249,17 +249,17 @@ export default function PortfolioHero({
 
   return (
     <motion.section
-      className="relative overflow-hidden"
+      className="relative overflow-hidden flex flex-col"
+      style={{ height: isSearchActive ? "auto" : "100vh" }} // Use style for 100vh height
       animate={{
-        paddingTop: isSearchActive ? "5rem" : "6rem",
-        paddingBottom: isSearchActive ? "4rem" : "6rem",
-        height: isSearchActive ? "auto" : "100vh",
+        paddingTop: isSearchActive ? "5rem" : "max(6rem, 10vh)", // Responsive padding
+        paddingBottom: isSearchActive ? "4rem" : "max(4rem, 8vh)",
       }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
-        {/* Video Montage - Ensure videos are visible */}
+        {/* Video Montage */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           {storyContent.map((content, index) => (
             <div
@@ -273,7 +273,7 @@ export default function PortfolioHero({
             >
               <video
                 muted
-                loop={false} // Prevent automatic looping
+                loop={false}
                 playsInline
                 preload="metadata"
                 className="absolute w-full h-full object-cover"
@@ -281,7 +281,6 @@ export default function PortfolioHero({
               >
                 <source src={content.video.url} type="video/mp4" />
               </video>
-              {/* This overlay darkens the video - slightly less dark when search is active */}
               <div
                 className="absolute inset-0 bg-black/80 z-2"
                 style={{ opacity: isSearchActive ? 0.75 : 0.8 }}
@@ -289,8 +288,7 @@ export default function PortfolioHero({
             </div>
           ))}
         </div>
-
-        {/* Overlay gradients - adjusted for search state */}
+        {/* Overlay gradients */}
         <motion.div
           className={`absolute inset-0 z-10 ${isSearchActive ? "cursor-pointer" : ""}`}
           initial={{
@@ -307,50 +305,30 @@ export default function PortfolioHero({
             top: 0,
             left: 0,
             right: 0,
-            height: "100%", // Always cover the full height
+            height: "100%",
             zIndex: isSearchActive ? 30 : 10,
           }}
           transition={{
             duration: 0.6,
-            ease: [0.16, 1, 0.3, 1], // Custom cubic-bezier for a more natural feel
-            background: {
-              duration: 0.8,
-              ease: "easeInOut",
-            },
+            ease: [0.16, 1, 0.3, 1],
+            background: { duration: 0.8, ease: "easeInOut" },
           }}
-          onClick={() => {
-            if (isSearchActive) {
-              clearSearch();
-            }
-          }}
+          onClick={() => { if (isSearchActive) { clearSearch(); } }}
         ></motion.div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,90,205,0.2)_0%,transparent_70%)] z-20 pointer-events-none"></div>
       </div>
 
-      {/* Content */}
-      <div
-        className={`px-6 md:px-8 lg:px-12 ${isSearchActive ? "" : "grid grid-cols-1 lg:grid-cols-10 gap-4 justify-items-center items-center"}`}
-      >
+      {/* Content Wrapper - Flexbox for responsiveness */}
+      <div className="container mx-auto px-4 flex-grow flex flex-col lg:flex-row items-center lg:items-stretch gap-8 z-30 relative">
+        
         {/* Left Column: Text, Search, Filters */}
-        <motion.div
+        <motion.div 
+          className="w-full lg:w-1/2 flex flex-col justify-center items-center text-center lg:text-left lg:items-start order-2 lg:order-1 pt-8 lg:pt-0"
           initial={{ opacity: 0, y: 20 }}
-          animate={{
-            opacity: 1,
-            y: 0,
-            width: isSearchActive ? "100%" : "auto",
-            cursor: isSearchActive ? "pointer" : "default",
-            position: isSearchActive ? "relative" : "relative",
-            zIndex: isSearchActive ? 40 : 40,
-          }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className={`relative h-full flex flex-col ${isSearchActive ? "mx-auto max-w-3xl items-center" : "text-center items-center lg:pr-0 justify-center lg:col-span-5 w-full"}`}
-          onClick={() => {
-            if (isSearchActive) {
-              clearSearch();
-            }
-          }}
         >
-          {/* Title and animated text - hide when search is active */}
+          {/* Title and animated text */}
           <AnimatePresence mode="wait">
             {!isSearchActive && (
               <motion.h1
@@ -359,20 +337,12 @@ export default function PortfolioHero({
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center lg:items-start">
                   <span className="text-white mb-1">Stories That</span>
-                  <div
-                    className="neon-text-accent text-center"
-                    key={currentIndex}
-                  >
+                  <div className="neon-text-accent text-center lg:text-left" key={currentIndex}>
                     <Typewriter
                       words={[storyContent[currentIndex].word]}
-                      loop={1}
-                      cursor
-                      cursorStyle="|"
-                      typeSpeed={70}
-                      deleteSpeed={50}
-                      delaySpeed={1000}
+                      loop={1} cursor cursorStyle="|" typeSpeed={70} deleteSpeed={50} delaySpeed={1000}
                     />
                   </div>
                 </div>
@@ -380,10 +350,10 @@ export default function PortfolioHero({
             )}
           </AnimatePresence>
 
-          {/* Search form - fixed to the top when active */}
-          <motion.form
-            onSubmit={handleSearch}
-            className="flex gap-2 mb-3 relative z-50 w-full max-w-xs mx-auto"
+          {/* Search form */}
+          <motion.form 
+            onSubmit={handleSearch} 
+            className="flex gap-2 mb-3 relative z-50 w-full max-w-xs mx-auto lg:mx-0"
             animate={{
               maxWidth: isSearchActive ? "100%" : "100%",
               marginTop: isSearchActive ? "0" : "0",
@@ -398,117 +368,76 @@ export default function PortfolioHero({
                 ? "0 8px 32px rgba(0, 0, 0, 0.8)"
                 : "none",
               position: isSearchActive ? "fixed" : "relative",
-              top: isSearchActive ? "4rem" : "auto", // Position right below navbar
+              top: isSearchActive ? "4rem" : "auto",
               left: isSearchActive ? "50%" : "auto",
               transform: isSearchActive ? "translateX(-50%)" : "none",
               zIndex: 100,
             }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            onClick={(e) => e.stopPropagation()} // Prevent clicks from bubbling to the background
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative flex-1">
-              <Input
-                ref={searchInputRef}
-                type="text"
-                placeholder="Search stories..."
-                className="bg-black/50 border-gray-700 focus:border-cyberpunk-blue text-white pl-10 h-10 text-sm"
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  if (e.target.value && !isSearchActive) {
-                    setIsSearchActive(true);
-                  }
-                }}
-                onFocus={handleInputFocus}
-              />
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-
-              {/* Clear search button - only visible when search is active */}
-              {isSearchActive && (
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    clearSearch();
-                  }}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              )}
-            </div>
-            <Button
-              type="submit"
-              className="cyberpunk-button h-10 px-4 text-sm"
-              onClick={(e) => e.stopPropagation()} // Prevent clicks from bubbling to the background
-            >
-              Search
-            </Button>
+             <div className="relative flex-1">
+               <Input
+                 ref={searchInputRef}
+                 type="text"
+                 placeholder="Search stories..."
+                 className="bg-black/50 border-gray-700 focus:border-cyberpunk-blue text-white pl-10 h-10 text-sm"
+                 value={searchQuery}
+                 onChange={(e) => {
+                   setSearchQuery(e.target.value);
+                   if (e.target.value && !isSearchActive) {
+                     setIsSearchActive(true);
+                   }
+                 }}
+                 onFocus={handleInputFocus}
+               />
+               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+               {isSearchActive && (
+                 <button
+                   type="button"
+                   onClick={(e) => { e.stopPropagation(); clearSearch(); }}
+                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                 >
+                   <X className="h-4 w-4" />
+                 </button>
+               )}
+             </div>
+             <Button
+               type="submit"
+               className="cyberpunk-button h-10 px-4 text-sm"
+               onClick={(e) => e.stopPropagation()}
+             >
+               Search
+             </Button>
           </motion.form>
 
-          {/* Filter buttons - fixed below search form when active */}
+          {/* Filter buttons */}
           <AnimatePresence>
-            <motion.div
-              className={`grid ${isSearchActive ? "grid-cols-4" : "grid-cols-2"} gap-2 w-full max-w-xs sm:max-w-md mx-auto ${isSearchActive ? "mt-5" : "mt-3"}`}
-              initial={{ opacity: 1, y: 0 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                gridTemplateColumns: isSearchActive
-                  ? "repeat(4, 1fr)"
-                  : "repeat(2, 1fr)",
-                maxWidth: isSearchActive ? "800px" : "xs",
-                position: isSearchActive ? "fixed" : "relative",
-                top: isSearchActive ? "9rem" : "auto", // Increased gap between search form and filters
-                left: isSearchActive ? "50%" : "auto",
-                transform: isSearchActive ? "translateX(-50%)" : "none",
-                zIndex: 100,
-                width: isSearchActive ? "calc(100% - 3rem)" : "auto",
-              }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()} // Prevent clicks from bubbling to the background
+            <motion.div 
+                className={`grid ${isSearchActive ? "grid-cols-4" : "grid-cols-2 sm:grid-cols-4 lg:grid-cols-2"} gap-2 w-full max-w-xs sm:max-w-md mx-auto lg:mx-0 lg:max-w-xs ${isSearchActive ? "mt-5" : "mt-3"}`}
+                initial={{ opacity: 1, y: 0 }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  gridTemplateColumns: isSearchActive
+                    ? "repeat(4, 1fr)"
+                    : "repeat(2, 1fr)",
+                  maxWidth: isSearchActive ? "800px" : "xs",
+                  position: isSearchActive ? "fixed" : "relative",
+                  top: isSearchActive ? "9rem" : "auto",
+                  left: isSearchActive ? "50%" : "auto",
+                  transform: isSearchActive ? "translateX(-50%)" : "none",
+                  zIndex: 100,
+                  width: isSearchActive ? "calc(100% - 3rem)" : "auto",
+                }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                onClick={(e: React.MouseEvent) => e.stopPropagation()}
             >
-              <Button
-                variant="outline"
-                className={`bg-black/50 border-cyberpunk-blue/50 text-white hover:bg-cyberpunk-blue/20 text-xs py-1.5 px-2 ${isSearchActive ? "text-[10px]" : "text-xs"}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleFilterClick();
-                }}
-              >
-                Documentary
-              </Button>
-              <Button
-                variant="outline"
-                className={`bg-black/50 border-cyberpunk-pink/50 text-white hover:bg-cyberpunk-pink/20 text-xs py-1.5 px-2 ${isSearchActive ? "text-[10px]" : "text-xs"}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleFilterClick();
-                }}
-              >
-                Digital Marketing
-              </Button>
-              <Button
-                variant="outline"
-                className={`bg-black/50 border-cyberpunk-green/50 text-white hover:bg-cyberpunk-green/20 text-xs py-1.5 px-2 ${isSearchActive ? "text-[10px]" : "text-xs"}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleFilterClick();
-                }}
-              >
-                Social Media
-              </Button>
-              <Button
-                variant="outline"
-                className={`bg-black/50 border-cyberpunk-purple/50 text-white hover:bg-cyberpunk-purple/20 text-xs py-1.5 px-2 ${isSearchActive ? "text-[10px]" : "text-xs"}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleFilterClick();
-                }}
-              >
-                Brand Storytelling
-              </Button>
+              <Button variant="outline" className={`bg-black/50 border-cyberpunk-blue/50 text-white hover:bg-cyberpunk-blue/20 text-xs py-1.5 px-2 ${isSearchActive ? "text-[10px]" : "text-xs"}`} onClick={(e: React.MouseEvent) => { e.stopPropagation(); handleFilterClick(); }}>Documentary</Button>
+              <Button variant="outline" className={`bg-black/50 border-cyberpunk-pink/50 text-white hover:bg-cyberpunk-pink/20 text-xs py-1.5 px-2 ${isSearchActive ? "text-[10px]" : "text-xs"}`} onClick={(e: React.MouseEvent) => { e.stopPropagation(); handleFilterClick(); }}>Digital Marketing</Button>
+              <Button variant="outline" className={`bg-black/50 border-cyberpunk-green/50 text-white hover:bg-cyberpunk-green/20 text-xs py-1.5 px-2 ${isSearchActive ? "text-[10px]" : "text-xs"}`} onClick={(e: React.MouseEvent) => { e.stopPropagation(); handleFilterClick(); }}>Social Media</Button>
+              <Button variant="outline" className={`bg-black/50 border-cyberpunk-purple/50 text-white hover:bg-cyberpunk-purple/20 text-xs py-1.5 px-2 ${isSearchActive ? "text-[10px]" : "text-xs"}`} onClick={(e: React.MouseEvent) => { e.stopPropagation(); handleFilterClick(); }}>Brand Storytelling</Button>
             </motion.div>
           </AnimatePresence>
         </motion.div>
@@ -516,57 +445,37 @@ export default function PortfolioHero({
         {/* Right Column: Featured Project */}
         <AnimatePresence mode="wait">
           {!isSearchActive && featuredProject && (
-            <motion.div
+            <motion.div 
+              className="w-full lg:w-1/2 flex flex-col items-center order-1 lg:order-2 mt-8 lg:mt-0"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20, position: "absolute", zIndex: -1 }}
               transition={{ duration: 0.3 }}
-              className="relative z-40 hidden lg:block lg:col-span-5 mt-0"
             >
-              <div className="h-full">{featuredProject}</div>
+              {/* Container to control size and prevent clipping */} 
+              <div className="w-full max-w-2xl lg:max-w-none lg:h-full flex items-center justify-center">
+                 {/* The actual project component */} 
+                 <div className="max-h-[70vh] lg:max-h-full">
+                  {featuredProject}
+                 </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
+      </div> {/* This is the closing tag for "Content Wrapper" */}
 
-        {/* Mobile Featured Project - only show on mobile when search is not active */}
-        <AnimatePresence mode="wait">
-          {!isSearchActive && featuredProject && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20, position: "absolute", zIndex: -1 }}
-              transition={{ duration: 0.3 }}
-              className="mt-8 mb-8 lg:hidden flex justify-center items-center"
-            >
-              {featuredProject}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
-      {/* Decorative Elements - adjusted opacity when search is active */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-cyberpunk-background to-transparent z-10"
-        style={{ opacity: isSearchActive ? 0.5 : 1 }}
-      ></div>
-
-      {/* Scroll indicator - positioned at the very bottom of the hero section */}
+      {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-50"
+        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
       >
         {!isSearchActive && (
           <>
-            <span className="text-cyberpunk-pink text-sm mb-2">
-              Explore Stories
-            </span>
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
-            >
-              <ChevronDown className="h-6 w-6 text-cyberpunk-pink" />
+            <span className="text-cyberpunk-pink text-sm mb-1">Explore Stories</span>
+            <motion.div animate={{ y: [0, 5, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}>
+              <ChevronDown className="h-5 w-5 text-cyberpunk-pink" />
             </motion.div>
           </>
         )}

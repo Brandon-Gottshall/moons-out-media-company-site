@@ -23,11 +23,11 @@ export default function FeaturedProject({
         viewport={{ once: true }}
         className="bg-black/20 backdrop-blur-sm border border-cyberpunk-blue/30 rounded-lg overflow-hidden"
       >
-        <div className="relative rounded-lg overflow-hidden">
+        <div className="relative rounded-lg overflow-hidden aspect-video">
           <img
             src="/images/project1.png"
             alt="EcoTech Innovations Documentary"
-            className="w-full h-[50dvh]"
+            className="w-full h-full object-cover"
           />
           {customImageOverlay || (
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-center justify-center">
