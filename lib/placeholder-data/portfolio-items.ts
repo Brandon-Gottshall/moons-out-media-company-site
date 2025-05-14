@@ -47,7 +47,8 @@ export interface PortfolioItem {
     order: number
     description?: string
   }>
-  category: string // New field for category filtering
+  metaCategory: string; // New field for top-level category
+  subCategory: string; // Renamed from 'category' for specific sub-category filtering
 }
 
 export const allPortfolioItems: PortfolioItem[] = [
@@ -106,7 +107,8 @@ export const allPortfolioItems: PortfolioItem[] = [
         description: "A quick look at the making of our documentary."
       }
     ],
-    category: "documentary",
+    metaCategory: "creative-narrative-driven", // Placeholder - PLEASE UPDATE
+    subCategory: "all-creative-narrative-driven", // Placeholder - PLEASE UPDATE
   },
   {
     title: "Urban Fitness: Powering Growth with Authentic Social Campaigns",
@@ -141,7 +143,8 @@ export const allPortfolioItems: PortfolioItem[] = [
         description: "See the incredible journeys of Urban Fitness members."
       }
     ],
-    category: "documentary",
+    metaCategory: "creative-narrative-driven", // Placeholder - PLEASE UPDATE
+    subCategory: "all-creative-narrative-driven", // Placeholder - PLEASE UPDATE
   },
   {
     title: "Artisan Collective: Weaving Narratives for E-commerce Success",
@@ -173,7 +176,8 @@ export const allPortfolioItems: PortfolioItem[] = [
       ctaUrl: "/shop", // Placeholder internal link
       ctaType: "internal"
     },
-    category: "documentary",
+    metaCategory: "creative-narrative-driven", // Placeholder - PLEASE UPDATE
+    subCategory: "all-creative-narrative-driven", // Placeholder - PLEASE UPDATE
   },
   {
     title: "Custom Web App for Innovate Solutions: Streamlining Complex Workflows",
@@ -200,7 +204,8 @@ export const allPortfolioItems: PortfolioItem[] = [
       authorName: "David Miller",
       authorTitle: "COO, Innovate Solutions Ltd."
     },
-    category: "documentary",
+    metaCategory: "creative-narrative-driven", // Placeholder - PLEASE UPDATE
+    subCategory: "all-creative-narrative-driven", // Placeholder - PLEASE UPDATE
   },
   {
     title: "AI-Driven Automation for DataCorp: Unlocking Insights & Efficiency",
@@ -232,6 +237,7 @@ export const allPortfolioItems: PortfolioItem[] = [
       authorName: "Dr. Emily Carter",
       authorTitle: "Chief Data Scientist, DataCorp Analytics"
     },
-    category: "documentary",
+    metaCategory: "creative-narrative-driven", // Placeholder - PLEASE UPDATE
+    subCategory: "all-creative-narrative-driven", // Placeholder - PLEASE UPDATE
   }
 ] 

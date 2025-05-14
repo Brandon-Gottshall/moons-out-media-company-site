@@ -1,26 +1,74 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import PortfolioHero from "@/components/portfolio/portfolio-hero"
 import PortfolioGallery from "@/components/portfolio/portfolio-gallery"
 import FeaturedProject from "@/components/portfolio/featured-project"
-import ClientSuccessTimeline from "@/components/client-success-timeline"
 import CallToAction from "@/components/call-to-action"
 import { Play } from "lucide-react"
 import { allPortfolioItems } from "@/lib/placeholder-data/portfolio-items"
+import { metaCategoriesData } from "@/lib/category-data"
 import Link from "next/link"
+
+const GALLERY_SECTION_ID = "project-gallery-section";
 
 export default function PortfolioPage() {
   const [isSearchActive, setIsSearchActive] = useState(false)
-  const [activeGalleryFilter, setActiveGalleryFilter] = useState<string>("all")
 
-  // Find the first published portfolio item to feature
+  // New state variables for two-tier filtering
+  const [selectedMetaCategoryId, setSelectedMetaCategoryId] = useState<string>("all-projects")
+  const [activeGalleryFilterId, setActiveGalleryFilterId] = useState<string>("all-projects")
+
   const featuredItemData = allPortfolioItems.find(item => item.status === 'published')
 
-  const handleGalleryFilterChange = (filter: string) => {
-    setActiveGalleryFilter(filter)
-  }
+  // Updated to include scroll and to be used by Hero buttons as well
+  const handleMetaCategorySelectAndScroll = (metaId: string) => {
+    setSelectedMetaCategoryId(metaId);
+    if (metaId === "all-projects") {
+      setActiveGalleryFilterId("all-projects");
+    } else {
+      const meta = metaCategoriesData.find(m => m.id === metaId);
+      if (meta && meta.subCategories.length > 0) {
+        setActiveGalleryFilterId(meta.subCategories[0].id); 
+      } else {
+        // This case should ideally not be hit if metaId is a valid one from metaCategoriesData
+        // and not 'all-projects', as they should have subCategories (at least the 'All Meta' one)
+        setActiveGalleryFilterId(metaId); 
+      }
+    }
+    // Scroll to gallery section if a specific meta-category (not global 'all-projects') is chosen by hero button
+    // Or always scroll if preferred, even for gallery's internal swiper selection.
+    // For now, let's make it scroll when triggered (e.g. by a hero button)
+    // We might need a way to distinguish calls from hero vs. swiper if scroll is only for hero.
+    // Simpler: scroll every time this is called.
+    setTimeout(() => { 
+      const galleryElement = window.document.getElementById(GALLERY_SECTION_ID);
+      galleryElement?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50); 
+  };
+
+  // This handler is specifically for the SubCategorySwiper INSIDE PortfolioGallery
+  const handleSubCategorySelect = (subId: string) => {
+    setActiveGalleryFilterId(subId);
+    // Optional: could also scroll here if changing sub-category should re-focus the gallery
+    // setTimeout(() => { document.getElementById(GALLERY_SECTION_ID)?.scrollIntoView({ behavior: "smooth", block: "nearest" }); }, 50);
+  };
+
+  // Effect to handle initial load with potential query params for filtering (optional future enhancement)
+  useEffect(() => {
+    // Example: if URL is /portfolio?meta=creative-narrative-driven&sub=documentary
+    // const params = new URLSearchParams(window.location.search);
+    // const initialMeta = params.get("meta");
+    // const initialSub = params.get("sub");
+    // if (initialMeta) {
+    //   handleMetaCategorySelect(initialMeta);
+    //   if (initialSub) {
+    //     // Need to ensure meta-category is set first, then sub, potentially with a slight delay or combined logic
+    //     setActiveGalleryFilterId(initialSub);
+    //   }
+    // }
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -63,6 +111,10 @@ export default function PortfolioPage() {
             </div>
           ) : null
         }
+        metaCategories={metaCategoriesData}
+        selectedMetaCategoryId={selectedMetaCategoryId}
+        onHeroMetaButtonSelect={handleMetaCategorySelectAndScroll}
+        gallerySectionId={GALLERY_SECTION_ID}
       />
 
       {/* Conditional sections - only visible when search is not active */}
@@ -91,11 +143,11 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
 
-      {/* Project Gallery Section - Now contains PortfolioCategories */}
+      {/* Project Gallery Section - ID added for scrolling */}
       <motion.section
-        className="pb-20 md:pb-28 relative z-0"
+        id={GALLERY_SECTION_ID}
+        className="pb-20 md:pb-28 relative z-0 pt-6 md:pt-10"
         animate={{
-          paddingTop: isSearchActive ? "2rem" : "6rem",
           paddingBottom: isSearchActive ? "5rem" : "7rem",
           y: isSearchActive ? "0" : 0,
           marginTop: isSearchActive ? "0" : 0,
@@ -106,7 +158,7 @@ export default function PortfolioPage() {
           <AnimatePresence>
             {!isSearchActive && (
               <motion.div
-                className="text-center mb-12 md:mb-16"
+                className="text-center mb-8 md:mb-10"
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -121,8 +173,10 @@ export default function PortfolioPage() {
           </AnimatePresence>
 
           <PortfolioGallery
-            currentFilter={activeGalleryFilter}
-            onFilterChange={handleGalleryFilterChange}
+            selectedMetaCategoryId={selectedMetaCategoryId}
+            activeGalleryFilterId={activeGalleryFilterId}
+            onMetaCategorySelect={handleMetaCategorySelectAndScroll}
+            onSubCategorySelect={handleSubCategorySelect}
           />
         </div>
       </motion.section>

@@ -226,7 +226,7 @@ const categoriesData: Category[] = [
     description: "Projects involving website and web application development.",
     image: "https://media.giphy.com/media/xT9IgzoPsqh6NBgE48/giphy.gif", // Generic code/web dev GIF
     projectCount: 0,
-    color: "cyberpunk-orange", 
+    color: "cyberpunk-orange",
     placeholderVideoUrl: "https://www.youtube.com/watch?v=exampleWebDevVid"
   },
 ];

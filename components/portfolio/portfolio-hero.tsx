@@ -10,6 +10,8 @@ import { Input } from "@/components/ui/input";
 import { useMobile } from "@/hooks/use-mobile";
 import { Typewriter } from "react-simple-typewriter";
 import { ChevronDown } from "lucide-react";
+import MetaCategoryNavButtons from "./meta-category-nav-buttons";
+import type { MetaCategory } from "@/lib/category-data";
 
 const TRANSITION_INTERVAL = 4000; // Time in milliseconds between transitions
 const TEXT_DELAY = 1000; // Delay in milliseconds before text changes after video
@@ -74,15 +76,23 @@ const storyContent = [
   },
 ];
 
+interface PortfolioHeroProps {
+  isSearchActive: boolean;
+  setIsSearchActive: (active: boolean) => void;
+  featuredProject?: React.ReactNode;
+  metaCategories: MetaCategory[];
+  onHeroMetaButtonSelect: (metaId: string) => void;
+  gallerySectionId: string;
+}
+
 export default function PortfolioHero({
   isSearchActive,
   setIsSearchActive,
   featuredProject,
-}: {
-  isSearchActive: boolean;
-  setIsSearchActive: (active: boolean) => void;
-  featuredProject?: React.ReactNode;
-}) {
+  metaCategories,
+  onHeroMetaButtonSelect,
+  gallerySectionId
+}: PortfolioHeroProps) {
   // Use a single index for tracking position
   const [currentIndex, setCurrentIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
@@ -220,6 +230,11 @@ export default function PortfolioHero({
   const clearSearch = () => {
     setSearchQuery("");
     setIsSearchActive(false);
+  };
+
+  const handleShortcutButtonClick = (subCategoryId: string, event: React.MouseEvent) => {
+    event.stopPropagation();
+    onHeroMetaButtonSelect(subCategoryId);
   };
 
   // Don't render video content during SSR
@@ -413,32 +428,21 @@ export default function PortfolioHero({
 
           {/* Filter buttons */}
           <AnimatePresence>
+            {!isSearchActive && (
             <motion.div 
-                className={`grid ${isSearchActive ? "grid-cols-4" : "grid-cols-2 sm:grid-cols-4 lg:grid-cols-2"} gap-2 w-full max-w-xs sm:max-w-md mx-auto lg:mx-0 lg:max-w-xs ${isSearchActive ? "mt-5" : "mt-3"}`}
-                initial={{ opacity: 1, y: 0 }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  gridTemplateColumns: isSearchActive
-                    ? "repeat(4, 1fr)"
-                    : "repeat(2, 1fr)",
-                  maxWidth: isSearchActive ? "800px" : "xs",
-                  position: isSearchActive ? "fixed" : "relative",
-                  top: isSearchActive ? "9rem" : "auto",
-                  left: isSearchActive ? "50%" : "auto",
-                  transform: isSearchActive ? "translateX(-50%)" : "none",
-                  zIndex: 100,
-                  width: isSearchActive ? "calc(100% - 3rem)" : "auto",
-                }}
-                exit={{ opacity: 0, y: -20 }}
+                    className={`w-full ${isSearchActive ? "max-w-xl" : "max-w-xs sm:max-w-md lg:max-w-xs xl:max-w-lg 2xl:max-w-xl"} mx-auto lg:mx-0 ${isSearchActive ? "mt-5 fixed top-[9rem] left-1/2 -translate-x-1/2 z-[100] calc(100% - 3rem)" : "mt-3"}`}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20, height: 0, overflow: "hidden" }}
                 transition={{ duration: 0.3 }}
-                onClick={(e: React.MouseEvent) => e.stopPropagation()}
             >
-              <Button variant="outline" className={`bg-black/50 border-cyberpunk-blue/50 text-white hover:bg-cyberpunk-blue/20 text-xs py-1.5 px-2 ${isSearchActive ? "text-[10px]" : "text-xs"}`} onClick={(e: React.MouseEvent) => { e.stopPropagation(); handleFilterClick(); }}>Documentary</Button>
-              <Button variant="outline" className={`bg-black/50 border-cyberpunk-pink/50 text-white hover:bg-cyberpunk-pink/20 text-xs py-1.5 px-2 ${isSearchActive ? "text-[10px]" : "text-xs"}`} onClick={(e: React.MouseEvent) => { e.stopPropagation(); handleFilterClick(); }}>Digital Marketing</Button>
-              <Button variant="outline" className={`bg-black/50 border-cyberpunk-green/50 text-white hover:bg-cyberpunk-green/20 text-xs py-1.5 px-2 ${isSearchActive ? "text-[10px]" : "text-xs"}`} onClick={(e: React.MouseEvent) => { e.stopPropagation(); handleFilterClick(); }}>Social Media</Button>
-              <Button variant="outline" className={`bg-black/50 border-cyberpunk-purple/50 text-white hover:bg-cyberpunk-purple/20 text-xs py-1.5 px-2 ${isSearchActive ? "text-[10px]" : "text-xs"}`} onClick={(e: React.MouseEvent) => { e.stopPropagation(); handleFilterClick(); }}>Brand Storytelling</Button>
+                <MetaCategoryNavButtons
+                    metaCategories={metaCategories}
+                    onMetaCategorySelect={onHeroMetaButtonSelect}
+                    gallerySectionId={gallerySectionId}
+                />
             </motion.div>
+            )}
           </AnimatePresence>
         </motion.div>
 

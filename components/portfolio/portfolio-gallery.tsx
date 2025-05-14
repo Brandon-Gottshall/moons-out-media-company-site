@@ -5,16 +5,22 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { allPortfolioItems, type PortfolioItem } from "@/lib/placeholder-data/portfolio-items"
 import { PortfolioItemCard } from "@/components/portfolio/portfolio-item-card"
-import PortfolioCategories from "@/components/portfolio/portfolio-categories"
+import MetaCategorySwiper from "./meta-category-swiper"
+import SubCategorySwiper from "./sub-category-swiper"
+import { metaCategoriesData } from "@/lib/category-data"
 
 interface PortfolioGalleryProps {
-  currentFilter: string;
-  onFilterChange: (filter: string) => void;
+  selectedMetaCategoryId: string;
+  activeGalleryFilterId: string;
+  onMetaCategorySelect: (metaId: string) => void;
+  onSubCategorySelect: (subId: string) => void;
 }
 
 export default function PortfolioGallery({ 
-  currentFilter, 
-  onFilterChange 
+  selectedMetaCategoryId,
+  activeGalleryFilterId,
+  onMetaCategorySelect,
+  onSubCategorySelect
 }: PortfolioGalleryProps) {
   const [isSearchContext, setIsSearchContext] = useState(false)
 
@@ -32,31 +38,56 @@ export default function PortfolioGallery({
     }
   }, [])
 
-  const filteredItems = useMemo(() => 
-    currentFilter === "All"
-      ? allPortfolioItems.filter(item => item.status === 'published')
-      : allPortfolioItems.filter(
-          (item) => item.status === 'published' && item.category === currentFilter
-        )
-  , [currentFilter])
+  const currentSelectedMeta = useMemo(() => 
+    metaCategoriesData.find(meta => meta.id === selectedMetaCategoryId)
+  , [selectedMetaCategoryId]);
+
+  const filteredItems = useMemo(() => {
+    if (selectedMetaCategoryId === "all-projects") {
+      return allPortfolioItems.filter(item => item.status === 'published');
+    }
+
+    const isMetaAllSubCategorySelected = currentSelectedMeta?.subCategories.find(
+      sub => sub.id === activeGalleryFilterId && sub.isMetaAll
+    );
+
+    if (isMetaAllSubCategorySelected) {
+      return allPortfolioItems.filter(item => 
+        item.status === 'published' && 
+        item.metaCategory === selectedMetaCategoryId
+      );
+    } else {
+      return allPortfolioItems.filter(item => 
+        item.status === 'published' && 
+        item.subCategory === activeGalleryFilterId
+      );
+    }
+  }, [activeGalleryFilterId, selectedMetaCategoryId, currentSelectedMeta]);
 
   return (
     <motion.div
       className="max-w-6xl mx-auto"
-      animate={{
-        scale: isSearchContext ? 1 : 1,
-        y: isSearchContext ? 0 : 0,
-      }}
-      transition={{ duration: 0.5 }}
     >
-      <div className="mb-8 md:mb-12">
-        <PortfolioCategories 
-          activeFilter={currentFilter} 
-          onFilterChange={onFilterChange} 
+      <div className="mb-1 md:mb-2">
+        <MetaCategorySwiper 
+          metaCategories={metaCategoriesData}
+          selectedMetaCategoryId={selectedMetaCategoryId}
+          onMetaCategorySelect={onMetaCategorySelect}
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <AnimatePresence initial={false}> 
+        {currentSelectedMeta && !currentSelectedMeta.isGlobalAll && currentSelectedMeta.subCategories.length > 0 && (
+          <SubCategorySwiper 
+            subCategories={currentSelectedMeta.subCategories}
+            activeGalleryFilterId={activeGalleryFilterId}
+            onSubCategorySelect={onSubCategorySelect}
+            metaCategoryColor={currentSelectedMeta.color}
+          />
+        )}
+      </AnimatePresence>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4 md:mt-6">
         <AnimatePresence>
           {filteredItems.map((item, index) => (
             <PortfolioItemCard key={item.slug} item={item} index={index} />
@@ -64,10 +95,14 @@ export default function PortfolioGallery({
         </AnimatePresence>
       </div>
 
-      {filteredItems.length === 0 && currentFilter !== "All" && (
+      {filteredItems.length === 0 && activeGalleryFilterId !== "all-projects" && (
         <div className="text-center py-12">
-          <p className="text-xl text-gray-400">No projects found for the filter "{currentFilter}".</p>
-          <Button variant="ghost" onClick={() => onFilterChange("All")} className="text-cyberpunk-blue mt-2">
+          <p className="text-xl text-gray-400">No projects found for the current filter.</p>
+          <Button 
+            variant="ghost" 
+            onClick={() => onMetaCategorySelect("all-projects")} 
+            className="text-cyberpunk-blue mt-2"
+          >
             Show all projects
           </Button>
         </div>
