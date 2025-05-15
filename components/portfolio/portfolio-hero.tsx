@@ -3,12 +3,12 @@
 import type React from "react";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useMobile } from "@/hooks/use-mobile";
-import { Typewriter } from "react-simple-typewriter";
+import { AnimatedTypewriter } from "./animated-typewriter";
 import { ChevronDown } from "lucide-react";
 import MetaCategoryNavButtons from "./meta-category-nav-buttons";
 import type { MetaCategory } from "@/lib/category-data";
@@ -19,56 +19,56 @@ const TEXT_DELAY = 1000; // Delay in milliseconds before text changes after vide
 // Combined data structure for videos and words
 const storyContent = [
   {
-    word: "Remind Us To Slow Down",
+    word: "Reminds People To Slow Down",
     video: {
       url: "https://cdn.pixabay.com/video/2025/03/18/265501_small.mp4",
       alt: "A fluffy baby chick calmly preens its feathers while resting on soft straw, capturing a quiet moment of innocence and peace.",
     },
   },
   {
-    word: "Remind us to Embrace",
-    video: {
-      url: "https://cdn.pixabay.com/video/2024/12/09/245932_small.mp4",
-      alt: "A dynamic, shifting view—perhaps abstract or urban—symbolizing change and new beginnings.",
-    },
-  },
-  {
-    word: "Connect",
+    word: "Connects People",
     video: {
       url: "https://cdn.pixabay.com/video/2024/11/27/243647_small.mp4",
       alt: "A visually engaging clip that suggests gradual change, growth, and progression through subtle motion.",
     },
   },
   {
-    word: "Satiate",
+    word: "Satiates the Curious",
     video: {
       url: "https://cdn.pixabay.com/video/2024/09/24/233024_medium.mp4",
       alt: "A medium-shot video that draws the eye with intriguing movement and rich, atmospheric detail.",
     },
   },
   {
-    word: "Ignite",
+    word: "Reminds People to Embrace",
+    video: {
+      url: "https://cdn.pixabay.com/video/2024/12/09/245932_small.mp4",
+      alt: "A dynamic, shifting view—perhaps abstract or urban—symbolizing change and new beginnings.",
+    },
+  },
+  {
+    word: "Ignites the Imagination",
     video: {
       url: "https://cdn.pixabay.com/video/2022/05/16/117133-710564131.mp4",
       alt: "A vibrant, energetic scene that appears to burst with color and life, sparking excitement.",
     },
   },
   {
-    word: "Refresh",
+    word: "Refreshes the Mind",
     video: {
       url: "https://cdn.pixabay.com/video/2022/07/31/126234-735976664.mp4",
       alt: "A warm, inviting clip that hints at human or natural connection, filled with gentle motion and light.",
     },
   },
   {
-    word: "Bring Nostalgia",
+    word: "Brings Nostalgia",
     video: {
       url: "https://cdn.pixabay.com/video/2022/02/08/107142-675298847.mp4",
       alt: "A video with an exploratory feel—possibly a journey or a close-up detail that invites curiosity.",
     },
   },
   {
-    word: "Capture a Moment of Joy",
+    word: "Captures a Moment of Joy",
     video: {
       url: "https://cdn.pixabay.com/video/2023/01/28/148282-793718077.mp4",
       alt: "A creative, thought-provoking scene that opens up possibilities, blending dreamy visuals with subtle motion.",
@@ -83,6 +83,42 @@ interface PortfolioHeroProps {
   metaCategories: MetaCategory[];
   onHeroMetaButtonSelect: (metaId: string) => void;
   gallerySectionId: string;
+}
+
+// Define variants for hero section and search form to batch animations and enable layout transitions
+const heroSectionVariants: Variants = {
+  collapsed: { height: "100vh", paddingTop: "max(6rem, 10vh)", paddingBottom: "max(4rem, 8vh)" },
+  expanded: { height: "auto", paddingTop: "5rem", paddingBottom: "4rem" },
+}
+
+const searchFormVariants: Variants = {
+  collapsed: {
+    position: "relative",
+    top: 0,
+    left: 0,
+    width: "100%", // full width when collapsed
+    marginLeft: 0,
+    marginRight: 0,
+    backgroundColor: "transparent",
+    padding: 0,
+    borderRadius: 0,
+    boxShadow: "none",
+    scale: 1,
+  },
+  expanded: {
+    position: "fixed",
+    top: "4rem",
+    left: 0, x: 0,
+    width: "100vw",
+    marginLeft: 0,
+    marginRight: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    padding: "1.5rem",
+    borderRadius: "0.5rem",
+    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.8)",
+    scale: 1.02,
+    zIndex: 100,
+  },
 }
 
 export default function PortfolioHero({
@@ -230,12 +266,28 @@ export default function PortfolioHero({
   const clearSearch = () => {
     setSearchQuery("");
     setIsSearchActive(false);
+    // After closing search, scroll to gallery section
+    setTimeout(() => {
+      document.getElementById(gallerySectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 600);
   };
 
   const handleShortcutButtonClick = (subCategoryId: string, event: React.MouseEvent) => {
     event.stopPropagation();
     onHeroMetaButtonSelect(subCategoryId);
   };
+
+  // Cancel search when Escape key is pressed
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSearchQuery("");
+        setIsSearchActive(false);
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, []);
 
   // Don't render video content during SSR
   if (!mounted) {
@@ -264,13 +316,16 @@ export default function PortfolioHero({
 
   return (
     <motion.section
-      className="relative overflow-hidden flex flex-col"
-      style={{ height: isSearchActive ? "auto" : "100vh" }} // Use style for 100vh height
-      animate={{
-        paddingTop: isSearchActive ? "5rem" : "max(6rem, 10vh)", // Responsive padding
-        paddingBottom: isSearchActive ? "4rem" : "max(4rem, 8vh)",
+      className="transform-gpu relative overflow-hidden flex flex-col"
+      variants={heroSectionVariants}
+      initial="collapsed"
+      animate={isSearchActive ? "expanded" : "collapsed"}
+      transition={{
+        duration: 0.5,
+        ease: "easeInOut",
+        layout: { type: "spring", stiffness: 300, damping: 30 }
       }}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
+      layout
     >
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
@@ -305,7 +360,7 @@ export default function PortfolioHero({
         </div>
         {/* Overlay gradients */}
         <motion.div
-          className={`absolute inset-0 z-10 ${isSearchActive ? "cursor-pointer" : ""}`}
+          className={`transform-gpu absolute inset-0 z-10 ${isSearchActive ? "cursor-pointer" : ""}`}
           initial={{
             background:
               "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, var(--cyberpunk-background) 100%)",
@@ -338,7 +393,7 @@ export default function PortfolioHero({
         
         {/* Left Column: Text, Search, Filters */}
         <motion.div 
-          className="w-full lg:w-1/2 flex flex-col justify-center items-center text-center lg:text-left lg:items-start order-2 lg:order-1 pt-8 lg:pt-0"
+          className="transform-gpu w-full lg:w-1/2 flex flex-col justify-center items-center text-center lg:text-left lg:items-start order-2 lg:order-1 pt-8 lg:pt-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -347,18 +402,15 @@ export default function PortfolioHero({
           <AnimatePresence mode="wait">
             {!isSearchActive && (
               <motion.h1
-                className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
+                className="transform-gpu text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
                 initial={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
               >
                 <div className="flex flex-col items-center lg:items-start">
-                  <span className="text-white mb-1">Stories That</span>
-                  <div className="neon-text-accent text-center lg:text-left" key={currentIndex}>
-                    <Typewriter
-                      words={[storyContent[currentIndex].word]}
-                      loop={1} cursor cursorStyle="|" typeSpeed={70} deleteSpeed={50} delaySpeed={1000}
-                    />
+                  <span className="text-white mb-1">Our Work</span>
+                  <div className="neon-text-accent w-full h-24 whitespace-normal break-words text-left" key={currentIndex}>
+                    <AnimatedTypewriter word={storyContent[currentIndex].word} />
                   </div>
                 </div>
               </motion.h1>
@@ -366,29 +418,18 @@ export default function PortfolioHero({
           </AnimatePresence>
 
           {/* Search form */}
-          <motion.form 
-            onSubmit={handleSearch} 
-            className="flex gap-2 mb-3 relative z-50 w-full max-w-xs mx-auto lg:mx-0"
-            animate={{
-              maxWidth: isSearchActive ? "100%" : "100%",
-              marginTop: isSearchActive ? "0" : "0",
-              scale: isSearchActive ? 1.02 : 1,
-              width: isSearchActive ? "100%" : "100%",
-              backgroundColor: isSearchActive
-                ? "rgba(0, 0, 0, 0.8)"
-                : "transparent",
-              padding: isSearchActive ? "1.5rem" : "0",
-              borderRadius: isSearchActive ? "0.5rem" : "0",
-              boxShadow: isSearchActive
-                ? "0 8px 32px rgba(0, 0, 0, 0.8)"
-                : "none",
-              position: isSearchActive ? "fixed" : "relative",
-              top: isSearchActive ? "4rem" : "auto",
-              left: isSearchActive ? "50%" : "auto",
-              transform: isSearchActive ? "translateX(-50%)" : "none",
-              zIndex: 100,
+          <motion.form
+            onSubmit={handleSearch}
+            className="transform-gpu flex gap-2 mb-3 relative z-50"
+            variants={searchFormVariants}
+            initial="collapsed"
+            animate={isSearchActive ? "expanded" : "collapsed"}
+            transition={{
+              duration: 0.4,
+              ease: "easeOut",
+              layout: { type: "spring", stiffness: 300, damping: 30 }
             }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            layout
             onClick={(e) => e.stopPropagation()}
           >
              <div className="relative flex-1">
@@ -430,7 +471,7 @@ export default function PortfolioHero({
           <AnimatePresence>
             {!isSearchActive && (
             <motion.div 
-                    className={`w-full ${isSearchActive ? "max-w-xl" : "max-w-xs sm:max-w-md lg:max-w-xs xl:max-w-lg 2xl:max-w-xl"} mx-auto lg:mx-0 ${isSearchActive ? "mt-5 fixed top-[9rem] left-1/2 -translate-x-1/2 z-[100] calc(100% - 3rem)" : "mt-3"}`}
+                    className={`transform-gpu w-full ${isSearchActive ? "max-w-xl" : "max-w-xs sm:max-w-md lg:max-w-xs xl:max-w-lg 2xl:max-w-xl"} mx-auto lg:mx-0 ${isSearchActive ? "mt-5 fixed top-[9rem] left-1/2 -translate-x-1/2 z-[100] calc(100% - 3rem)" : "mt-3"}`}
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20, height: 0, overflow: "hidden" }}
@@ -450,7 +491,7 @@ export default function PortfolioHero({
         <AnimatePresence mode="wait">
           {!isSearchActive && featuredProject && (
             <motion.div 
-              className="w-full lg:w-1/2 flex flex-col items-center order-1 lg:order-2 mt-8 lg:mt-0"
+              className="transform-gpu w-full lg:w-1/2 flex flex-col items-center order-1 lg:order-2 mt-8 lg:mt-0"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20, position: "absolute", zIndex: -1 }}
@@ -470,7 +511,7 @@ export default function PortfolioHero({
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-50"
+        className="transform-gpu absolute bottom-4 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
@@ -478,7 +519,7 @@ export default function PortfolioHero({
         {!isSearchActive && (
           <>
             <span className="text-cyberpunk-pink text-sm mb-1">Explore Stories</span>
-            <motion.div animate={{ y: [0, 5, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}>
+            <motion.div className="transform-gpu" animate={{ y: [0, 5, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}>
               <ChevronDown className="h-5 w-5 text-cyberpunk-pink" />
             </motion.div>
           </>

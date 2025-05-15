@@ -22,6 +22,8 @@ export default function PortfolioGallery({
   onMetaCategorySelect,
   onSubCategorySelect
 }: PortfolioGalleryProps) {
+  const PAGE_SIZE = 6
+  const [itemsToShow, setItemsToShow] = useState(PAGE_SIZE)
   const [isSearchContext, setIsSearchContext] = useState(false)
 
   useEffect(() => {
@@ -64,9 +66,18 @@ export default function PortfolioGallery({
     }
   }, [activeGalleryFilterId, selectedMetaCategoryId, currentSelectedMeta]);
 
+  useEffect(() => {
+    setItemsToShow(PAGE_SIZE)
+  }, [filteredItems])
+
+  const displayedItems = useMemo(
+    () => filteredItems.slice(0, itemsToShow),
+    [filteredItems, itemsToShow]
+  )
+
   return (
     <motion.div
-      className="max-w-6xl mx-auto"
+      className="w-full"
     >
       <div className="mb-1 md:mb-2">
         <MetaCategorySwiper 
@@ -87,9 +98,9 @@ export default function PortfolioGallery({
         )}
       </AnimatePresence>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4 md:mt-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-4 md:mt-6">
         <AnimatePresence>
-          {filteredItems.map((item, index) => (
+          {displayedItems.map((item, index) => (
             <PortfolioItemCard key={item.slug} item={item} index={index} />
           ))}
         </AnimatePresence>
@@ -108,14 +119,13 @@ export default function PortfolioGallery({
         </div>
       )}
 
-      {!isSearchContext && (
+      {!isSearchContext && displayedItems.length < filteredItems.length && (
         <div className="mt-12 text-center">
           <Button
-            className="cyberpunk-button py-6 px-10 text-base relative overflow-hidden group disabled:opacity-50"
-            onClick={() => console.log("Load more projects - (Placeholder: currently shows all published)")}
-            disabled={true} 
+            className="cyberpunk-button py-6 px-10 text-base relative overflow-hidden group"
+            onClick={() => setItemsToShow(prev => Math.min(prev + PAGE_SIZE, filteredItems.length))}
           >
-            <span className="relative z-10">Load More Projects (Placeholder)</span>
+            <span className="relative z-10">Load More Projects</span>
           </Button>
         </div>
       )}

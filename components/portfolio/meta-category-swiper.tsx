@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperInstance } from "swiper";
@@ -77,6 +77,9 @@ export default function MetaCategorySwiper({
   onMetaCategorySelect 
 }: MetaCategorySwiperProps) {
   const swiperRef = useRef<SwiperInstance | null>(null);
+  const swiperContainerRef = useRef<HTMLDivElement>(null); // Ref for the Swiper container
+  const [isFitMode, setIsFitMode] = useState(false);
+  const [currentTotalSlidesWidth, setCurrentTotalSlidesWidth] = useState(0);
 
   const selectedIndex = metaCategories.findIndex(cat => cat.id === selectedMetaCategoryId);
 
@@ -101,9 +104,40 @@ export default function MetaCategorySwiper({
     }
   }, [selectedMetaCategoryId, selectedIndex, metaCategories.length]);
 
+  useEffect(() => {
+    const calculateMode = () => {
+      if (swiperContainerRef.current && metaCategories.length > 0) {
+        const containerWidth = swiperContainerRef.current.offsetWidth;
+        const slideWidth = 256; // w-64
+        const spaceBetweenSlides = 16;
+        const calculatedTotalWidth = 
+          metaCategories.length * slideWidth + 
+          (metaCategories.length > 0 ? (metaCategories.length - 1) * spaceBetweenSlides : 0);
+        
+        setCurrentTotalSlidesWidth(calculatedTotalWidth);
+
+        if (calculatedTotalWidth <= containerWidth) {
+          setIsFitMode(true);
+        } else {
+          setIsFitMode(false);
+        }
+      } else if (metaCategories.length === 0) {
+        setIsFitMode(false); // Or true if an empty centered swiper is desired
+        setCurrentTotalSlidesWidth(0);
+      }
+    };
+
+    calculateMode();
+    window.addEventListener("resize", calculateMode);
+    return () => window.removeEventListener("resize", calculateMode);
+  }, [metaCategories, swiperContainerRef.current]); // Add swiperContainerRef.current to dependencies
+
   return (
     <TooltipProvider>
-      <div className="relative py-4">
+      <div 
+        ref={swiperContainerRef}
+        className={`relative py-4 ${isFitMode ? 'flex justify-center' : ''}`}
+      >
         <Swiper
           modules={[Navigation, A11y]}
           onSwiper={(swiper) => { swiperRef.current = swiper; }}
@@ -115,13 +149,15 @@ export default function MetaCategorySwiper({
           }}
           slidesPerView={"auto"}
           spaceBetween={16}
-          centeredSlides={false} 
+          centeredSlides={false} // Always false now
+          centerInsufficientSlides={false} // Always false now
           grabCursor={true}
           watchSlidesProgress={true}
-          className="!px-0 !py-4 w-full"
+          className={`!px-0 !py-4 ${isFitMode ? '!w-auto' : '!w-full'}`}
+          style={isFitMode ? { width: `${currentTotalSlidesWidth}px` } : {}}
         >
           {metaCategories.map((category) => (
-            <SwiperSlide key={category.id} className="!w-auto !h-auto">
+            <SwiperSlide key={category.id} className="!w-auto !h-auto"> {/* Important for slidesPerView: 'auto' */}
               <MetaCategoryCard 
                 category={category} 
                 isSelected={category.id === selectedMetaCategoryId}
@@ -131,22 +167,27 @@ export default function MetaCategorySwiper({
           ))}
         </Swiper>
 
-        <button 
-          aria-label="Previous Meta Category"
-          className="portfolio-cat-prev absolute top-1/2 -translate-y-1/2 -left-4 md:-left-6 z-20 p-2 rounded-full bg-cyberpunk-background/70 border-2 border-cyberpunk-blue/50 hover:border-cyberpunk-blue transition-colors shadow-lg text-white group disabled:opacity-30 disabled:pointer-events-none"
-          onClick={handlePrev}
-          disabled={selectedIndex <= 0} 
-        >
-          <ChevronLeft className="h-5 w-5 md:h-6 md:w-6 text-cyberpunk-blue group-hover:text-white transition-colors" />
-        </button>
-        <button 
-          aria-label="Next Meta Category"
-          className="portfolio-cat-next absolute top-1/2 -translate-y-1/2 -right-4 md:-right-6 z-20 p-2 rounded-full bg-cyberpunk-background/70 border-2 border-cyberpunk-blue/50 hover:border-cyberpunk-blue transition-colors shadow-lg text-white group disabled:opacity-30 disabled:pointer-events-none"
-          onClick={handleNext}
-          disabled={selectedIndex >= metaCategories.length - 1} 
-        >
-          <ChevronRight className="h-5 w-5 md:h-6 md:w-6 text-cyberpunk-blue group-hover:text-white transition-colors" />
-        </button>
+        {/* Navigation buttons should still work and be visible */}
+        {!isFitMode && ( // Only show nav buttons if not in fit mode (i.e., when scrollable)
+          <>
+            <button 
+              aria-label="Previous Meta Category"
+              className="portfolio-cat-prev absolute top-1/2 -translate-y-1/2 -left-4 md:-left-6 z-20 p-2 rounded-full bg-cyberpunk-background/70 border-2 border-cyberpunk-blue/50 hover:border-cyberpunk-blue transition-colors shadow-lg text-white group disabled:opacity-30 disabled:pointer-events-none"
+              onClick={handlePrev}
+              disabled={selectedIndex <= 0} 
+            >
+              <ChevronLeft className="h-5 w-5 md:h-6 md:w-6 text-cyberpunk-blue group-hover:text-white transition-colors" />
+            </button>
+            <button 
+              aria-label="Next Meta Category"
+              className="portfolio-cat-next absolute top-1/2 -translate-y-1/2 -right-4 md:-right-6 z-20 p-2 rounded-full bg-cyberpunk-background/70 border-2 border-cyberpunk-blue/50 hover:border-cyberpunk-blue transition-colors shadow-lg text-white group disabled:opacity-30 disabled:pointer-events-none"
+              onClick={handleNext}
+              disabled={selectedIndex >= metaCategories.length - 1} 
+            >
+              <ChevronRight className="h-5 w-5 md:h-6 md:w-6 text-cyberpunk-blue group-hover:text-white transition-colors" />
+            </button>
+          </>
+        )}
       </div>
     </TooltipProvider>
   );

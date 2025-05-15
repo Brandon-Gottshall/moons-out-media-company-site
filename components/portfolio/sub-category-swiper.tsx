@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperInstance } from "swiper";
@@ -78,6 +78,9 @@ export default function SubCategorySwiper({
   metaCategoryColor = "cyberpunk-blue"
 }: SubCategorySwiperProps) {
   const swiperRef = useRef<SwiperInstance | null>(null);
+  const swiperContainerRef = useRef<HTMLDivElement>(null); // Ref for the Swiper container
+  const [isFitMode, setIsFitMode] = useState(false);
+  const [currentTotalSlidesWidth, setCurrentTotalSlidesWidth] = useState(0);
 
   const selectedIndex = subCategories.findIndex(cat => cat.id === activeGalleryFilterId);
 
@@ -108,6 +111,36 @@ export default function SubCategorySwiper({
     // when a meta category changes, which it does.
   }, [activeGalleryFilterId, selectedIndex, subCategories]); // Depend on activeGalleryFilterId and subCategories
 
+  useEffect(() => {
+    const calculateMode = () => {
+      if (swiperContainerRef.current && subCategories.length > 0) {
+        const containerWidth = swiperContainerRef.current.offsetWidth;
+        const slideWidth = 224; // w-56
+        const spaceBetweenSlides = 12;
+        const calculatedTotalWidth = 
+          subCategories.length * slideWidth + 
+          (subCategories.length > 0 ? (subCategories.length - 1) * spaceBetweenSlides : 0);
+
+        setCurrentTotalSlidesWidth(calculatedTotalWidth);
+
+        if (calculatedTotalWidth <= containerWidth) {
+          setIsFitMode(true);
+        } else {
+          setIsFitMode(false);
+        }
+      } else if (subCategories.length === 0) {
+        setIsFitMode(false);
+        setCurrentTotalSlidesWidth(0);
+      }
+    };
+
+    calculateMode();
+    // Ensure swiperContainerRef.current is stable or included in deps if it can change
+    // For now, assuming it's stable after initial render of the div
+    window.addEventListener("resize", calculateMode);
+    return () => window.removeEventListener("resize", calculateMode);
+  }, [subCategories, swiperContainerRef.current]); // Add swiperContainerRef.current to dependencies
+
   const swiperVariants = {
     hidden: { opacity: 0, height: 0, y: -20 },
     visible: { opacity: 1, height: "auto", y: 0, transition: { duration: 0.4, ease: "easeInOut" } },
@@ -121,11 +154,12 @@ export default function SubCategorySwiper({
   return (
     <TooltipProvider>
       <motion.div 
+        ref={swiperContainerRef} // Ref moved to the motion.div which is the actual container
         variants={swiperVariants}
         initial="hidden"
         animate="visible"
         exit="exit"
-        className="relative py-3 mt-2 mb-4 border-t-2 border-b-2 border-dashed border-gray-700/50"
+        className={`relative py-3 mt-2 mb-4 border-t-2 border-b-2 border-dashed border-gray-700/50 ${isFitMode ? 'flex justify-center' : ''}`}
         style={{borderColor: metaCategoryColor ? `${metaCategoryColor}33` : '#4B556366'}} 
       >
         <Swiper
@@ -138,11 +172,13 @@ export default function SubCategorySwiper({
             }
           }}
           slidesPerView={"auto"}
-          spaceBetween={12} 
-          centeredSlides={false}
+          spaceBetween={12}
+          centeredSlides={false} // Always false
+          centerInsufficientSlides={false} // Always false
           grabCursor={true}
           watchSlidesProgress={true}
-          className="!px-0 !py-3 w-full"
+          className={`!px-0 !py-3 ${isFitMode ? '!w-auto' : '!w-full'}`}
+          style={isFitMode ? { width: `${currentTotalSlidesWidth}px` } : {}}
         >
           {subCategories.map((category) => (
             <SwiperSlide key={category.id} className="!w-auto !h-auto">
@@ -156,22 +192,26 @@ export default function SubCategorySwiper({
           ))}
         </Swiper>
 
-        <button 
-          aria-label="Previous Sub-Category"
-          className="absolute top-1/2 -translate-y-1/2 -left-3 md:-left-5 z-10 p-1.5 rounded-full bg-black/50 border border-gray-600 hover:border-gray-400 transition-colors text-white group disabled:opacity-30 disabled:pointer-events-none"
-          onClick={handlePrev}
-          disabled={selectedIndex <= 0}
-        >
-          <ChevronLeft className="h-4 w-4 md:h-5 md:w-5 text-gray-300 group-hover:text-white transition-colors" />
-        </button>
-        <button 
-          aria-label="Next Sub-Category"
-          className="absolute top-1/2 -translate-y-1/2 -right-3 md:-right-5 z-10 p-1.5 rounded-full bg-black/50 border border-gray-600 hover:border-gray-400 transition-colors text-white group disabled:opacity-30 disabled:pointer-events-none"
-          onClick={handleNext}
-          disabled={selectedIndex >= subCategories.length - 1}
-        >
-          <ChevronRight className="h-4 w-4 md:h-5 md:w-5 text-gray-300 group-hover:text-white transition-colors" />
-        </button>
+        {!isFitMode && (
+          <>
+            <button 
+              aria-label="Previous Sub-Category"
+              className="absolute top-1/2 -translate-y-1/2 -left-3 md:-left-5 z-10 p-1.5 rounded-full bg-black/50 border border-gray-600 hover:border-gray-400 transition-colors text-white group disabled:opacity-30 disabled:pointer-events-none"
+              onClick={handlePrev}
+              disabled={selectedIndex <= 0}
+            >
+              <ChevronLeft className="h-4 w-4 md:h-5 md:w-5 text-gray-300 group-hover:text-white transition-colors" />
+            </button>
+            <button 
+              aria-label="Next Sub-Category"
+              className="absolute top-1/2 -translate-y-1/2 -right-3 md:-right-5 z-10 p-1.5 rounded-full bg-black/50 border border-gray-600 hover:border-gray-400 transition-colors text-white group disabled:opacity-30 disabled:pointer-events-none"
+              onClick={handleNext}
+              disabled={selectedIndex >= subCategories.length - 1}
+            >
+              <ChevronRight className="h-4 w-4 md:h-5 md:w-5 text-gray-300 group-hover:text-white transition-colors" />
+            </button>
+          </>
+        )}
       </motion.div>
     </TooltipProvider>
   );

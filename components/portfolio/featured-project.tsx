@@ -112,7 +112,7 @@ export default function FeaturedProject({
               window.location.href = "/portfolio/ecotech-documentary"; 
             }}
           >
-            View Full Case Study <ExternalLink className="ml-2 h-4 w-4" />
+            View Full Project <ExternalLink className="ml-2 h-4 w-4" />
           </Button>
           <Button
             variant="outline"
