@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { VideoHero } from "@/components/home/video-hero"
 import { ServiceCard } from "@/components/home/service-card"
-import { CTA } from "@/components/home/cta"
+import CallToAction from "@/components/call-to-action"
 
 export default function Home() {
   return (
@@ -36,7 +36,7 @@ export default function Home() {
       </section>
 
       {/* Call to Action */}
-      <CTA />
+      <CallToAction />
     </div>
   )
 }

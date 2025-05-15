@@ -5,15 +5,29 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { Twitter, Linkedin, Mail, ExternalLink } from "lucide-react"
 
-export default function TeamSection() {
-  const [activeTeamMember, setActiveTeamMember] = useState(null)
+interface TeamMember {
+  name: string
+  role: string
+  bio: string
+  image: string
+  social: {
+    twitter: string
+    linkedin: string
+    email: string
+  }
+}
 
-  const team = [
+export default function TeamSection() {
+  const [activeTeamMember, setActiveTeamMember] = useState<TeamMember | null>(
+    null
+  )
+
+  const team: TeamMember[] = [
     {
       name: "Levi Armentrout",
       role: "HNIC",
-      bio: "Levi Armentrout, HNIC at Moons Out Media, brings Marine Corps discipline and a documentary cinematographer’s eye to every project. After multiple tours of duty, he immersed himself in authentic storytelling—directing and shooting films that uncover untold personal narratives. As HNIC, Levi shapes narrative strategy, oversees brand-film direction, and guides creative execution, ensuring each story combines cinematic polish with genuine human emotion. His steady leadership and visual expertise drive Moons Out’s mission to craft memorable, human-centered experiences that linger long after the credits roll.",
-      image: "/placeholder.svg?height=400&width=400",
+      bio: "Levi Armentrout, HNIC at Moons Out Media, brings Marine Corps discipline and a documentary cinematographer's eye to every project. After multiple tours of duty, he immersed himself in authentic storytelling—directing and shooting films that uncover untold personal narratives. As HNIC, Levi shapes narrative strategy, oversees brand-film direction, and guides creative execution, ensuring each story combines cinematic polish with genuine human emotion. His steady leadership and visual expertise drive Moons Out's mission to craft memorable, human-centered experiences that linger long after the credits roll.",
+      image: "/images/levi.jpg",
       social: {
         twitter: "#",
         linkedin: "#",
@@ -24,7 +38,7 @@ export default function TeamSection() {
       name: "Brandon",
       role: "Software Alchemist",
       bio: "Brandon Gottshall is a Marine Corps veteran who architects containerized infrastructures, secure reverse-proxy gateways, and AI-driven automation pipelines for Moons Out Media. He leverages Vercel, Docker, Next.js, Tailwind, ShadCN, and PostgreSQL to deploy scalable web platforms. At Moons Out Labs, he implemented Authelia for internal AI-service authentication and orchestrated n8n, Langflow, and LibreChat workflows to eliminate repetitive tasks. With a focus on CI/CD best practices, infrastructure as code, and maintainability, Brandon transforms complex requirements into robust systems that empower creative teams to focus on storytelling.",
-      image: "/placeholder.svg?height=400&width=400",
+      image: "/images/Brandon.jpg",
       social: {
         twitter: "#",
         linkedin: "#",
@@ -41,29 +55,7 @@ export default function TeamSection() {
         linkedin: "#",
         email: "",
       },
-    },
-    {
-      name: "Doora Black",
-      role: "Social Media, Advertisement & Marketing Manager",
-      bio: "Dora is a recent college graduate who brings imagination, personality, and charm to the Moons Out Media team. Dora is the manager of digital marketing and advertisements. As the creative director of ads, Dora implements her ability to recognize a brand’s untapped audience and assists in cultivating new and stronger relationships between brands, companies, and consumers. Dora brings an eye for authenticity and incorporates culture into each project. Dora combines her curiosity with practicality and tests the boundaries of society with her creative ideas.",
-      image: "/placeholder.svg?height=400&width=400",
-      social: {
-        twitter: "#",
-        linkedin: "#",
-        email: "dorab5282@gmail.com",
-      },
-    },
-    {
-      name: "Jazz Jefferson",
-      role: "Cinematography Intern",
-      bio: "",
-      image: "/placeholder.svg?height=400&width=400",
-      social: {
-        twitter: "#",
-        linkedin: "#",
-        email: "jzz.d.jefferson@gmail.com",
-      },
-    },
+    }
   ]
 
   const container = {
@@ -121,7 +113,7 @@ export default function TeamSection() {
                   alt={member.name}
                   width={400}
                   height={400}
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="object-contain transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
               </div>
