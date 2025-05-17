@@ -36,13 +36,12 @@ export default function CallToAction() {
           >
             <h2
               className="text-2xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 glitch-text tracking-tight"
-              data-text="Ready to Tell Your Story?"
+              data-text="Convert Viewers to Customers"
             >
-              Ready to Tell Your Story?
+              Convert Viewers to Customers
             </h2>
             <p className="text-base md:text-xl text-gray-200 mb-6 md:mb-8 max-w-2xl mx-auto font-medium">
-              Let's create authentic story telling content that captures the essence of your brand and connects with your
-              audience on a deeper level.
+            Engaging Content + Cutting-Edge Tech = More Conversions
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4 mb-8 md:mb-12">
@@ -50,7 +49,7 @@ export default function CallToAction() {
                 className="cyberpunk-button text-base md:text-lg py-4 md:py-6 px-6 md:px-8 shadow-glow-blue"
                 onClick={() => (window.location.href = "/contact")}
               >
-                Start Your Project
+                Book Now
               </Button>
               <Button
                 variant="outline"
@@ -61,8 +60,8 @@ export default function CallToAction() {
               </Button>
             </div>
           </motion.div>
-
-          <motion.div
+          {/* Newsletter - To be added later */}
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -92,7 +91,7 @@ export default function CallToAction() {
             ) : (
               <div className="text-cyberpunk-green font-medium">Thanks for subscribing! We'll be in touch soon.</div>
             )}
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
     </section>

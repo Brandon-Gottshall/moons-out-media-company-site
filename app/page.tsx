@@ -2,12 +2,22 @@ import Link from "next/link"
 import { VideoHero } from "@/components/home/video-hero"
 import { ServiceCard } from "@/components/home/service-card"
 import CallToAction from "@/components/call-to-action"
+import { WhyChooseUs } from "@/components/home/why-choose-us"
 
 export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <VideoHero />
+
+      {/* Why Choose Us Section */}
+      <div className="relative py-10 px-4 flex justify-center w-full overflow-visible">
+        {/* Top Gradient Overlay - Blends from Hero's cyberpunk-background */}
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-cyberpunk-background/50 via-cyberpunk-background/20 to-transparent pointer-events-none z-10" />
+        <WhyChooseUs />
+        {/* Bottom Gradient Overlay - Blends to Services' top (black/30) */}
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black/15 via-black/5 to-transparent pointer-events-none z-10" />
+      </div>
 
       {/* Services Section */}
       <section className="py-20 px-4 relative overflow-hidden">
