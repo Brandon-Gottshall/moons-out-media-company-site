@@ -75,7 +75,11 @@ export default function ContactForm() {
 
   // validation and form state helpers
   const emailRegex = /\S+@\S+\.\S+/
-  const isFormValid = formState.name.trim() !== "" && emailRegex.test(formState.email) && formState.message.trim() !== ""
+  const isFormValid = 
+    formState.name.trim() !== "" && 
+    emailRegex.test(formState.email) && 
+    formState.message.trim() !== "" &&
+    (formState.service.length > 0 || formState.branch !== "")
 
   // Only confirm service interest if at least one service or branch is selected
   const handleServiceMouseLeave = () => {
@@ -249,10 +253,10 @@ export default function ContactForm() {
             <motion.div
               key="service-picker"
               layout
-              initial={{ opacity: 0, height: 0 }}
+              initial={{ opacity: 1, height: 'auto' }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ layout: { duration: 0.8, ease: 'easeInOut' }, opacity: { duration: 0.8 } }}
+              transition={{ duration: 0.3 }}
               onMouseLeave={handleServiceMouseLeave}
               onMouseEnter={handleServiceMouseEnter}
               className="overflow-hidden"
@@ -349,7 +353,7 @@ export default function ContactForm() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ layout: { duration: 0.8, ease: 'easeInOut' }, opacity: { duration: 0.8 } }}
+              transition={{ duration: 0.3 }}
               className="overflow-hidden"
             >
               <ServiceInterestConfirmed
@@ -407,7 +411,11 @@ export default function ContactForm() {
         <motion.button
           type="submit"
           disabled={!isFormValid || isSubmitting}
-          className="w-full py-3 px-6 bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple text-white font-bold rounded-md hover:from-cyberpunk-purple hover:to-cyberpunk-blue transition-all duration-300 relative overflow-hidden disabled:opacity-70"
+          className={`w-full py-3 px-6 font-bold rounded-md transition-all duration-300 relative overflow-hidden ${
+            !isFormValid || isSubmitting
+              ? "bg-black border border-cyberpunk-blue/50 text-white/50 cursor-not-allowed shadow-[0_0_10px_rgba(0,204,255,0.2)]"
+              : "bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple text-white hover:from-cyberpunk-purple hover:to-cyberpunk-blue"
+          }`}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -438,6 +446,37 @@ export default function ContactForm() {
               Send Message
             </span>
           )}
+        </motion.button>
+
+        {/* OR Separator */}
+        <div className="flex items-center justify-center">
+          <span className="h-px w-1/3 bg-gray-700"></span>
+          <span className="mx-4 text-gray-500">OR</span>
+          <span className="h-px w-1/3 bg-gray-700"></span>
+        </div>
+
+        {/* Book Now Button */}
+        <motion.button
+          type="button" // Important: type="button" to not submit the form
+          onClick={() => window.open("#", "_blank")} // Replace # with actual booking link
+          disabled={!isFormValid || isSubmitting} // Same disabled logic
+          className={`w-full py-3 px-6 font-bold rounded-md transition-all duration-300 relative overflow-hidden ${
+            !isFormValid || isSubmitting
+              ? "bg-black border border-cyberpunk-green/50 text-white/50 cursor-not-allowed shadow-[0_0_10px_rgba(0,255,127,0.2)]"
+              : "bg-gradient-to-r from-cyberpunk-green to-cyberpunk-teal text-white hover:from-cyberpunk-teal hover:to-cyberpunk-green"
+          }`}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.9 }} // Slightly later delay
+          whileHover={{
+            boxShadow: "0 0 20px rgba(0, 255, 127, 0.5)", // Greenish glow
+          }}
+        >
+          <span className="flex items-center justify-center">
+            Book Now
+            <CalendarFold className="ml-2 h-5 w-5" />
+          </span>
         </motion.button>
       </form>
     </motion.div>

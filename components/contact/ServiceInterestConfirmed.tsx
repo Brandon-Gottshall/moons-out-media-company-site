@@ -41,7 +41,7 @@ export default function ServiceInterestConfirmed({ selectionType, services, onCh
         )}
       </CardContent>
       <CardFooter>
-        <Button variant="outline" onClick={onChange} className="border-cyberpunk-pink text-cyberpunk-pink hover:bg-cyberpunk-pink/10 hover:text-cyberpunk-pink">
+        <Button type="button" variant="outline" onClick={onChange} className="border-cyberpunk-pink text-cyberpunk-pink hover:bg-cyberpunk-pink/10 hover:text-cyberpunk-pink">
           Change Selection
         </Button>
       </CardFooter>
