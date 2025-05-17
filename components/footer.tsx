@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-black/80 border-t border-cyberpunk-blue/30 pt-16 pb-8">
-      <div className="container mx-auto px-4">
+    <footer className="bg-black/80 border-t border-cyberpunk-blue/30 pt-16 pb-8 w-full max-w-[100vw]">
+      <div className="container mx-auto px-4 w-full">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           <div>
             <h3 className="text-2xl font-bold mb-4 text-cyberpunk-blue">

@@ -11,13 +11,15 @@ interface FeaturedProjectProps {
   customImageOverlay?: React.ReactNode;
   slug: string;
   isCardLinkDisabled?: boolean;
+  isHeroCompact?: boolean;
 }
 
 export default function FeaturedProject({ 
   hideDescription = false,
   customImageOverlay,
   slug,
-  isCardLinkDisabled = false
+  isCardLinkDisabled = false,
+  isHeroCompact = false
 }: FeaturedProjectProps) {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
 
@@ -26,6 +28,37 @@ export default function FeaturedProject({
       e.stopPropagation();
     }
   };
+
+  // Create a compact layout for the hero section
+  if (isHeroCompact) {
+    return (
+      <div className="w-full h-full relative group overflow-hidden rounded-lg">
+        {/* Thumbnail with play button */}
+        <div className="w-full h-full relative">
+          <img
+            src="/images/project1.png"
+            alt="Featured project image" 
+            className="w-full h-full object-cover"
+          />
+          {customImageOverlay}
+        </div>
+        
+        {/* Project and company name - always visible */}
+        <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-2 z-10">
+          <h3 className="text-sm font-bold text-white leading-tight">Sustainable Innovation</h3>
+          <p className="text-xs text-cyberpunk-blue">EcoTech Innovations</p>
+        </div>
+        
+        {/* Description drawer - visible on hover */}
+        <div className="absolute bottom-0 left-0 right-0 bg-black/90 p-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-20">
+          <p className="text-xs text-white">
+            Our latest and most impactful storytelling work. This documentary series showcases revolutionary
+            sustainable technologies and their real-world impact.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   const cardContent = (
     <motion.div

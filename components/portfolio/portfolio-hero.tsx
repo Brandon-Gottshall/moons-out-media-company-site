@@ -11,6 +11,7 @@ import { useMobile } from "@/hooks/use-mobile";
 import { AnimatedTypewriter } from "./animated-typewriter";
 import { ChevronDown } from "lucide-react";
 import MetaCategoryNavButtons from "./meta-category-nav-buttons";
+import MetaCategorySwiper from "./meta-category-swiper";
 import type { MetaCategory } from "@/lib/category-data";
 
 const TRANSITION_INTERVAL = 4000; // Time in milliseconds between transitions
@@ -79,6 +80,7 @@ const storyContent = [
 interface PortfolioHeroProps {
   isSearchActive: boolean;
   setIsSearchActive: (active: boolean) => void;
+  selectedMetaCategoryId: string;
   featuredProject?: React.ReactNode;
   metaCategories: MetaCategory[];
   onHeroMetaButtonSelect: (metaId: string) => void;
@@ -87,8 +89,8 @@ interface PortfolioHeroProps {
 
 // Define variants for hero section and search form to batch animations and enable layout transitions
 const heroSectionVariants: Variants = {
-  collapsed: { height: "100vh", paddingTop: "max(6rem, 10vh)", paddingBottom: "max(4rem, 8vh)" },
-  expanded: { height: "auto", paddingTop: "5rem", paddingBottom: "4rem" },
+  collapsed: { height: "100dvh" },
+  expanded: { height: "auto" },
 }
 
 const searchFormVariants: Variants = {
@@ -124,6 +126,7 @@ const searchFormVariants: Variants = {
 export default function PortfolioHero({
   isSearchActive,
   setIsSearchActive,
+  selectedMetaCategoryId,
   featuredProject,
   metaCategories,
   onHeroMetaButtonSelect,
@@ -316,7 +319,7 @@ export default function PortfolioHero({
 
   return (
     <motion.section
-      className="transform-gpu relative overflow-hidden flex flex-col"
+      className={`transform-gpu relative overflow-hidden flex flex-col justify-center ${isSearchActive ? 'pt-20 pb-16' : 'pt-[max(6rem,12vh)] pb-[max(3rem,6vh)] lg:pt-16 lg:pb-12 vh-short:pt-[max(4rem,8vh)] vh-short:pb-[max(2rem,4vh)]'}`}
       variants={heroSectionVariants}
       initial="collapsed"
       animate={isSearchActive ? "expanded" : "collapsed"}
@@ -389,138 +392,151 @@ export default function PortfolioHero({
       </div>
 
       {/* Content Wrapper - Flexbox for responsiveness */}
-      <div className="container mx-auto px-4 flex-grow flex flex-col lg:flex-row items-center lg:items-stretch gap-8 z-30 relative">
+      <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center lg:items-stretch gap-8 lg:gap-6 z-30 relative vh-short:gap-2">
         
         {/* Left Column: Text, Search, Filters */}
         <motion.div 
-          className="transform-gpu w-full lg:w-1/2 flex flex-col justify-center items-center text-center lg:text-left lg:items-start order-2 lg:order-1 pt-8 lg:pt-0"
+          className="transform-gpu w-full sm:w-1/2 flex flex-col justify-center items-center text-center lg:text-left lg:items-start order-1 lg:order-1 sm:pt-0 vh-short:py-1"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          {/* Title and animated text */}
-          <AnimatePresence mode="wait">
-            {!isSearchActive && (
-              <motion.h1
-                className="transform-gpu text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
-                initial={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="flex flex-col items-center lg:items-start">
-                  <span className="text-white mb-1">Our Work</span>
-                  <div className="neon-text-accent w-full h-24 whitespace-normal break-words text-left" key={currentIndex}>
-                    <AnimatedTypewriter word={storyContent[currentIndex].word} />
+          {/* Group all content elements in a flex column with consistent gap */}
+          <div className="flex flex-col gap-4 w-full vh-short:gap-2">
+            {/* Title and animated text */}
+            <AnimatePresence mode="wait">
+              {!isSearchActive && (
+                <motion.h1
+                  className="transform-gpu text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-5xl vh-short:text-lg font-bold"
+                  initial={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="flex flex-col items-center lg:items-start">
+                    <span className="text-white mb-1 vh-short:mb-0">Our Work</span>
+                    <div className="neon-text-accent w-full h-16 sm:h-20 md:h-24 lg:h-20 xl:h-20 vh-short:h-8 whitespace-normal break-words text-center lg:text-left text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl vh-short:text-xl" key={currentIndex}>
+                      <AnimatedTypewriter word={storyContent[currentIndex].word} />
+                    </div>
                   </div>
-                </div>
-              </motion.h1>
-            )}
-          </AnimatePresence>
+                </motion.h1>
+              )}
+            </AnimatePresence>
 
-          {/* Search form */}
-          <motion.form
-            onSubmit={handleSearch}
-            className="transform-gpu flex gap-2 mb-3 relative z-50"
-            variants={searchFormVariants}
-            initial="collapsed"
-            animate={isSearchActive ? "expanded" : "collapsed"}
-            transition={{
-              duration: 0.4,
-              ease: "easeOut",
-              layout: { type: "spring", stiffness: 300, damping: 30 }
-            }}
-            layout
-            onClick={(e) => e.stopPropagation()}
-          >
-             <div className="relative flex-1">
-               <Input
-                 ref={searchInputRef}
-                 type="text"
-                 placeholder="Search stories..."
-                 className="bg-black/50 border-gray-700 focus:border-cyberpunk-blue text-white pl-10 h-10 text-sm"
-                 value={searchQuery}
-                 onChange={(e) => {
-                   setSearchQuery(e.target.value);
-                   if (e.target.value && !isSearchActive) {
-                     setIsSearchActive(true);
-                   }
-                 }}
-                 onFocus={handleInputFocus}
-               />
-               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-               {isSearchActive && (
-                 <button
-                   type="button"
-                   onClick={(e) => { e.stopPropagation(); clearSearch(); }}
-                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
-                 >
-                   <X className="h-4 w-4" />
-                 </button>
-               )}
-             </div>
-             <Button
-               type="submit"
-               className="cyberpunk-button h-10 px-4 text-sm"
-               onClick={(e) => e.stopPropagation()}
-             >
-               Search
-             </Button>
-          </motion.form>
-
-          {/* Filter buttons */}
-          <AnimatePresence>
-            {!isSearchActive && (
-            <motion.div 
-                    className={`transform-gpu w-full ${isSearchActive ? "max-w-xl" : "max-w-xs sm:max-w-md lg:max-w-xs xl:max-w-lg 2xl:max-w-xl"} mx-auto lg:mx-0 ${isSearchActive ? "mt-5 fixed top-[9rem] left-1/2 -translate-x-1/2 z-[100] calc(100% - 3rem)" : "mt-3"}`}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20, height: 0, overflow: "hidden" }}
-                transition={{ duration: 0.3 }}
+            {/* Search form */}
+            <motion.form
+              onSubmit={handleSearch}
+              className="transform-gpu flex gap-2 relative z-50 w-full"
+              variants={searchFormVariants}
+              initial="collapsed"
+              animate={isSearchActive ? "expanded" : "collapsed"}
+              transition={{
+                duration: 0.4,
+                ease: "easeOut",
+                layout: { type: "spring", stiffness: 300, damping: 30 }
+              }}
+              layout
+              onClick={(e) => e.stopPropagation()}
             >
-                <MetaCategoryNavButtons
-                    metaCategories={metaCategories}
-                    onMetaCategorySelect={onHeroMetaButtonSelect}
-                    gallerySectionId={gallerySectionId}
+              <div className="relative flex-1">
+                <Input
+                  ref={searchInputRef}
+                  type="text"
+                  placeholder="Search stories..."
+                  className="bg-black/50 border-gray-700 focus:border-cyberpunk-blue text-white pl-10 h-10 vh-short:h-8 text-sm"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    if (e.target.value && !isSearchActive) {
+                      setIsSearchActive(true);
+                    }
+                  }}
+                  onFocus={handleInputFocus}
                 />
-            </motion.div>
-            )}
-          </AnimatePresence>
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                {isSearchActive && (
+                  <button
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); clearSearch(); }}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+              <Button
+                type="submit"
+                className="cyberpunk-button h-10 vh-short:h-8 px-4 vh-short:px-3 text-sm vh-short:text-xs"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Search
+              </Button>
+            </motion.form>
+
+            {/* Filter buttons */}
+            <AnimatePresence>
+              {!isSearchActive && (
+                <>
+                  {/* Default button layout for narrow widths */}
+                  <div className="block min-[1050px]:hidden">
+                    <motion.div
+                      className={`transform-gpu w-full ${isSearchActive ? "max-w-xl" : "max-w-xs sm:max-w-md lg:max-w-xs xl:max-w-lg 2xl:max-w-xl"} mx-auto lg:mx-0 ${isSearchActive ? "fixed top-[9rem] left-1/2 -translate-x-1/2 z-[100] calc(100% - 3rem)" : ""} vh-short:py-0`}
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20, height: 0, overflow: "hidden" }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <MetaCategoryNavButtons
+                        metaCategories={metaCategories}
+                        onMetaCategorySelect={onHeroMetaButtonSelect}
+                        gallerySectionId={gallerySectionId}
+                      />
+                    </motion.div>
+                  </div>
+
+                  {/* Swiper layout for wider widths */}
+                  <div className="hidden min-[1050px]:block">
+                    <MetaCategorySwiper
+                      metaCategories={metaCategories}
+                      selectedMetaCategoryId={selectedMetaCategoryId}
+                      onMetaCategorySelect={onHeroMetaButtonSelect}
+                    />
+                  </div>
+                </>
+              )}
+            </AnimatePresence>
+          </div>
         </motion.div>
 
         {/* Right Column: Featured Project */}
         <AnimatePresence mode="wait">
           {!isSearchActive && featuredProject && (
             <motion.div 
-              className="transform-gpu w-full lg:w-1/2 flex flex-col items-center order-1 lg:order-2 mt-8 lg:mt-0"
+              className="transform-gpu w-full sm:w-1/2 flex flex-col justify-center items-center order-1 sm:order-2 lg:order-2 mt-8 sm:mt-0 vh-short:mt-2"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20, position: "absolute", zIndex: -1 }}
               transition={{ duration: 0.3 }}
             >
-              {/* Container to control size and prevent clipping */} 
-              <div className="w-full max-w-2xl lg:max-w-none lg:h-full flex items-center justify-center">
-                 {/* The actual project component */} 
-                 <div className="max-h-[70vh] lg:max-h-full">
-                  {featuredProject}
-                 </div>
+              <div className="flex items-center justify-center w-full max-w-full sm:max-w-2xl">
+                {featuredProject}
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </div> {/* This is the closing tag for "Content Wrapper" */}
+      </div>
 
       {/* Scroll indicator */}
       <motion.div
-        className="transform-gpu absolute bottom-4 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-50"
+        className="transform-gpu absolute bottom-4 vh-short:bottom-1 left-1/2 -translate-x-1/2 flex flex-col items-center z-50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
       >
         {!isSearchActive && (
           <>
-            <span className="text-cyberpunk-pink text-sm mb-1">Explore Stories</span>
+            <span className="text-cyberpunk-pink text-sm mb-1 vh-short:mb-0">Explore Stories</span>
             <motion.div className="transform-gpu" animate={{ y: [0, 5, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}>
-              <ChevronDown className="h-5 w-5 text-cyberpunk-pink" />
+              <ChevronDown className="h-5 w-5 vh-short:h-4 vh-short:w-4 text-cyberpunk-pink" />
             </motion.div>
           </>
         )}

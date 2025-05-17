@@ -75,39 +75,28 @@ export default function PortfolioPage() {
       <PortfolioHero
         isSearchActive={isSearchActive}
         setIsSearchActive={setIsSearchActive}
+        selectedMetaCategoryId={selectedMetaCategoryId}
         featuredProject={
           featuredItemData ? (
-            <div className="relative max-h-[65vh]">
-              <div className="flex flex-col justify-between items-center mb-1">
-                <h2 className="text-lg font-bold neon-text">Featured Project</h2>
-              </div>
-              <div className="origin-top-left -mt-1 overflow-hidden rounded-lg border-2 max-w-6xl border-cyberpunk-blue/30">
-                <div className="relative">
-                  <FeaturedProject 
-                    slug={featuredItemData.slug}
-                    hideDescription={true}
-                    isCardLinkDisabled={true}
-                    customImageOverlay={
-                      <div className="absolute inset-0 z-10 bg-black bg-opacity-[10%] backdrop-blur-xxsm flex flex-col items-center justify-center p-4">
-                        <div className="p-6 pb-6 max-w-md text-center">
-                          <p className="text-white text-sm md:text-base">
-                            Our latest and most impactful storytelling work. This documentary series showcases revolutionary
-                            sustainable technologies and their real-world impact.
-                          </p>
-                        </div>
-                        <Link 
-                          href={`/portfolio/${featuredItemData.slug}?play=true`} 
-                          aria-label={`Play video for ${featuredItemData.title}`}
-                          className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-cyberpunk-blue/20 backdrop-blur-sm border border-cyberpunk-blue flex items-center justify-center transition-transform hover:scale-110"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <Play className="h-8 w-8 md:h-10 md:w-10 text-white fill-white" />
-                        </Link>
-                      </div>
-                    }
-                  />
-                </div>
-              </div>
+            <div className="w-full aspect-video rounded-lg overflow-hidden">
+              <FeaturedProject 
+                slug={featuredItemData.slug}
+                hideDescription={true}
+                isCardLinkDisabled={true}
+                isHeroCompact={true}
+                customImageOverlay={
+                  <div className="absolute inset-0 z-10 flex items-center justify-center">
+                    <Link 
+                      href={`/portfolio/${featuredItemData.slug}?play=true`} 
+                      aria-label={`Play video for ${featuredItemData.title}`}
+                      className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm border border-white/60 flex items-center justify-center transition-transform hover:scale-110"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Play className="h-5 w-5 text-white fill-white" />
+                    </Link>
+                  </div>
+                }
+              />
             </div>
           ) : null
         }

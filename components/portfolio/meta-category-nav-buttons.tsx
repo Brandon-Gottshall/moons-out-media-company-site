@@ -31,15 +31,15 @@ export default function MetaCategoryNavButtons({
   }
 
   return (
-    <div className="flex flex-wrap justify-center gap-3 md:gap-4 py-4 md:py-6">
+    <div className="flex flex-wrap justify-center gap-1.5 sm:gap-3 md:gap-4 py-2 sm:py-4 md:py-6 vh-short:py-1 vh-short:gap-1">
       {metaCategories.map((category) => {
         const color = category.color || "cyberpunk-blue"; // Fallback color
         const isGlobalAllButton = category.isGlobalAll;
 
         // Consistent styling for all buttons, with hover effects using their theme color
         let buttonClasses = `
-          px-5 py-2.5 md:px-6 md:py-3 text-sm md:text-base rounded-lg transition-all duration-300 ease-in-out 
-          font-semibold border-2 focus:outline-none focus:ring-4 focus:ring-opacity-50
+          px-2 py-1.5 sm:py-1 md:px-5 md:py-2.5 vh-short:px-2 vh-short:py-1 text-xs md:text-sm vh-short:text-xs rounded-md md:rounded-lg transition-all duration-300 ease-in-out 
+          font-semibold border md:border-2 vh-short:border focus:outline-none focus:ring-2 md:focus:ring-4 focus:ring-opacity-50
           bg-black/60`; // Base background
 
         if (isGlobalAllButton) {

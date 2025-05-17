@@ -114,7 +114,7 @@ export default function Navigation() {
   return (
     <motion.header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50",
+        "fixed top-0 left-0 right-0 z-50 w-full max-w-[100vw]",
         scrolled
           ? "bg-black/90 backdrop-blur-md border-b border-cyberpunk-blue/50 animate-header-glow"
           : "bg-gradient-to-r from-black/80 via-black/70 to-black/80 backdrop-blur-sm animate-header-glow-out",
@@ -233,7 +233,7 @@ export default function Navigation() {
         }
       `}</style>
 
-      <div className="container mx-auto px-4 flex justify-between items-center">
+      <div className="container mx-auto px-4 flex justify-between items-center w-full">
         <Link href="/" className="flex items-center">
           <motion.span
             className="text-2xl font-bold relative"
@@ -247,7 +247,7 @@ export default function Navigation() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:block relative">
+        <div className="hidden md:block vh-short:hidden relative">
           <nav
             ref={navRef}
             className="flex items-center space-x-6 relative"
@@ -342,7 +342,7 @@ export default function Navigation() {
         </div>
 
         {/* Mobile Navigation Toggle */}
-        <div className="md:hidden">
+        <div className="md:hidden vh-short:block">
           <Button
             variant="ghost"
             className="relative text-cyberpunk-blue hover:text-cyberpunk-pink p-2 border border-cyberpunk-blue/30 rounded-md overflow-hidden group"
@@ -371,7 +371,7 @@ export default function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="absolute top-full left-0 right-0 bg-black/95 border-t border-cyberpunk-blue/50 md:hidden shadow-[0_5px_20px_rgba(0,204,255,0.15)]"
+            className="absolute top-full left-0 right-0 bg-black/95 border-t border-cyberpunk-blue/50 md:hidden vh-short:block shadow-[0_5px_20px_rgba(0,204,255,0.15)]"
           >
             <div className="container mx-auto px-4 py-6">
               <nav className="flex flex-col space-y-4">

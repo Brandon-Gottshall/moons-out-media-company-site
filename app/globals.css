@@ -5,6 +5,9 @@
 @layer base {
   html {
     @apply overflow-x-hidden;
+    width: 100%;
+    max-width: 100vw;
+    background-color: rgb(18, 18, 18); /* Match site background */
   }
   :root {
     --background: 0 0% 7%;
@@ -27,16 +30,51 @@
     --input: 240 3.7% 15.9%;
     --ring: 180 100% 50%;
     --radius: 0.5rem;
+    --vh: 1vh;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
   body {
     @apply bg-background text-foreground;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: rgb(18, 18, 18); /* Match site background */
+    min-height: 100vh; /* Fallback */
+    min-height: calc(var(--vh, 1vh) * 100);
   }
+}
+
+/* Fix for mobile viewport width issues */
+#__next, main, .main-content {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: rgb(18, 18, 18); /* Match site background */
+}
+
+/* Use --vh for fixed positioning */
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+}
+
+/* Safe area for mobile browsers with changing viewport heights */
+.fixed-bottom-safe {
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  transform: translateZ(0); /* Force hardware acceleration */
+  will-change: transform; /* Hint to browser about property changes */
 }
 
 @layer components {
