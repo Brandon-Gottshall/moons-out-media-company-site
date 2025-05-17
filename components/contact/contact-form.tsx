@@ -4,15 +4,21 @@ import type React from "react"
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Input } from "@/components/ui/input"
-import { Send, CheckCircle } from "lucide-react"
+import { CalendarFold, CheckCircle, ChevronDown } from "lucide-react"
+import { MASTER_SERVICES } from "@/app/data/services"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"
 
 export default function ContactForm() {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
+    phone: "",
     company: "",
-    service: "",
+    service: [] as string[],
     message: "",
+    findUs: "",
+    branch: "",
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -22,6 +28,42 @@ export default function ContactForm() {
     const { name, value } = e.target
     setFormState((prev) => ({ ...prev, [name]: value }))
   }
+
+  const handleServiceCheckboxChange = (id: string, checked: boolean) => {
+    setFormState(prev => {
+      if (id === "unsure") return { ...prev, service: checked ? ["unsure"] : [] }
+      const set = new Set(prev.service.filter(s => s !== "unsure"))
+      if (checked) set.add(id)
+      else set.delete(id)
+      return { ...prev, service: Array.from(set) }
+    })
+  }
+
+  // Handle branch-level selection (Media or Labs)
+  const handleBranchCheckboxChange = (branchName: "media" | "labs", checked: boolean) => {
+    setFormState(prev => ({
+      ...prev,
+      branch: checked ? branchName : "",
+      service: [] // clear specific services when selecting branch
+    }))
+  }
+
+  // Global both branches selection
+  const allBranchIds = MASTER_SERVICES.filter(s => s.branch === "media" || s.branch === "labs").map(s => s.id)
+  const allSelectedCount = formState.service.filter(id => allBranchIds.includes(id)).length
+  const allChecked: boolean | "indeterminate" = allSelectedCount === allBranchIds.length ? true : allSelectedCount > 0 ? "indeterminate" : false
+  const handleAllChange = (checked: boolean) => {
+    setFormState(prev => {
+      const set = new Set(prev.service)
+      if (checked) allBranchIds.forEach(id => set.add(id))
+      else allBranchIds.forEach(id => set.delete(id))
+      return { ...prev, service: Array.from(set), branch: "" }
+    })
+  }
+
+  // validation and form state helpers
+  const emailRegex = /\S+@\S+\.\S+/
+  const isFormValid = formState.name.trim() !== "" && emailRegex.test(formState.email) && formState.message.trim() !== ""
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -40,9 +82,12 @@ export default function ContactForm() {
     setFormState({
       name: "",
       email: "",
+      phone: "",
       company: "",
-      service: "",
+      service: [],
       message: "",
+      findUs: "",
+      branch: "",
     })
 
     // Clear success message after 5 seconds
@@ -82,12 +127,17 @@ export default function ContactForm() {
           <div className="flex items-center">
             {submitMessage.type === "success" && <CheckCircle className="h-5 w-5 text-green-400 mr-2" />}
             <p className={`text-${submitMessage.type === "success" ? "green" : "red"}-400`}>{submitMessage.text}</p>
+            {submitMessage.type === "success" && (
+              <div className="mt-2">
+                <a href="#" className="text-cyberpunk-blue underline">Book a discovery call →</a>
+              </div>
+            )}
           </div>
         </motion.div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -126,58 +176,161 @@ export default function ContactForm() {
               className="bg-black/60 border-gray-700 text-white focus:border-cyberpunk-blue"
             />
           </motion.div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-1">
-              Company
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
+              Phone Number
             </label>
             <Input
-              id="company"
-              name="company"
-              value={formState.company}
+              id="phone"
+              name="phone"
+              type="tel"
+              value={formState.phone}
               onChange={handleChange}
+              placeholder="Optional"
               className="bg-black/60 border-gray-700 text-white focus:border-cyberpunk-blue"
             />
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <label htmlFor="service" className="block text-sm font-medium text-gray-300 mb-1">
-              Service Interest
-            </label>
-            <select
-              id="service"
-              name="service"
-              value={formState.service}
-              onChange={handleChange}
-              className="w-full rounded-md border border-gray-700 bg-black/60 text-white py-2 px-3 focus:outline-none focus:border-cyberpunk-blue"
-            >
-              <option value="">Select a service</option>
-              <option value="narrative-driven">Narrative Driven Production</option>
-              <option value="digital-marketing">Digital Marketing Campaigns</option>
-              <option value="brand-storytelling">Brand Storytelling</option>
-              <option value="social-media-content">Social Media Content</option>
-              <option value="other">Other</option>
-            </select>
-          </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-1 text-left">
+            Company (optional)
+          </label>
+          <Input
+            id="company"
+            name="company"
+            value={formState.company}
+            onChange={handleChange}
+            className="bg-black/60 border-gray-700 text-white focus:border-cyberpunk-blue"
+          />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
+          <label className="block text-sm font-medium text-gray-300 mb-1">Service Interest</label>
+          <div className="space-y-2">
+            <div className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+              <Checkbox
+                id="help-me-choose"
+                checked={formState.service.includes("unsure") && formState.service.length === 1}
+                onCheckedChange={checked => handleServiceCheckboxChange("unsure", Boolean(checked))}
+                className="h-6 w-6 mr-2 bg-black/60 border-cyberpunk-pink focus-visible:ring-cyberpunk-pink data-[state=checked]:bg-cyberpunk-pink"
+              />
+              <label htmlFor="help-me-choose" className="text-gray-300">Help me choose</label>
+            </div>
+            <div className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+              <Checkbox
+                id="group-both"
+                checked={allChecked}
+                onCheckedChange={checked => handleAllChange(Boolean(checked))}
+                className="h-6 w-6 mr-2"
+              />
+              <label htmlFor="group-both" className="text-gray-300">Both</label>
+            </div>
+            <Collapsible defaultOpen>
+              <CollapsibleTrigger asChild>
+                <div className="flex justify-between items-center w-full min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+                  <div className="flex items-center gap-2">
+                    <Checkbox
+                      id="branch-media"
+                      checked={formState.branch === "media"}
+                      onCheckedChange={checked => handleBranchCheckboxChange("media", Boolean(checked))}
+                      onClick={e => e.stopPropagation()}
+                      className="h-6 w-6 mr-2"
+                    />
+                    <span className="text-gray-300 font-semibold text-sm">Moons Out Media</span>
+                  </div>
+                  <ChevronDown className="h-4 w-4" />
+                </div>
+              </CollapsibleTrigger>
+              <CollapsibleContent className="pl-4 space-y-1">
+                {MASTER_SERVICES.filter(s => s.branch === "media").map(s => (
+                  <div key={s.id} className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+                    <Checkbox
+                      id={`service-${s.id}`}
+                      name="service"
+                      checked={formState.service.includes(s.id)}
+                      onCheckedChange={checked => handleServiceCheckboxChange(s.id, Boolean(checked))}
+                      className="h-6 w-6 mr-2"
+                    />
+                    <label htmlFor={`service-${s.id}`} className="text-gray-300">{s.shortTitle ?? s.title}</label>
+                  </div>
+                ))}
+              </CollapsibleContent>
+            </Collapsible>
+            <Collapsible defaultOpen>
+              <CollapsibleTrigger asChild>
+                <div className="flex justify-between items-center w-full min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+                  <div className="flex items-center gap-2">
+                    <Checkbox
+                      id="branch-labs"
+                      checked={formState.branch === "labs"}
+                      onCheckedChange={checked => handleBranchCheckboxChange("labs", Boolean(checked))}
+                      onClick={e => e.stopPropagation()}
+                      className="h-6 w-6 mr-2"
+                    />
+                    <span className="text-gray-300 font-semibold text-sm">Moons Out Labs</span>
+                  </div>
+                  <ChevronDown className="h-4 w-4" />
+                </div>
+              </CollapsibleTrigger>
+              <CollapsibleContent className="pl-4 space-y-1">
+                {MASTER_SERVICES.filter(s => s.branch === "labs").map(s => (
+                  <div key={s.id} className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+                    <Checkbox
+                      id={`service-${s.id}`}
+                      name="service"
+                      checked={formState.service.includes(s.id)}
+                      onCheckedChange={checked => handleServiceCheckboxChange(s.id, Boolean(checked))}
+                      className="h-6 w-6 mr-2"
+                    />
+                    <label htmlFor={`service-${s.id}`} className="text-gray-300">{s.shortTitle ?? s.title}</label>
+                  </div>
+                ))}
+              </CollapsibleContent>
+            </Collapsible>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <label htmlFor="findUs" className="block text-sm font-medium text-gray-300 mb-1">
+            How did you find us?
+          </label>
+          <Input
+            id="findUs"
+            name="findUs"
+            value={formState.findUs}
+            onChange={handleChange}
+            placeholder="e.g., Google, Social Media, Referral"
+            className="bg-black/60 border-gray-700 text-white focus:border-cyberpunk-blue"
+          />
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
         >
           <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
             Message <span className="text-cyberpunk-pink">*</span>
@@ -195,12 +348,12 @@ export default function ContactForm() {
 
         <motion.button
           type="submit"
-          disabled={isSubmitting}
+          disabled={!isFormValid || isSubmitting}
           className="w-full py-3 px-6 bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple text-white font-bold rounded-md hover:from-cyberpunk-purple hover:to-cyberpunk-blue transition-all duration-300 relative overflow-hidden disabled:opacity-70"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
           whileHover={{
             boxShadow: "0 0 20px rgba(101, 206, 240, 0.5)",
           }}
@@ -225,7 +378,6 @@ export default function ContactForm() {
           ) : (
             <span className="flex items-center justify-center">
               Send Message
-              <Send className="ml-2 h-4 w-4" />
             </span>
           )}
         </motion.button>
