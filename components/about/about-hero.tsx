@@ -6,7 +6,7 @@ import { ChevronDown } from "lucide-react"
 
 export default function AboutHero() {
   return (
-    <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+    <div className="relative h-dvh flex flex-col items-center justify-center overflow-hidden vh-short:pt-10">
       {/* Background with overlay */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -52,11 +52,11 @@ export default function AboutHero() {
           transition={{ delay: 0.4, duration: 0.6 }}
           className="max-w-3xl mx-auto"
         >
-          <p className="text-xl md:text-2xl text-gray-200 mb-8">
+          <p className="text-xl md:text-2xl text-gray-200 mb-8 vh-short:mb-4">
             A collective of storytellers, digital artists, and marketing strategists pushing the boundaries of creative
             content.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4 mb-16 vh-short:mb-6">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -101,9 +101,9 @@ export default function AboutHero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
       >
-        <span className="text-cyberpunk-pink text-sm mb-2">Discover Our Story</span>
+        <span className="text-cyberpunk-pink text-sm mb-2 vh-short:-mb-1">Discover Our Story</span>
         <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}>
-          <ChevronDown className="h-6 w-6 text-cyberpunk-pink" />
+          <ChevronDown className="h-6 w-6 text-cyberpunk-pink vh-short:-mb-[0.5rem]" />
         </motion.div>
       </motion.div>
     </div>

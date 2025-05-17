@@ -7,7 +7,25 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { motion } from "framer-motion"
 
-export default function CallToAction() {
+interface CallToActionProps {
+  title?: string
+  description?: string
+  primaryButtonText?: string
+  primaryButtonLink?: string
+  secondaryButtonText?: string
+  secondaryButtonLink?: string
+  showNewsletter?: boolean // To control newsletter section visibility
+}
+
+export default function CallToAction({
+  title = "Convert Viewers to Customers",
+  description = "Engaging Content + Cutting-Edge Tech = More Conversions",
+  primaryButtonText = "Book Now",
+  primaryButtonLink = "/contact",
+  secondaryButtonText = "Explore Our Work",
+  secondaryButtonLink = "/portfolio",
+  showNewsletter = false, // Default to false, as it was commented out
+}: CallToActionProps) {
   const [email, setEmail] = useState("")
   const [submitted, setSubmitted] = useState(false)
 
@@ -36,62 +54,63 @@ export default function CallToAction() {
           >
             <h2
               className="text-2xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 glitch-text tracking-tight"
-              data-text="Convert Viewers to Customers"
+              data-text={title}
             >
-              Convert Viewers to Customers
+              {title}
             </h2>
             <p className="text-base md:text-xl text-gray-200 mb-6 md:mb-8 max-w-2xl mx-auto font-medium">
-            Engaging Content + Cutting-Edge Tech = More Conversions
+              {description}
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4 mb-8 md:mb-12">
               <Button
                 className="cyberpunk-button text-base md:text-lg py-4 md:py-6 px-6 md:px-8 shadow-glow-blue"
-                onClick={() => (window.location.href = "/contact")}
+                onClick={() => (window.location.href = primaryButtonLink)}
               >
-                Book Now
+                {primaryButtonText}
               </Button>
               <Button
                 variant="outline"
                 className="border-cyberpunk-blue text-cyberpunk-blue hover:bg-cyberpunk-blue/10 text-base md:text-lg py-4 md:py-6 px-6 md:px-8 shadow-glow-subtle"
-                onClick={() => (window.location.href = "/portfolio")}
+                onClick={() => (window.location.href = secondaryButtonLink)}
               >
-                Explore Our Work
+                {secondaryButtonText}
               </Button>
             </div>
           </motion.div>
-          {/* Newsletter - To be added later */}
-          {/* <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="bg-black/60 backdrop-blur-sm rounded-lg border border-cyberpunk-pink/30 p-5 md:p-8"
-          >
-            <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-white">Stay Updated</h3>
-            <p className="text-sm md:text-base text-gray-300 mb-5 md:mb-6">
-              Subscribe to our newsletter for the latest insights on storytelling, marketing trends, and creative
-              inspiration.
-            </p>
+          {showNewsletter && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="bg-black/60 backdrop-blur-sm rounded-lg border border-cyberpunk-pink/30 p-5 md:p-8"
+            >
+              <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-white">Stay Updated</h3>
+              <p className="text-sm md:text-base text-gray-300 mb-5 md:mb-6">
+                Subscribe to our newsletter for the latest insights on storytelling, marketing trends, and creative
+                inspiration.
+              </p>
 
-            {!submitted ? (
-              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="bg-black/50 border-gray-700 focus:border-cyberpunk-blue text-white"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <Button type="submit" className="cyberpunk-button whitespace-nowrap">
-                  Subscribe
-                </Button>
-              </form>
-            ) : (
-              <div className="text-cyberpunk-green font-medium">Thanks for subscribing! We'll be in touch soon.</div>
-            )}
-          </motion.div> */}
+              {!submitted ? (
+                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                  <Input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="bg-black/50 border-gray-700 focus:border-cyberpunk-blue text-white"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                  <Button type="submit" className="cyberpunk-button whitespace-nowrap">
+                    Subscribe
+                  </Button>
+                </form>
+              ) : (
+                <div className="text-cyberpunk-green font-medium">Thanks for subscribing! We'll be in touch soon.</div>
+              )}
+            </motion.div>
+          )}
         </div>
       </div>
     </section>

@@ -66,8 +66,8 @@ export default function AboutPage() {
       <CallToAction
         title="Ready to tell your story?"
         description="Let's create something extraordinary together."
-        buttonText="Get in touch"
-        buttonLink="/contact"
+        primaryButtonText="Get in touch"
+        primaryButtonLink="/contact"
       />
     </div>
   )
