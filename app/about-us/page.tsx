@@ -78,13 +78,6 @@ export default function AboutPage() {
         {activeSection === "team" && <TeamSection />}
         {activeSection === "process" && <CreativeProcess />}
       </motion.div>
-
-      <CallToAction
-        title="Ready to tell your story?"
-        description="Let's create something extraordinary together."
-        primaryButtonText="Get in touch"
-        primaryButtonLink="/contact"
-      />
     </div>
   )
 }
