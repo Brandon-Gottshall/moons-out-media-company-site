@@ -70,6 +70,15 @@ export default function PortfolioPage() {
     // }
   }, []);
 
+  // Scroll to gallery when search is activated
+  useEffect(() => {
+    if (isSearchActive) {
+      setTimeout(() => {
+        document.getElementById(GALLERY_SECTION_ID)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 600)
+    }
+  }, [isSearchActive]);
+
   return (
     <div className="min-h-screen">
       <PortfolioHero
@@ -131,44 +140,43 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
 
-      {/* Project Gallery Section - slides in like a drawer */}
-      <AnimatePresence initial={false}>
-        {!isSearchActive && (
-          <motion.section
-            key="project-gallery"
-            id={GALLERY_SECTION_ID}
-            className="transform-gpu pb-20 md:pb-28 relative z-0 pt-6 md:pt-10"
-            initial={{ y: '-100%' }}
-            animate={{ y: '0%' }}
-            exit={{ y: '-100%' }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          >
-            <div className="w-full px-4">
-              <AnimatePresence>
-                <motion.div
-                  className="text-center mb-8 md:mb-10"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 neon-green-text">Project Gallery</h2>
-                  <p className="text-white max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-                    Browse our complete collection of projects and discover the impact we've made.
-                  </p>
-                </motion.div>
-              </AnimatePresence>
+      {/* Project Gallery Section - always mounted to enable scrolling on search open */}
+      <motion.section
+        key="project-gallery"
+        id={GALLERY_SECTION_ID}
+        className="transform-gpu pb-20 md:pb-28 relative z-0 pt-6 md:pt-10"
+        initial={{ y: '-100%' }}
+        animate={{ y: '0%' }}
+        exit={{ y: '-100%' }}
+        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+      >
+        <div className="w-full px-4">
+          <AnimatePresence>
+            <motion.div
+              className={`text-center ${isSearchActive ? 'mb-4 md:mb-6' : 'mb-8 md:mb-10'}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 neon-green-text">Project Gallery</h2>
+              { !isSearchActive && (
+                <p className="text-white max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+                  Browse our complete collection of projects and discover the impact we've made.
+                </p>
+              ) }
+            </motion.div>
+          </AnimatePresence>
 
-              <PortfolioGallery
-                selectedMetaCategoryId={selectedMetaCategoryId}
-                activeGalleryFilterId={activeGalleryFilterId}
-                onMetaCategorySelect={handleMetaCategorySelectAndScroll}
-                onSubCategorySelect={handleSubCategorySelect}
-              />
-            </div>
-          </motion.section>
-        )}
-      </AnimatePresence>
+          <PortfolioGallery
+            isSearchActive={isSearchActive}
+            selectedMetaCategoryId={selectedMetaCategoryId}
+            activeGalleryFilterId={activeGalleryFilterId}
+            onMetaCategorySelect={handleMetaCategorySelectAndScroll}
+            onSubCategorySelect={handleSubCategorySelect}
+          />
+        </div>
+      </motion.section>
 
       {/* Call to Action - always visible */}
       <CallToAction />

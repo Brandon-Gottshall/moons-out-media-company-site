@@ -17,6 +17,7 @@ interface MetaCategorySwiperProps {
   metaCategories: MetaCategory[];
   selectedMetaCategoryId: string;
   onMetaCategorySelect: (metaId: string) => void;
+  isSearchActive: boolean;
   // Consider adding layoutMode if it affects this swiper as well, or manage layout from parent
 }
 
@@ -24,11 +25,13 @@ interface MetaCategorySwiperProps {
 function MetaCategoryCard({ 
   category, 
   isSelected, 
-  onSelect 
+  onSelect,
+  isSearchActive
 }: { 
   category: MetaCategory; 
   isSelected: boolean; 
-  onSelect: () => void; 
+  onSelect: () => void;
+  isSearchActive: boolean;
 }) {
   // const categoryColorName = category.color || 'cyberpunk-blue'; // Fallback color name
 
@@ -37,7 +40,7 @@ function MetaCategoryCard({
       key={category.id}
       onClick={onSelect}
       className={`relative overflow-hidden rounded-lg border-2 group transition-all cursor-pointer
-        w-64 h-40 flex-shrink-0 
+        w-64 ${isSearchActive ? 'h-20' : 'h-40'} flex-shrink-0 
         ${isSelected ? `border-${category.color} ring-2 ring-${category.color}/30 opacity-100` : 'border-gray-800 opacity-70 hover:opacity-100'}`}
       transition={{ duration: 0.3 }}
     >
@@ -74,7 +77,8 @@ function MetaCategoryCard({
 export default function MetaCategorySwiper({ 
   metaCategories, 
   selectedMetaCategoryId, 
-  onMetaCategorySelect 
+  onMetaCategorySelect,
+  isSearchActive
 }: MetaCategorySwiperProps) {
   const swiperRef = useRef<SwiperInstance | null>(null);
   const swiperContainerRef = useRef<HTMLDivElement>(null); // Ref for the Swiper container
@@ -162,6 +166,7 @@ export default function MetaCategorySwiper({
                 category={category} 
                 isSelected={category.id === selectedMetaCategoryId}
                 onSelect={() => onMetaCategorySelect(category.id)}
+                isSearchActive={isSearchActive}
               />
             </SwiperSlide>
           ))}

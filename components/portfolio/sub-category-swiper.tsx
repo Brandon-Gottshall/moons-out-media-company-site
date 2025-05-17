@@ -18,18 +18,21 @@ interface SubCategorySwiperProps {
   activeGalleryFilterId: string; // To know which sub-category is selected (or the meta's "All")
   onSubCategorySelect: (subId: string) => void;
   metaCategoryColor?: string; // Optional: to theme the swiper or cards to parent meta-category
+  isSearchActive: boolean;
 }
 
 function SubCategoryCard({ 
   category, 
   isSelected, 
   onSelect,
-  metaColor
+  metaColor,
+  isSearchActive
 }: { 
   category: SubCategory; 
   isSelected: boolean; 
   onSelect: () => void; 
   metaColor?: string;
+  isSearchActive: boolean;
 }) {
   const borderColor = isSelected ? (category.color || metaColor || "cyberpunk-blue") : "gray-800";
   const ringColor = category.color || metaColor || "cyberpunk-blue";
@@ -40,7 +43,7 @@ function SubCategoryCard({
       key={category.id}
       onClick={onSelect}
       className={`relative overflow-hidden rounded-lg border-2 group transition-all cursor-pointer
-        w-56 h-36 flex-shrink-0  // Slightly smaller than meta cards
+        w-56 ${isSearchActive ? 'h-[4.5rem]' : 'h-36'} flex-shrink-0  // Slightly smaller than meta cards
         border-${borderColor} ${isSelected ? `ring-2 ring-${ringColor}/30` : ''}`}
       transition={{ duration: 0.3 }}
     >
@@ -75,7 +78,8 @@ export default function SubCategorySwiper({
   subCategories, 
   activeGalleryFilterId, // This prop tells us which sub-category is currently selected
   onSubCategorySelect,
-  metaCategoryColor = "cyberpunk-blue"
+  metaCategoryColor = "cyberpunk-blue",
+  isSearchActive
 }: SubCategorySwiperProps) {
   const swiperRef = useRef<SwiperInstance | null>(null);
   const swiperContainerRef = useRef<HTMLDivElement>(null); // Ref for the Swiper container
@@ -187,6 +191,7 @@ export default function SubCategorySwiper({
                 isSelected={category.id === activeGalleryFilterId}
                 onSelect={() => onSubCategorySelect(category.id)}
                 metaColor={metaCategoryColor}
+                isSearchActive={isSearchActive}
               />
             </SwiperSlide>
           ))}

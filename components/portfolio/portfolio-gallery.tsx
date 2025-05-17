@@ -14,13 +14,15 @@ interface PortfolioGalleryProps {
   activeGalleryFilterId: string;
   onMetaCategorySelect: (metaId: string) => void;
   onSubCategorySelect: (subId: string) => void;
+  isSearchActive: boolean;
 }
 
 export default function PortfolioGallery({ 
   selectedMetaCategoryId,
   activeGalleryFilterId,
   onMetaCategorySelect,
-  onSubCategorySelect
+  onSubCategorySelect,
+  isSearchActive
 }: PortfolioGalleryProps) {
   const PAGE_SIZE = 6
   const [itemsToShow, setItemsToShow] = useState(PAGE_SIZE)
@@ -79,26 +81,32 @@ export default function PortfolioGallery({
     <motion.div
       className="w-full"
     >
+      {/* Meta-category swiper */}
       <div className="mb-1 md:mb-2">
         <MetaCategorySwiper 
+          isSearchActive={isSearchActive}
           metaCategories={metaCategoriesData}
           selectedMetaCategoryId={selectedMetaCategoryId}
           onMetaCategorySelect={onMetaCategorySelect}
         />
       </div>
 
-      <AnimatePresence initial={false}> 
+      {/* Sub-category swiper */}
+      <AnimatePresence initial={false}>
         {currentSelectedMeta && !currentSelectedMeta.isGlobalAll && currentSelectedMeta.subCategories.length > 0 && (
-          <SubCategorySwiper 
-            subCategories={currentSelectedMeta.subCategories}
-            activeGalleryFilterId={activeGalleryFilterId}
-            onSubCategorySelect={onSubCategorySelect}
-            metaCategoryColor={currentSelectedMeta.color}
-          />
+          <div className={`${isSearchActive ? 'mt-1 mb-2' : 'mt-2 mb-4'}`}>
+            <SubCategorySwiper 
+              isSearchActive={isSearchActive}
+              subCategories={currentSelectedMeta.subCategories}
+              activeGalleryFilterId={activeGalleryFilterId}
+              onSubCategorySelect={onSubCategorySelect}
+              metaCategoryColor={currentSelectedMeta.color}
+            />
+          </div>
         )}
       </AnimatePresence>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-4 md:mt-6">
+      <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ${isSearchActive ? 'mt-2 md:mt-3' : 'mt-4 md:mt-6'}`}>
         <AnimatePresence>
           {displayedItems.map((item, index) => (
             <PortfolioItemCard key={item.slug} item={item} index={index} />
