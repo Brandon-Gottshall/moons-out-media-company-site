@@ -22,30 +22,30 @@ export default function PortfolioPage() {
 
   const featuredItemData = allPortfolioItems.find(item => item.status === 'published')
 
-  // Updated to include scroll and to be used by Hero buttons as well
-  const handleMetaCategorySelectAndScroll = (metaId: string) => {
-    setSelectedMetaCategoryId(metaId);
+  // Filter handler without scrolling (for in-gallery clicks)
+  const handleMetaCategorySelect = (metaId: string) => {
+    setSelectedMetaCategoryId(metaId)
     if (metaId === "all-projects") {
-      setActiveGalleryFilterId("all-projects");
+      setActiveGalleryFilterId("all-projects")
     } else {
-      const meta = metaCategoriesData.find(m => m.id === metaId);
+      const meta = metaCategoriesData.find(m => m.id === metaId)
       if (meta && meta.subCategories.length > 0) {
-        setActiveGalleryFilterId(meta.subCategories[0].id); 
+        setActiveGalleryFilterId(meta.subCategories[0].id)
       } else {
-        // This case should ideally not be hit if metaId is a valid one from metaCategoriesData
-        // and not 'all-projects', as they should have subCategories (at least the 'All Meta' one)
-        setActiveGalleryFilterId(metaId); 
+        setActiveGalleryFilterId(metaId)
       }
     }
-    // Scroll to gallery section if a specific meta-category (not global 'all-projects') is chosen by hero button
-    // Or always scroll if preferred, even for gallery's internal swiper selection.
-    // For now, let's make it scroll when triggered (e.g. by a hero button)
-    // We might need a way to distinguish calls from hero vs. swiper if scroll is only for hero.
-    // Simpler: scroll every time this is called.
-    setTimeout(() => { 
-      const galleryElement = window.document.getElementById(GALLERY_SECTION_ID);
-      galleryElement?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 50); 
+  }
+
+  // Updated to include scroll and to be used by Hero buttons as well
+  const handleMetaCategorySelectAndScroll = (metaId: string) => {
+    // Apply filter
+    handleMetaCategorySelect(metaId)
+    // Then scroll to gallery (hero-triggered)
+    setTimeout(() => {
+      const galleryElement = window.document.getElementById(GALLERY_SECTION_ID)
+      galleryElement?.scrollIntoView({ behavior: "smooth", block: "start" })
+    }, 50)
   };
 
   // This handler is specifically for the SubCategorySwiper INSIDE PortfolioGallery
@@ -69,15 +69,6 @@ export default function PortfolioPage() {
     //   }
     // }
   }, []);
-
-  // Scroll to gallery when search is activated
-  useEffect(() => {
-    if (isSearchActive) {
-      setTimeout(() => {
-        document.getElementById(GALLERY_SECTION_ID)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }, 600)
-    }
-  }, [isSearchActive]);
 
   return (
     <div className="min-h-screen">
@@ -172,7 +163,7 @@ export default function PortfolioPage() {
             isSearchActive={isSearchActive}
             selectedMetaCategoryId={selectedMetaCategoryId}
             activeGalleryFilterId={activeGalleryFilterId}
-            onMetaCategorySelect={handleMetaCategorySelectAndScroll}
+            onMetaCategorySelect={handleMetaCategorySelect}
             onSubCategorySelect={handleSubCategorySelect}
           />
         </div>

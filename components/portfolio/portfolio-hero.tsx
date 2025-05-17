@@ -269,9 +269,9 @@ export default function PortfolioHero({
   const clearSearch = () => {
     setSearchQuery("");
     setIsSearchActive(false);
-    // After closing search, scroll to gallery section
+    // After closing search, scroll to top of page
     setTimeout(() => {
-      document.getElementById(gallerySectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }, 600);
   };
 
@@ -286,6 +286,8 @@ export default function PortfolioHero({
       if (e.key === "Escape") {
         setSearchQuery("");
         setIsSearchActive(false);
+        // Scroll to top when cancelling search
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
     };
     document.addEventListener("keydown", onKeyDown);
@@ -496,6 +498,7 @@ export default function PortfolioHero({
                   {/* Swiper layout for wider widths */}
                   <div className="hidden min-[1050px]:block">
                     <MetaCategorySwiper
+                      isSearchActive={isSearchActive}
                       metaCategories={metaCategories}
                       selectedMetaCategoryId={selectedMetaCategoryId}
                       onMetaCategorySelect={onHeroMetaButtonSelect}
