@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply overflow-x-hidden;
+  }
   :root {
     --background: 0 0% 7%;
     --foreground: 0 0% 98%;
@@ -203,4 +206,3 @@
     opacity: 0.7;
   }
 }
-

@@ -62,6 +62,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        'vh-short': { 'raw': '(max-height: 500px)' },
+        'vh-xshort': { 'raw': '(max-height: 400px)' },
+      },
+      fontSize: {
+        xxs: ["0.625rem", { lineHeight: "0.75rem" }],
+      },
       backdropBlur: {
         xxxsm: '1px',
         xxsm: '2.5px',

@@ -8,7 +8,7 @@ import CallToAction from "@/components/call-to-action"
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative overflow-x-hidden">
       {/* Global page styling elements */}
       <div className="fixed inset-0 bg-[url('/noise.png')] opacity-5 z-50 pointer-events-none"></div>
 
