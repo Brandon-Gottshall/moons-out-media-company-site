@@ -72,7 +72,7 @@ export default function CoreValues() {
     },
     {
       title: "Courage",
-      description: "Risk-taking creativity that cuts through noise.",
+      description: "Bold creativity that breaks through the noise.",
       icon: (
         <Sword className="w-5 h-5 stroke-white group-hover:fill-gradient-to-r group-hover:from-cyberpunk-blue group-hover:to-cyberpunk-pink transition-all duration-300" />
       ),

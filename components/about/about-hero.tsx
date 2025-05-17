@@ -4,7 +4,13 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { ChevronDown } from "lucide-react"
 
-export default function AboutHero() {
+interface AboutHeroProps {
+  sections: { id: string; label: string }[]
+  activeSection: string
+  onSectionClick: (id: string) => void
+}
+
+export default function AboutHero({ sections, activeSection, onSectionClick }: AboutHeroProps) {
   return (
     <div className="relative h-dvh flex flex-col items-center justify-center overflow-hidden vh-short:pt-10">
       {/* Background with overlay */}
@@ -57,22 +63,26 @@ export default function AboutHero() {
             content.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-16 vh-short:mb-6">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="cyberpunk-button relative overflow-hidden group"
-            >
-              Our Mission
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-pink opacity-30 blur-xl group-hover:opacity-50 transition duration-300"></span>
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="cyberpunk-button relative overflow-hidden group"
-            >
-              Meet The Team
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-green opacity-30 blur-xl group-hover:opacity-50 transition duration-300"></span>
-            </motion.button>
+            {sections.map(section => (
+              <motion.button
+                key={section.id}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => onSectionClick(section.id)}
+                className="cyberpunk-button relative overflow-hidden group"
+              >
+                {section.label}
+                <span
+                  className={`absolute inset-0 w-full h-full opacity-30 blur-xl group-hover:opacity-50 transition duration-300 ${
+                    section.id === 'values'
+                      ? 'bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-pink'
+                      : section.id === 'team'
+                      ? 'bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-green'
+                      : 'bg-gradient-to-r from-cyberpunk-green to-cyberpunk-blue'
+                  }`}
+                ></span>
+              </motion.button>
+            ))}
           </div>
         </motion.div>
       </motion.div>
@@ -96,7 +106,7 @@ export default function AboutHero() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-8 flex flex-col items-center z-50"
+        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-8 flex flex-col items-center z-40"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
