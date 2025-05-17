@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import PortfolioHero from "@/components/portfolio/portfolio-hero"
-import PortfolioGallery from "@/components/portfolio/portfolio-gallery"
-import FeaturedProject from "@/components/portfolio/featured-project"
+import PortfolioHero from "@/components/projects/portfolio-hero"
+import PortfolioGallery from "@/components/projects/portfolio-gallery"
+import FeaturedProject from "@/components/projects/featured-project"
 import CallToAction from "@/components/call-to-action"
 import { Play } from "lucide-react"
 import { allPortfolioItems } from "@/lib/placeholder-data/portfolio-items"
@@ -87,7 +87,7 @@ export default function PortfolioPage() {
                 customImageOverlay={
                   <div className="absolute inset-0 z-10 flex items-center justify-center">
                     <Link 
-                      href={`/portfolio/${featuredItemData.slug}?play=true`} 
+                      href={`/project/${featuredItemData.slug}?play=true`} 
                       aria-label={`Play video for ${featuredItemData.title}`}
                       className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm border border-white/60 flex items-center justify-center transition-transform hover:scale-110"
                       onClick={(e) => e.stopPropagation()}

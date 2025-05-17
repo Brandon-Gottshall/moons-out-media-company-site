@@ -25,7 +25,7 @@ import { allPortfolioItems, type PortfolioItem } from "@/lib/placeholder-data/po
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { notFound, useSearchParams } from "next/navigation"
-import { PortfolioItemCard } from "@/components/portfolio/portfolio-item-card"
+import { PortfolioItemCard } from "@/components/projects/portfolio-item-card"
 import MuxPlayer from '@mux/mux-player-react';
 
 // Helper to simulate RichText rendering (replace with actual RichText renderer if you have one)

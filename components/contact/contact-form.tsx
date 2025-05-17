@@ -45,18 +45,33 @@ export default function ContactForm() {
   // Centralized function to handle the actual form data submission
   const sendFormData = async () => {
     setIsSubmitting(true)
+    setSubmitMessage(null) // Clear previous messages
     try {
-      // Simulate API call
-      console.log("Form data to send:", {
-        ...formState,
-        phone: formState.phone, // raw digits
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formState,
+          selectionType, // Include selectionType for the backend
+        }),
       })
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      // In a real scenario, you might return data or a success status here
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.message || "Something went wrong with the submission.")
+      }
+      
+      // Success is handled by the caller (handleSubmit or handleDialogSubmitAndProceed)
+      return result // Return result for potential use by caller
+
     } catch (error) {
       console.error("Form submission error:", error)
-      setSubmitMessage({ type: "error", text: "Message could not be sent. Please try again." })
-      setTimeout(() => setSubmitMessage(null), 5000)
+      const errorMessage = error instanceof Error ? error.message : "Message could not be sent. Please try again."
+      setSubmitMessage({ type: "error", text: errorMessage })
+      setTimeout(() => setSubmitMessage(null), 7000) // Increased timeout for error messages
       throw error // Re-throw to allow callers to handle if needed
     } finally {
       setIsSubmitting(false)
@@ -174,7 +189,11 @@ export default function ContactForm() {
   // Main form submission for "Send Message" button
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!isFormValid) return
+    if (!hasInteracted) setHasInteracted(true) // Ensure validation messages can show if submit is clicked first
+    if (!isFormValid) {
+      // Optionally, focus the first invalid field or simply rely on the displayed messages
+      return
+    }
 
     try {
       await sendFormData() // Call centralized submission logic
@@ -192,13 +211,13 @@ export default function ContactForm() {
       setFormattedPhone("")
       setSelectionType("")
       setConfirmed(false)
-      setHasInteracted(false)
+      setHasInteracted(false) // Reset interaction state
 
       setTimeout(() => setSubmitMessage(null), 5000)
     } catch (error) {
-      // Error is already handled by sendFormData and a toast is shown there
-      // No need to set another error toast here unless a different one is desired
-      console.log("handleSubmit caught error, already handled by sendFormData")
+      // Error is already handled by sendFormData, which sets a submitMessage.
+      // No need to set another error message here.
+      console.log("handleSubmit caught error, which was handled by sendFormData.")
     }
   }
 

@@ -333,7 +333,7 @@ export default function StoryWheel() {
               <div className="flex justify-between items-center">
                 <Button
                   className="cyberpunk-button"
-                  onClick={() => router.push(`/portfolio/project/${selectedProject.id}`)}
+                  onClick={() => router.push(`/projects/${selectedProject.id}`)}
                 >
                   View Full Case Study
                 </Button>

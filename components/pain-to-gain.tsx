@@ -32,7 +32,7 @@ const painPoints: PainPoint[] = [
         "2.7x longer view time compared to industry average",
         "87% of viewers reported stronger brand connection",
       ],
-      caseStudyLink: "/portfolio/authentic-brand-narrative-revamp",
+      caseStudyLink: "/projects/authentic-brand-narrative-revamp",
     },
   },
   {
@@ -49,7 +49,7 @@ const painPoints: PainPoint[] = [
         "3.2x higher comment rate on campaign content",
         "52% increase in conversion from engaged viewers",
       ],
-      caseStudyLink: "/portfolio/emotional-connection-campaign",
+      caseStudyLink: "/projects/emotional-connection-campaign",
     },
   },
   {
@@ -66,7 +66,7 @@ const painPoints: PainPoint[] = [
         "2.3x ROI improvement over previous campaigns",
         "Predictable growth pattern established over 6-month period",
       ],
-      caseStudyLink: "/portfolio/data-driven-creative-roi",
+      caseStudyLink: "/projects/data-driven-creative-roi",
     },
   },
   {
@@ -83,7 +83,7 @@ const painPoints: PainPoint[] = [
         "3.8x increase in qualified leads",
         "47% improvement in customer retention metrics",
       ],
-      caseStudyLink: "/portfolio/audience-centric-engagement",
+      caseStudyLink: "/projects/audience-centric-engagement",
     },
   },
 ]

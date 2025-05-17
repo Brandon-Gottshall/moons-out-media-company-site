@@ -26,7 +26,7 @@ const projects: Project[] = [
       "A documentary series showcasing EcoTech's revolutionary sustainable technologies and their real-world impact on communities and the environment.",
     image: "/images/placeholder.svg?height=500&width=800",
     results: ["87% increase in brand awareness", "$12M in new investor interest", "14 new strategic partnerships"],
-    link: "/portfolio/ecotech-documentary",
+    link: "/projects/ecotech-documentary",
   },
   {
     id: 2,
@@ -37,7 +37,7 @@ const projects: Project[] = [
       "A social media campaign featuring authentic customer transformation stories that resonated deeply with the target audience and drove membership growth.",
     image: "/images/placeholder.svg?height=500&width=800",
     results: ["73% increase in new memberships", "1.2M social media engagements", "92% member retention rate"],
-    link: "/portfolio/urban-fitness-campaign",
+    link: "/projects/urban-fitness-campaign",
   },
   {
     id: 3,
@@ -48,7 +48,7 @@ const projects: Project[] = [
       "A series of intimate artisan profiles that showcased the craftsmanship, passion, and stories behind each handmade product, driving e-commerce sales.",
     image: "/images/placeholder.svg?height=500&width=800",
     results: ["94% increase in e-commerce sales", "35% higher average order value", "78% customer loyalty rate"],
-    link: "/portfolio/artisan-series",
+    link: "/projects/artisan-series",
   },
   {
     id: 4,
@@ -59,7 +59,7 @@ const projects: Project[] = [
       "A campaign that translated complex technology into relatable human stories, showcasing real-world impact and applications to drive lead generation.",
     image: "/images/placeholder.svg?height=500&width=800",
     results: ["128% increase in qualified leads", "12.4% conversion rate (86% improvement)", "23% market share growth"],
-    link: "/portfolio/techstart-impact",
+    link: "/projects/techstart-impact",
   },
 ]
 
