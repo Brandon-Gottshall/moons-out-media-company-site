@@ -11,6 +11,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"
 import { AnimatePresence } from "framer-motion"
 import ServiceInterestConfirmed from "@/components/contact/ServiceInterestConfirmed"
+import BookingConfirmationDialog from "@/components/contact/BookingConfirmationDialog"
 
 export default function ContactForm() {
   const [formState, setFormState] = useState({
@@ -33,6 +34,10 @@ export default function ContactForm() {
 
   // Phone input visual state
   const [formattedPhone, setFormattedPhone] = useState("")
+
+  // Dialog state
+  const [isBookingDialogOpen, setIsBookingDialogOpen] = useState(false)
+  const [currentBookingLink, setCurrentBookingLink] = useState("#")
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -113,6 +118,17 @@ export default function ContactForm() {
     }
   }
 
+  // Helper to determine booking link
+  const getBookingLink = () => {
+    const mediaSvc = MASTER_SERVICES.some(s => s.branch === "media" && formState.service.includes(s.id))
+    const labsSvc = MASTER_SERVICES.some(s => s.branch === "labs" && formState.service.includes(s.id))
+
+    if (selectionType === "both" || (mediaSvc && labsSvc)) return "https://google.com"
+    if (selectionType === "media" || (mediaSvc && !labsSvc) || formState.branch === "media") return "https://linkedin.com"
+    if (selectionType === "labs" || (labsSvc && !mediaSvc) || formState.branch === "labs") return "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ10MfFXCLnngwj5wQ9CRQ6Mqw2r6sF1IBHMYr8y2pQmV4OZ8-kcvoeWxbx8mHgWM2QfLW4aPVZw"
+    return "#" // Default
+  }
+
   // Validation messages
   const getValidationMessages = () => {
     const messages = []
@@ -134,6 +150,7 @@ export default function ContactForm() {
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
     setIsSubmitting(false)
+
     setSubmitMessage({
       type: "success",
       text: "Thank you for your message! We'll be in touch soon.",
@@ -205,7 +222,16 @@ export default function ContactForm() {
             <p className={`text-${submitMessage.type === "success" ? "green" : "red"}-400`}>{submitMessage.text}</p>
             {submitMessage.type === "success" && (
               <div className="mt-2">
-                <a href="#" className="text-cyberpunk-blue underline">Book a discovery call →</a>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCurrentBookingLink(getBookingLink())
+                    setIsBookingDialogOpen(true)
+                  }}
+                  className="text-cyberpunk-blue underline hover:text-cyberpunk-blue/80 transition-colors"
+                >
+                  Book a discovery call →
+                </button>
               </div>
             )}
           </div>
@@ -499,11 +525,14 @@ export default function ContactForm() {
           <span className="h-px w-1/3 bg-gray-700"></span>
         </div>
 
-        {/* Book Now Button */}
+        {/* Book Now Button - update onClick to use dynamic bookingLink */}
         <motion.button
-          type="button" // Important: type="button" to not submit the form
-          onClick={() => window.open("#", "_blank")} // Replace # with actual booking link
-          disabled={!isFormValid || isSubmitting} // Same disabled logic
+          type="button" 
+          onClick={() => {
+            setCurrentBookingLink(getBookingLink())
+            setIsBookingDialogOpen(true)
+          }}
+          disabled={!isFormValid || isSubmitting} 
           className={`w-full py-3 px-6 font-bold rounded-md transition-all duration-300 relative overflow-hidden ${
             !isFormValid || isSubmitting
               ? "bg-black border border-cyberpunk-green/50 text-white/50 cursor-not-allowed shadow-[0_0_10px_rgba(0,255,127,0.2)]"
@@ -523,6 +552,12 @@ export default function ContactForm() {
           </span>
         </motion.button>
       </form>
+
+      <BookingConfirmationDialog 
+        isOpen={isBookingDialogOpen} 
+        onOpenChange={setIsBookingDialogOpen} 
+        bookingLink={currentBookingLink} 
+      />
     </motion.div>
   )
 }
