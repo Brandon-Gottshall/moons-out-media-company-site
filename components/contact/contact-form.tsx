@@ -39,12 +39,38 @@ export default function ContactForm() {
   const [isBookingDialogOpen, setIsBookingDialogOpen] = useState(false)
   const [currentBookingLink, setCurrentBookingLink] = useState("#")
 
+  // Track if user has interacted with the form to control initial validation message display
+  const [hasInteracted, setHasInteracted] = useState(false)
+
+  // Centralized function to handle the actual form data submission
+  const sendFormData = async () => {
+    setIsSubmitting(true)
+    try {
+      // Simulate API call
+      console.log("Form data to send:", {
+        ...formState,
+        phone: formState.phone, // raw digits
+      })
+      await new Promise((resolve) => setTimeout(resolve, 1500))
+      // In a real scenario, you might return data or a success status here
+    } catch (error) {
+      console.error("Form submission error:", error)
+      setSubmitMessage({ type: "error", text: "Message could not be sent. Please try again." })
+      setTimeout(() => setSubmitMessage(null), 5000)
+      throw error // Re-throw to allow callers to handle if needed
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    if (!hasInteracted) setHasInteracted(true)
     const { name, value } = e.target
     setFormState((prev) => ({ ...prev, [name]: value }))
   }
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!hasInteracted) setHasInteracted(true)
     const input = e.target.value
     const asYouType = new AsYouType('US') // Default to US, can be dynamic
     const formatted = asYouType.input(input)
@@ -56,6 +82,7 @@ export default function ContactForm() {
   }
 
   const handleServiceCheckboxChange = (id: string, checked: boolean) => {
+    if (!hasInteracted) setHasInteracted(true)
     // update selection type
     setSelectionType(id === "unsure" ? "unsure" : "services")
     setFormState(prev => {
@@ -69,6 +96,7 @@ export default function ContactForm() {
 
   // Handle branch-level selection (Media or Labs)
   const handleBranchCheckboxChange = (branchName: "media" | "labs", checked: boolean) => {
+    if (!hasInteracted) setHasInteracted(true)
     // update selection type for branch
     setSelectionType(branchName)
     setFormState(prev => ({
@@ -83,6 +111,7 @@ export default function ContactForm() {
   const allSelectedCount = formState.service.filter(id => allBranchIds.includes(id)).length
   const allChecked: boolean | "indeterminate" = allSelectedCount === allBranchIds.length ? true : allSelectedCount > 0 ? "indeterminate" : false
   const handleAllChange = (checked: boolean) => {
+    if (!hasInteracted) setHasInteracted(true)
     // update selection type for both
     setSelectionType("both")
     setFormState(prev => {
@@ -142,38 +171,64 @@ export default function ContactForm() {
 
   const validationMessages = getValidationMessages()
 
+  // Main form submission for "Send Message" button
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
+    if (!isFormValid) return
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      await sendFormData() // Call centralized submission logic
 
-    setIsSubmitting(false)
+      setSubmitMessage({
+        type: "success",
+        text: "Thank you! Your message has been sent.",
+      })
 
-    setSubmitMessage({
-      type: "success",
-      text: "Thank you for your message! We'll be in touch soon.",
-    })
+      // Reset form
+      setFormState({
+        name: "", email: "", phone: "", company: "",
+        service: [], message: "", findUs: "", branch: "",
+      })
+      setFormattedPhone("")
+      setSelectionType("")
+      setConfirmed(false)
+      setHasInteracted(false)
 
-    // Reset form after successful submission
-    setFormState({
-      name: "",
-      email: "",
-      phone: "",
-      company: "",
-      service: [],
-      message: "",
-      findUs: "",
-      branch: "",
-    })
+      setTimeout(() => setSubmitMessage(null), 5000)
+    } catch (error) {
+      // Error is already handled by sendFormData and a toast is shown there
+      // No need to set another error toast here unless a different one is desired
+      console.log("handleSubmit caught error, already handled by sendFormData")
+    }
+  }
 
-    // Clear success message after 5 seconds
-    setTimeout(() => {
-      setSubmitMessage(null)
-    }, 5000)
+  // Submission logic for the Dialog's "Proceed" button
+  const handleDialogSubmitAndProceed = async () => {
+    if (!isFormValid) {
+      console.warn("Attempted to submit from dialog with invalid form.")
+      throw new Error("Form is invalid") // Prevent dialog from proceeding
+    }
 
-    setFormattedPhone("") // Reset visual phone input too
+    try {
+      await sendFormData() // Call centralized submission logic
+
+      // Dialog will handle redirect and its own success messaging
+      // Reset form fields as the dialog flow implies a successful send for this part
+      setFormState({
+        name: "", email: "", phone: "", company: "",
+        service: [], message: "", findUs: "", branch: "",
+      })
+      setFormattedPhone("")
+      setSelectionType("")
+      setConfirmed(false)
+      setHasInteracted(false)
+
+    } catch (error) {
+      // Error already handled by sendFormData and a toast shown.
+      // Re-throw to let dialog know submission failed, so it doesn't proceed to redirect.
+      console.error("Dialog submission failed, not proceeding to redirect.")
+      throw error // Let dialog handle UI update for error
+    }
   }
 
   return (
@@ -194,7 +249,7 @@ export default function ContactForm() {
       </h2>
 
       {/* Validation Messages Area */}
-      {!isFormValid && validationMessages.length > 0 && (
+      {hasInteracted && !isFormValid && validationMessages.length > 0 && (
         <motion.div 
           className="mb-6 p-4 bg-red-900/30 border border-red-700 rounded-md text-red-400"
           initial={{ opacity: 0, y: -10 }}
@@ -220,20 +275,6 @@ export default function ContactForm() {
           <div className="flex items-center">
             {submitMessage.type === "success" && <CheckCircle className="h-5 w-5 text-green-400 mr-2" />}
             <p className={`text-${submitMessage.type === "success" ? "green" : "red"}-400`}>{submitMessage.text}</p>
-            {submitMessage.type === "success" && (
-              <div className="mt-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setCurrentBookingLink(getBookingLink())
-                    setIsBookingDialogOpen(true)
-                  }}
-                  className="text-cyberpunk-blue underline hover:text-cyberpunk-blue/80 transition-colors"
-                >
-                  Book a discovery call →
-                </button>
-              </div>
-            )}
           </div>
         </motion.div>
       )}
@@ -557,6 +598,8 @@ export default function ContactForm() {
         isOpen={isBookingDialogOpen} 
         onOpenChange={setIsBookingDialogOpen} 
         bookingLink={currentBookingLink} 
+        onSubmitAndProceed={handleDialogSubmitAndProceed}
+        isParentSubmitting={isSubmitting}
       />
     </motion.div>
   )
