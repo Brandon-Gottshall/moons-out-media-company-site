@@ -8,6 +8,7 @@ import { CalendarFold, CheckCircle, ChevronDown } from "lucide-react"
 import { MASTER_SERVICES } from "@/app/data/services"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"
+import ServiceInterestConfirmed from "@/components/contact/ServiceInterestConfirmed"
 
 export default function ContactForm() {
   const [formState, setFormState] = useState({
@@ -23,6 +24,7 @@ export default function ContactForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+  const [confirmed, setConfirmed] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -64,6 +66,11 @@ export default function ContactForm() {
   // validation and form state helpers
   const emailRegex = /\S+@\S+\.\S+/
   const isFormValid = formState.name.trim() !== "" && emailRegex.test(formState.email) && formState.message.trim() !== ""
+
+  // Only confirm service interest if at least one service or branch is selected
+  const handleServiceMouseLeave = () => {
+    if (formState.service.length > 0 || formState.branch) setConfirmed(true)
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -216,96 +223,107 @@ export default function ContactForm() {
           />
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          <label className="block text-sm font-medium text-gray-300 mb-1">Service Interest</label>
-          <div className="space-y-2">
-            <div className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
-              <Checkbox
-                id="help-me-choose"
-                checked={formState.service.includes("unsure") && formState.service.length === 1}
-                onCheckedChange={checked => handleServiceCheckboxChange("unsure", Boolean(checked))}
-                className="h-6 w-6 mr-2 bg-black/60 border-cyberpunk-pink focus-visible:ring-cyberpunk-pink data-[state=checked]:bg-cyberpunk-pink"
-              />
-              <label htmlFor="help-me-choose" className="text-gray-300">Help me choose</label>
+        {!confirmed ? (
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            onMouseLeave={handleServiceMouseLeave}
+          >
+            <label className="block text-sm font-medium text-gray-300 mb-1">Service Interest</label>
+            <div className="space-y-2">
+              <div className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+                <Checkbox
+                  id="help-me-choose"
+                  checked={formState.service.includes("unsure") && formState.service.length === 1}
+                  onCheckedChange={checked => handleServiceCheckboxChange("unsure", Boolean(checked))}
+                  className="h-6 w-6 mr-2 bg-black/60 border-cyberpunk-pink focus-visible:ring-cyberpunk-pink data-[state=checked]:bg-cyberpunk-pink"
+                />
+                <label htmlFor="help-me-choose" className="text-gray-300">Help me choose</label>
+              </div>
+              <div className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+                <Checkbox
+                  id="group-both"
+                  checked={allChecked}
+                  onCheckedChange={checked => handleAllChange(Boolean(checked))}
+                  className="h-6 w-6 mr-2"
+                />
+                <label htmlFor="group-both" className="text-gray-300">Both</label>
+              </div>
+              <Collapsible defaultOpen>
+                <CollapsibleTrigger asChild>
+                  <div className="flex justify-between items-center w-full min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="branch-media"
+                        checked={formState.branch === "media"}
+                        onCheckedChange={checked => handleBranchCheckboxChange("media", Boolean(checked))}
+                        onClick={e => e.stopPropagation()}
+                        className="h-6 w-6 mr-2"
+                      />
+                      <span className="text-gray-300 font-semibold text-sm">Moons Out Media</span>
+                    </div>
+                    <ChevronDown className="h-4 w-4" />
+                  </div>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="pl-4 space-y-1">
+                  {MASTER_SERVICES.filter(s => s.branch === "media").map(s => (
+                    <div key={s.id} className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+                      <Checkbox
+                        id={`service-${s.id}`}
+                        name="service"
+                        checked={formState.service.includes(s.id)}
+                        onCheckedChange={checked => handleServiceCheckboxChange(s.id, Boolean(checked))}
+                        className="h-6 w-6 mr-2"
+                      />
+                      <label htmlFor={`service-${s.id}`} className="text-gray-300">{s.shortTitle ?? s.title}</label>
+                    </div>
+                  ))}
+                </CollapsibleContent>
+              </Collapsible>
+              <Collapsible defaultOpen>
+                <CollapsibleTrigger asChild>
+                  <div className="flex justify-between items-center w-full min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="branch-labs"
+                        checked={formState.branch === "labs"}
+                        onCheckedChange={checked => handleBranchCheckboxChange("labs", Boolean(checked))}
+                        onClick={e => e.stopPropagation()}
+                        className="h-6 w-6 mr-2"
+                      />
+                      <span className="text-gray-300 font-semibold text-sm">Moons Out Labs</span>
+                    </div>
+                    <ChevronDown className="h-4 w-4" />
+                  </div>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="pl-4 space-y-1">
+                  {MASTER_SERVICES.filter(s => s.branch === "labs").map(s => (
+                    <div key={s.id} className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+                      <Checkbox
+                        id={`service-${s.id}`}
+                        name="service"
+                        checked={formState.service.includes(s.id)}
+                        onCheckedChange={checked => handleServiceCheckboxChange(s.id, Boolean(checked))}
+                        className="h-6 w-6 mr-2"
+                      />
+                      <label htmlFor={`service-${s.id}`} className="text-gray-300">{s.shortTitle ?? s.title}</label>
+                    </div>
+                  ))}
+                </CollapsibleContent>
+              </Collapsible>
             </div>
-            <div className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
-              <Checkbox
-                id="group-both"
-                checked={allChecked}
-                onCheckedChange={checked => handleAllChange(Boolean(checked))}
-                className="h-6 w-6 mr-2"
-              />
-              <label htmlFor="group-both" className="text-gray-300">Both</label>
-            </div>
-            <Collapsible defaultOpen>
-              <CollapsibleTrigger asChild>
-                <div className="flex justify-between items-center w-full min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="branch-media"
-                      checked={formState.branch === "media"}
-                      onCheckedChange={checked => handleBranchCheckboxChange("media", Boolean(checked))}
-                      onClick={e => e.stopPropagation()}
-                      className="h-6 w-6 mr-2"
-                    />
-                    <span className="text-gray-300 font-semibold text-sm">Moons Out Media</span>
-                  </div>
-                  <ChevronDown className="h-4 w-4" />
-                </div>
-              </CollapsibleTrigger>
-              <CollapsibleContent className="pl-4 space-y-1">
-                {MASTER_SERVICES.filter(s => s.branch === "media").map(s => (
-                  <div key={s.id} className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
-                    <Checkbox
-                      id={`service-${s.id}`}
-                      name="service"
-                      checked={formState.service.includes(s.id)}
-                      onCheckedChange={checked => handleServiceCheckboxChange(s.id, Boolean(checked))}
-                      className="h-6 w-6 mr-2"
-                    />
-                    <label htmlFor={`service-${s.id}`} className="text-gray-300">{s.shortTitle ?? s.title}</label>
-                  </div>
-                ))}
-              </CollapsibleContent>
-            </Collapsible>
-            <Collapsible defaultOpen>
-              <CollapsibleTrigger asChild>
-                <div className="flex justify-between items-center w-full min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="branch-labs"
-                      checked={formState.branch === "labs"}
-                      onCheckedChange={checked => handleBranchCheckboxChange("labs", Boolean(checked))}
-                      onClick={e => e.stopPropagation()}
-                      className="h-6 w-6 mr-2"
-                    />
-                    <span className="text-gray-300 font-semibold text-sm">Moons Out Labs</span>
-                  </div>
-                  <ChevronDown className="h-4 w-4" />
-                </div>
-              </CollapsibleTrigger>
-              <CollapsibleContent className="pl-4 space-y-1">
-                {MASTER_SERVICES.filter(s => s.branch === "labs").map(s => (
-                  <div key={s.id} className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
-                    <Checkbox
-                      id={`service-${s.id}`}
-                      name="service"
-                      checked={formState.service.includes(s.id)}
-                      onCheckedChange={checked => handleServiceCheckboxChange(s.id, Boolean(checked))}
-                      className="h-6 w-6 mr-2"
-                    />
-                    <label htmlFor={`service-${s.id}`} className="text-gray-300">{s.shortTitle ?? s.title}</label>
-                  </div>
-                ))}
-              </CollapsibleContent>
-            </Collapsible>
-          </div>
-        </motion.div>
+          </motion.div>
+        ) : (
+          <ServiceInterestConfirmed
+            services={formState.service}
+            onChange={() => {
+              setConfirmed(false)
+              setFormState({ ...formState, service: [], branch: "" })
+            }}
+          />
+        )}
 
         <motion.div
           initial={{ opacity: 0, x: -20 }}
