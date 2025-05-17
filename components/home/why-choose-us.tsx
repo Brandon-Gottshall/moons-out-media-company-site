@@ -45,17 +45,24 @@ export function WhyChooseUs() {
             >
               {item.icon}
             </motion.div>
-            <h3 className="text-base font-semibold text-white mb-1">
+            <h3 className="text-lg font-semibold text-white mb-2">
               {item.title}
             </h3>
             {Array.isArray(item.description) ? (
               item.description.map((line, i) => (
-                <p key={i} className="text-sm text-gray-300 pb-4">
+                <p
+                  key={i}
+                  className={`w-full text-sm text-gray-300 leading-relaxed text-left ${
+                    i === item.description.length - 1 ? "" : "mb-1"
+                  }`}
+                >
                   {line}
                 </p>
               ))
             ) : (
-              <p className="text-sm text-gray-300">{item.description}</p>
+              <p className="w-full text-sm text-gray-300 leading-relaxed text-left">
+                {item.description}
+              </p>
             )}
           </motion.div>
         ))}
@@ -79,7 +86,7 @@ const whyChooseUsItems: WhyChooseUsItem[] = [
     title: "Mission-Ready Media",
     description: [
       "Marine-veteran discipline shapes our approach.",
-      "Gen Z instincts help us find the clicks.",
+      "Digital native instincts help us find the clicks.",
     ],
     color: "blue",
   },
