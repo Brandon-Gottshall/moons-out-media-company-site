@@ -123,7 +123,7 @@ export default function ServiceHero() {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <span className="block text-white mb-2">Our Services</span>
-              <span className="block text-cyberpunk-blue relative inline-block min-h-[50px] sm:min-h-[60px] md:min-h-[60px] lg:min-h-[70px] xl:min-h-[80px]">
+              <span className="text-cyberpunk-blue relative inline-block min-h-[50px] sm:min-h-[60px] md:min-h-[60px] lg:min-h-[70px] xl:min-h-[80px]">
                 <TypewriterEffect />
               </span>
             </motion.h1>
