@@ -54,7 +54,7 @@ export default function ContactPage() {
             transition={{ duration: 0.6 }}
           >
             <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold mb-4 inline-block relative">
+              <h2 className="text-3xl font-bold my-4 inline-block relative">
                 <span className="text-white">Quick Contact Form</span>
                 <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-pink"></span>
               </h2>

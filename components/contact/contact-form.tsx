@@ -5,6 +5,7 @@ import { useState, useRef } from "react"
 import { motion } from "framer-motion"
 import { Input } from "@/components/ui/input"
 import { CalendarFold, CheckCircle, ChevronDown } from "lucide-react"
+import { AsYouType, isPossiblePhoneNumber } from 'libphonenumber-js'
 import { MASTER_SERVICES } from "@/app/data/services"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"
@@ -15,7 +16,7 @@ export default function ContactForm() {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
-    phone: "",
+    phone: "", // Store raw phone digits
     company: "",
     service: [] as string[],
     message: "",
@@ -30,9 +31,23 @@ export default function ContactForm() {
   // Pending confirm on leave
   const confirmTimeout = useRef<NodeJS.Timeout | null>(null)
 
+  // Phone input visual state
+  const [formattedPhone, setFormattedPhone] = useState("")
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormState((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value
+    const asYouType = new AsYouType('US') // Default to US, can be dynamic
+    const formatted = asYouType.input(input)
+    setFormattedPhone(formatted) // Update visual input
+
+    // Extract raw digits for storage and validation
+    const rawPhone = input.replace(/\D/g, '')
+    setFormState(prev => ({ ...prev, phone: rawPhone }))
   }
 
   const handleServiceCheckboxChange = (id: string, checked: boolean) => {
@@ -78,6 +93,7 @@ export default function ContactForm() {
   const isFormValid = 
     formState.name.trim() !== "" && 
     emailRegex.test(formState.email) && 
+    (formState.phone === "" || isPossiblePhoneNumber(formState.phone, 'US')) && // Valid if empty or possible US number
     formState.message.trim() !== "" &&
     (formState.service.length > 0 || formState.branch !== "")
 
@@ -96,6 +112,19 @@ export default function ContactForm() {
       confirmTimeout.current = null
     }
   }
+
+  // Validation messages
+  const getValidationMessages = () => {
+    const messages = []
+    if (formState.name.trim() === "") messages.push("Name is required.")
+    if (!emailRegex.test(formState.email)) messages.push("A valid email is required.")
+    if (formState.phone && !isPossiblePhoneNumber(formState.phone, 'US')) messages.push("Please enter a valid phone number.")
+    if (formState.message.trim() === "") messages.push("Message is required.")
+    if (!(formState.service.length > 0 || formState.branch !== "")) messages.push("Please select a service interest.")
+    return messages
+  }
+
+  const validationMessages = getValidationMessages()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -126,6 +155,8 @@ export default function ContactForm() {
     setTimeout(() => {
       setSubmitMessage(null)
     }, 5000)
+
+    setFormattedPhone("") // Reset visual phone input too
   }
 
   return (
@@ -144,6 +175,19 @@ export default function ContactForm() {
         Get In Touch
         <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-pink"></span>
       </h2>
+
+      {/* Validation Messages Area */}
+      {!isFormValid && validationMessages.length > 0 && (
+        <motion.div 
+          className="mb-6 p-4 bg-red-900/30 border border-red-700 rounded-md text-red-400"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <ul className="list-disc list-inside space-y-1">
+            {validationMessages.map((msg, i) => <li key={i}>{msg}</li>)}
+          </ul>
+        </motion.div>
+      )}
 
       {submitMessage && (
         <motion.div
@@ -222,8 +266,8 @@ export default function ContactForm() {
               id="phone"
               name="phone"
               type="tel"
-              value={formState.phone}
-              onChange={handleChange}
+              value={formattedPhone}
+              onChange={handlePhoneChange}
               placeholder="Optional"
               className="bg-black/60 border-gray-700 text-white focus:border-cyberpunk-blue"
             />
