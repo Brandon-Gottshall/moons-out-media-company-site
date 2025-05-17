@@ -232,14 +232,14 @@ export default function ServiceShowcase() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-center md:text-left"
+              className="text-center md:text-left flex justify-center"
             >
               <Link href={activeService.caseStudyLink}>
                 <Button
                   className={`${activeBgClass} hover:bg-cyberpunk-${activeTailwindColorName}/80 text-white py-3 px-6 text-base relative overflow-hidden group`}
                 >
                   <span className="relative z-10 flex items-center">
-                    View Case Studies <ExternalLink className="ml-2 h-4 w-4" />
+                    View Our Projects <ExternalLink className="ml-2 h-4 w-4" />
                   </span>
                   <motion.div
                     className="absolute inset-0 bg-white/10"

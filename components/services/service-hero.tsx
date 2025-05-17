@@ -204,7 +204,7 @@ export default function ServiceHero() {
 
       {/* Scroll indicator - positioned at the very bottom of the hero section */}
       <motion.div
-        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-4 flex flex-col items-center z-50 vh-short:-mt-4"
+        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-4 flex flex-col items-center z-40 vh-short:-mt-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
@@ -221,7 +221,7 @@ export default function ServiceHero() {
 // Helper component for the typewriter effect
 function TypewriterEffect() {
   const [text] = useTypewriter({
-    words: ["Authentic Stories", "Scalable Tech"],
+    words: ["Measurable Growth", "Scalable Tech", "Higher Conversions"],
     loop: 0, // Loop indefinitely
     typeSpeed: 100,
     deleteSpeed: 70,

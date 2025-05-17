@@ -1,7 +1,6 @@
 import ServiceHero from "@/components/services/service-hero"
 import ServiceShowcase from "@/components/services/service-showcase"
 import PainToGain from "@/components/pain-to-gain"
-import ServiceProcess from "@/components/services/service-process"
 import ServiceTestimonials from "@/components/services/service-testimonials"
 import StoryMatchmaker from "@/components/story-matchmaker"
 import CallToAction from "@/components/call-to-action"
@@ -44,41 +43,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Transform Your Brand Section */}
-      <section className="py-20 bg-gradient-to-b from-black/50 to-cyberpunk-background relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,105,180,0.15)_0%,transparent_50%)]"></div>
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 neon-pink-text">Transform Your Brand Story</h2>
-            <div className="bg-black/40 backdrop-blur-sm p-4 rounded-lg max-w-2xl mx-auto border border-gray-800/50">
-              <p className="text-white text-lg leading-relaxed">
-                See how we turn common marketing challenges into powerful brand narratives that connect with your
-                audience.
-              </p>
-            </div>
-          </div>
-
-          <PainToGain />
-        </div>
-      </section>
-
-      {/* Our Process Section */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(106,90,205,0.15)_0%,transparent_70%)]"></div>
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 neon-green-text">Our Process</h2>
-            <div className="bg-black/40 backdrop-blur-sm p-4 rounded-lg max-w-2xl mx-auto border border-gray-800/50">
-              <p className="text-white text-lg leading-relaxed">
-                We follow a proven methodology to ensure your project delivers exceptional results.
-              </p>
-            </div>
-          </div>
-
-          <ServiceProcess />
-        </div>
-      </section>
-
       {/* Client Success Stories Section */}
       {/* <section className="py-20 bg-gradient-to-b from-black/50 to-cyberpunk-background relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,255,127,0.1)_0%,transparent_70%)]"></div>
@@ -95,23 +59,6 @@ export default function ServicesPage() {
           <ServiceTestimonials />
         </div>
       </section> */}
-
-      {/* Find Your Perfect Story Section */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,105,180,0.1)_0%,transparent_70%)]"></div>
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 neon-pink-text">Find Your Perfect Story</h2>
-            <div className="bg-black/40 backdrop-blur-sm p-4 rounded-lg max-w-2xl mx-auto border border-gray-800/50">
-              <p className="text-white text-lg leading-relaxed">
-                Take our quick quiz to discover which storytelling approach will best elevate your brand.
-              </p>
-            </div>
-          </div>
-
-          <StoryMatchmaker />
-        </div>
-      </section>
 
       <CallToAction />
     </div>
