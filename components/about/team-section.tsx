@@ -46,17 +46,28 @@ export default function TeamSection() {
       },
     },
     {
-      name: "Jacai ",
+      name: "Jacai",
       role: "Audio Engineering/Sound Design",
-      bio: "Audio engineering/sound design Independent artist and audio engineer  Jacai, is deeply immersed in crafting his authentic sound. His mastery of audio engineering and production fuels his growth as a songwriter, recording artist, and mixing engineer across diverse musical projects. Beyond his solo work, Jacai collaborates with other artists, using his keen ear and technical skills to realize their sonic visions. Driven by a passion for music and a commitment to his community, Jacai supports fellow artists and shares his unique creative approach, aiming to create impactful art and be a positive influence. His burgeoning fanbase and love for music continue to propel this mission.",
+      bio: "Independent artist and audio engineer Jacai is deeply immersed in crafting his authentic sound. His mastery of audio engineering and production fuels his growth as a songwriter, recording artist, and mixing engineer across diverse musical projects. Beyond his solo work, Jacai collaborates with other artists, using his keen ear and technical skills to realize their sonic visions. Driven by a passion for music and a commitment to his community, Jacai supports fellow artists and shares his unique creative approach, aiming to create impactful art and be a positive influence. His burgeoning fanbase and love for music continue to propel this mission.",
       image: "/images/jacai_cropped.jpeg",
       social: {
         twitter: "#",
         linkedin: "#",
         email: "",
       },
-    }
-  ]
+    },
+    {
+      name: "Emma",
+      role: "UX & Creative Strategist",
+      bio: "Emma brings clarity and strategic insight to Moons Out Media's user experience and creative direction. With a sharp eye for detail and a passion for intuitive design, she bridges storytelling with interactive design, ensuring every digital touchpoint is seamless, engaging, and conversion-focused. Emma's expertise in UX/UI design, content strategy, and creative ideation empowers the team to craft compelling experiences that resonate deeply with audiences and drive meaningful results.",
+      image: "/images/Emma.webp",
+      social: {
+        twitter: "#",
+        linkedin: "#",
+        email: "emma@moonsoutmedia.com",
+      },
+    },
+  ];  
 
   const container = {
     hidden: { opacity: 0 },
