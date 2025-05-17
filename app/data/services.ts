@@ -3,6 +3,7 @@ import type { Service } from "@/app/types/services";
 export const MASTER_SERVICES: Service[] = [
   {
     id: "digital-marketing",
+    branch: "media",
     title: "Digital Marketing Campaigns",
     shortTitle: "Digital Marketing",
     description:
@@ -23,6 +24,7 @@ export const MASTER_SERVICES: Service[] = [
   },
   {
     id: "brand-storytelling",
+    branch: "media",
     title: "Brand Storytelling",
     // shortTitle can be omitted if title is suitable
     description:
@@ -42,6 +44,7 @@ export const MASTER_SERVICES: Service[] = [
   },
   {
     id: "web-application-development",
+    branch: "labs",
     title: "Web Application Development",
     // shortTitle can be omitted
     description:
@@ -60,6 +63,7 @@ export const MASTER_SERVICES: Service[] = [
   },
   {
     id: "ai-automation-engineering",
+    branch: "labs",
     title: "AI & Automation Engineering",
     // shortTitle can be omitted
     description:
@@ -78,6 +82,7 @@ export const MASTER_SERVICES: Service[] = [
   },
   {
     id: "cloud-devops-solutions",
+    branch: "labs",
     title: "Cloud & DevOps Solutions",
     // shortTitle can be omitted
     description:
@@ -96,6 +101,7 @@ export const MASTER_SERVICES: Service[] = [
   },
   {
     id: "social-media-content",
+    branch: "media",
     title: "Social Media Content",
     // No corresponding entry in app/page.tsx, so no icon or shortDescription unless we create them.
     // shortTitle: "Social Content" // Example if needed
@@ -113,4 +119,4 @@ export const MASTER_SERVICES: Service[] = [
     color: "green",
     // icon: "👍" // Example icon if desired
   },
-]; 
+].sort((a, b) => (a.branch === b.branch ? 0 : a.branch === "media" ? -1 : 1)); 

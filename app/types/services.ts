@@ -1,5 +1,6 @@
 export interface Service {
   id: string;
+  branch: string;
   title: string; // Main title, potentially longer for showcase
   shortTitle?: string; // Optional: For contexts like homepage cards
   description: string; // Detailed description for showcase
