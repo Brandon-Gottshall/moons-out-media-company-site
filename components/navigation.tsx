@@ -112,13 +112,20 @@ export default function Navigation() {
   }
 
   return (
-    <header
+    <motion.header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50",
         scrolled
-          ? "bg-black/90 backdrop-blur-md py-3 border-b border-cyberpunk-blue/50 shadow-[0_4px_15px_rgba(0,204,255,0.15)]"
-          : "bg-gradient-to-r from-black/80 via-black/70 to-black/80 backdrop-blur-sm py-4",
+          ? "bg-black/90 backdrop-blur-md border-b border-cyberpunk-blue/50 animate-header-glow"
+          : "bg-gradient-to-r from-black/80 via-black/70 to-black/80 backdrop-blur-sm animate-header-glow-out",
       )}
+      initial={{ paddingTop: "1rem", paddingBottom: "1rem", y: 0 }}
+      animate={{
+        paddingTop: "1rem",
+        paddingBottom: "1rem",
+        y: 0,
+      }}
+      transition={{ duration: 0.3 }}
     >
       <style jsx global>{`
         @keyframes textFlicker {
@@ -414,7 +421,7 @@ export default function Navigation() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   )
 }
 

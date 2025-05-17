@@ -1,7 +1,7 @@
-"use client"
-import React from "react"
-import { motion } from "framer-motion"
-import { Award, ShieldCheck, Users } from "lucide-react"
+"use client";
+import React from "react";
+import { motion } from "framer-motion";
+import { Target, BarChart2, Gem, FlaskConical } from "lucide-react";
 
 export function WhyChooseUs() {
   const container = {
@@ -12,7 +12,7 @@ export function WhyChooseUs() {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
   return (
     <motion.section
@@ -25,7 +25,7 @@ export function WhyChooseUs() {
       <h2 className="text-2xl font-bold mb-6 text-white relative inline-block text-center w-full">
         Why Choose Us
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
         {whyChooseUsItems.map((item, index) => (
           <motion.div
             key={index}
@@ -45,41 +45,69 @@ export function WhyChooseUs() {
             >
               {item.icon}
             </motion.div>
-            <h3 className="text-base font-semibold text-white mb-1">{item.title}</h3>
-            <p className="text-sm text-gray-300">{item.description}</p>
+            <h3 className="text-base font-semibold text-white mb-1">
+              {item.title}
+            </h3>
+            {Array.isArray(item.description) ? (
+              item.description.map((line, i) => (
+                <p key={i} className="text-sm text-gray-300 pb-4">
+                  {line}
+                </p>
+              ))
+            ) : (
+              <p className="text-sm text-gray-300">{item.description}</p>
+            )}
           </motion.div>
         ))}
       </div>
     </motion.section>
-  )
+  );
 }
 
 // --- Static Content and Types ---
 
 interface WhyChooseUsItem {
-  icon: React.ReactNode
-  title: string
-  description: string
-  color: "blue" | "pink" | "green"
+  icon: React.ReactNode;
+  title: string;
+  description: string | string[];
+  color: "blue" | "pink" | "green" | "purple";
 }
 
 const whyChooseUsItems: WhyChooseUsItem[] = [
   {
-    icon: <Award className="w-5 h-5 text-cyberpunk-blue" />,
-    title: "Award-Winning Content",
-    description: "42 industry awards for excellence in creative content and storytelling",
+    icon: <Target className="w-5 h-5 text-cyberpunk-blue" />,
+    title: "Mission-Ready Media",
+    description: [
+      "Marine-veteran discipline shapes our approach.",
+      "Gen Z instincts help us find the clicks.",
+    ],
     color: "blue",
   },
   {
-    icon: <ShieldCheck className="w-5 h-5 text-cyberpunk-pink" />,
-    title: "Guaranteed Results",
-    description: "We tie our success to yours with measurable, data-driven outcomes",
+    icon: <BarChart2 className="w-5 h-5 text-cyberpunk-pink" />,
+    title: "Results You Can Track",
+    description: [
+      "Campaigns built around clear, measurable KPIs.",
+      "We adapt quickly to keep you on track.",
+    ],
     color: "pink",
   },
   {
-    icon: <Users className="w-5 h-5 text-cyberpunk-green" />,
-    title: "Expert Team",
-    description: "Seasoned professionals with 15+ years of industry experience",
+    icon: <Gem className="w-5 h-5 text-cyberpunk-green" />,
+    title: "Quality First, Always",
+    description: [
+      "We shoot, edit, and perfect every visual ourselves.",
+      "Human craftsmanship defines Moons Out Media.",
+    ],
     color: "green",
   },
-] 
+  {
+    icon: <FlaskConical className="w-5 h-5 text-cyberpunk-purple" />,
+    title: "In-House Innovation",
+    description: [
+      "Labs creates custom apps and tech-driven solutions.",
+      "We build sites, web apps, and tools that bring your vision to life.",
+    ],
+    color: "purple",
+  },
+];

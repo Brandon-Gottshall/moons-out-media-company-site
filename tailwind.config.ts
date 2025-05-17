@@ -184,10 +184,67 @@ const config: Config = {
             textShadow: "0 0 5px #fff, 0 0 10px #fff, 0 0 20px #00CCFF, 0 0 30px #00CCFF, 0 0 40px #00CCFF",
           },
         },
+        // Glow animation for the header bottom border / shadow
+        "header-glow": {
+          "0%": {
+            boxShadow: "0 4px 15px rgba(0, 204, 255, 0)",
+            borderColor: "rgba(0, 204, 255, 0)",
+          },
+          "40%": {
+            boxShadow: "0 4px 15px rgba(0, 204, 255, 0.1)",
+            borderColor: "rgba(0, 204, 255, 0.2)",
+          },
+          "45%": {
+            boxShadow: "0 4px 15px rgba(0, 204, 255, 0)",
+            borderColor: "rgba(0, 204, 255, 0)",
+          },
+          "50%": {
+            boxShadow: "0 4px 15px rgba(0, 204, 255, 0.15)",
+            borderColor: "rgba(0, 204, 255, 0.3)",
+          },
+          "55%": {
+            boxShadow: "0 4px 15px rgba(0, 204, 255, 0)",
+            borderColor: "rgba(0, 204, 255, 0)",
+          },
+          "60%": {
+            boxShadow: "0 4px 15px rgba(0, 204, 255, 0.25)",
+            borderColor: "rgba(0, 204, 255, 0.4)",
+          },
+          "100%": {
+            boxShadow: "0 4px 15px rgba(0, 204, 255, 0.4)",
+            borderColor: "rgba(0, 204, 255, 0.5)",
+          },
+        },
+        // Glow-out animation when scrolling back to top
+        "header-glow-out": {
+          "0%": {
+            boxShadow: "0 4px 15px rgba(0, 204, 255, 0.4)",
+          },
+          "40%": {
+            boxShadow: "0 4px 15px rgba(0, 204, 255, 0.25)",
+          },
+          "45%": {
+            boxShadow: "0 4px 15px rgba(0, 204, 255, 0)",
+          },
+          "50%": {
+            boxShadow: "0 4px 15px rgba(0, 204, 255, 0.15)",
+          },
+          "55%": {
+            boxShadow: "0 4px 15px rgba(0, 204, 255, 0)",
+          },
+          "60%": {
+            boxShadow: "0 4px 15px rgba(0, 204, 255, 0.1)",
+          },
+          "100%": {
+            boxShadow: "0 4px 15px rgba(0, 204, 255, 0)",
+          },
+        },
       },
       animation: {
         flicker: "flicker 2s infinite alternate",
         pulse: "pulse 3s infinite alternate",
+        "header-glow": "header-glow 2.5s ease forwards",
+        "header-glow-out": "header-glow-out 2.5s ease forwards",
       },
     },
   },
