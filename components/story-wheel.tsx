@@ -26,27 +26,27 @@ const categories: Category[] = [
     id: 1,
     name: "Cinematography",
     description: "Cinematic authentic story telling content that tells authentic stories.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/placeholder.svg?height=400&width=600",
     projects: [
       {
         id: 101,
         title: "The Artisan's Journey",
         client: "Handcrafted Co.",
-        thumbnail: "/placeholder.svg?height=300&width=500",
+        thumbnail: "/images/placeholder.svg?height=300&width=500",
         videoUrl: "#",
       },
       {
         id: 102,
         title: "Urban Explorers",
         client: "City Tourism Board",
-        thumbnail: "/placeholder.svg?height=300&width=500",
+        thumbnail: "/images/placeholder.svg?height=300&width=500",
         videoUrl: "#",
       },
       {
         id: 103,
         title: "Sustainable Future",
         client: "EcoTech Innovations",
-        thumbnail: "/placeholder.svg?height=300&width=500",
+        thumbnail: "/images/placeholder.svg?height=300&width=500",
         videoUrl: "#",
       },
     ],
@@ -55,27 +55,27 @@ const categories: Category[] = [
     id: 2,
     name: "Digital Marketing",
     description: "Targeted digital ad campaigns that drive measurable results.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/placeholder.svg?height=400&width=600",
     projects: [
       {
         id: 201,
         title: "Conversion Catalyst",
         client: "TechStart Inc.",
-        thumbnail: "/placeholder.svg?height=300&width=500",
+        thumbnail: "/images/placeholder.svg?height=300&width=500",
         videoUrl: "#",
       },
       {
         id: 202,
         title: "Market Expansion",
         client: "Global Brands",
-        thumbnail: "/placeholder.svg?height=300&width=500",
+        thumbnail: "/images/placeholder.svg?height=300&width=500",
         videoUrl: "#",
       },
       {
         id: 203,
         title: "Product Launch",
         client: "Innovate Labs",
-        thumbnail: "/placeholder.svg?height=300&width=500",
+        thumbnail: "/images/placeholder.svg?height=300&width=500",
         videoUrl: "#",
       },
     ],
@@ -84,27 +84,27 @@ const categories: Category[] = [
     id: 3,
     name: "Social Campaigns",
     description: "Engaging social media content that builds community and drives engagement.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/placeholder.svg?height=400&width=600",
     projects: [
       {
         id: 301,
         title: "Viral Challenge",
         client: "FitLife App",
-        thumbnail: "/placeholder.svg?height=300&width=500",
+        thumbnail: "/images/placeholder.svg?height=300&width=500",
         videoUrl: "#",
       },
       {
         id: 302,
         title: "Community Stories",
         client: "Neighborhood Connect",
-        thumbnail: "/placeholder.svg?height=300&width=500",
+        thumbnail: "/images/placeholder.svg?height=300&width=500",
         videoUrl: "#",
       },
       {
         id: 303,
         title: "Influencer Collaboration",
         client: "Fashion Forward",
-        thumbnail: "/placeholder.svg?height=300&width=500",
+        thumbnail: "/images/placeholder.svg?height=300&width=500",
         videoUrl: "#",
       },
     ],
@@ -113,27 +113,27 @@ const categories: Category[] = [
     id: 4,
     name: "Brand Storytelling",
     description: "Authentic narratives that connect with your audience on a deeper level.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/placeholder.svg?height=400&width=600",
     projects: [
       {
         id: 401,
         title: "Origin Story",
         client: "Heritage Crafts",
-        thumbnail: "/placeholder.svg?height=300&width=500",
+        thumbnail: "/images/placeholder.svg?height=300&width=500",
         videoUrl: "#",
       },
       {
         id: 402,
         title: "Customer Journeys",
         client: "Life Solutions",
-        thumbnail: "/placeholder.svg?height=300&width=500",
+        thumbnail: "/images/placeholder.svg?height=300&width=500",
         videoUrl: "#",
       },
       {
         id: 403,
         title: "Behind the Scenes",
         client: "Culinary Masters",
-        thumbnail: "/placeholder.svg?height=300&width=500",
+        thumbnail: "/images/placeholder.svg?height=300&width=500",
         videoUrl: "#",
       },
     ],
@@ -278,7 +278,7 @@ export default function StoryWheel() {
                 onClick={() => handleProjectClick(project)}
               >
                 <img
-                  src={project.thumbnail || "/placeholder.svg"}
+                  src={project.thumbnail || "/images/placeholder.svg"}
                   alt={project.title}
                   className="w-full h-24 object-cover transition-transform duration-300 group-hover:scale-110"
                 />
@@ -317,7 +317,7 @@ export default function StoryWheel() {
 
             <div className="aspect-video bg-black">
               <img
-                src={selectedProject.thumbnail || "/placeholder.svg"}
+                src={selectedProject.thumbnail || "/images/placeholder.svg"}
                 alt={selectedProject.title}
                 className="w-full h-full object-cover"
               />

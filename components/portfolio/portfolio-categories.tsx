@@ -382,7 +382,7 @@ export default function PortfolioCategories({
         {/* Image container */}
         <div className="absolute inset-0 z-0 overflow-hidden"> 
           <img
-            src={category.image || "/placeholder.svg"} // Now points to public Giphy URLs or via.placeholder.com
+            src={category.image || "/images/placeholder.svg"} // Now points to public Giphy URLs or via.placeholder.com
             alt={category.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />

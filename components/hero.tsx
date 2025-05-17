@@ -43,14 +43,14 @@ export default function Hero() {
             muted
             playsInline
             className="absolute w-full h-full object-cover"
-            poster="/placeholder.svg?height=1080&width=1920"
+            poster="/images/placeholder.svg?height=1080&width=1920"
           >
             <source src="#" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         ) : (
           <img
-            src="/placeholder.svg?height=1080&width=1920"
+            src="/images/placeholder.svg?height=1080&width=1920"
             alt="Hero background"
             className="absolute w-full h-full object-cover"
           />

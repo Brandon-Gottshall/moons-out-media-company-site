@@ -82,7 +82,7 @@ export default function VideoElevatorPitch() {
                 <video
                   ref={videoRef}
                   className="w-full h-full object-cover"
-                  poster="/placeholder.svg?height=270&width=480"
+                  poster="/images/placeholder.svg?height=270&width=480"
                   loop
                   muted={isMuted}
                 >

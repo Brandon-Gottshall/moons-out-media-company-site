@@ -10,7 +10,7 @@ export default function AboutHero() {
       {/* Background with overlay */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/placeholder.svg?height=1080&width=1920"
+          src="/images/placeholder.svg?height=1080&width=1920"
           alt="Moons Out Media Team"
           fill
           className="object-cover"

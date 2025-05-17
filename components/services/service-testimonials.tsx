@@ -158,7 +158,7 @@ export default function ServiceTestimonials() {
                   ></motion.div>
 
                   <img
-                    src={testimonials[currentIndex].image || "/placeholder.svg"}
+                    src={testimonials[currentIndex].image || "/images/placeholder.svg"}
                     alt={testimonials[currentIndex].name}
                     className="w-full h-full object-cover"
                   />

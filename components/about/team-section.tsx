@@ -109,7 +109,7 @@ export default function TeamSection() {
             >
               <div className="aspect-square relative overflow-hidden">
                 <Image
-                  src={member.image || "/placeholder.svg"}
+                  src={member.image || "/images/placeholder.svg"}
                   alt={member.name}
                   width={400}
                   height={400}
@@ -169,7 +169,7 @@ export default function TeamSection() {
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="w-full md:w-1/3 aspect-square relative rounded-lg overflow-hidden">
                   <Image
-                    src={activeTeamMember.image || "/placeholder.svg"}
+                    src={activeTeamMember.image || "/images/placeholder.svg"}
                     alt={activeTeamMember.name}
                     fill
                     className="object-cover"

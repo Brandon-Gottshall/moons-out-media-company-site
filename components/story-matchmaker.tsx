@@ -37,7 +37,7 @@ const serviceCategories: ServiceCategory[] = [
       "Our authentic story telling approach captures authentic moments and creates emotional connections with your audience, perfect for brands looking to build depth and trust.",
     serviceType: "Narrative Driven Production",
     caseStudyLink: "/portfolio/documentary-storytelling",
-    image: "/placeholder.svg?height=300&width=500&text=DocuStory",
+    image: "/images/placeholder.svg?height=300&width=500&text=DocuStory",
   },
   {
     id: "digital-ads",
@@ -46,7 +46,7 @@ const serviceCategories: ServiceCategory[] = [
       "We craft strategic ad campaigns that combine compelling storytelling with data-driven optimization to drive measurable conversions and maximize your ROI.",
     serviceType: "Digital Ad Campaigns",
     caseStudyLink: "/portfolio/conversion-campaigns",
-    image: "/placeholder.svg?height=300&width=500&text=AdCampaigns",
+    image: "/images/placeholder.svg?height=300&width=500&text=AdCampaigns",
   },
   {
     id: "social-media",
@@ -55,7 +55,7 @@ const serviceCategories: ServiceCategory[] = [
       "Your brand can thrive with our authentic social media approach, building a strong community and driving consistent engagement through genuine interaction.",
     serviceType: "Social Media Marketing",
     caseStudyLink: "/portfolio/social-media-strategy",
-    image: "/placeholder.svg?height=300&width=500&text=SocialMedia",
+    image: "/images/placeholder.svg?height=300&width=500&text=SocialMedia",
   },
   {
     id: "web-apps",
@@ -64,7 +64,7 @@ const serviceCategories: ServiceCategory[] = [
       "Need a bespoke web application or a high-performance landing page? We build tailored digital experiences that are both functional and engaging.",
     serviceType: "Web Development",
     caseStudyLink: "/portfolio/custom-web-applications",
-    image: "/placeholder.svg?height=300&width=500&text=WebApps",
+    image: "/images/placeholder.svg?height=300&width=500&text=WebApps",
   },
   {
     id: "ai-automation",
@@ -73,7 +73,7 @@ const serviceCategories: ServiceCategory[] = [
       "Leverage the power of AI and automation to streamline your processes, gain insights, and create innovative solutions for your business challenges.",
     serviceType: "AI & Automation",
     caseStudyLink: "/portfolio/ai-driven-automation",
-    image: "/placeholder.svg?height=300&width=500&text=AI+Automation",
+    image: "/images/placeholder.svg?height=300&width=500&text=AI+Automation",
   },
   {
     id: "cloud-devops",
@@ -82,7 +82,7 @@ const serviceCategories: ServiceCategory[] = [
       "Build a scalable and resilient infrastructure with our enterprise-grade DevOps and cloud solutions, ensuring your technology foundation is robust and future-proof.",
     serviceType: "Cloud & DevOps",
     caseStudyLink: "/portfolio/enterprise-cloud-devops",
-    image: "/placeholder.svg?height=300&width=500&text=CloudDevOps",
+    image: "/images/placeholder.svg?height=300&width=500&text=CloudDevOps",
   },
 ]
 
@@ -378,7 +378,7 @@ export default function StoryMatchmaker() {
                     >
                       <div className="aspect-video relative">
                         <img
-                          src={service.image || "/placeholder.svg"}
+                          src={service.image || "/images/placeholder.svg"}
                           alt={service.title}
                           className="w-full h-full object-cover"
                         />

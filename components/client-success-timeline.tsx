@@ -36,7 +36,7 @@ const successStories: SuccessStory[] = [
       { label: "Investor Interest", value: "$12M", change: "+156%" },
       { label: "New Partnerships", value: "14", change: "+250%" },
     ],
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/placeholder.svg?height=400&width=600",
     caseStudyLink: "/portfolio/ecotech-innovations-documentary",
   },
   {
@@ -52,7 +52,7 @@ const successStories: SuccessStory[] = [
       { label: "Social Engagement", value: "1.2M", change: "+215%" },
       { label: "Retention Rate", value: "92%", change: "+24%" },
     ],
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/placeholder.svg?height=400&width=600",
     caseStudyLink: "/portfolio/urban-fitness-transformation",
   },
   {
@@ -68,7 +68,7 @@ const successStories: SuccessStory[] = [
       { label: "Average Order Value", value: "$120", change: "+35%" },
       { label: "Customer Loyalty", value: "78%", change: "+47%" },
     ],
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/placeholder.svg?height=400&width=600",
     caseStudyLink: "/portfolio/artisan-collective-showcase",
   },
   {
@@ -84,7 +84,7 @@ const successStories: SuccessStory[] = [
       { label: "Conversion Rate", value: "12.4%", change: "+86%" },
       { label: "Market Share", value: "23%", change: "+15%" },
     ],
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/images/placeholder.svg?height=400&width=600",
     caseStudyLink: "/portfolio/techstart-growth-engine",
   },
 ]
@@ -185,7 +185,7 @@ export default function ClientSuccessTimeline() {
                     <>
                       <div className="mb-4 overflow-hidden rounded-md">
                         <img
-                          src={story.image || "/placeholder.svg"}
+                          src={story.image || "/images/placeholder.svg"}
                           alt={story.title}
                           className="w-full h-48 object-cover"
                         />
@@ -252,7 +252,7 @@ export default function ClientSuccessTimeline() {
             </div>
 
             <div className="overflow-hidden">
-              <img src={story.image || "/placeholder.svg"} alt={story.title} className="w-full h-40 object-cover" />
+              <img src={story.image || "/images/placeholder.svg"} alt={story.title} className="w-full h-40 object-cover" />
             </div>
 
             <div className="p-4">

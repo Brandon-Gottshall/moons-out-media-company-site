@@ -31,7 +31,7 @@ const testimonials: Testimonial[] = [
     company: "EcoTech Innovations",
     quote:
       "Moons Out Media transformed our brand narrative. Their authentic story telling approach captured the essence of our mission in a way traditional marketing never could.",
-    image: "/placeholder.svg?height=100&width=100",
+    image: "/images/placeholder.svg?height=100&width=100",
   },
   {
     id: 2,
@@ -40,7 +40,7 @@ const testimonials: Testimonial[] = [
     company: "Urban Fitness",
     quote:
       "The authenticity of the content Moons Out created for us resonated deeply with our audience. We saw immediate engagement and conversion improvements.",
-    image: "/placeholder.svg?height=100&width=100",
+    image: "/images/placeholder.svg?height=100&width=100",
   },
   {
     id: 3,
@@ -49,7 +49,7 @@ const testimonials: Testimonial[] = [
     company: "Artisan Collective",
     quote:
       "Working with Moons Out Media was transformative. They understood our craftspeople's stories and translated them into compelling content that drove real business results.",
-    image: "/placeholder.svg?height=100&width=100",
+    image: "/images/placeholder.svg?height=100&width=100",
   },
   {
     id: 4,
@@ -58,19 +58,19 @@ const testimonials: Testimonial[] = [
     company: "TechStart Inc.",
     quote:
       "Moons Out Media helped us humanize our complex technology through storytelling. Our audience finally understood not just what we do, but why it matters.",
-    image: "/placeholder.svg?height=100&width=100",
+    image: "/images/placeholder.svg?height=100&width=100",
   },
 ]
 
 const clients: Client[] = [
-  { id: 1, name: "EcoTech Innovations", logo: "/placeholder.svg?height=60&width=120" },
-  { id: 2, name: "Urban Fitness", logo: "/placeholder.svg?height=60&width=120" },
-  { id: 3, name: "Artisan Collective", logo: "/placeholder.svg?height=60&width=120" },
-  { id: 4, name: "TechStart Inc.", logo: "/placeholder.svg?height=60&width=120" },
-  { id: 5, name: "Global Brands", logo: "/placeholder.svg?height=60&width=120" },
-  { id: 6, name: "City Tourism Board", logo: "/placeholder.svg?height=60&width=120" },
-  { id: 7, name: "Fashion Forward", logo: "/placeholder.svg?height=60&width=120" },
-  { id: 8, name: "Culinary Masters", logo: "/placeholder.svg?height=60&width=120" },
+  { id: 1, name: "EcoTech Innovations", logo: "/images/placeholder.svg?height=60&width=120" },
+  { id: 2, name: "Urban Fitness", logo: "/images/placeholder.svg?height=60&width=120" },
+  { id: 3, name: "Artisan Collective", logo: "/images/placeholder.svg?height=60&width=120" },
+  { id: 4, name: "TechStart Inc.", logo: "/images/placeholder.svg?height=60&width=120" },
+  { id: 5, name: "Global Brands", logo: "/images/placeholder.svg?height=60&width=120" },
+  { id: 6, name: "City Tourism Board", logo: "/images/placeholder.svg?height=60&width=120" },
+  { id: 7, name: "Fashion Forward", logo: "/images/placeholder.svg?height=60&width=120" },
+  { id: 8, name: "Culinary Masters", logo: "/images/placeholder.svg?height=60&width=120" },
 ]
 
 const stats = [
@@ -167,7 +167,7 @@ export default function TrustMeter({ className }: TrustMeterProps) {
                   <div className="flex items-center mb-4">
                     <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
                       <img
-                        src={testimonial.image || "/placeholder.svg"}
+                        src={testimonial.image || "/images/placeholder.svg"}
                         alt={testimonial.name}
                         className="w-full h-full object-cover"
                       />
@@ -240,7 +240,7 @@ export default function TrustMeter({ className }: TrustMeterProps) {
               viewport={{ once: true, margin: "-100px" }}
               className="bg-black/30 p-4 rounded-lg flex items-center justify-center h-24 border border-gray-800 hover:border-cyberpunk-blue/30 transition-colors"
             >
-              <img src={client.logo || "/placeholder.svg"} alt={client.name} className="max-h-12 max-w-full" />
+              <img src={client.logo || "/images/placeholder.svg"} alt={client.name} className="max-h-12 max-w-full" />
             </motion.div>
           ))}
         </div>

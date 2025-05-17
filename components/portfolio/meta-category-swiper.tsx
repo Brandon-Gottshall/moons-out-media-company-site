@@ -42,7 +42,7 @@ function MetaCategoryCard({
       transition={{ duration: 0.3 }}
     >
       <img
-        src={category.image || "/placeholder.svg"}
+        src={category.image || "/images/placeholder.svg"}
         alt={category.title}
         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
       />

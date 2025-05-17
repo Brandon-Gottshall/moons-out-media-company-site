@@ -24,7 +24,7 @@ const projects: Project[] = [
     category: "Documentary",
     description:
       "A documentary series showcasing EcoTech's revolutionary sustainable technologies and their real-world impact on communities and the environment.",
-    image: "/placeholder.svg?height=500&width=800",
+    image: "/images/placeholder.svg?height=500&width=800",
     results: ["87% increase in brand awareness", "$12M in new investor interest", "14 new strategic partnerships"],
     link: "/portfolio/ecotech-documentary",
   },
@@ -35,7 +35,7 @@ const projects: Project[] = [
     category: "Social Campaign",
     description:
       "A social media campaign featuring authentic customer transformation stories that resonated deeply with the target audience and drove membership growth.",
-    image: "/placeholder.svg?height=500&width=800",
+    image: "/images/placeholder.svg?height=500&width=800",
     results: ["73% increase in new memberships", "1.2M social media engagements", "92% member retention rate"],
     link: "/portfolio/urban-fitness-campaign",
   },
@@ -46,7 +46,7 @@ const projects: Project[] = [
     category: "Brand Storytelling",
     description:
       "A series of intimate artisan profiles that showcased the craftsmanship, passion, and stories behind each handmade product, driving e-commerce sales.",
-    image: "/placeholder.svg?height=500&width=800",
+    image: "/images/placeholder.svg?height=500&width=800",
     results: ["94% increase in e-commerce sales", "35% higher average order value", "78% customer loyalty rate"],
     link: "/portfolio/artisan-series",
   },
@@ -57,7 +57,7 @@ const projects: Project[] = [
     category: "Digital Marketing",
     description:
       "A campaign that translated complex technology into relatable human stories, showcasing real-world impact and applications to drive lead generation.",
-    image: "/placeholder.svg?height=500&width=800",
+    image: "/images/placeholder.svg?height=500&width=800",
     results: ["128% increase in qualified leads", "12.4% conversion rate (86% improvement)", "23% market share growth"],
     link: "/portfolio/techstart-impact",
   },
@@ -80,7 +80,7 @@ export default function FeaturedProjects() {
           >
             <div className="aspect-video">
               <img
-                src={activeProject.image || "/placeholder.svg"}
+                src={activeProject.image || "/images/placeholder.svg"}
                 alt={activeProject.title}
                 className="w-full h-full object-cover"
               />
@@ -127,7 +127,7 @@ export default function FeaturedProjects() {
             <div className="flex items-center">
               <div className="w-16 h-16 rounded-md overflow-hidden mr-4 flex-shrink-0">
                 <img
-                  src={project.image || "/placeholder.svg"}
+                  src={project.image || "/images/placeholder.svg"}
                   alt={project.title}
                   className="w-full h-full object-cover"
                 />
