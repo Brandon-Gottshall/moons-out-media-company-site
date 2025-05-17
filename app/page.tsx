@@ -3,6 +3,7 @@ import { VideoHero } from "@/components/home/video-hero"
 import { ServiceCard } from "@/components/home/service-card"
 import CallToAction from "@/components/call-to-action"
 import { WhyChooseUs } from "@/components/home/why-choose-us"
+import { MASTER_SERVICES } from "@/app/data/services"
 
 export default function Home() {
   return (
@@ -38,8 +39,17 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {SERVICES.map((service, index) => (
-              <ServiceCard key={index} service={service} index={index} />
+            {MASTER_SERVICES.filter(service => service.icon).map((service, index) => (
+              <ServiceCard
+                key={service.id}
+                service={{
+                  title: service.shortTitle || service.title,
+                  description: service.shortDescription || service.description,
+                  icon: service.icon!,
+                  color: service.color,
+                }}
+                index={index}
+              />
             ))}
           </div>
         </div>
@@ -53,35 +63,35 @@ export default function Home() {
 
 // Static data that can be accessed by both server and client components
 // Static data that can be accessed by both server and client components
-export const SERVICES = [
-  {
-    title: "Digital Marketing",
-    description: "Targeted digital ad campaigns that drive measurable results.",
-    color: "pink",
-    icon: "📱",
-  },
-  {
-    title: "Brand Storytelling",
-    description: "Authentic narratives that connect with your audience on a deeper level.",
-    color: "purple",
-    icon: "📖",
-  },
-  {
-    title: "Web Application Development",
-    description: "End-to-end web apps built on Next.js, React & Node—designed for scale, security and speed.",
-    color: "teal",
-    icon: "💻",
-  },
-  {
-    title: "AI & Automation Engineering",
-    description: "Tailored AI/ML pipelines, chatbots and workflow automations (n8n, Langflow, etc.).",
-    color: "yellow",
-    icon: "🤖",
-  },
-  {
-    title: "Cloud & DevOps Solutions",
-    description: "Containerized infrastructure, CI/CD pipelines, Kubernetes, Docker & hybrid-cloud hosting.",
-    color: "cyan",
-    icon: "☁️",
-  },
-];
+// export const SERVICES = [ // This section is removed
+//   {
+//     title: "Digital Marketing",
+//     description: "Targeted digital ad campaigns that drive measurable results.",
+//     color: "pink",
+//     icon: "📱",
+//   },
+//   {
+//     title: "Brand Storytelling",
+//     description: "Authentic narratives that connect with your audience on a deeper level.",
+//     color: "purple",
+//     icon: "📖",
+//   },
+//   {
+//     title: "Web Application Development",
+//     description: "End-to-end web apps built on Next.js, React & Node—designed for scale, security and speed.",
+//     color: "teal",
+//     icon: "💻",
+//   },
+//   {
+//     title: "AI & Automation Engineering",
+//     description: "Tailored AI/ML pipelines, chatbots and workflow automations (n8n, Langflow, etc.).",
+//     color: "yellow",
+//     icon: "🤖",
+//   },
+//   {
+//     title: "Cloud & DevOps Solutions",
+//     description: "Containerized infrastructure, CI/CD pipelines, Kubernetes, Docker & hybrid-cloud hosting.",
+//     color: "cyan",
+//     icon: "☁️",
+//   },
+// ];

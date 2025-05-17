@@ -16,111 +16,7 @@ import "swiper/css"
 import "swiper/css/navigation"
 import "swiper/css/effect-fade"
 
-type Service = {
-  id: string
-  title: string
-  description: string
-  features: string[]
-  image: string
-  caseStudyLink: string
-  color: string
-}
-
-const services: Service[] = [
-  {
-    id: "digital",
-    title: "Digital Marketing Campaigns",
-    description:
-      "We develop targeted digital campaigns that combine compelling storytelling with data-driven strategies to drive measurable results for your business.",
-    features: [
-      "Social Media Campaigns",
-      "Video Ad Series",
-      "Conversion-Focused Content",
-      "Performance Analytics",
-      "A/B Testing & Optimization",
-      "Google and Meta Ad Campaigns",
-    ],
-    image: "/images/digital-marketing.webp",
-    caseStudyLink: "/portfolio/conversion-campaigns",
-    color: "pink",
-  },
-  {
-    id: "storytelling",
-    title: "Brand Storytelling",
-    description:
-      "We craft authentic narratives that communicate your brand's values, mission, and unique selling proposition in a way that resonates with your target audience.",
-    features: [
-      "Brand Narrative Development",
-      "Visual Identity Enhancement",
-      "Messaging Strategy",
-      "Audience Connection Mapping",
-      "Emotional Engagement Tactics",
-    ],
-    image: "/images/storytelling.gif",
-    caseStudyLink: "/portfolio/documentary-storytelling",
-    color: "purple",
-  },
-  {
-    id: "social",
-    title: "Social Media Content",
-    description:
-      "We create engaging, platform-optimized content that builds community, drives engagement, and establishes your brand as a thought leader in your industry.",
-    features: [
-      "Platform-Specific Content",
-      "Community Building",
-      "Engagement Strategies",
-      "Content Development",
-    ],
-    image: "/images/Whiteboard Colab Scene.webp",
-    caseStudyLink: "/portfolio/social-media-strategy",
-    color: "green",
-  },
-  {
-    id: "web-app",
-    title: "Web Application Development",
-    description:
-      "We build scalable, secure web applications with Next.js, React & Node.js—designed for performance, reliability and ease-of-use.",
-    features: [
-      "Responsive UI/UX design",
-      "API & microservices architecture",
-      "Performance optimization & caching",
-      "Security best practices & compliance",
-    ],
-    image: "/images/web-app-development.gif",
-    caseStudyLink: "/portfolio/custom-web-applications",
-    color: "teal",
-  },
-  {
-    id: "ai-automation",
-    title: "AI & Automation Engineering",
-    description:
-      "Tailored AI/ML pipelines, chatbots and workflow automations (n8n, Langflow, etc.) that streamline operations and unlock data-driven insights.",
-    features: [
-      "Custom ML model development",
-      "Conversational chatbot integration",
-      "End-to-end workflow orchestration",
-      "Data preprocessing & ETL pipelines",
-    ],
-    image: "/images/ai-automation.jpeg",
-    caseStudyLink: "/portfolio/ai-driven-automation",
-    color: "yellow",
-  },
-  {
-    id: "cloud-devops",
-    title: "Cloud & DevOps Solutions",
-    description:
-      "End-to-end containerized infrastructure, CI/CD pipelines and hybrid-cloud hosting to keep your apps up, fast and secure at any scale.",
-    features: [
-      "Kubernetes & Docker orchestration",
-      "Automated CI/CD pipelines",
-      "Monitoring, alerting & auto-scaling",
-      "Infrastructure as Code (Terraform/Ansible)",
-    ],
-    image: "/images/cloud-devops.webp",
-    caseStudyLink: "/portfolio/enterprise-cloud-devops",
-    color: "cyan",
-  },
-]
+import { MASTER_SERVICES } from "@/app/data/services"
 
 const getServiceRgbaColor = (colorName: string, opacity: number = 1): string => {
   const colors: Record<string, string> = {
@@ -141,7 +37,7 @@ export default function ServiceShowcase() {
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { once: true, amount: 0.1 })
 
-  const activeService = services[activeIndex]
+  const activeService = MASTER_SERVICES[activeIndex]
   const activeRgbaColor = getServiceRgbaColor(activeService.color)
   const activeTailwindColorName = activeService.color // e.g. "blue", "pink"
   // Pre-construct strings for dynamic Tailwind classes that involve interpolation
@@ -194,7 +90,7 @@ export default function ServiceShowcase() {
           }}
           className="!py-8"
         >
-          {services.map((service, index) => {
+          {MASTER_SERVICES.map((service, index) => {
             const isServiceActive = index === activeIndex;
             const serviceBorderClass = isServiceActive ? activeBorderClass : 'border-gray-800 hover:border-gray-700';
             const serviceTitleClass = isServiceActive ? activeTextClass : 'text-white';
