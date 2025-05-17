@@ -63,33 +63,6 @@ export default function AboutPage() {
         {activeSection === "process" && <CreativeProcess />}
       </motion.div>
 
-      {/* Stats Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.6 }}
-        className="container mx-auto px-4 py-16"
-      >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-          <div className="bg-black/50 border border-cyberpunk-pink/20 rounded-lg p-6 text-center hover:border-cyberpunk-pink/50 transition-all duration-300">
-            <div className="text-4xl md:text-5xl font-bold text-cyberpunk-pink mb-2">3+</div>
-            <div className="text-gray-400">Years in Business</div>
-          </div>
-          <div className="bg-black/50 border border-cyberpunk-blue/20 rounded-lg p-6 text-center hover:border-cyberpunk-blue/50 transition-all duration-300">
-            <div className="text-4xl md:text-5xl font-bold text-cyberpunk-blue mb-2">20+</div>
-            <div className="text-gray-400">Clients Served</div>
-          </div>
-          <div className="bg-black/50 border border-cyberpunk-green/20 rounded-lg p-6 text-center hover:border-cyberpunk-green/50 transition-all duration-300">
-            <div className="text-4xl md:text-5xl font-bold text-cyberpunk-green mb-2">200+</div>
-            <div className="text-gray-400">Projects Completed</div>
-          </div>
-          <div className="bg-black/50 border border-cyberpunk-purple/20 rounded-lg p-6 text-center hover:border-cyberpunk-purple/50 transition-all duration-300">
-            <div className="text-4xl md:text-5xl font-bold text-cyberpunk-purple mb-2">6</div>
-            <div className="text-gray-400">Team Members</div>
-          </div>
-        </div>
-      </motion.div>
-
       <CallToAction
         title="Ready to tell your story?"
         description="Let's create something extraordinary together."
