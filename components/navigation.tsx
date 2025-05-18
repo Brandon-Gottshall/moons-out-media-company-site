@@ -168,8 +168,12 @@ export default function Navigation() {
         }
         
         .active-link {
-          color: #00CCFF;
-          animation: textFlicker 8s infinite;
+          color: #FFFFFF; /* White text */
+          text-shadow: 
+            0 0 4px rgba(255,255,255,0.6), 
+            0 0 7px rgba(255,255,255,0.4), 
+            0 0 10px rgba(255,255,255,0.2); /* Subtle white glow */
+          animation: none; /* Remove previous blue text flicker */
         }
         
         .highlight-flicker {
@@ -177,7 +181,7 @@ export default function Navigation() {
         }
         
         .microled-highlight {
-          background: linear-gradient(to right, #00CCFF, #FF69B4);
+          background: linear-gradient(to right, rgba(0,204,255,0.5) 0%, rgba(0, 204, 255, 0.1) 48%, rgba(255, 105, 180, 0.1) 52%, rgba(255,105,180,0.5) 100%);
           border-radius: 6px;
           box-shadow: 0 0 5px rgba(255, 105, 180, 0.7);
           height: 100%;
@@ -317,27 +321,6 @@ export default function Navigation() {
                 </Link>
               )
             })}
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }}>
-              <Button
-                variant="outline"
-                className="relative overflow-hidden bg-black/50 text-white px-6 py-2 rounded-md uppercase tracking-wider font-medium ml-4 transition-all border border-cyberpunk-blue/50 shadow-[0_0_10px_rgba(0,204,255,0.2)]"
-                onClick={() => {
-                  if (pathname === "/contact") {
-                    // If already on contact page, just scroll to the element
-                    const element = document.getElementById("guided-process")
-                    if (element) {
-                      element.scrollIntoView({ behavior: "smooth" })
-                    }
-                  } else {
-                    // Navigate to contact page with hash
-                    router.push("/contact#guided-process")
-                  }
-                }}
-              >
-                <span className="relative z-10">Get Started</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-cyberpunk-blue/20 via-cyberpunk-purple/20 to-cyberpunk-pink/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></span>
-              </Button>
-            </motion.div>
           </nav>
         </div>
 
@@ -345,7 +328,11 @@ export default function Navigation() {
         <div className="md:hidden vh-short:block">
           <Button
             variant="ghost"
-            className="relative text-cyberpunk-blue hover:text-cyberpunk-pink p-2 border border-cyberpunk-blue/30 rounded-md overflow-hidden group"
+            className={cn(
+              "relative p-2 border border-cyberpunk-blue/30 rounded-md overflow-hidden group",
+              // Keep background transparent on hover/focus to avoid ghost variant styles
+              "hover:bg-transparent focus:bg-transparent focus-visible:bg-transparent"
+            )}
             onClick={toggleMenu}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
@@ -353,8 +340,11 @@ export default function Navigation() {
             <motion.div
               initial={false}
               animate={{ rotate: isMenuOpen ? 90 : 0 }}
-              transition={{ duration: 0.2 }}
-              className="relative z-10"
+              transition={{ duration: 0.2 }} // This transition is for the rotation
+              className={cn(
+                "relative z-10 transition-colors duration-200", // Added for color transition
+                isMenuOpen ? "text-cyberpunk-pink" : "text-cyberpunk-blue" // Conditional color
+              )}
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </motion.div>
@@ -382,7 +372,7 @@ export default function Navigation() {
                       <Link
                         href={link.href}
                         className={cn(
-                          "py-3 transition-colors duration-300 border-b border-gray-800 block relative",
+                          "py-3 transition-colors duration-300 border-b border-gray-800 block relative p-4",
                           isActive ? "active-link" : "text-white hover:text-cyberpunk-blue",
                         )}
                         onClick={() => setIsMenuOpen(false)}
@@ -395,27 +385,6 @@ export default function Navigation() {
                     </motion.div>
                   )
                 })}
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }}>
-                  <Button
-                    className="bg-cyberpunk-pink/90 text-white w-full mt-4 uppercase tracking-wider font-medium transition-all border-none shadow-md hover:bg-cyberpunk-pink"
-                    onClick={() => {
-                      if (pathname === "/contact") {
-                        // If already on contact page, just scroll to the element
-                        setIsMenuOpen(false)
-                        const element = document.getElementById("guided-process")
-                        if (element) {
-                          element.scrollIntoView({ behavior: "smooth" })
-                        }
-                      } else {
-                        // Navigate to contact page with hash
-                        router.push("/contact#guided-process")
-                        setIsMenuOpen(false)
-                      }
-                    }}
-                  >
-                    Get Started
-                  </Button>
-                </motion.div>
               </nav>
             </div>
           </motion.div>

@@ -11,7 +11,22 @@ export const metadata: Metadata = {
   title: "Moons Out Media | Creative Agency",
   description:
     "Cutting-edge creative agency and tech studio: authentic story telling content, authentic storytelling, targeted digital campaigns—and custom web, AI & DevOps solutions.",
-  generator: 'v0.dev'
+  generator: 'v0.dev',
+  openGraph: {
+    type: 'website',
+    title: 'Moons Out Media | Creative Agency',
+    description: 'Cutting-edge creative agency and tech studio: authentic story telling content, authentic storytelling, targeted digital campaigns—and custom web, AI & DevOps solutions.',
+    // You might want to add a site_name and images here as well
+    // site_name: 'Moons Out Media',
+    // images: [
+    //   {
+    //     url: 'https://yourdomain.com/og-image.png', // Replace with your actual OG image URL
+    //     width: 1200,
+    //     height: 630,
+    //     alt: 'Moons Out Media',
+    //   },
+    // ],
+  },
 }
 
 export const viewport: Viewport = {

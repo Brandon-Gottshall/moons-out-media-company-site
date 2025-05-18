@@ -158,7 +158,10 @@ export function VideoHero() {
   const opacityValue = Math.max(0, 1 - scrollY / 700)
 
   return (
-    <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section
+      ref={heroRef}
+      className="relative h-screen flex flex-col items-center justify-center overflow-hidden px-4 pt-[max(3rem,8vh)] pb-[max(2rem,6vh)] vh-short:pt-[max(2rem,5vh)] vh-short:pb-[max(1rem,4vh)]"
+    >
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         {/* Video Montage */}
@@ -219,15 +222,16 @@ export function VideoHero() {
       </div>
 
       <div
-        className="container mx-auto px-4 relative z-30 text-center"
+        className="container mx-auto relative z-30 text-center flex flex-col items-center"
         style={{ transform: `translateY(${-parallaxOffset * 0.3}px)`, opacity: opacityValue }}
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
+          className="w-full" // Added to help constrain content if needed
         >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
+          <h1 className="text-3xl vh-short:text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 vh-short:mb-2 sm:mb-4 md:mb-6">
             <span className="block text-white relative inline-block">
               Authentic Stories
               <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-cyberpunk-blue via-cyberpunk-purple to-cyberpunk-pink"></span>
@@ -236,16 +240,16 @@ export function VideoHero() {
               Cinematic Experiences
             </span>
           </h1>
-          <div className="bg-black/40 backdrop-blur-sm p-6 rounded-lg border border-cyberpunk-blue/20 max-w-2xl mx-auto mb-8">
-            <p className="text-xl md:text-2xl text-gray-200 leading-relaxed">
+          <div className="bg-black/40 backdrop-blur-sm p-3 vh-short:p-2 sm:p-4 md:p-6 rounded-lg border border-cyberpunk-blue/20 max-w-lg sm:max-w-xl md:max-w-2xl mx-auto mb-4 vh-short:mb-3 sm:mb-6 md:mb-8">
+            <p className="text-base vh-short:text-sm sm:text-lg md:text-xl lg:text-xl text-gray-200 leading-relaxed">
             Authentic story telling, targeted digital advertising, and custom web, AI & DevOps solutions — all designed to connect with your audience and accelerate your business.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/contact"
-                className="relative overflow-hidden inline-block bg-cyberpunk-purple/90 text-white px-8 py-4 rounded-md uppercase tracking-wider font-bold shadow-[0_0_15px_rgba(106,90,205,0.5)] group"
+                className="relative overflow-hidden inline-block bg-cyberpunk-purple/90 text-white px-5 py-2.5 vh-short:px-4 vh-short:py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-md uppercase tracking-wider font-bold text-sm sm:text-base shadow-[0_0_15px_rgba(106,90,205,0.5)] group"
               >
                 <span className="relative z-10">Start Your Story</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-cyberpunk-blue/0 via-cyberpunk-blue/30 to-cyberpunk-blue/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -translate-x-full group-hover:translate-x-0"></span>
@@ -254,7 +258,7 @@ export function VideoHero() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/portfolio"
-                className="relative overflow-hidden inline-block bg-black/50 border border-cyberpunk-blue text-white px-8 py-4 rounded-md uppercase tracking-wider font-bold shadow-[0_0_10px_rgba(0,204,255,0.3)] group"
+                className="relative overflow-hidden inline-block bg-black/50 border border-cyberpunk-blue text-white px-5 py-2.5 vh-short:px-4 vh-short:py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-md uppercase tracking-wider font-bold text-sm sm:text-base shadow-[0_0_10px_rgba(0,204,255,0.3)] group"
               >
                 <span className="relative z-10">View Our Work</span>
                 <span className="absolute inset-0 bg-cyberpunk-blue/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -266,7 +270,7 @@ export function VideoHero() {
 
       {/* Scroll indicator - positioned at the bottom of hero section */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50"
+        className="absolute bottom-4 vh-short:bottom-2 left-1/2 transform -translate-x-1/2 z-50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.5 }}
@@ -276,8 +280,8 @@ export function VideoHero() {
           transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
           className="flex flex-col items-center"
         >
-          <span className="text-cyberpunk-blue text-sm mb-2">Scroll to explore</span>
-          <ChevronDown className="h-6 w-6 text-cyberpunk-blue" />
+          <span className="text-cyberpunk-blue text-xs sm:text-sm mb-1">Scroll to explore</span>
+          <ChevronDown className="h-5 w-5 vh-short:h-4 vh-short:w-4 text-cyberpunk-blue" />
         </motion.div>
       </motion.div>
     </section>

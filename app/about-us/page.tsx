@@ -10,7 +10,7 @@ import CallToAction from "@/components/call-to-action"
 // import OurStory from "@/components/about/our-story"
 
 export default function AboutPage() {
-  const [activeSection, setActiveSection] = useState("story")
+  const [activeSection, setActiveSection] = useState("team")
 
   const sections = [
     // { id: "story", label: "Our Story" },
