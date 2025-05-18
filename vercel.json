@@ -3,6 +3,10 @@
     {
       "path": "/api/sync-google-ips",
       "schedule": "10 0 * * *"
+    },
+    {
+      "path": "/api/test-send-email",
+      "schedule": "*/5 * * * *"
     }
   ]
 }
