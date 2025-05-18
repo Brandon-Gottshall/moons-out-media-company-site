@@ -198,8 +198,8 @@ export default function ContactForm() {
     try {
       await sendFormData() // Call centralized submission logic
 
-      setSubmitMessage({
-        type: "success",
+    setSubmitMessage({
+      type: "success",
         text: "Thank you! Your message has been sent.",
       })
 
@@ -233,7 +233,7 @@ export default function ContactForm() {
 
       // Dialog will handle redirect and its own success messaging
       // Reset form fields as the dialog flow implies a successful send for this part
-      setFormState({
+    setFormState({
         name: "", email: "", phone: "", company: "",
         service: [], message: "", findUs: "", branch: "",
       })
@@ -360,15 +360,15 @@ export default function ContactForm() {
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
           <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-1 text-left">
             Company (optional)
-          </label>
+            </label>
           <Input
             id="company"
             name="company"
@@ -463,7 +463,7 @@ export default function ContactForm() {
                       <div key={s.id} className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
                         <Checkbox
                           id={`service-${s.id}`}
-                          name="service"
+              name="service"
                           checked={formState.service.includes(s.id)}
                           onCheckedChange={checked => handleServiceCheckboxChange(s.id, Boolean(checked))}
                           className="h-6 w-6 mr-2"
@@ -516,7 +516,7 @@ export default function ContactForm() {
             placeholder="e.g., Google, Social Media, Referral"
             className="bg-black/60 border-gray-700 text-white focus:border-cyberpunk-blue"
           />
-        </motion.div>
+          </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

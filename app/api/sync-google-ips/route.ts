@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import dns from 'dns/promises';
 import nodemailer from 'nodemailer';
+import sgClient from '@sendgrid/client';
 
 // --- SendGrid IP Management ---
 const SENDGRID_API_KEY_IP_MANAGEMENT = process.env.SENDGRID_API_KEY_IP_MANAGEMENT;
@@ -13,10 +14,16 @@ const EMAIL_USER = process.env.EMAIL_USER; // Should be "apikey" for SendGrid
 const EMAIL_PASS = process.env.EMAIL_PASS; // Should be your main SendGrid API Key (for sending email)
 const NODEMAILER_FROM_EMAIL = process.env.NODEMAILER_FROM_EMAIL || '"Moons Out IP Sync Agent" <status@moonsoutmedia.com>';
 const STATUS_EMAIL_RECIPIENT = process.env.STATUS_EMAIL_RECIPIENT; // Your email address for status updates
+const HOME_DDNS_HOSTNAME = process.env.HOME_DDNS_HOSTNAME; // Your DDNS hostname
+
+// Configure SendGrid client
+if (SENDGRID_API_KEY_IP_MANAGEMENT) {
+  sgClient.setApiKey(SENDGRID_API_KEY_IP_MANAGEMENT);
+}
 
 // Nodemailer transporter for sending status emails
 let statusEmailTransporter: nodemailer.Transporter | null = null;
-if (EMAIL_HOST && EMAIL_USER && EMAIL_PASS && STATUS_EMAIL_RECIPIENT) {
+if (EMAIL_HOST && EMAIL_USER && EMAIL_PASS && STATUS_EMAIL_RECIPIENT && NODEMAILER_FROM_EMAIL) {
   statusEmailTransporter = nodemailer.createTransport({
     host: EMAIL_HOST,
     port: EMAIL_PORT,
@@ -30,11 +37,15 @@ if (EMAIL_HOST && EMAIL_USER && EMAIL_PASS && STATUS_EMAIL_RECIPIENT) {
 
 async function sendStatusEmail(subject: string, textBody: string, htmlBody?: string) {
   if (!statusEmailTransporter) {
-    console.warn('Status email transporter not configured. Skipping status email.');
+    console.warn('Status email transporter not configured (missing one or more of: EMAIL_HOST, EMAIL_USER, EMAIL_PASS, STATUS_EMAIL_RECIPIENT, NODEMAILER_FROM_EMAIL). Skipping status email.');
     return;
   }
   if (!STATUS_EMAIL_RECIPIENT) {
     console.warn('STATUS_EMAIL_RECIPIENT not set. Skipping status email.');
+    return;
+  }
+  if (!NODEMAILER_FROM_EMAIL) {
+    console.warn('NODEMAILER_FROM_EMAIL not set. Skipping status email.');
     return;
   }
 
@@ -145,6 +156,67 @@ async function addToSendGridWhitelist(ipsToAdd: string[]): Promise<{success: boo
 export async function GET(request: Request) { 
   let statusSubject = 'Moons Out Media: SendGrid IP Sync Status';
   let statusTextBody = `Run at: ${new Date().toUTCString()}\n\n`;
+
+  // --- BEGIN: Add Home IP to SendGrid Allowlist ---
+  if (!HOME_DDNS_HOSTNAME) {
+    statusTextBody += 'Warning: HOME_DDNS_HOSTNAME environment variable is not set. Skipping home IP allowlist update.\n';
+    console.warn('HOME_DDNS_HOSTNAME environment variable is not set. Skipping home IP allowlist update.');
+  } else if (!SENDGRID_API_KEY_IP_MANAGEMENT) {
+    statusTextBody += 'Warning: SENDGRID_API_KEY_IP_MANAGEMENT is not set. Cannot update SendGrid IP allowlist.\n';
+    console.warn('SENDGRID_API_KEY_IP_MANAGEMENT is not set. Cannot update SendGrid IP allowlist.');
+  } else {
+    try {
+      sgClient.setApiKey(SENDGRID_API_KEY_IP_MANAGEMENT); // Ensure API key is set for sgClient
+      const resolvedIps = await dns.resolve4(HOME_DDNS_HOSTNAME);
+      if (resolvedIps && resolvedIps.length > 0) {
+        const currentHomeIp = resolvedIps[0];
+        statusTextBody += `Resolved ${HOME_DDNS_HOSTNAME} to ${currentHomeIp}.\n`;
+        console.log(`Resolved ${HOME_DDNS_HOSTNAME} to ${currentHomeIp}.`);
+
+        // Get current allowlist
+        const [allowlistResponse, allowlistBody] = await sgClient.request({
+          method: 'GET',
+          url: '/v3/access_settings/whitelist',
+        });
+
+        if (allowlistResponse.statusCode === 200 && allowlistBody.result) {
+          const isIpAllowed = allowlistBody.result.some((rule: any) => rule.ip === currentHomeIp);
+          if (isIpAllowed) {
+            statusTextBody += `${currentHomeIp} is already in SendGrid IP allowlist.\n`;
+            console.log(`${currentHomeIp} is already in SendGrid IP allowlist.`);
+          } else {
+            statusTextBody += `${currentHomeIp} not found in SendGrid IP allowlist. Adding...\n`;
+            console.log(`${currentHomeIp} not found in SendGrid IP allowlist. Adding...`);
+            const [addResponse, addBody] = await sgClient.request({
+              method: 'POST',
+              url: '/v3/access_settings/whitelist',
+              body: {
+                ips: [{ ip: currentHomeIp }],
+              },
+            });
+            if (addResponse.statusCode === 201) {
+              statusTextBody += `Successfully added ${currentHomeIp} to SendGrid IP allowlist.\n`;
+              console.log(`Successfully added ${currentHomeIp} to SendGrid IP allowlist.`);
+            } else {
+              statusTextBody += `Error adding ${currentHomeIp} to SendGrid IP allowlist. Status: ${addResponse.statusCode}, Body: ${JSON.stringify(addBody)}\n`;
+              console.error(`Error adding ${currentHomeIp} to SendGrid IP allowlist. Status: ${addResponse.statusCode}, Body:`, addBody);
+            }
+          }
+        } else {
+          statusTextBody += `Error fetching SendGrid IP allowlist. Status: ${allowlistResponse.statusCode}, Body: ${JSON.stringify(allowlistBody)}\n`;
+          console.error(`Error fetching SendGrid IP allowlist. Status: ${allowlistResponse.statusCode}, Body:`, allowlistBody);
+        }
+      } else {
+        statusTextBody += `Could not resolve ${HOME_DDNS_HOSTNAME} to an IPv4 address.\n`;
+        console.warn(`Could not resolve ${HOME_DDNS_HOSTNAME} to an IPv4 address.`);
+      }
+    } catch (error: any) {
+      statusTextBody += `Error processing home IP allowlist: ${error.message}\n`;
+      console.error('Error processing home IP allowlist:', error);
+    }
+  }
+  statusTextBody += '---\n';
+  // --- END: Add Home IP to SendGrid Allowlist ---
 
   if (!SENDGRID_API_KEY_IP_MANAGEMENT) {
     statusTextBody += 'Configuration Error: SENDGRID_API_KEY_IP_MANAGEMENT is not set.';
