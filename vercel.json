@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/sync-google-ips",
-      "schedule": "0 2 * * *"
+      "schedule": "10 0 * * *"
     }
   ]
 }
