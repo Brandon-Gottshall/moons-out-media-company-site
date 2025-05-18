@@ -117,7 +117,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
           </Link>
 
           <div className="max-w-4xl">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
               <Badge variant="outline" className="bg-cyberpunk-blue/20 text-cyberpunk-blue border-cyberpunk-blue/30 mb-4">
                 {displayCategory}
               </Badge>
@@ -154,7 +154,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
           className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-4 flex flex-col items-center z-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.8 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
         >
           <span className="text-cyberpunk-pink text-sm mb-2">Scroll for details</span>
           <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}>
@@ -233,7 +233,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
 
               <AnimatePresence mode="wait">
                 {activeTab === "challenge" && currentItem.challenge && (
-                  <motion.div key="challenge" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
+                  <motion.div key="challenge" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }}>
                     <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">The Challenge</h2>
                     <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6 md:p-8 mb-8">
                       <SimpleRichText content={currentItem.challenge} />
@@ -242,7 +242,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
                 )}
 
                 {activeTab === "solution" && currentItem.solution && (
-                  <motion.div key="solution" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
+                  <motion.div key="solution" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }}>
                     <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Our Solution</h2>
                     <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6 md:p-8 mb-8">
                       <SimpleRichText content={currentItem.solution} />
@@ -265,7 +265,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
                 )}
 
                 {activeTab === "results" && currentItem.results && (
-                  <motion.div key="results" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
+                  <motion.div key="results" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }}>
                     <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Project Results</h2>
                     <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6 md:p-8 mb-8">
                       <SimpleRichText content={currentItem.results} />
@@ -277,7 +277,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
                             key={index}
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.3, delay: index * 0.1 }}
+                            transition={{ duration: 0.2, delay: index * 0.05 }}
                             className="bg-black/50 border border-gray-700/70 rounded-lg p-4 text-center flex flex-col justify-center items-center"
                           >
                             <p className="text-2xl font-bold text-cyberpunk-green">{metric.metricValue}</p>
@@ -308,7 +308,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
                 )}
 
                 {activeTab === "gallery" && currentItem.galleryImages && currentItem.galleryImages.length > 0 && (
-                  <motion.div key="gallery" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
+                  <motion.div key="gallery" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }}>
                     <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Project Gallery</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-8">
                       {currentItem.galleryImages.map((galleryItem, index) => (
@@ -316,7 +316,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
                           key={index}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5, delay: index * 0.1 }}
+                          transition={{ duration: 0.3, delay: index * 0.05 }}
                           className="group relative overflow-hidden rounded-lg border border-gray-800/50 aspect-video"
                         >
                           <Image
@@ -337,7 +337,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
                 )}
 
                 {activeTab === "videos" && currentItem.showcaseVideos && currentItem.showcaseVideos.length > 0 && (
-                  <motion.div key="videos" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
+                  <motion.div key="videos" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }}>
                     <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Showcase Videos</h2>
                     <div className="space-y-8">
                       {currentItem.showcaseVideos.map((video, index) => (

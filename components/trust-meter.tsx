@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 type TrustMeterProps = {
   className?: string
@@ -208,15 +209,15 @@ export default function TrustMeter({ className }: TrustMeterProps) {
         <div className="bg-black/50 backdrop-blur-sm rounded-lg border border-cyberpunk-pink/30 p-6">
           <h4 className="text-xl font-semibold text-white mb-6">By the Numbers</h4>
 
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center p-4 bg-black/60 rounded-lg border border-gray-800"
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="bg-black/50 backdrop-blur-sm border border-cyberpunk-blue/20 p-3 md:p-4 rounded-lg text-center shadow-xl"
               >
                 <p className="text-3xl font-bold text-cyberpunk-gold mb-2">{stat.value}</p>
                 <p className="text-sm text-gray-400">{stat.label}</p>
@@ -245,6 +246,20 @@ export default function TrustMeter({ className }: TrustMeterProps) {
           ))}
         </div>
       </div>
+
+      <motion.div
+        className="mt-12 md:mt-16"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <Link href="/contact">
+          <button className="bg-cyberpunk-blue text-white px-4 py-2 rounded-full">
+            Contact Us
+          </button>
+        </Link>
+      </motion.div>
     </div>
   )
 }

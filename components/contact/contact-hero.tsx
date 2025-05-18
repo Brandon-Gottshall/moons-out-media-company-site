@@ -82,7 +82,7 @@ export default function ContactHero() {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : -20 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.4 }}
           >
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               <span className="text-white">Let's Solve Your</span> <br />
@@ -107,7 +107,7 @@ export default function ContactHero() {
             className="text-xl text-gray-300 mb-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: isVisible ? 1 : 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.4, delay: 0.15 }}
           >
             No generic solutions. Tell us your specific challenges, and we'll show you how our authentic story telling
             approach can transform your results. We collaborate virtually with clients worldwide.
@@ -117,7 +117,7 @@ export default function ContactHero() {
             className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            transition={{ duration: 0.4, delay: 0.25 }}
           >
             {[
               { value: "87%", label: "Increase in brand engagement", color: "blue" },
@@ -134,7 +134,7 @@ export default function ContactHero() {
                 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
-                transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
               >
                 <motion.p
                   className={`text-3xl font-bold text-cyberpunk-${stat.color}`}

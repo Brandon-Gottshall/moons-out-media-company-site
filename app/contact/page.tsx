@@ -170,7 +170,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.4 }}
           >
             <div className="text-center mb-10">
               <h2 className="text-3xl font-bold my-4 inline-block relative">
@@ -187,11 +187,12 @@ export default function ContactPage() {
 
           {/* FAQ Section */}
           <motion.section
-            className="mb-20"
+            id="faq"
+            className="mb-12"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
           >
 
             <div className="max-w-3xl mx-auto space-y-12">
@@ -244,7 +245,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.5 }}
             className="relative overflow-hidden rounded-2xl"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-cyberpunk-blue/20 to-cyberpunk-pink/20 z-0"></div>

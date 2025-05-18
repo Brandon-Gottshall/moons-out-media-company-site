@@ -150,10 +150,10 @@ export default function ClientSuccessTimeline() {
                 ></div>
 
                 <motion.div
-                  initial={{ opacity: 0, x: isLeft ? 20 : -20 }}
+                  initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.3, delay: 0.1 }}
+                  viewport={{ once: true, amount: 0.2 }}
                   className={`p-6 rounded-lg ${
                     isActive
                       ? "bg-black/80 backdrop-blur-md border border-cyberpunk-blue/50 shadow-[0_0_15px_rgba(0,255,255,0.3)]"
@@ -232,10 +232,10 @@ export default function ClientSuccessTimeline() {
         {successStories.map((story, index) => (
           <motion.div
             key={story.id}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.3 }}
+            viewport={{ once: true, amount: 0.2 }}
             className="bg-black/80 backdrop-blur-sm border border-cyberpunk-blue/30 rounded-lg overflow-hidden shadow-lg"
           >
             <div className="p-4 border-b border-gray-800">

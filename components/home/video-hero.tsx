@@ -154,8 +154,8 @@ export function VideoHero() {
   }, [currentIndex])
 
   // Calculate parallax effect based on scroll position
-  const parallaxOffset = scrollY * 0.4
-  const opacityValue = Math.max(0, 1 - scrollY / 700)
+  const parallaxOffset = scrollY * 0.5
+  const opacityValue = Math.max(0, 1 - scrollY / 500)
 
   return (
     <section
@@ -228,7 +228,7 @@ export function VideoHero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
           className="w-full" // Added to help constrain content if needed
         >
           <h1 className="text-3xl vh-short:text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 vh-short:mb-2 sm:mb-4 md:mb-6">
@@ -273,7 +273,7 @@ export function VideoHero() {
         className="absolute bottom-4 vh-short:bottom-2 left-1/2 transform -translate-x-1/2 z-50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.5 }}
+        transition={{ delay: 0.5, duration: 0.4 }}
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}

@@ -129,23 +129,10 @@ export default function Navigation() {
     >
       <style jsx global>{`
         @keyframes textFlicker {
-          0% { opacity: 1; text-shadow: 0 0 4px rgba(0, 204, 255, 0.6); }
-          3% { opacity: 0.8; text-shadow: 0 0 2px rgba(0, 204, 255, 0.4); }
-          6% { opacity: 1; text-shadow: 0 0 4px rgba(0, 204, 255, 0.6); }
-          7% { opacity: 0.9; text-shadow: 0 0 3px rgba(0, 204, 255, 0.5); }
-          8% { opacity: 1; text-shadow: 0 0 4px rgba(0, 204, 255, 0.6); }
-          9% { opacity: 0.95; text-shadow: 0 0 3px rgba(0, 204, 255, 0.5); }
-          10% { opacity: 1; text-shadow: 0 0 4px rgba(0, 204, 255, 0.6); }
-          30% { opacity: 1; text-shadow: 0 0 4px rgba(0, 204, 255, 0.6); }
-          31% { opacity: 0.85; text-shadow: 0 0 2px rgba(0, 204, 255, 0.4); }
-          32% { opacity: 1; text-shadow: 0 0 4px rgba(0, 204, 255, 0.6); }
-          36% { opacity: 0.9; text-shadow: 0 0 3px rgba(0, 204, 255, 0.5); }
-          37% { opacity: 1; text-shadow: 0 0 4px rgba(0, 204, 255, 0.6); }
-          71% { opacity: 1; text-shadow: 0 0 4px rgba(0, 204, 255, 0.6); }
-          72% { opacity: 0.75; text-shadow: 0 0 2px rgba(0, 204, 255, 0.4); }
-          73% { opacity: 0.9; text-shadow: 0 0 3px rgba(0, 204, 255, 0.5); }
-          74% { opacity: 1; text-shadow: 0 0 4px rgba(0, 204, 255, 0.6); }
-          100% { opacity: 1; text-shadow: 0 0 4px rgba(0, 204, 255, 0.6); }
+          0%, 100% { opacity: 1; text-shadow: 0 0 5px rgba(0, 204, 255, 0.7); }
+          25% { opacity: 0.9; text-shadow: 0 0 4px rgba(0, 204, 255, 0.5); }
+          50% { opacity: 1; text-shadow: 0 0 5px rgba(0, 204, 255, 0.7); }
+          75% { opacity: 0.92; text-shadow: 0 0 4px rgba(0, 204, 255, 0.6); }
         }
 
         @keyframes dramaticFlicker {
@@ -234,6 +221,10 @@ export default function Navigation() {
         
         .led-track.active::before {
           opacity: 1;
+        }
+
+        .animate-text-flicker {
+          animation: textFlicker 8s infinite;
         }
       `}</style>
 

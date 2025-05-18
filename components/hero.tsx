@@ -22,7 +22,7 @@ export default function Hero() {
   // Don't apply parallax effect during SSR
   const parallaxStyle = mounted
     ? {
-        transform: `translateY(${scrollY * 0.5}px)`,
+        transform: `translateY(${scrollY * 0.6}px)`,
       }
     : {};
 
@@ -62,7 +62,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
           className="text-center max-w-4xl mx-auto"
         >
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
@@ -103,7 +103,7 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
+        transition={{ delay: 0.8, duration: 0.7 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30"
       >
         <motion.div

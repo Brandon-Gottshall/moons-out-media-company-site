@@ -174,7 +174,7 @@ const config: Config = {
       keyframes: {
         flicker: {
           "0%, 18%, 22%, 25%, 53%, 57%, 100%": { opacity: "1" },
-          "20%, 24%, 55%": { opacity: "0.7" },
+          "20%, 24%, 55%": { opacity: "0.92" },
         },
         pulse: {
           "0%": {

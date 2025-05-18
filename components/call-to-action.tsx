@@ -49,7 +49,7 @@ export default function CallToAction({
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
             viewport={{ once: true }}
           >
             <h2
@@ -80,35 +80,35 @@ export default function CallToAction({
           </motion.div>
           {showNewsletter && (
             <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="bg-black/60 backdrop-blur-sm rounded-lg border border-cyberpunk-pink/30 p-5 md:p-8"
-          >
-            <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-white">Stay Updated</h3>
-            <p className="text-sm md:text-base text-gray-300 mb-5 md:mb-6">
-              Subscribe to our newsletter for the latest insights on storytelling, marketing trends, and creative
-              inspiration.
-            </p>
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="bg-black/60 backdrop-blur-sm rounded-lg border border-cyberpunk-pink/30 p-5 md:p-8 max-w-lg mx-auto"
+            >
+              <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-white">Stay Updated</h3>
+              <p className="text-sm md:text-base text-gray-300 mb-5 md:mb-6">
+                Subscribe to our newsletter for the latest insights on storytelling, marketing trends, and creative
+                inspiration.
+              </p>
 
-            {!submitted ? (
-              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="bg-black/50 border-gray-700 focus:border-cyberpunk-blue text-white"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <Button type="submit" className="cyberpunk-button whitespace-nowrap">
-                  Subscribe
-                </Button>
-              </form>
-            ) : (
-              <div className="text-cyberpunk-green font-medium">Thanks for subscribing! We'll be in touch soon.</div>
-            )}
+              {!submitted ? (
+                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                  <Input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="bg-black/50 border-gray-700 focus:border-cyberpunk-blue text-white"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                  <Button type="submit" className="cyberpunk-button whitespace-nowrap">
+                    Subscribe
+                  </Button>
+                </form>
+              ) : (
+                <div className="text-cyberpunk-green font-medium">Thanks for subscribing! We'll be in touch soon.</div>
+              )}
             </motion.div>
           )}
         </div>

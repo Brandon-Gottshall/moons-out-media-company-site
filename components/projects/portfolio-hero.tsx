@@ -15,7 +15,7 @@ import MetaCategorySwiper from "./meta-category-swiper";
 import type { MetaCategory } from "@/lib/category-data";
 
 const TRANSITION_INTERVAL = 4000; // Time in milliseconds between transitions
-const TEXT_DELAY = 1000; // Delay in milliseconds before text changes after video
+const TEXT_DELAY = 700; // Delay in milliseconds before text changes after video
 
 // Combined data structure for videos and words
 const storyContent = [
@@ -401,7 +401,7 @@ export default function PortfolioHero({
           className="transform-gpu w-full sm:w-1/2 flex flex-col justify-center items-center text-center lg:text-left lg:items-start order-1 lg:order-1 sm:pt-0 vh-short:py-1"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
         >
           {/* Group all content elements in a flex column with consistent gap */}
           <div className="flex flex-col gap-4 w-full vh-short:gap-2">
@@ -412,7 +412,7 @@ export default function PortfolioHero({
                   className="transform-gpu text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-5xl vh-short:text-lg font-bold"
                   initial={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <div className="flex flex-col items-center lg:items-start">
                     <span className="text-white mb-1 vh-short:mb-0">Our Work</span>
@@ -485,7 +485,7 @@ export default function PortfolioHero({
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20, height: 0, overflow: "hidden" }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.2 }}
                     >
                       <MetaCategoryNavButtons
                         metaCategories={metaCategories}
@@ -518,7 +518,7 @@ export default function PortfolioHero({
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20, position: "absolute", zIndex: -1 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.2 }}
             >
               <div className="flex items-center justify-center w-full max-w-full sm:max-w-2xl">
                 {featuredProject}
@@ -533,7 +533,7 @@ export default function PortfolioHero({
         className="transform-gpu absolute bottom-4 vh-short:bottom-1 left-1/2 -translate-x-1/2 flex flex-col items-center z-50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.8 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
       >
         {!isSearchActive && (
           <>
