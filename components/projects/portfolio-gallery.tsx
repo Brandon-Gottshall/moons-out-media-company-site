@@ -24,9 +24,37 @@ export default function PortfolioGallery({
   onSubCategorySelect,
   isSearchActive
 }: PortfolioGalleryProps) {
-  const PAGE_SIZE = 6
-  const [itemsToShow, setItemsToShow] = useState(PAGE_SIZE)
+  const [pageSize, setPageSize] = useState(6);
+  const [itemsToShow, setItemsToShow] = useState(pageSize)
   const [isSearchContext, setIsSearchContext] = useState(false)
+
+  useEffect(() => {
+    const calculatePageSize = () => {
+      const width = window.innerWidth;
+      let numColumns = 1;
+      if (width >= 1280) { // xl
+        numColumns = 4;
+      } else if (width >= 1024) { // lg
+        numColumns = 3;
+      } else if (width >= 768) { // md
+        numColumns = 2;
+      }
+      return numColumns * 2; // Load 2 rows
+    };
+
+    const newPageSize = calculatePageSize();
+    setPageSize(newPageSize);
+    setItemsToShow(newPageSize);
+
+    const handleResize = () => {
+      const updatedPageSize = calculatePageSize();
+      setPageSize(updatedPageSize);
+      setItemsToShow(updatedPageSize);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search)
@@ -69,8 +97,8 @@ export default function PortfolioGallery({
   }, [activeGalleryFilterId, selectedMetaCategoryId, currentSelectedMeta]);
 
   useEffect(() => {
-    setItemsToShow(PAGE_SIZE)
-  }, [filteredItems])
+    setItemsToShow(pageSize)
+  }, [filteredItems, pageSize])
 
   const displayedItems = useMemo(
     () => filteredItems.slice(0, itemsToShow),
@@ -131,7 +159,7 @@ export default function PortfolioGallery({
         <div className="mt-12 text-center">
           <Button
             className="cyberpunk-button py-6 px-10 text-base relative overflow-hidden group"
-            onClick={() => setItemsToShow(prev => Math.min(prev + PAGE_SIZE, filteredItems.length))}
+            onClick={() => setItemsToShow(prev => Math.min(prev + pageSize, filteredItems.length))}
           >
             <span className="relative z-10">Load More Projects</span>
           </Button>

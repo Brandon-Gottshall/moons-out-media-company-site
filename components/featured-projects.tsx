@@ -19,7 +19,7 @@ type Project = {
 const projects: Project[] = [
   {
     id: 1,
-    title: "Sustainable Innovation Documentary",
+    title: "Sustainable Innovation Doc (Debug: Full Results)",
     client: "EcoTech Innovations",
     category: "Documentary",
     description:
@@ -30,24 +30,24 @@ const projects: Project[] = [
   },
   {
     id: 2,
-    title: "Fitness Transformation Campaign",
+    title: "Fitness Campaign (Debug: Minimal Results)",
     client: "Urban Fitness",
     category: "Social Campaign",
     description:
-      "A social media campaign featuring authentic customer transformation stories that resonated deeply with the target audience and drove membership growth.",
+      "A social media campaign featuring authentic customer transformation stories that resonated deeply with the target audience and drove membership growth. This version has fewer result items for debugging.",
     image: "/images/placeholder.svg?height=500&width=800",
-    results: ["73% increase in new memberships", "1.2M social media engagements", "92% member retention rate"],
+    results: ["73% increase in new memberships"],
     link: "/projects/urban-fitness-campaign",
   },
   {
     id: 3,
-    title: "Artisan Craftsmanship Series",
+    title: "Artisan Series (Debug: No Results)",
     client: "Artisan Collective",
     category: "Brand Storytelling",
     description:
-      "A series of intimate artisan profiles that showcased the craftsmanship, passion, and stories behind each handmade product, driving e-commerce sales.",
+      "A series of intimate artisan profiles that showcased the craftsmanship, passion, and stories behind each handmade product, driving e-commerce sales. This version has no result items for debugging.",
     image: "/images/placeholder.svg?height=500&width=800",
-    results: ["94% increase in e-commerce sales", "35% higher average order value", "78% customer loyalty rate"],
+    results: [],
     link: "/projects/artisan-series",
   },
   {

@@ -8,15 +8,15 @@ export interface PortfolioItem {
   publishedDate?: string // ISO date string
   heroImage: { url: string; alt: string }
   summary: string
-  challenge: string // RichText, simplified to string for placeholder
-  solution: string // RichText, simplified to string for placeholder
+  challenge?: string // RichText, simplified to string for placeholder
+  solution?: string // RichText, simplified to string for placeholder
+  results?: string // RichText, simplified to string for placeholder. Was: results: string
   servicesRendered: string[] // Slugs of services
   keyFeatures?: Array<{
     featureTitle: string
     featureDescription: string
     featureIcon?: string // e.g., Lucide icon name
   }>
-  results: string // RichText, simplified to string for placeholder
   metrics?: Array<{
     metricLabel: string
     metricValue: string
@@ -53,6 +53,228 @@ export interface PortfolioItem {
 
 export const allPortfolioItems: PortfolioItem[] = [
   {
+    title: "Project Alpha (Debug: All Tabs)",
+    slug: "project-alpha",
+    clientName: "Innovatech Solutions",
+    industry: "VR/AR Development",
+    projectYear: 2023,
+    status: "published",
+    publishedDate: "2023-11-01T00:00:00Z",
+    heroImage: { url: "https://media.giphy.com/media/3oEduXqfCv6iR65zGM/giphy.gif", alt: "VR Tech GIF" },
+    summary: "A groundbreaking VR training platform for surgical procedures, enhancing realism and skill acquisition.",
+    challenge: "Traditional surgical training methods are expensive, time-consuming, and lack realistic haptic feedback. Innovatech needed a scalable and immersive solution.",
+    solution: "We developed a high-fidelity VR simulation with custom haptic controllers, replicating the tactile sensations of surgery. The platform includes a comprehensive curriculum and performance analytics.",
+    results: "Reduced training costs by 40%, improved surgical skill proficiency by 25% based on standardized tests, and received overwhelmingly positive feedback from trainees and instructors.",
+    servicesRendered: ["vr-ar-development", "custom-software-development", "ui-ux-design"],
+    keyFeatures: [
+      { featureTitle: "Realistic Haptic Feedback", featureDescription: "Custom controllers simulate surgical tool interaction." },
+      { featureTitle: "Comprehensive Analytics", featureDescription: "Detailed performance tracking for trainees." }
+    ],
+    tags: ["VR", "Medical Training", "Simulation"],
+    metaCategory: "all-projects", // Placeholder
+    subCategory: "all-projects" // Placeholder
+  },
+  {
+    title: "Project Beta (Debug: No Solution Tab)",
+    slug: "project-beta",
+    clientName: "FutureGadget Labs",
+    industry: "Artificial Intelligence",
+    projectYear: 2024,
+    status: "published",
+    publishedDate: "2024-01-20T00:00:00Z",
+    heroImage: { url: "https://media.giphy.com/media/l3vR8HnO1LhP900tW/giphy.gif", alt: "AI Thinking GIF" },
+    summary: "An AI-powered personal assistant app designed to learn user habits and proactively manage schedules and tasks.",
+    challenge: "Existing personal assistant apps lack true proactivity and deep personalization. The goal was to create an AI that genuinely anticipates user needs.",
+    results: "Achieved a 90% accuracy in predicting user needs after a two-week learning period. Beta users reported a 30% increase in daily productivity.",
+    servicesRendered: ["ai-ml-solutions", "mobile-app-development"],
+    tags: ["AI", "Productivity", "Mobile App"],
+    metaCategory: "all-projects", // Placeholder
+    subCategory: "all-projects" // Placeholder
+  },
+  {
+    title: "Project Gamma (Debug: No Results Tab)",
+    slug: "project-gamma",
+    clientName: "EcoPlanet Initiatives",
+    industry: "Environmental Tech",
+    projectYear: 2023,
+    status: "published",
+    publishedDate: "2023-07-05T00:00:00Z",
+    heroImage: { url: "https://media.giphy.com/media/3oKIPEqD8XJ8NGmdP2/giphy.gif", alt: "Green Tech GIF" },
+    summary: "A global platform connecting volunteers with environmental projects, featuring a dynamic mapping and impact tracking system.",
+    challenge: "Environmental organizations struggled to reach and coordinate volunteers effectively. A centralized platform was needed to bridge this gap.",
+    solution: "We designed and developed a web platform with interactive maps, project listings, volunteer management tools, and real-time impact reporting.",
+    servicesRendered: ["web-development", "data-visualization", "cloud-solutions"],
+    tags: ["Environment", "Non-profit", "Web Platform"],
+    metaCategory: "all-projects", // Placeholder
+    subCategory: "all-projects" // Placeholder
+  },
+  {
+    title: "Project Delta (Debug: Only Challenge Tab)",
+    slug: "project-delta",
+    clientName: "CyberSecure Corp",
+    industry: "Cybersecurity",
+    projectYear: 2024,
+    status: "published",
+    publishedDate: "2024-04-15T00:00:00Z",
+    heroImage: { url: "https://media.giphy.com/media/10nZNevH2qVTQA/giphy.gif", alt: "Cybersecurity Matrix GIF" },
+    summary: "Development of a next-generation threat intelligence platform with predictive analytics.",
+    challenge: "The rapidly evolving landscape of cyber threats requires a proactive and intelligent system to identify and mitigate risks before they impact organizations.",
+    servicesRendered: ["ai-ml-solutions", "custom-software-development"],
+    keyFeatures: [
+      { featureTitle: "Predictive Threat Modeling", featureDescription: "AI algorithms analyze global threat data to predict potential attacks." },
+      { featureTitle: "Real-time Alerting", featureDescription: "Instant notifications for critical security events." },
+    ],
+    tags: ["Cybersecurity", "AI", "Platform"],
+    callToAction: { ctaType: "external", ctaLabel: "Request a Demo", ctaUrl: "/request-demo?project=delta" },
+    metaCategory: "all-projects",
+    subCategory: "all-projects"
+  },
+  {
+    title: "Project Epsilon (Debug: No Challenge, Solution, or Results)",
+    slug: "project-epsilon",
+    clientName: "QuantumLeap Computing",
+    industry: "Quantum Computing",
+    projectYear: "Upcoming",
+    status: "published",
+    publishedDate: "2024-05-01T00:00:00Z",
+    heroImage: { url: "https://media.giphy.com/media/xUPGчимtU5bF6x91m/giphy.gif", alt: "Quantum Physics GIF" },
+    summary: "Exploratory research and framework development for a novel quantum algorithm.",
+    servicesRendered: ["research-development"],
+    tags: ["Quantum Computing", "R&D"],
+    metaCategory: "all-projects", // Placeholder
+    subCategory: "all-projects" // Placeholder
+  },
+  {
+    title: "Project Zeta (Debug: Solution & Results Only)",
+    slug: "project-zeta",
+    clientName: "HealthSync Medical",
+    industry: "Healthcare Technology",
+    projectYear: 2023,
+    status: "published",
+    publishedDate: "2023-10-20T00:00:00Z",
+    heroImage: { url: "https://media.giphy.com/media/3oFzm6et50S2A20xWM/giphy.gif", alt: "Healthcare Tech GIF" },
+    summary: "A platform for secure medical data exchange between hospitals and clinics.",
+    solution: "Leveraging blockchain technology and advanced encryption, we created a HIPAA-compliant data sharing network that ensures patient privacy and data integrity.",
+    results: "Reduced data transfer times by 60% and eliminated 99% of data breach risks associated with previous methods. Adopted by 50+ healthcare providers.",
+    servicesRendered: ["blockchain-development", "custom-software-development", "cloud-solutions"],
+    tags: ["Healthcare", "Blockchain", "Security"],
+    metrics: [
+        { metricLabel: "Data Transfer Time Reduction", metricValue: "60%" },
+        { metricLabel: "Risk Elimination (Breaches)", metricValue: "99%" },
+        { metricLabel: "Provider Adoption", metricValue: "50+" }
+    ],
+    metaCategory: "all-projects", // Placeholder
+    subCategory: "all-projects" // Placeholder
+  },
+  {
+    title: "Project Eta (Debug: Challenge & Solution Only)",
+    slug: "project-eta",
+    clientName: "SmartGrid Energy",
+    industry: "Energy Management",
+    projectYear: 2024,
+    status: "published",
+    publishedDate: "2024-02-10T00:00:00Z",
+    heroImage: { url: "https://media.giphy.com/media/l0HlO1mg802y9L0Hu/giphy.gif", alt: "Smart Energy GIF" },
+    summary: "An IoT system for optimizing energy distribution in urban environments.",
+    challenge: "Inefficient energy distribution in large cities leads to significant waste and high costs. A smarter grid was needed to balance supply and demand dynamically.",
+    solution: "We developed an IoT network of sensors and AI-driven control units that monitor energy consumption in real-time and adjust distribution patterns to optimize efficiency and reduce load on the grid.",
+    servicesRendered: ["iot-solutions", "ai-ml-solutions", "cloud-solutions"],
+    tags: ["Energy", "IoT", "Smart City"],
+    keyFeatures: [
+        { featureTitle: "Real-Time Monitoring", featureDescription: "Live data streams from thousands of sensors across the city." },
+        { featureTitle: "AI-Powered Optimization", featureDescription: "Machine learning models predict demand and optimize distribution." }
+    ],
+    metaCategory: "all-projects", // Placeholder
+    subCategory: "all-projects" // Placeholder
+  },
+  {
+    title: "Project Theta (Debug: Videos Only)",
+    slug: "project-theta",
+    clientName: "ViralVids Co.",
+    industry: "Digital Media",
+    projectYear: 2024,
+    status: "published",
+    publishedDate: "2024-06-01T00:00:00Z",
+    heroImage: { url: "https://media.giphy.com/media/3o7TKz6e9PrQnN4D28/giphy.gif", alt: "Video Reel GIF" },
+    summary: "A showcase of compelling video content, demonstrating storytelling through motion pictures. This project primarily features a collection of videos.",
+    servicesRendered: ["video-production", "content-marketing"],
+    tags: ["Video Production", "Short Film", "Brand Video"],
+    showcaseVideos: [
+      {
+        muxPlaybackId: "placeholderMuxIdViral1",
+        title: "The Art of Motion - Showcase Reel",
+        order: 1,
+        description: "A dynamic reel highlighting our best video work.",
+        thumbnailUrl: "/placeholder-images/video-thumb1.jpg"
+      },
+      {
+        muxPlaybackId: "placeholderMuxIdViral2",
+        title: "Client Success Story: TechSpark",
+        order: 2,
+        description: "A compelling testimonial video for TechSpark.",
+        thumbnailUrl: "/placeholder-images/video-thumb2.jpg"
+      }
+    ],
+    metaCategory: "all-projects", // Placeholder
+    subCategory: "all-projects" // Placeholder
+  },
+  {
+    title: "Galactic Archives Holo-Library",
+    slug: "galactic-archives-holo-library",
+    clientName: "Galactic Archives",
+    industry: "Historical Research",
+    projectYear: "2023",
+    status: "published",
+    publishedDate: "2023-08-01T10:00:00Z",
+    heroImage: { url: "https://media.giphy.com/media/3oEduEoy1Lz98wzQkM/giphy.gif", alt: "Space Library GIF" },
+    summary: "A digital archive of historical artifacts and cultural relics from across the galaxy.",
+    challenge: "Galactic Archives faced the challenge of preserving and digitizing a vast collection of historical artifacts and cultural relics. They needed a scalable and secure platform to manage and access this vast collection.",
+    solution: "We developed a digital archive platform that integrates advanced search algorithms, 3D reconstruction technology, and secure access controls. The platform allows users to explore and interact with artifacts in a virtual environment, providing a rich and immersive experience.",
+    results: "The platform successfully digitized and preserved over 100,000 artifacts, making them accessible to researchers and enthusiasts worldwide. The platform also facilitated a 50% increase in visitor engagement and a 30% increase in donations.",
+    servicesRendered: ["web-development", "data-visualization", "cloud-solutions"],
+    keyFeatures: [
+      { featureTitle: "Advanced Search Algorithms", featureDescription: "Utilizes machine learning to enhance search capabilities and accuracy." },
+      { featureTitle: "3D Reconstruction Technology", featureDescription: "Reconstructs artifacts in 3D for immersive experiences." },
+      { featureTitle: "Secure Access Controls", featureDescription: "Ensures the integrity and security of sensitive data." }
+    ],
+    metrics: [
+      { metricLabel: "Artifact Digitization", metricValue: "+100,000" },
+      { metricLabel: "Visitor Engagement", metricValue: "+50%" },
+      { metricLabel: "Donation Increase", metricValue: "+30%" },
+    ],
+    testimonial: {
+      quote: "Moons Out Media's digital solutions have been instrumental in our mission to preserve and share the rich history of the galaxy. Their expertise in cloud architecture and data visualization has transformed our archive into a powerful tool for education and research.",
+      authorName: "Dr. Thalia Starlight",
+      authorTitle: "Director, Galactic Archives"
+    },
+    galleryImages: [
+      { image: { url: "https://via.placeholder.com/800x600?text=Galactic+Archives+Still+1", alt: "Inside the Galactic Archives" }, caption: "The holographic library in action." },
+      { image: { url: "https://via.placeholder.com/800x600?text=Galactic+Archives+Still+2", alt: "Digital archive of historical artifacts" }, caption: "The digital archive in action." },
+    ],
+    tags: ["Historical Research", "Digital Archive", "Cultural Preservation", "3D Reconstruction"],
+    callToAction: {
+      ctaLabel: "Visit the Galactic Archives",
+      ctaUrl: "https://galacticarchives.com",
+      ctaType: "external"
+    },
+    showcaseVideos: [
+      {
+        muxPlaybackId: "placeholderMuxIdGalacticArchivesTrailer", // Placeholder Mux Playback ID
+        title: "Galactic Archives - Trailer",
+        order: 1,
+        description: "Official trailer for the Galactic Archives digital archive."
+      },
+      {
+        muxPlaybackId: "placeholderMuxIdGalacticArchivesBTS", // Placeholder Mux Playback ID
+        title: "Behind the Scenes: Galactic Archives",
+        order: 2,
+        description: "A quick look at the making of our digital archive."
+      }
+    ],
+    metaCategory: "creative-narrative-driven", // Placeholder - PLEASE UPDATE
+    subCategory: "all-creative-narrative-driven", // Placeholder - PLEASE UPDATE
+  },
+  {
     title: "EcoTech Innovations: Igniting Brand Awareness with Documentary Storytelling",
     slug: "ecotech-innovations-documentary",
     clientName: "EcoTech Innovations",
@@ -60,7 +282,7 @@ export const allPortfolioItems: PortfolioItem[] = [
     projectYear: "2023",
     status: "published",
     publishedDate: "2023-10-15T10:00:00Z",
-    heroImage: { url: "https://via.placeholder.com/1200x675?text=EcoTech+Hero+Shot", alt: "EcoTech sustainable technology in action" },
+    heroImage: { url: "https://media.giphy.com/media/l41lHj9DEejLz99hS/giphy.gif", alt: "Sustainability Animation GIF" },
     summary: "Discover how our documentary series amplified EcoTech's message, showcasing their green solutions and achieving a 42% surge in brand recognition.",
     challenge: "EcoTech Innovations, a pioneer in sustainable energy solutions, struggled to convey the real-world impact and technical sophistication of their products to a broader audience. Their existing marketing materials were dense and failed to capture the passion behind their mission, leading to low engagement and difficulty attracting new investors and talent.",
     solution: "We partnered with EcoTech to produce a compelling three-part documentary series, \"The Future is Green.\" Each episode focused on a different aspect of their technology, featuring interviews with engineers, testimonials from early adopters, and stunning visuals of their solutions in practice. The narrative was crafted to be accessible, inspiring, and emotionally resonant, humanizing the technology and highlighting its positive global impact.",
@@ -118,7 +340,7 @@ export const allPortfolioItems: PortfolioItem[] = [
     projectYear: "2022",
     status: "published",
     publishedDate: "2022-11-20T10:00:00Z",
-    heroImage: { url: "https://via.placeholder.com/1200x675?text=Urban+Fitness+Hero", alt: "Diverse group exercising at Urban Fitness" },
+    heroImage: { url: "https://media.giphy.com/media/l41YvXYq2z00wZ2o0/giphy.gif", alt: "Fitness Workout GIF" },
     summary: "A targeted social media campaign showcasing real member transformations drove a 73% increase in membership inquiries for Urban Fitness.",
     challenge: "Urban Fitness Co. offered excellent facilities and trainers but faced stiff competition in a crowded market. Their social media presence was generic and failed to highlight their unique community-focused approach, resulting in stagnant growth and low engagement on their posts.",
     solution: "We launched the #MyUrbanJourney social media campaign, centered around authentic video and photo stories of real members and their fitness transformations. Content focused on overcoming challenges, building community, and celebrating personal achievements, rather than just before-and-after shots. This was supported by targeted ads and influencer collaborations with local fitness personalities.",
@@ -154,7 +376,7 @@ export const allPortfolioItems: PortfolioItem[] = [
     projectYear: "2023",
     status: "published",
     publishedDate: "2023-09-05T10:00:00Z",
-    heroImage: { url: "https://via.placeholder.com/1200x675?text=Artisan+Collective+Hero", alt: "Beautiful handcrafted goods from Artisan Collective" },
+    heroImage: { url: "https://media.giphy.com/media/3o7TKtsBMu4kM2mY4U/giphy.gif", alt: "Online Shopping GIF" },
     summary: "Intimate artisan profiles and a revamped e-commerce visual strategy led to a 94% increase in online sales for The Artisan Collective.",
     challenge: "The Artisan Collective curated beautiful, high-quality handcrafted goods, but their online store struggled to convey the skill and passion behind each product. Product photography was inconsistent, and the brand story was lost, leading to high cart abandonment rates and difficulty competing with mass-produced alternatives.",
     solution: "We developed a series of short video profiles for key artisans, showcasing their creative process, inspiration, and dedication. This was complemented by a complete overhaul of their product photography and website visuals, emphasizing a cohesive, aspirational aesthetic. The brand narrative was woven throughout the customer journey, from product pages to email marketing.",
@@ -187,7 +409,7 @@ export const allPortfolioItems: PortfolioItem[] = [
     projectYear: "2024",
     status: "published",
     publishedDate: "2024-01-10T10:00:00Z",
-    heroImage: { url: "https://via.placeholder.com/1200x675?text=Innovate+Web+App", alt: "Screenshot of Innovate Solutions custom web application" },
+    heroImage: { url: "https://media.giphy.com/media/xTiTnqUxyWbsAXq7Ju/giphy.gif", alt: "Software Interface GIF" },
     summary: "A bespoke web application built with Next.js and Node.js, designed to automate Innovate Solutions' core operational processes, resulting in a 30% efficiency gain.",
     challenge: "Innovate Solutions was relying on a patchwork of spreadsheets, email, and outdated legacy software to manage their complex project workflows. This led to inefficiencies, data silos, frequent errors, and an inability to scale their operations effectively. They needed a centralized, modern solution tailored to their specific needs.",
     solution: "We designed and developed a custom web application from the ground up using Next.js for the frontend and Node.js for the backend API. The application featured role-based access control, a real-time project dashboard, automated reporting, and integration with their existing CRM. The UI/UX was meticulously designed for ease of use, even for non-technical staff.",
@@ -215,7 +437,7 @@ export const allPortfolioItems: PortfolioItem[] = [
     projectYear: "2023",
     status: "published",
     publishedDate: "2023-11-01T10:00:00Z",
-    heroImage: { url: "https://via.placeholder.com/1200x675?text=DataCorp+AI+Hero", alt: "Abstract visualization of AI data processing" },
+    heroImage: { url: "https://media.giphy.com/media/3oKIPEsPZOv95fX16M/giphy.gif", alt: "Data Analytics GIF" },
     summary: "Implemented a custom AI/ML pipeline to automate DataCorp's report generation, reducing processing time by 70% and uncovering new actionable insights.",
     challenge: "DataCorp Analytics processed vast amounts of client data to generate market intelligence reports. Their existing manual processes were time-consuming, prone to human error, and limited their ability to extract deeper, predictive insights from the data. They needed to scale their analytical capabilities and offer more sophisticated services.",
     solution: "We developed a tailored AI/ML pipeline that automated data ingestion, cleaning, analysis, and report generation. This involved creating custom machine learning models for trend prediction and anomaly detection. The solution was built using Python, TensorFlow, and integrated with their existing cloud infrastructure, providing a scalable and robust platform.",
@@ -231,7 +453,6 @@ export const allPortfolioItems: PortfolioItem[] = [
       { metricLabel: "New Insights Generated", metricValue: "+25% annually" },
       { metricLabel: "Client Satisfaction (Premium Reports)", metricValue: "95%" },
     ],
-    tags: ["AI & Machine Learning", "Data Analytics", "Automation", "Cloud Solutions", "Python"],
     testimonial: {
       quote: "Moons Out Media's AI expertise helped us leapfrog our competition. The automation solution is not just efficient; it's a strategic asset that unlocks new value from our data.",
       authorName: "Dr. Emily Carter",

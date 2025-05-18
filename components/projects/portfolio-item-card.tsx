@@ -19,9 +19,9 @@ export function PortfolioItemCard({ item, index }: PortfolioItemCardProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="relative flex flex-col overflow-hidden rounded-lg border border-gray-800 group-hover:border-cyberpunk-blue/70 group-hover:shadow-glow-blue transition-all duration-300 bg-black/60 backdrop-blur-sm h-full"
+        className="bg-black/70 border border-gray-800/70 rounded-lg overflow-hidden flex flex-col group hover:border-cyberpunk-blue/50 transition-all duration-300 shadow-lg hover:shadow-cyberpunk-blue/20 h-full"
       >
-        <div className="aspect-video overflow-hidden">
+        <div className="aspect-[16/10] overflow-hidden relative">
           <Image
             src={item.heroImage.url}
             alt={item.heroImage.alt}
@@ -32,19 +32,7 @@ export function PortfolioItemCard({ item, index }: PortfolioItemCardProps) {
         </div>
 
         <div className="p-5 flex flex-col flex-grow">
-          <div className="mb-3">
-            {item.tags?.slice(0, 2).map((tag) => (
-              <Badge
-                key={tag}
-                variant="outline"
-                className="mr-2 mb-1 border-cyberpunk-blue/50 text-cyberpunk-blue bg-cyberpunk-blue/10 text-xs"
-              >
-                {tag}
-              </Badge>
-            ))}
-          </div>
-
-          <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyberpunk-blue transition-colors">
+          <h3 className="text-lg md:text-xl font-bold text-white mb-2 leading-tight group-hover:text-cyberpunk-blue transition-colors">
             {item.title}
           </h3>
           
@@ -56,7 +44,7 @@ export function PortfolioItemCard({ item, index }: PortfolioItemCardProps) {
 
           <div className="mt-auto">
             <div className="inline-flex items-center text-sm font-medium text-cyberpunk-blue group-hover:text-cyberpunk-blue/80 group-hover:underline underline-offset-4">
-              View Case Study
+              View Project
               <ExternalLink className="ml-1.5 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
             </div>
           </div>

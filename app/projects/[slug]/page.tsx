@@ -45,7 +45,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
   const { slug } = unwrappedParams
   
   const [mounted, setMounted] = useState(false)
-  const [activeTab, setActiveTab] = useState("challenge") 
+  const [activeTab, setActiveTab] = useState<string | undefined>(undefined) 
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -54,6 +54,21 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
 
   const currentItem = allPortfolioItems.find(item => item.slug === slug && item.status === 'published');
   const primaryVideo = currentItem?.showcaseVideos?.find(v => v.order === 1);
+
+  useEffect(() => {
+    if (currentItem) {
+      const availableTabs = [];
+      if (currentItem.challenge) availableTabs.push("challenge");
+      if (currentItem.solution) availableTabs.push("solution");
+      if (currentItem.results) availableTabs.push("results");
+      if (currentItem.galleryImages && currentItem.galleryImages.length > 0) availableTabs.push("gallery");
+      if (currentItem.showcaseVideos && currentItem.showcaseVideos.length > 0) availableTabs.push("videos");
+
+      if (activeTab === undefined || !availableTabs.includes(activeTab)) {
+        setActiveTab(availableTabs[0]);
+      }
+    }
+  }, [currentItem, activeTab]);
 
   if (!mounted) {
     return null
@@ -148,89 +163,48 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
         </motion.div>
       </section>
 
-      {/* Project Quick Stats - Adapted for PortfolioItem */}
-      <section className="py-8 border-y border-gray-800/50 bg-black/20">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {currentItem.projectYear && (
-              <div className="flex items-center space-x-3">
-                <Calendar className="h-8 w-8 text-cyberpunk-blue" />
-                <div>
-                  <p className="text-sm text-gray-400">Year</p>
-                  <p className="text-white font-medium">{currentItem.projectYear}</p>
-                </div>
-              </div>
-            )}
-            {currentItem.industry && (
-              <div className="flex items-center space-x-3">
-                <Briefcase className="h-8 w-8 text-cyberpunk-pink" />
-                <div>
-                  <p className="text-sm text-gray-400">Industry</p>
-                  <p className="text-white font-medium">{currentItem.industry}</p>
-                </div>
-              </div>
-            )}
-            {currentItem.servicesRendered && currentItem.servicesRendered.length > 0 && (
-              <div className="flex items-center space-x-3">
-                <Tag className="h-8 w-8 text-cyberpunk-green" />
-                <div>
-                  <p className="text-sm text-gray-400">Key Service</p>
-                  {/* Display first service, or join them. For simplicity, first one. */}
-                  <p className="text-white font-medium">{currentItem.servicesRendered[0]}</p>
-                </div>
-              </div>
-            )}
-             {currentItem.metrics && currentItem.metrics.length > 0 && (
-              <div className="flex items-center space-x-3">
-                <Award className="h-8 w-8 text-cyberpunk-gold" />
-                <div>
-                  <p className="text-sm text-gray-400">Key Metric</p>
-                  <p className="text-white font-medium">
-                    {currentItem.metrics[0].metricLabel}: {currentItem.metrics[0].metricValue} {currentItem.metrics[0].metricChange || ''}
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
       {/* Project Details Tabs */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
             <div className="lg:col-span-2">
               <div className="flex overflow-x-auto space-x-1 sm:space-x-2 mb-8 pb-2 border-b border-gray-800/50">
-                <button
-                  className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
-                    activeTab === "challenge"
-                      ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
-                      : "text-gray-400 hover:text-white"
-                  }`}
-                  onClick={() => setActiveTab("challenge")}
-                >
-                  <Target className="inline h-4 w-4 mr-1.5 sm:mr-2" /> Challenge
-                </button>
-                <button
-                  className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
-                    activeTab === "solution"
-                      ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
-                      : "text-gray-400 hover:text-white"
-                  }`}
-                  onClick={() => setActiveTab("solution")}
-                >
-                  <Lightbulb className="inline h-4 w-4 mr-1.5 sm:mr-2" /> Solution
-                </button>
-                <button
-                  className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
-                    activeTab === "results"
-                      ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
-                      : "text-gray-400 hover:text-white"
-                  }`}
-                  onClick={() => setActiveTab("results")}
-                >
-                 <BarChart2 className="inline h-4 w-4 mr-1.5 sm:mr-2" /> Results
-                </button>
+                {currentItem.challenge && (
+                  <button
+                    className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
+                      activeTab === "challenge"
+                        ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
+                        : "text-gray-400 hover:text-white"
+                    }`}
+                    onClick={() => setActiveTab("challenge")}
+                  >
+                    <Target className="inline h-4 w-4 mr-1.5 sm:mr-2" /> Challenge
+                  </button>
+                )}
+                {currentItem.solution && (
+                  <button
+                    className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
+                      activeTab === "solution"
+                        ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
+                        : "text-gray-400 hover:text-white"
+                    }`}
+                    onClick={() => setActiveTab("solution")}
+                  >
+                    <Lightbulb className="inline h-4 w-4 mr-1.5 sm:mr-2" /> Solution
+                  </button>
+                )}
+                {currentItem.results && (
+                  <button
+                    className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
+                      activeTab === "results"
+                        ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
+                        : "text-gray-400 hover:text-white"
+                    }`}
+                    onClick={() => setActiveTab("results")}
+                  >
+                   <BarChart2 className="inline h-4 w-4 mr-1.5 sm:mr-2" /> Results
+                  </button>
+                )}
                 {currentItem.galleryImages && currentItem.galleryImages.length > 0 && (
                   <button
                     className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
@@ -258,7 +232,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
               </div>
 
               <AnimatePresence mode="wait">
-                {activeTab === "challenge" && (
+                {activeTab === "challenge" && currentItem.challenge && (
                   <motion.div key="challenge" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
                     <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">The Challenge</h2>
                     <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6 md:p-8 mb-8">
@@ -267,7 +241,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
                   </motion.div>
                 )}
 
-                {activeTab === "solution" && (
+                {activeTab === "solution" && currentItem.solution && (
                   <motion.div key="solution" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
                     <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Our Solution</h2>
                     <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6 md:p-8 mb-8">
@@ -290,7 +264,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
                   </motion.div>
                 )}
 
-                {activeTab === "results" && (
+                {activeTab === "results" && currentItem.results && (
                   <motion.div key="results" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
                     <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Project Results</h2>
                     <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6 md:p-8 mb-8">
@@ -385,70 +359,6 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
-
-            {/* Sidebar Details */}
-            <div className="lg:sticky top-24 self-start">
-              <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6">
-                <h3 className="text-xl font-bold mb-6 text-white">Project At a Glance</h3>
-                <div className="space-y-5 mb-6">
-                  <div>
-                    <p className="text-sm text-gray-400 flex items-center"><Briefcase className="h-4 w-4 mr-2 text-cyberpunk-blue"/> Client</p>
-                    <p className="text-white mt-1">{currentItem.clientName}</p>
-                  </div>
-                  {currentItem.projectYear && (
-                    <div>
-                      <p className="text-sm text-gray-400 flex items-center"><Calendar className="h-4 w-4 mr-2 text-cyberpunk-blue"/> Year</p>
-                      <p className="text-white mt-1">{currentItem.projectYear}</p>
-                    </div>
-                  )}
-                  {currentItem.industry && (
-                    <div>
-                      <p className="text-sm text-gray-400 flex items-center"><Tag className="h-4 w-4 mr-2 text-cyberpunk-blue"/> Industry</p>
-                      <p className="text-white mt-1">{currentItem.industry}</p>
-                    </div>
-                  )}
-                </div>
-
-                {currentItem.servicesRendered && currentItem.servicesRendered.length > 0 && (
-                  <>
-                    <h4 className="text-lg font-medium mb-3 text-white">Services Provided</h4>
-                    <ul className="space-y-2 mb-6">
-                      {currentItem.servicesRendered.map((service, index) => (
-                        <li key={index} className="flex items-start">
-                          <span className="text-cyberpunk-green mr-2 mt-1">✓</span>
-                          <span className="text-white capitalize">{service.replace(/-/g, ' ')}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                )}
-                
-                {currentItem.tags && currentItem.tags.length > 0 && (
-                  <>
-                    <h4 className="text-lg font-medium mb-3 text-white">Project Tags</h4>
-                    <div className="flex flex-wrap gap-2 mb-6">
-                        {currentItem.tags.map(tag => (
-                            <Badge key={tag} variant="secondary" className="bg-gray-700/50 text-gray-300">{tag}</Badge>
-                        ))}
-                    </div>
-                  </>
-                )}
-
-                <Link href="/contact">
-                  <Button className="w-full cyberpunk-button mb-3">
-                    Discuss Your Project
-                  </Button>
-                </Link>
-                <Link href="/services">
-                  <Button
-                    variant="outline"
-                    className="w-full border-cyberpunk-blue text-cyberpunk-blue hover:bg-cyberpunk-blue/10"
-                  >
-                    Explore Our Services
-                  </Button>
-                </Link>
-              </div>
             </div>
           </div>
         </div>
