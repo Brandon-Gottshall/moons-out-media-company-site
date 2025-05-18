@@ -60,6 +60,7 @@
     "react-resizable-panels": "^2.1.7",
     "react-simple-typewriter": "latest",
     "recharts": "2.15.0",
+    "sendgrid": "^5.2.3",
     "sonner": "^1.7.1",
     "swiper": "^11.2.6",
     "tailwind-merge": "^2.5.5",
