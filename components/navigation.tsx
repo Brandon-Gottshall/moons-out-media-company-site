@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { usePathname, useRouter } from "next/navigation"
+import type { ReactNode } from "react"
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -16,7 +17,11 @@ const navLinks = [
   { name: "Contact", href: "/contact" },
 ]
 
-export default function Navigation() {
+interface NavigationProps {
+  logoSlot?: ReactNode
+}
+
+export default function Navigation({ logoSlot }: NavigationProps) {
   // First, add a state to track the last hovered link index
   const [activeLink, setActiveLink] = useState("")
   const [lastHoveredIndex, setLastHoveredIndex] = useState<number | null>(null)
@@ -229,18 +234,20 @@ export default function Navigation() {
       `}</style>
 
       <div className="container mx-auto px-4 flex justify-between items-center w-full">
-        <Link href="/" className="flex items-center">
-          <motion.span
-            className="text-2xl font-bold relative"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
-          >
-            <span className="text-cyberpunk-blue mr-1 tracking-wider">MOONS</span>
-            <span className="text-cyberpunk-pink tracking-wider">OUT</span>
-            <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-cyberpunk-blue via-cyberpunk-purple to-cyberpunk-pink"></span>
-          </motion.span>
-          {/* <span className="text-2xl font-bold relative text-white">MOONS OUT</span> Simplified for LCP diagnosis */}
-        </Link>
+        {logoSlot || (
+          <Link href="/" className="flex items-center">
+            <motion.span
+              className="text-2xl font-bold relative"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <span className="text-cyberpunk-blue mr-1 tracking-wider">MOONS</span>
+              <span className="text-cyberpunk-pink tracking-wider">OUT</span>
+              <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-cyberpunk-blue via-cyberpunk-purple to-cyberpunk-pink"></span>
+            </motion.span>
+            {/* <span className="text-2xl font-bold relative text-white">MOONS OUT</span> Simplified for LCP diagnosis */}
+          </Link>
+        )}
 
         {/* Desktop Navigation */}
         <div className="hidden md:block vh-short:hidden relative">

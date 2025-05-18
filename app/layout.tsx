@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
+import { SiteLogo } from "@/components/site-logo"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -44,7 +45,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} cyberpunk bg-cyberpunk-background min-h-screen`}>
         <div className="relative">
-          <Navigation />
+          <Navigation logoSlot={<SiteLogo />} />
           <main className="relative">{children}</main>
           <Footer />
         </div>
