@@ -36,9 +36,11 @@ export default function FeaturedProject({
         {/* Thumbnail with play button */}
         <div className="w-full h-full relative">
           <img
-            src="/images/project1.png"
+            src="/images/project1.webp"
             alt="Featured project image" 
-            className="w-full h-full object-cover"
+            width={1200}
+            height={675}
+            className="w-full h-full object-cover rounded-lg shadow-2xl group-hover:shadow-[0_0_30px_theme(colors.cyberpunk.blue)] transition-all duration-300"
           />
           {customImageOverlay}
         </div>
@@ -70,9 +72,11 @@ export default function FeaturedProject({
     >
       <div className="relative rounded-lg overflow-hidden aspect-video" onClick={customImageOverlay ? handleOverlayInteraction : undefined}>
         <img
-          src="/images/project1.png"
+          src="/images/project1.webp"
           alt="Featured project image"
-          className="w-full h-full object-cover"
+          width={1200}
+          height={675}
+          className="w-full h-full object-cover rounded-lg shadow-2xl group-hover:shadow-[0_0_30px_theme(colors.cyberpunk.pink)] transition-all duration-300"
         />
         {customImageOverlay || (
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-center justify-center">

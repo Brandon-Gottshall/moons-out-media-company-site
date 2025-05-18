@@ -27,7 +27,7 @@ export default function TeamSection() {
       name: "Levi Armentrout",
       role: "HNIC",
       bio: "Levi Armentrout, HNIC at Moons Out Media, brings Marine Corps discipline and a documentary cinematographer's eye to every project. After multiple tours of duty, he immersed himself in authentic storytelling—directing and shooting films that uncover untold personal narratives. As HNIC, Levi shapes narrative strategy, oversees brand-film direction, and guides creative execution, ensuring each story combines cinematic polish with genuine human emotion. His steady leadership and visual expertise drive Moons Out's mission to craft memorable, human-centered experiences that linger long after the credits roll.",
-      image: "/images/Levi.jpg",
+      image: "/images/Levi.webp",
       social: {
         twitter: "#",
         linkedin: "#",
@@ -38,7 +38,7 @@ export default function TeamSection() {
       name: "Brandon",
       role: "Software Alchemist",
       bio: "Brandon Gottshall is a Marine Corps veteran who architects containerized infrastructures, secure reverse-proxy gateways, and AI-driven automation pipelines for Moons Out Media. He leverages Vercel, Docker, Next.js, Tailwind, ShadCN, and PostgreSQL to deploy scalable web platforms. At Moons Out Labs, he implemented Authelia for internal AI-service authentication and orchestrated n8n, Langflow, and LibreChat workflows to eliminate repetitive tasks. With a focus on CI/CD best practices, infrastructure as code, and maintainability, Brandon transforms complex requirements into robust systems that empower creative teams to focus on storytelling.",
-      image: "/images/Brandon.jpg",
+      image: "/images/Brandon.webp",
       social: {
         twitter: "#",
         linkedin: "#",
@@ -49,7 +49,7 @@ export default function TeamSection() {
       name: "Jacai",
       role: "Audio Engineering/Sound Design",
       bio: "Independent artist and audio engineer Jacai is deeply immersed in crafting his authentic sound. His mastery of audio engineering and production fuels his growth as a songwriter, recording artist, and mixing engineer across diverse musical projects. Beyond his solo work, Jacai collaborates with other artists, using his keen ear and technical skills to realize their sonic visions. Driven by a passion for music and a commitment to his community, Jacai supports fellow artists and shares his unique creative approach, aiming to create impactful art and be a positive influence. His burgeoning fanbase and love for music continue to propel this mission.",
-      image: "/images/jacai_cropped.jpeg",
+      image: "/images/jacai_cropped.webp",
       social: {
         twitter: "#",
         linkedin: "#",

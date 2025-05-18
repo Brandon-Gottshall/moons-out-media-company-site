@@ -182,7 +182,7 @@ export function VideoHero() {
                 playsInline
                 preload="metadata"
                 className="absolute w-full h-full object-cover"
-                poster="/images/portfolio-hero.png"
+                poster="/images/portfolio-hero.webp"
               >
                 <source src={content.video.url} type="video/mp4" />
               </video>

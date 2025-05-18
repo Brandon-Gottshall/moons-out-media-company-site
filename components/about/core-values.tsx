@@ -161,11 +161,10 @@ export default function CoreValues() {
               transition={{ duration: 0.6 }}
             >
               <Image
-                src="/images/red_racoons.png"
-                alt="Marine Corps Raccoons"
-                width={250}
-                height={250}
-                className="object-cover max-w-full overflow-clip opacity-60"
+                alt="Red Racoons Logo"
+                className="object-contain"
+                fill
+                src="/images/red_racoons.webp"
               />
             </motion.div>
           </div>

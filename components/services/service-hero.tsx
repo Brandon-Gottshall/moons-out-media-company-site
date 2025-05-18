@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
 import { useTypewriter, Cursor } from 'react-simple-typewriter'
+import Image from "next/image"
 
 export default function ServiceHero() {
   const [mounted, setMounted] = useState(false)
@@ -99,11 +100,12 @@ export default function ServiceHero() {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-cyberpunk-background z-10"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,90,205,0.2)_0%,transparent_70%)] z-20"></div>
-        <motion.img
-          style={{ y, opacity }}
-          src="/images/services-hero.png"
-          alt="Services Hero Background"
+        <Image
+          alt="Services Hero Image"
           className="absolute w-full h-full object-cover"
+          fill
+          priority
+          src="/images/services-hero.webp"
         />
       </div>
 

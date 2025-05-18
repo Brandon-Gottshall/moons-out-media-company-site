@@ -28,7 +28,7 @@ export const MASTER_SERVICES: Service[] = [
     title: "Brand Storytelling",
     // shortTitle can be omitted if title is suitable
     description:
-      "We craft authentic narratives that communicate your brand's values, mission, and unique selling proposition in a way that resonates with your target audience.",
+      "We craft compelling narratives that connect with your audience on an emotional level. Our team of experienced storytellers will help you develop a brand voice that resonates with your target market and drives engagement.",
     shortDescription: "Authentic narratives that connect with your audience on a deeper level.",
     features: [
       "Brand Narrative Development",
@@ -37,7 +37,7 @@ export const MASTER_SERVICES: Service[] = [
       "Audience Connection Mapping",
       "Emotional Engagement Tactics",
     ],
-    image: "/images/storytelling.gif",
+    image: "/images/storytelling.webp",
     caseStudyLink: "/projects/documentary-storytelling",
     color: "purple",
     icon: "📖",
@@ -48,7 +48,7 @@ export const MASTER_SERVICES: Service[] = [
     title: "Web Application Development",
     // shortTitle can be omitted
     description:
-      "We build scalable, secure web applications with Next.js, React & Node.js—designed for performance, reliability and ease-of-use.",
+      "We build custom web applications that are tailored to your specific business needs. Our team of expert developers will work with you to create a solution that is scalable, secure, and user-friendly.",
     shortDescription: "End-to-end web apps built on Next.js, React & Node—designed for scale, security and speed.",
     features: [
       "Responsive UI/UX design",
@@ -56,7 +56,7 @@ export const MASTER_SERVICES: Service[] = [
       "Performance optimization & caching",
       "Security best practices & compliance",
     ],
-    image: "/images/web-app-development.gif",
+    image: "/images/web-app-development.webp",
     caseStudyLink: "/projects/custom-web-applications",
     color: "teal",
     icon: "💻",
@@ -67,7 +67,7 @@ export const MASTER_SERVICES: Service[] = [
     title: "AI & Automation Engineering",
     // shortTitle can be omitted
     description:
-      "Tailored AI/ML pipelines, chatbots and workflow automations (n8n, Langflow, etc.) that streamline operations and unlock data-driven insights.",
+      "We leverage the power of artificial intelligence to automate repetitive tasks and streamline your business processes. Our team of AI experts will help you identify opportunities for automation and implement solutions that drive efficiency and reduce costs.",
     shortDescription: "Tailored AI/ML pipelines, chatbots and workflow automations (n8n, Langflow, etc.).",
     features: [
       "Custom ML model development",
@@ -75,7 +75,7 @@ export const MASTER_SERVICES: Service[] = [
       "End-to-end workflow orchestration",
       "Data preprocessing & ETL pipelines",
     ],
-    image: "/images/ai-automation.jpeg",
+    image: "/images/ai-automation.webp",
     caseStudyLink: "/projects/ai-driven-automation",
     color: "yellow",
     icon: "🤖",

@@ -13,6 +13,7 @@ import { ChevronDown } from "lucide-react";
 import MetaCategoryNavButtons from "./meta-category-nav-buttons";
 import MetaCategorySwiper from "./meta-category-swiper";
 import type { MetaCategory } from "@/lib/category-data";
+import Image from "next/image";
 
 const TRANSITION_INTERVAL = 4000; // Time in milliseconds between transitions
 const TEXT_DELAY = 700; // Delay in milliseconds before text changes after video
@@ -301,10 +302,11 @@ export default function PortfolioHero({
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-cyberpunk-background z-10"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,90,205,0.2)_0%,transparent_70%)] z-20"></div>
-          <img
-            src="/images/portfolio-hero.png"
+          <Image
+            src="/images/portfolio-hero.webp"
             alt="Portfolio Hero Background"
             className="absolute w-full h-full object-cover"
+            fill
           />
         </div>
 
@@ -352,7 +354,7 @@ export default function PortfolioHero({
                 playsInline
                 preload="metadata"
                 className="absolute w-full h-full object-cover"
-                poster="/images/portfolio-hero.png"
+                poster="/images/portfolio-hero.webp"
               >
                 <source src={content.video.url} type="video/mp4" />
               </video>
