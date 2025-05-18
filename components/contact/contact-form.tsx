@@ -167,8 +167,8 @@ export default function ContactForm() {
     const mediaSvc = MASTER_SERVICES.some(s => s.branch === "media" && formState.service.includes(s.id))
     const labsSvc = MASTER_SERVICES.some(s => s.branch === "labs" && formState.service.includes(s.id))
 
-    if (selectionType === "both" || (mediaSvc && labsSvc)) return "https://google.com"
-    if (selectionType === "media" || (mediaSvc && !labsSvc) || formState.branch === "media") return "https://linkedin.com"
+    if (selectionType === "both" || (mediaSvc && labsSvc)) return "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2swHswmqVv-s0HOpg-LSS-obwlWMI45jymn3QSMUrY75ydccrDZSYVpSKb9i2X908dbQKkuVAY"
+    if (selectionType === "media" || (mediaSvc && !labsSvc) || formState.branch === "media") return "https://calendar.app.google/WBDFCapdi8Z9UDvJ7"
     if (selectionType === "labs" || (labsSvc && !mediaSvc) || formState.branch === "labs") return "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ10MfFXCLnngwj5wQ9CRQ6Mqw2r6sF1IBHMYr8y2pQmV4OZ8-kcvoeWxbx8mHgWM2QfLW4aPVZw"
     return "#" // Default
   }
