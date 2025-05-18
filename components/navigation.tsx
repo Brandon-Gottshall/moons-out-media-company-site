@@ -230,7 +230,7 @@ export default function Navigation() {
 
       <div className="container mx-auto px-4 flex justify-between items-center w-full">
         <Link href="/" className="flex items-center">
-          {/* <motion.span
+          <motion.span
             className="text-2xl font-bold relative"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
@@ -238,8 +238,8 @@ export default function Navigation() {
             <span className="text-cyberpunk-blue mr-1 tracking-wider">MOONS</span>
             <span className="text-cyberpunk-pink tracking-wider">OUT</span>
             <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-cyberpunk-blue via-cyberpunk-purple to-cyberpunk-pink"></span>
-          </motion.span> */}
-          <span className="text-2xl font-bold relative text-white">MOONS OUT</span> {/* Simplified for LCP diagnosis */}
+          </motion.span>
+          {/* <span className="text-2xl font-bold relative text-white">MOONS OUT</span> Simplified for LCP diagnosis */}
         </Link>
 
         {/* Desktop Navigation */}
