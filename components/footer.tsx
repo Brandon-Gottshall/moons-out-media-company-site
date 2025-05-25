@@ -55,9 +55,17 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-gray-800 text-center">
-          <p className="text-gray-400 text-sm">
+          <p className="text-gray-400 text-sm mb-2">
             © {new Date().getFullYear()} Moons Out Media. All rights reserved.
           </p>
+          <div className="flex justify-center space-x-4 text-sm">
+            <Link
+              href="/privacy"
+              className="text-gray-400 hover:text-cyberpunk-blue transition-colors"
+            >
+              Privacy Policy
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
