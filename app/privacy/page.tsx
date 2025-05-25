@@ -10,7 +10,7 @@ export default function PrivacyPage() {
     <div className="min-h-screen bg-black text-white">
       <div className="container mx-auto px-4 py-16 max-w-4xl">
         <div className="prose prose-invert max-w-none">
-          <h1 className="text-4xl font-bold mb-8 text-cyberpunk-blue">
+          <h1 className="text-4xl font-bold my-8 text-cyberpunk-blue">
             Privacy Policy
           </h1>
           
