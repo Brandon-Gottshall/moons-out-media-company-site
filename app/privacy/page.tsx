@@ -172,7 +172,7 @@ export default function PrivacyPage() {
                 United States Corporation Agents, Inc.<br />
                 1991 Crocker Road #600‑755<br />
                 Westlake, OH 44145<br />
-                Email: <a href="mailto:privacy@moonsoutmedia.com" className="text-cyberpunk-blue hover:text-cyberpunk-pink transition-colors">privacy@moonsoutmedia.com</a><br />
+                Email: <a href="mailto:team@moonsoutmedia.com" className="text-cyberpunk-blue hover:text-cyberpunk-pink transition-colors">team@moonsoutmedia.com</a><br />
                 Phone: <strong>(937) 451‑0042</strong></p>
               </div>
             </section>
