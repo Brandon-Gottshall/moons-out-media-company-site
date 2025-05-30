@@ -19,7 +19,7 @@ interface CallToActionProps {
 
 export default function CallToAction({
   title = "Convert Viewers to Customers",
-  description = "Engaging Content + Cutting-Edge Tech = More Conversions",
+  description = "Authentic Storytelling. Measurable Growth",
   primaryButtonText = "Book Now",
   primaryButtonLink = "/contact",
   secondaryButtonText = "Explore Our Work",

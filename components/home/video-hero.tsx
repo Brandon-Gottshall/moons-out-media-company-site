@@ -232,17 +232,17 @@ export function VideoHero() {
           className="w-full" // Added to help constrain content if needed
         >
           <h1 className="text-3xl vh-short:text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading mb-3 vh-short:mb-2 sm:mb-4 md:mb-6">
-            <span className="block text-white relative inline-block">
-              Authentic Stories
-              <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-cyberpunk-blue via-cyberpunk-purple to-cyberpunk-pink"></span>
+            <span className="text-white relative inline-block">
+              Authentic Storytelling
+              <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r -z-10 from-cyberpunk-blue via-cyberpunk-purple to-cyberpunk-pink"></span>
             </span>
             <span className="block mt-4 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-blue via-cyberpunk-purple to-cyberpunk-pink">
-              Cinematic Experiences
+              Measurable Growth
             </span>
           </h1>
           <div className="bg-black/40 backdrop-blur-sm p-3 vh-short:p-2 sm:p-4 md:p-6 rounded-lg border border-cyberpunk-blue/20 max-w-lg sm:max-w-xl md:max-w-2xl mx-auto mb-4 vh-short:mb-3 sm:mb-6 md:mb-8">
             <p className=" vh-short:text-body-sm sm:text-body-lg md:text-heading-md lg:text-heading-md text-gray-200 leading-relaxed">
-            Authentic story telling, targeted digital advertising, and custom web, AI & DevOps solutions — all designed to connect with your audience and accelerate your business.
+            At Moon Out Media, we transform your unique story into compelling video content that builds trust and drives measurable growth. Our targeted ad strategies connect you directly with your ideal audience, turning views into valuable leads and, ultimately, sales.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
