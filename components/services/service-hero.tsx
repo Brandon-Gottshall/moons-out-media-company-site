@@ -119,7 +119,7 @@ export default function ServiceHero() {
             className="max-w-3xl mx-auto text-center"
           >
             <motion.h1
-              className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold -mb-2 lg:mb-6 mt-2 sm:mt-0"
+              className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-heading -mb-2 lg:mb-6 mt-2 sm:mt-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -155,7 +155,7 @@ export default function ServiceHero() {
                 }}
               ></motion.div>
 
-              <p className="text-white text-base sm:text-xxs md:text-sm lg:text-lg leading-relaxed">
+              <p className="text-white  sm:text-xxs md:text-body-sm lg:text-body-lg leading-relaxed">
               Cinematic artistry meets cutting-edge tech: narrative driven storytelling, strategic ad campaigns, and end-to-end web, AI & cloud engineering—all under one roof to drive real results.
               </p>
             </motion.div>
@@ -170,7 +170,7 @@ export default function ServiceHero() {
                 className="cyberpunk-button px-6 py-3 vh-short:px-3 vh-short:py-1 relative overflow-hidden group"
                 onClick={() => (window.location.href = "/contact")}
               >
-                <span className="relative z-10 vh-short:text-xxs sm:text-base">Start Your Project</span>
+                <span className="relative z-10 vh-short:text-xxs sm:text-body-base">Start Your Project</span>
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-cyberpunk-purple/0 via-white/10 to-cyberpunk-purple/0"
                   initial={{ x: "-100%", opacity: 0 }}
@@ -181,10 +181,10 @@ export default function ServiceHero() {
 
               <Button
                 variant="outline"
-                className="border-cyberpunk-blue text-cyberpunk-blue hover:bg-cyberpunk-blue/10 bg-black/50 px-6 py-3 vh-short:px-3 vh-xshort:py-1 vh-short:-py-2 text-sm sm:text-base relative overflow-hidden group min-h-8"
+                className="border-cyberpunk-blue text-cyberpunk-blue hover:bg-cyberpunk-blue/10 bg-black/50 px-6 py-3 vh-short:px-3 vh-xshort:py-1 vh-short:-py-2 text-body-sm sm:text-body-base relative overflow-hidden group min-h-8"
                 onClick={() => document.getElementById("services-showcase")?.scrollIntoView({ behavior: "smooth"})}
               >
-                <span className="relative z-10 vh-short:text-xxs sm:text-base">Explore Services</span>
+                <span className="relative z-10 vh-short:text-xxs sm:text-body-base">Explore Services</span>
                 <motion.div
                   className="absolute inset-0 bg-cyberpunk-blue/10"
                   initial={{ scale: 0, opacity: 0 }}
@@ -211,7 +211,7 @@ export default function ServiceHero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
       >
-        <span className="text-cyberpunk-blue text-sm mb-2 vh-xshort:mb-0 vh-short:text-xxs sm:text-base">Explore Our Services</span>
+        <span className="text-cyberpunk-blue text-body-sm mb-2 vh-xshort:mb-0 vh-short:text-xxs sm:text-body-base">Explore Our Services</span>
         <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}>
           <ChevronDown className="h-6 w-6 text-cyberpunk-blue" />
         </motion.div>

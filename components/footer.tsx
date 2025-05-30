@@ -1,23 +1,31 @@
 import Link from "next/link";
 
+const footerDescription = [
+  "<strong>Connect, Grow, Convert:</strong>",
+  "Authentic Storytelling, Targeted Digital Campaigns, and Custom Web, AI & DevOps Solutions – Driving Measurable Growth for Your Brand."
+];
+
 export default function Footer() {
   return (
     <footer className="bg-black/80 border-t border-cyberpunk-blue/30 pt-16 pb-8 w-full max-w-[100vw]">
       <div className="container mx-auto px-4 w-full">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           <div>
-            <h3 className="text-2xl font-bold mb-4 text-cyberpunk-blue">
+            <h3 className="text-2xl font-heading mb-4 text-cyberpunk-blue">
               MOONS<span className="text-cyberpunk-pink">OUT</span>
             </h3>
-            <p className="text-gray-300 mb-4">
-              Cutting-edge creative agency and tech studio: authentic story telling
-              content, authentic storytelling, targeted digital campaigns—and
-              custom web, AI & DevOps solutions.
-            </p>
+            <div className="text-gray-300 mb-4 space-y-1">
+              {footerDescription.map((line, index) => (
+                <p 
+                  key={index}
+                  dangerouslySetInnerHTML={{ __html: line }}
+                />
+              ))}
+            </div>
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-white">
+            <h4 className="text-body-lg font-subheading mb-4 text-white">
               Quick Links
             </h4>
             <ul className="space-y-2">
@@ -43,7 +51,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-white">
+            <h4 className="text-body-lg font-subheading mb-4 text-white">
               Contact Us
             </h4>
             <ul className="space-y-3">
@@ -51,16 +59,16 @@ export default function Footer() {
                 Dayton, Ohio, USA
               </li>
               <li className="text-gray-300">(937) 451 - 0042</li>
-              <li className="text-gray-300">help@moonsoutmedia.com</li>
+              <li className="text-gray-300">team@moonsoutmedia.com</li>
             </ul>
           </div>
         </div>
 
         <div className="pt-8 border-t border-gray-800 text-center">
-          <p className="text-gray-400 text-sm mb-2">
+          <p className="text-gray-400 text-body-sm mb-2">
             © {new Date().getFullYear()} Moons Out Media. All rights reserved.
           </p>
-          <div className="flex justify-center space-x-4 text-sm">
+          <div className="flex justify-center space-x-4 text-body-sm">
             <Link
               href="/privacy"
               className="text-gray-400 hover:text-cyberpunk-blue transition-colors"

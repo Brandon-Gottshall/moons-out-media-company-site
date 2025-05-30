@@ -56,7 +56,7 @@ function SubCategoryCard({
       <div className={`absolute inset-0 opacity-0 group-hover:opacity-15 transition-opacity duration-300 bg-${category.color || metaColor}`}></div>
       
       <div className="absolute bottom-0 left-0 right-0 p-2.5 z-10">
-        <h4 className={`text-sm font-semibold line-clamp-2 transition-colors duration-300
+        <h4 className={`text-body-sm font-subheading line-clamp-2 transition-colors duration-300
           ${isSelected ? `text-${category.color || metaColor}` : 'text-white group-hover:text-gray-200'}`}>
           {category.title}
         </h4>

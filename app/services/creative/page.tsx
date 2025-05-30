@@ -78,7 +78,7 @@ export default function CreativeServicesPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_center,rgba(0,204,255,0.15)_0%,transparent_50%)]"></div>
         <div className="container mx-auto px-4 text-center">
           <motion.h1 
-            className="text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple"
+            className="text-4xl md:text-6xl font-heading mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -86,7 +86,7 @@ export default function CreativeServicesPage() {
             Cinematic Storytelling That Converts
           </motion.h1>
           <motion.p 
-            className="text-xl text-gray-300 max-w-3xl mx-auto mb-8"
+            className="text-heading-md text-gray-300 max-w-3xl mx-auto mb-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -99,7 +99,7 @@ export default function CreativeServicesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <Link href="/contact" className="inline-flex items-center bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple text-white px-8 py-4 rounded-lg font-semibold hover:scale-105 transition-transform">
+            <Link href="/contact" className="inline-flex items-center bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple text-white px-8 py-4 rounded-lg font-subheading hover:scale-105 transition-transform">
               Schedule Creative Discovery Call
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
@@ -111,7 +111,7 @@ export default function CreativeServicesPage() {
       <section className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-center mb-12 text-white"
+            className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -132,11 +132,11 @@ export default function CreativeServicesPage() {
               >
                 <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-black/60 to-gray-900/60 border border-gray-800 p-6 h-full hover:border-cyberpunk-blue/50 transition-all duration-300 group-hover:scale-105">
                   <div className="text-4xl mb-4">{service.icon}</div>
-                  <h3 className="text-xl font-bold text-white mb-3">{service.shortTitle || service.title}</h3>
+                  <h3 className="text-heading-md font-heading text-white mb-3">{service.shortTitle || service.title}</h3>
                   <p className="text-gray-300 mb-4">{service.shortDescription}</p>
                   <ul className="space-y-2">
                     {service.features?.slice(0, 3).map((feature, i) => (
-                      <li key={i} className="flex items-center text-sm text-gray-400">
+                      <li key={i} className="flex items-center text-body-sm text-gray-400">
                         <div className="w-1.5 h-1.5 bg-cyberpunk-blue rounded-full mr-2"></div>
                         {feature}
                       </li>
@@ -154,7 +154,7 @@ export default function CreativeServicesPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-cyberpunk-blue/5 to-cyberpunk-purple/5"></div>
         <div className="container mx-auto px-4">
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-center mb-12 text-white"
+            className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -183,8 +183,8 @@ export default function CreativeServicesPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                   </div>
                   <div className="p-6">
-                    <div className="text-2xl font-bold text-cyberpunk-blue mb-2">{study.title}</div>
-                    <div className="text-sm text-cyberpunk-purple mb-2">{study.metric}</div>
+                    <div className="text-2xl font-heading text-cyberpunk-blue mb-2">{study.title}</div>
+                    <div className="text-body-sm text-cyberpunk-purple mb-2">{study.metric}</div>
                     <p className="text-gray-300">{study.description}</p>
                   </div>
                 </div>
@@ -198,7 +198,7 @@ export default function CreativeServicesPage() {
       <section className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-center mb-12 text-white"
+            className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -221,11 +221,11 @@ export default function CreativeServicesPage() {
                   <div className="w-16 h-16 bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple rounded-full flex items-center justify-center mx-auto mb-4">
                     {step.icon}
                   </div>
-                  <div className="text-4xl font-bold text-cyberpunk-blue/30 absolute -top-2 -right-2">
+                  <div className="text-4xl font-heading text-cyberpunk-blue/30 absolute -top-2 -right-2">
                     {step.number}
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
+                <h3 className="text-heading-md font-heading text-white mb-3">{step.title}</h3>
                 <p className="text-gray-300">{step.description}</p>
               </motion.div>
             ))}
@@ -239,7 +239,7 @@ export default function CreativeServicesPage() {
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-6 text-white"
+            className="text-3xl md:text-4xl font-heading mb-6 text-white"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -248,7 +248,7 @@ export default function CreativeServicesPage() {
             Ready to Tell Your Story?
           </motion.h2>
           <motion.p 
-            className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
+            className="text-heading-md text-gray-300 mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -262,7 +262,7 @@ export default function CreativeServicesPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <Link href="/contact" className="inline-flex items-center bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple text-white px-8 py-4 rounded-lg font-semibold hover:scale-105 transition-transform">
+            <Link href="/contact" className="inline-flex items-center bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple text-white px-8 py-4 rounded-lg font-subheading hover:scale-105 transition-transform">
               Schedule a Creative Discovery Call
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>

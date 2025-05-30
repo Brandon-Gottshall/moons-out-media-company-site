@@ -208,30 +208,30 @@ export default function ContactFunnel() {
             <Check className="h-10 w-10 text-cyberpunk-green" />
           </div>
 
-          <h2 className="text-3xl font-bold mb-4 text-white">Thank You for Reaching Out!</h2>
+          <h2 className="text-3xl font-heading mb-4 text-white">Thank You for Reaching Out!</h2>
 
           <div className="bg-black/40 p-6 rounded-lg mb-6">
-            <p className="text-lg text-white">
+            <p className="text-body-lg text-white">
               We've received your information about your{" "}
-              <span className="text-cyberpunk-blue font-medium">{selectedChallenge?.title.toLowerCase()}</span>{" "}
+              <span className="text-cyberpunk-blue font-emphasis">{selectedChallenge?.title.toLowerCase()}</span>{" "}
               challenge. Our team is already reviewing your details and will craft a tailored solution just for you.
             </p>
           </div>
 
-          <p className="text-lg text-white mb-8">
+          <p className="text-body-lg text-white mb-8">
             Expect to hear from us within the next 24-48 business hours at{" "}
             <span className="text-cyberpunk-blue">{formData.email}</span>. We'll schedule a virtual meeting to discuss
             your project in detail.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Button className="cyberpunk-button py-6 text-base" onClick={() => router.push("/portfolio")}>
+            <Button className="cyberpunk-button py-6 " onClick={() => router.push("/portfolio")}>
               Explore Our Work While You Wait
             </Button>
 
             <Button
               variant="outline"
-              className="border-cyberpunk-green text-cyberpunk-green hover:bg-cyberpunk-green/10 py-6 text-base"
+              className="border-cyberpunk-green text-cyberpunk-green hover:bg-cyberpunk-green/10 py-6 "
               onClick={() => window.open("https://calendly.com", "_blank")}
             >
               Schedule a Strategy Call <ArrowRight className="ml-2 h-4 w-4" />
@@ -258,8 +258,8 @@ export default function ContactFunnel() {
         {/* Progress Indicator */}
         <div className="p-4 border-b border-gray-800">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-lg font-medium text-white">{steps[currentStep].title}</h3>
-            <div className="text-sm text-gray-400">
+            <h3 className="text-body-lg font-emphasis text-white">{steps[currentStep].title}</h3>
+            <div className="text-body-sm text-gray-400">
               Step {currentStep + 1} of {steps.length}
             </div>
           </div>
@@ -308,8 +308,8 @@ export default function ContactFunnel() {
                             {challenge.icon}
                           </div>
                           <div>
-                            <h4 className="text-lg font-medium text-white mb-1">{challenge.title}</h4>
-                            <p className="text-sm text-gray-400">{challenge.description}</p>
+                            <h4 className="text-body-lg font-emphasis text-white mb-1">{challenge.title}</h4>
+                            <p className="text-body-sm text-gray-400">{challenge.description}</p>
                           </div>
                         </div>
                       </motion.div>
@@ -375,13 +375,13 @@ export default function ContactFunnel() {
                           <p className="text-white italic mb-3">{currentTestimonial.quote}</p>
                           <div className="flex items-center">
                             <div className="mr-3 w-8 h-8 bg-cyberpunk-purple/20 rounded-full flex items-center justify-center">
-                              <span className="text-cyberpunk-purple text-sm font-bold">
+                              <span className="text-cyberpunk-purple text-body-sm font-heading">
                                 {currentTestimonial.name.charAt(0)}
                               </span>
                             </div>
                             <div>
-                              <p className="font-medium text-white">{currentTestimonial.name}</p>
-                              <p className="text-xs text-gray-400">
+                              <p className="font-emphasis text-white">{currentTestimonial.name}</p>
+                              <p className="text-label-base text-gray-400">
                                 {currentTestimonial.position}, {currentTestimonial.company}
                               </p>
                             </div>
@@ -425,7 +425,7 @@ export default function ContactFunnel() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+                      <label htmlFor="name" className="block text-body-sm font-emphasis text-gray-300 mb-1">
                         Name <span className="text-cyberpunk-pink">*</span>
                       </label>
                       <Input
@@ -439,7 +439,7 @@ export default function ContactFunnel() {
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+                      <label htmlFor="email" className="block text-body-sm font-emphasis text-gray-300 mb-1">
                         Email <span className="text-cyberpunk-pink">*</span>
                       </label>
                       <Input
@@ -454,7 +454,7 @@ export default function ContactFunnel() {
                     </div>
 
                     <div>
-                      <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-1">
+                      <label htmlFor="company" className="block text-body-sm font-emphasis text-gray-300 mb-1">
                         Company <span className="text-cyberpunk-pink">*</span>
                       </label>
                       <Input
@@ -468,7 +468,7 @@ export default function ContactFunnel() {
                     </div>
 
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
+                      <label htmlFor="phone" className="block text-body-sm font-emphasis text-gray-300 mb-1">
                         Phone (optional)
                       </label>
                       <Input
@@ -483,7 +483,7 @@ export default function ContactFunnel() {
                   </div>
 
                   <div className="bg-black/60 p-5 rounded-lg border border-gray-800 mb-6">
-                    <h4 className="text-white font-medium mb-2 flex items-center">
+                    <h4 className="text-white font-emphasis mb-2 flex items-center">
                       <span className="w-6 h-6 rounded-full bg-cyberpunk-blue/20 flex items-center justify-center mr-2 text-cyberpunk-blue">
                         <Check className="h-4 w-4" />
                       </span>

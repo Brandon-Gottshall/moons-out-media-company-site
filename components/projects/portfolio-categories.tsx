@@ -394,13 +394,13 @@ export default function PortfolioCategories({
         
         <div className="relative z-10 p-3 h-full flex flex-col justify-between pointer-events-none">
           <div>
-            <h3 className={`text-base font-bold mb-1 line-clamp-2 transition-colors duration-300
+            <h3 className={` font-heading mb-1 line-clamp-2 transition-colors duration-300
               ${isActive ? `text-${category.color}` : 'text-white group-hover:text-gray-200'}`}>
               {category.title}
             </h3>
           </div>
           <div className="flex items-center justify-between pt-1.5 mt-1.5 border-t border-gray-700/40">
-            <span className={`text-xs font-medium transition-colors duration-300
+            <span className={`text-label-base font-emphasis transition-colors duration-300
               ${isActive ? `text-${category.color}` : `text-${category.color}/80 group-hover:text-${category.color}`}`}>
               {category.projectCount} Projects
             </span>
@@ -409,7 +409,7 @@ export default function PortfolioCategories({
                 <Info className={`h-3.5 w-3.5 transition-colors duration-300
                   ${isActive ? 'text-white' : 'text-gray-400 hover:text-white'}`} />
               </TooltipTrigger>
-              <TooltipContent side="top" align="end" className="bg-black border-cyberpunk-blue/30 text-white max-w-[220px] p-2.5 text-xs shadow-xl">
+              <TooltipContent side="top" align="end" className="bg-black border-cyberpunk-blue/30 text-white max-w-[220px] p-2.5 text-label-base shadow-xl">
                 <p>{category.description}</p>
               </TooltipContent>
             </Tooltip>

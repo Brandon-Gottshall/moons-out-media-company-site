@@ -6,17 +6,26 @@ import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import { SiteLogo } from "@/components/site-logo"
 
-const inter = Inter({ subsets: ["latin"] })
+// Process description - accepts string or array of strings with HTML tags
+function processDescription(description: string | string[]): string {
+  if (typeof description === 'string') return description
+  return description.map(line => line.replace(/<[^>]*>/g, '')).join(' ').trim()
+}
 
 export const metadata: Metadata = {
   title: "Moons Out Media | Creative Agency",
-  description:
-    "Cutting-edge creative agency and tech studio: authentic story telling content, authentic storytelling, targeted digital campaigns—and custom web, AI & DevOps solutions.",
+  description: processDescription([
+    "<strong>Connect, Grow, Convert:</strong>",
+    "Authentic Storytelling, Targeted Digital Campaigns, and Custom Web, AI & DevOps Solutions – Driving Measurable Growth for Your Brand."
+  ]),
   generator: 'v0.dev',
   openGraph: {
     type: 'website',
     title: 'Moons Out Media | Creative Agency',
-    description: 'Cutting-edge creative agency and tech studio: authentic story telling content, authentic storytelling, targeted digital campaigns—and custom web, AI & DevOps solutions.',
+    description: processDescription([
+      "<strong>Connect, Grow, Convert:</strong>",
+      "Authentic Storytelling, Targeted Digital Campaigns, and Custom Web, AI & DevOps Solutions – Driving Measurable Growth for Your Brand."
+    ]),
     // You might want to add a site_name and images here as well
     // site_name: 'Moons Out Media',
     // images: [
@@ -43,7 +52,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} cyberpunk bg-cyberpunk-background min-h-screen`}>
+      <body className="font-body2 cyberpunk bg-cyberpunk-background min-h-screen">
         <div className="relative">
           <Navigation logoSlot={<SiteLogo />} />
           <main className="relative">{children}</main>

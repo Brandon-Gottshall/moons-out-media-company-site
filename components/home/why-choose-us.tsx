@@ -23,7 +23,7 @@ export function WhyChooseUs() {
       viewport={{ once: true }}
       className="flex-col justify-center w-2/3"
     >
-      <h2 className="text-2xl font-bold mb-6 text-white relative inline-block text-center w-full">
+      <h2 className="text-2xl font-heading mb-6 text-white relative inline-block text-center w-full">
         Why Choose Us
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
@@ -46,14 +46,14 @@ export function WhyChooseUs() {
             >
               {item.icon}
             </motion.div>
-            <h3 className="text-lg font-semibold text-white mb-2">
+            <h3 className="text-body-lg font-subheading text-white mb-2">
               {item.title}
             </h3>
 {Array.isArray(item.description) ? (
               item.description.map((line, i) => (
                 <p
                   key={i}
-                  className={`w-full text-sm text-gray-300 leading-relaxed text-left ${
+                  className={`w-full text-body-sm text-gray-300 leading-relaxed text-left ${
                     i === item.description.length - 1 ? "" : "mb-1"
                   }`}
                 >
@@ -74,7 +74,7 @@ export function WhyChooseUs() {
                 </p>
               ))
             ) : (
-              <p className="w-full text-sm text-gray-300 leading-relaxed text-left">
+              <p className="w-full text-body-sm text-gray-300 leading-relaxed text-left">
                 {item.linkText && item.linkHref && typeof item.description === 'string' && item.description.includes(item.linkText) ? (
                   <>
                     {item.description.split(item.linkText)[0]}

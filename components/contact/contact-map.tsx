@@ -16,7 +16,7 @@ export default function ContactMap() {
         borderColor: "rgba(101, 206, 240, 0.4)",
       }}
     >
-      <h2 className="text-3xl font-bold mb-6 text-white relative inline-block">
+      <h2 className="text-3xl font-heading mb-6 text-white relative inline-block">
         Find Us
         <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-green"></span>
       </h2>
@@ -61,7 +61,7 @@ export default function ContactMap() {
             <div className="w-8 h-8 rounded-full bg-cyberpunk-blue/20 flex items-center justify-center mr-3">
               <Navigation className="h-4 w-4 text-cyberpunk-blue" />
             </div>
-            <h3 className="font-medium text-white">Studio Address</h3>
+            <h3 className="font-emphasis text-white">Studio Address</h3>
           </div>
           <p className="text-gray-300 pl-11">123 Creative Ave, Digital City, DC 10101</p>
         </motion.div>
@@ -77,7 +77,7 @@ export default function ContactMap() {
             <div className="w-8 h-8 rounded-full bg-cyberpunk-pink/20 flex items-center justify-center mr-3">
               <Clock className="h-4 w-4 text-cyberpunk-pink" />
             </div>
-            <h3 className="font-medium text-white">Studio Hours</h3>
+            <h3 className="font-emphasis text-white">Studio Hours</h3>
           </div>
           <p className="text-gray-300 pl-11">
             Monday - Friday: 9am - 6pm

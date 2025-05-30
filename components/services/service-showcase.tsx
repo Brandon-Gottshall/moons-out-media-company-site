@@ -114,7 +114,7 @@ export default function ServiceShowcase() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 z-10">
-                    <h4 className={`text-lg md:text-xl font-semibold transition-colors duration-300 ${serviceTitleClass}`}>
+                    <h4 className={`text-body-lg md:text-heading-md font-subheading transition-colors duration-300 ${serviceTitleClass}`}>
                       {service.title}
                     </h4>
                   </div>
@@ -172,7 +172,7 @@ export default function ServiceShowcase() {
           >
             <div className="mb-6 md:mb-8 text-center">
               <motion.h3
-                className="text-3xl md:text-4xl font-bold text-white inline-block"
+                className="text-3xl md:text-4xl font-heading text-white inline-block"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
@@ -193,7 +193,7 @@ export default function ServiceShowcase() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed">{activeService.description}</p>
+              <p className="text-gray-300  md:text-body-lg leading-relaxed">{activeService.description}</p>
             </motion.div>
 
             <motion.div
@@ -202,7 +202,7 @@ export default function ServiceShowcase() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <h4 className={`text-xl font-medium ${activeTextClass} mb-4 flex items-center`}>
+              <h4 className={`text-heading-md font-emphasis ${activeTextClass} mb-4 flex items-center`}>
                 <span className={`w-2.5 h-2.5 rounded-full ${activeBgClass} mr-2.5`}></span>
                 Key Features:
               </h4>
@@ -236,7 +236,7 @@ export default function ServiceShowcase() {
             >
               <Link href={activeService.caseStudyLink}>
                 <Button
-                  className={`${activeBgClass} hover:bg-cyberpunk-${activeTailwindColorName}/80 text-white py-3 px-6 text-base relative overflow-hidden group`}
+                  className={`${activeBgClass} hover:bg-cyberpunk-${activeTailwindColorName}/80 text-white py-3 px-6  relative overflow-hidden group`}
                 >
                   <span className="relative z-10 flex items-center">
                     View Our Projects <ExternalLink className="ml-2 h-4 w-4" />

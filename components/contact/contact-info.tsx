@@ -35,7 +35,7 @@ export default function ContactInfo() {
           borderColor: "rgba(255, 86, 246, 0.4)",
         }}
       >
-        <h2 className="text-2xl font-bold mb-6 text-white relative inline-block">
+        <h2 className="text-2xl font-heading mb-6 text-white relative inline-block">
           Contact Details
           <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple"></span>
         </h2>
@@ -80,8 +80,8 @@ export default function ContactInfo() {
                 {item.icon}
               </motion.div>
               <div>
-                <h3 className="text-base font-semibold text-white mb-1">{item.title}</h3>
-                <p className="text-sm text-gray-300">{item.content}</p>
+                <h3 className=" font-subheading text-white mb-1">{item.title}</h3>
+                <p className="text-body-sm text-gray-300">{item.content}</p>
               </div>
             </motion.div>
           ))}
@@ -94,7 +94,7 @@ export default function ContactInfo() {
           viewport={{ once: true }}
           transition={{ delay: 0.7, duration: 0.5 }}
         >
-          <h3 className="text-base font-semibold text-white mb-4">Connect With Us</h3>
+          <h3 className=" font-subheading text-white mb-4">Connect With Us</h3>
           <div className="flex flex-wrap gap-3">
             {[
               { name: "twitter", color: "#1DA1F2" },

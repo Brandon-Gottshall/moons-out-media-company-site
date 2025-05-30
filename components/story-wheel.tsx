@@ -204,8 +204,8 @@ export default function StoryWheel() {
       {/* Center Circle */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-48 md:h-48 rounded-full bg-black/80 border-2 border-cyberpunk-blue z-20 flex items-center justify-center">
         <div className="text-center">
-          <h3 className="text-lg md:text-xl font-bold text-white">Our Work</h3>
-          <p className="text-xs md:text-sm text-gray-400">Explore our universe</p>
+          <h3 className="text-body-lg md:text-heading-md font-heading text-white">Our Work</h3>
+          <p className="text-label-base md:text-body-sm text-gray-400">Explore our universe</p>
         </div>
       </div>
 
@@ -243,7 +243,7 @@ export default function StoryWheel() {
               onClick={() => handleCategoryClick(category, index)}
             >
               <div className="w-full h-full flex items-center justify-center bg-black/70">
-                <p className="text-center text-sm md:text-base font-medium text-white">{category.name}</p>
+                <p className="text-center text-body-sm md:text-body-base font-emphasis text-white">{category.name}</p>
               </div>
             </div>
           )
@@ -260,7 +260,7 @@ export default function StoryWheel() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <h3 className="text-2xl font-bold mb-2 text-white">{activeCategory.name}</h3>
+            <h3 className="text-2xl font-heading mb-2 text-white">{activeCategory.name}</h3>
             <p className="text-gray-300 mb-4">{activeCategory.description}</p>
             <Button
               className="cyberpunk-button"
@@ -283,7 +283,7 @@ export default function StoryWheel() {
                   className="w-full h-24 object-cover transition-transform duration-300 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-2">
-                  <p className="text-xs text-white font-medium">{project.title}</p>
+                  <p className="text-label-base text-white font-emphasis">{project.title}</p>
                 </div>
               </div>
             ))}
@@ -324,7 +324,7 @@ export default function StoryWheel() {
             </div>
 
             <div className="p-6">
-              <h3 className="text-2xl font-bold mb-1 text-white">{selectedProject.title}</h3>
+              <h3 className="text-2xl font-heading mb-1 text-white">{selectedProject.title}</h3>
               <p className="text-cyberpunk-blue mb-4">Client: {selectedProject.client}</p>
               <p className="text-gray-300 mb-6">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu

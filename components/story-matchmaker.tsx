@@ -241,15 +241,15 @@ export default function StoryMatchmaker() {
       <div className="bg-black/60 backdrop-blur-sm rounded-lg border border-cyberpunk-blue/30 overflow-hidden">
         {!isStarted ? (
           <div className="p-10 text-center">
-            <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">Find Your Perfect Story</h3>
+            <h3 className="text-2xl md:text-3xl font-heading mb-4 text-white">Find Your Perfect Story</h3>
             <div className="bg-black/40 p-6 rounded-lg mb-6">
-              <p className="text-white text-lg leading-relaxed">
+              <p className="text-white text-body-lg leading-relaxed">
                 Take our quick quiz to discover which storytelling approach will best elevate your brand and connect
                 with your audience. Select all options that apply for each question.
               </p>
             </div>
             <Button
-              className="cyberpunk-button py-6 text-base hover:shadow-glow-blue transition-all duration-300"
+              className="cyberpunk-button py-6  hover:shadow-glow-blue transition-all duration-300"
               onClick={handleStart}
             >
               Start Quiz
@@ -260,7 +260,7 @@ export default function StoryMatchmaker() {
             {recommendedServices.length === 0 ? (
               <>
                 <div className="flex justify-between items-center mb-8">
-                  <h3 className="text-2xl font-bold text-white">Story Matchmaker</h3>
+                  <h3 className="text-2xl font-heading text-white">Story Matchmaker</h3>
                   <div className="flex items-center">
                     {questions.map((_, index) => (
                       <motion.div
@@ -292,13 +292,13 @@ export default function StoryMatchmaker() {
                   >
                     {currentQuestion === 0 && (
                       <div className="mb-6 p-4 bg-cyberpunk-blue/10 border border-cyberpunk-blue/30 rounded-lg text-center">
-                        <p className="text-cyberpunk-blue font-medium">
+                        <p className="text-cyberpunk-blue font-emphasis">
                           Feel free to select multiple options for each question to best describe your needs!
                         </p>
                       </div>
                     )}
                     <div className="bg-black/40 p-6 rounded-lg mb-6">
-                      <h4 className="text-xl font-medium text-white mb-4">{questions[currentQuestion].text}</h4>
+                      <h4 className="text-heading-md font-emphasis text-white mb-4">{questions[currentQuestion].text}</h4>
                     </div>
 
                     <div className="space-y-4">
@@ -314,7 +314,7 @@ export default function StoryMatchmaker() {
                             whileHover={{ scale: selected ? 1.05 : 1.02 }}
                             whileTap={{ scale: 0.98 }}
                           >
-                            <span className="text-white text-lg">{option.text}</span>
+                            <span className="text-white text-body-lg">{option.text}</span>
                             <div className="flex items-center">
                               {selected && <Check className="h-5 w-5 text-cyberpunk-pink mr-2" />}
                               <motion.div
@@ -335,7 +335,7 @@ export default function StoryMatchmaker() {
                     <div className="mt-8 flex justify-end">
                       {currentQuestion < questions.length - 1 ? (
                         <Button 
-                          className="cyberpunk-button py-3 text-base hover:shadow-glow-blue transition-all duration-300"
+                          className="cyberpunk-button py-3  hover:shadow-glow-blue transition-all duration-300"
                           onClick={handleNextQuestion}
                           disabled={!(answers[questions[currentQuestion].id]?.length > 0)}
                         >
@@ -343,7 +343,7 @@ export default function StoryMatchmaker() {
                         </Button>
                       ) : (
                         <Button 
-                          className="cyberpunk-button-pink py-3 text-base hover:shadow-glow-pink transition-all duration-300"
+                          className="cyberpunk-button-pink py-3  hover:shadow-glow-pink transition-all duration-300"
                           onClick={handleShowResults}
                           disabled={!(answers[questions[currentQuestion].id]?.length > 0)}
                         >
@@ -357,9 +357,9 @@ export default function StoryMatchmaker() {
             ) : (
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">Your Perfect Matches</h3>
+                  <h3 className="text-2xl md:text-3xl font-heading mb-4 text-white">Your Perfect Matches</h3>
                   <div className="bg-black/40 p-6 rounded-lg">
-                    <p className="text-white text-lg leading-relaxed">
+                    <p className="text-white text-body-lg leading-relaxed">
                       {`You've unlocked ${recommendedServices.length} recommended service${recommendedServices.length === 1 ? '' : 's'}! Based on your responses, here's what we think will best suit your brand:`}
                     </p>
                   </div>
@@ -384,22 +384,22 @@ export default function StoryMatchmaker() {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end">
                           <div className="p-4 md:p-6">
-                            <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-cyberpunk-blue/30 text-cyberpunk-blue mb-2">
+                            <span className="inline-block px-3 py-1 rounded-full text-label-base font-emphasis bg-cyberpunk-blue/30 text-cyberpunk-blue mb-2">
                               {service.serviceType} (Score: {service.score})
                             </span>
-                            <h4 className="text-lg md:text-xl font-bold text-white">{service.title}</h4>
+                            <h4 className="text-body-lg md:text-heading-md font-heading text-white">{service.title}</h4>
                           </div>
                         </div>
                       </div>
 
                       <div className="p-4 md:p-6 flex flex-col flex-grow">
                         <div className="bg-black/40 p-4 rounded-lg mb-4 flex-grow">
-                          <p className="text-white text-sm md:text-base leading-relaxed">{service.description}</p>
+                          <p className="text-white text-body-sm md:text-body-base leading-relaxed">{service.description}</p>
                         </div>
 
                         <div className="grid grid-cols-1 gap-3 mt-auto">
                           <Button
-                            className={`w-full cyberpunk-button py-3 text-sm md:text-base hover:shadow-glow-blue transition-all duration-300 ${
+                            className={`w-full cyberpunk-button py-3 text-body-sm md:text-body-base hover:shadow-glow-blue transition-all duration-300 ${
                               index === 0 ? "bg-cyberpunk-pink hover:bg-cyberpunk-pink/80" : ""
                             }`}
                             onClick={() => (window.location.href = service.caseStudyLink)}
@@ -408,7 +408,7 @@ export default function StoryMatchmaker() {
                           </Button>
                           <Button
                             variant="outline"
-                            className={`w-full border-cyberpunk-blue text-cyberpunk-blue hover:bg-cyberpunk-blue/10 py-3 text-sm md:text-base hover:shadow-glow-blue transition-all duration-300 ${
+                            className={`w-full border-cyberpunk-blue text-cyberpunk-blue hover:bg-cyberpunk-blue/10 py-3 text-body-sm md:text-body-base hover:shadow-glow-blue transition-all duration-300 ${
                               index === 0 ? "border-cyberpunk-pink text-cyberpunk-pink hover:bg-cyberpunk-pink/10" : ""
                             }`}
                             onClick={() => (window.location.href = "/contact")}
@@ -424,14 +424,14 @@ export default function StoryMatchmaker() {
                 <div className="flex justify-between">
                   <Button
                     variant="ghost"
-                    className="text-white hover:text-white py-6 text-base hover:bg-red-900/20 transition-all duration-300"
+                    className="text-white hover:text-white py-6  hover:bg-red-900/20 transition-all duration-300"
                     onClick={resetQuiz}
                   >
                     <X className="h-5 w-5 mr-2" /> Retake Quiz
                   </Button>
                   <Button
                     variant="ghost"
-                    className="text-white hover:text-white py-6 text-base hover:bg-green-900/20 transition-all duration-300"
+                    className="text-white hover:text-white py-6  hover:bg-green-900/20 transition-all duration-300"
                     onClick={() => (window.location.href = "/services")}
                   >
                     <Check className="h-5 w-5 mr-2" /> Explore All Services

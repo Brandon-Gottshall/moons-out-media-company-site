@@ -112,7 +112,7 @@ export default function TrustMeter({ className }: TrustMeterProps) {
   return (
     <div ref={containerRef} className={cn("relative py-12", className)}>
       <div className="text-center mb-12">
-        <h3 className="text-2xl md:text-3xl font-bold mb-4 neon-text">Trust Meter</h3>
+        <h3 className="text-2xl md:text-3xl font-heading mb-4 neon-text">Trust Meter</h3>
         <p className="text-gray-300 max-w-2xl mx-auto">
           See how our clients' trust grows as you explore our proven track record of success.
         </p>
@@ -134,11 +134,11 @@ export default function TrustMeter({ className }: TrustMeterProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: trustLevel > 10 ? 1 : 0 }}
           >
-            <span className="text-white font-bold text-sm">Trust Level: {trustLevel}%</span>
+            <span className="text-white font-heading text-body-sm">Trust Level: {trustLevel}%</span>
           </motion.div>
         </div>
 
-        <div className="flex justify-between text-xs text-gray-400">
+        <div className="flex justify-between text-label-base text-gray-400">
           <span>Initial Contact</span>
           <span>Discovery</span>
           <span>Collaboration</span>
@@ -149,7 +149,7 @@ export default function TrustMeter({ className }: TrustMeterProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
         {/* Testimonials */}
         <div className="bg-black/50 backdrop-blur-sm rounded-lg border border-cyberpunk-blue/30 p-6 h-[400px] relative overflow-hidden">
-          <h4 className="text-xl font-semibold text-white mb-6">Client Testimonials</h4>
+          <h4 className="text-heading-md font-subheading text-white mb-6">Client Testimonials</h4>
 
           <div className="relative h-[300px]">
             {testimonials.map((testimonial, index) => (
@@ -174,8 +174,8 @@ export default function TrustMeter({ className }: TrustMeterProps) {
                       />
                     </div>
                     <div>
-                      <h5 className="font-medium text-white">{testimonial.name}</h5>
-                      <p className="text-sm text-gray-400">
+                      <h5 className="font-emphasis text-white">{testimonial.name}</h5>
+                      <p className="text-body-sm text-gray-400">
                         {testimonial.position}, {testimonial.company}
                       </p>
                     </div>
@@ -207,7 +207,7 @@ export default function TrustMeter({ className }: TrustMeterProps) {
 
         {/* Stats */}
         <div className="bg-black/50 backdrop-blur-sm rounded-lg border border-cyberpunk-pink/30 p-6">
-          <h4 className="text-xl font-semibold text-white mb-6">By the Numbers</h4>
+          <h4 className="text-heading-md font-subheading text-white mb-6">By the Numbers</h4>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16">
             {stats.map((stat, index) => (
@@ -219,8 +219,8 @@ export default function TrustMeter({ className }: TrustMeterProps) {
                 viewport={{ once: true, amount: 0.3 }}
                 className="bg-black/50 backdrop-blur-sm border border-cyberpunk-blue/20 p-3 md:p-4 rounded-lg text-center shadow-xl"
               >
-                <p className="text-3xl font-bold text-cyberpunk-gold mb-2">{stat.value}</p>
-                <p className="text-sm text-gray-400">{stat.label}</p>
+                <p className="text-3xl font-heading text-cyberpunk-gold mb-2">{stat.value}</p>
+                <p className="text-body-sm text-gray-400">{stat.label}</p>
               </motion.div>
             ))}
           </div>
@@ -229,7 +229,7 @@ export default function TrustMeter({ className }: TrustMeterProps) {
 
       {/* Client Logos */}
       <div className="mb-8">
-        <h4 className="text-xl font-semibold text-white text-center mb-8">Trusted By</h4>
+        <h4 className="text-heading-md font-subheading text-white text-center mb-8">Trusted By</h4>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {clients.map((client) => (

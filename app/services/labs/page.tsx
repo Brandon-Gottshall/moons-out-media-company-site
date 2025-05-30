@@ -134,7 +134,7 @@ export default function LabsServicesPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_center,rgba(255,105,180,0.15)_0%,transparent_50%)]"></div>
         <div className="container mx-auto px-4 text-center">
           <motion.h1 
-            className="text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple"
+            className="text-4xl md:text-6xl font-heading mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -142,7 +142,7 @@ export default function LabsServicesPage() {
             Launch a Lightning-Fast, ADA-Ready Site in 21 Days
           </motion.h1>
           <motion.p 
-            className="text-xl text-gray-300 max-w-3xl mx-auto mb-8"
+            className="text-heading-md text-gray-300 max-w-3xl mx-auto mb-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -155,7 +155,7 @@ export default function LabsServicesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <Link href="#audit" className="inline-flex items-center bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple text-white px-8 py-4 rounded-lg font-semibold hover:scale-105 transition-transform">
+            <Link href="#audit" className="inline-flex items-center bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple text-white px-8 py-4 rounded-lg font-subheading hover:scale-105 transition-transform">
               Book Free 15-Min Audit
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
@@ -167,7 +167,7 @@ export default function LabsServicesPage() {
       <section className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-center mb-12 text-white"
+            className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -195,8 +195,8 @@ export default function LabsServicesPage() {
                   <div className="w-16 h-16 bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple rounded-full flex items-center justify-center mx-auto mb-4">
                     {phase.icon}
                   </div>
-                  <div className="text-sm text-cyberpunk-pink font-semibold mb-2">{phase.phase}</div>
-                  <h3 className="text-xl font-bold text-white mb-3">{phase.title}</h3>
+                  <div className="text-body-sm text-cyberpunk-pink font-subheading mb-2">{phase.phase}</div>
+                  <h3 className="text-heading-md font-heading text-white mb-3">{phase.title}</h3>
                   <p className="text-gray-300">{phase.description}</p>
                 </div>
               </motion.div>
@@ -210,7 +210,7 @@ export default function LabsServicesPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-cyberpunk-pink/5 to-cyberpunk-purple/5"></div>
         <div className="container mx-auto px-4">
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-center mb-12 text-white"
+            className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -235,28 +235,28 @@ export default function LabsServicesPage() {
               >
                 {offer.highlight && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple text-white px-4 py-1 rounded-full text-sm font-semibold">
+                    <span className="bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple text-white px-4 py-1 rounded-full text-body-sm font-subheading">
                       Most Popular
                     </span>
                   </div>
                 )}
                 
                 <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-white mb-2">{offer.title}</h3>
-                  <div className="text-3xl font-bold text-cyberpunk-pink mb-2">{offer.price}</div>
-                  <p className="text-gray-300 text-sm">{offer.description}</p>
+                  <h3 className="text-heading-md font-heading text-white mb-2">{offer.title}</h3>
+                  <div className="text-3xl font-heading text-cyberpunk-pink mb-2">{offer.price}</div>
+                  <p className="text-gray-300 text-body-sm">{offer.description}</p>
                 </div>
                 
                 <ul className="space-y-3 mb-6">
                   {offer.features.map((feature, i) => (
-                    <li key={i} className="flex items-center text-sm text-gray-300">
+                    <li key={i} className="flex items-center text-body-sm text-gray-300">
                       <CheckCircle className="w-4 h-4 text-cyberpunk-pink mr-2 flex-shrink-0" />
                       {feature}
                     </li>
                   ))}
                 </ul>
                 
-                <button className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
+                <button className={`w-full py-3 rounded-lg font-subheading transition-all duration-300 ${
                   offer.highlight
                     ? 'bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple text-white hover:scale-105'
                     : 'border border-cyberpunk-pink text-cyberpunk-pink hover:bg-cyberpunk-pink hover:text-white'
@@ -273,7 +273,7 @@ export default function LabsServicesPage() {
       <section className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-center mb-12 text-white"
+            className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -294,11 +294,11 @@ export default function LabsServicesPage() {
               >
                 <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-black/60 to-gray-900/60 border border-gray-800 p-6 h-full hover:border-cyberpunk-pink/50 transition-all duration-300 group-hover:scale-105">
                   <div className="text-4xl mb-4">{service.icon}</div>
-                  <h3 className="text-xl font-bold text-white mb-3">{service.shortTitle || service.title}</h3>
+                  <h3 className="text-heading-md font-heading text-white mb-3">{service.shortTitle || service.title}</h3>
                   <p className="text-gray-300 mb-4">{service.shortDescription}</p>
                   <ul className="space-y-2">
                     {service.features?.slice(0, 4).map((feature, i) => (
-                      <li key={i} className="flex items-center text-sm text-gray-400">
+                      <li key={i} className="flex items-center text-body-sm text-gray-400">
                         <div className="w-1.5 h-1.5 bg-cyberpunk-pink rounded-full mr-2"></div>
                         {feature}
                       </li>
@@ -325,8 +325,8 @@ export default function LabsServicesPage() {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className="relative"
               >
-                <div className="text-4xl md:text-5xl font-bold text-cyberpunk-pink mb-2">{proof.metric}</div>
-                <div className="text-xl font-semibold text-white mb-1">{proof.label}</div>
+                <div className="text-4xl md:text-5xl font-heading text-cyberpunk-pink mb-2">{proof.metric}</div>
+                <div className="text-heading-md font-subheading text-white mb-1">{proof.label}</div>
                 <div className="text-gray-300">{proof.description}</div>
               </motion.div>
             ))}
@@ -338,7 +338,7 @@ export default function LabsServicesPage() {
       <section id="audit" className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-center mb-12 text-white"
+            className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -362,7 +362,7 @@ export default function LabsServicesPage() {
                      href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ10MfFXCLnngwj5wQ9CRQ6Mqw2r6sF1IBHMYr8y2pQmV4OZ8-kcvoeWxbx8mHgWM2QfLW4aPVZw"
                      target="_blank"
                      rel="noopener noreferrer"
-                     className="inline-flex items-center bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple text-white px-8 py-4 rounded-lg font-semibold hover:scale-105 transition-transform"
+                     className="inline-flex items-center bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple text-white px-8 py-4 rounded-lg font-subheading hover:scale-105 transition-transform"
                    >
                      Book Free 15-Min Audit
                      <ArrowRight className="w-5 h-5 ml-2" />
@@ -378,7 +378,7 @@ export default function LabsServicesPage() {
       <section className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-center mb-12 text-white"
+            className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -397,7 +397,7 @@ export default function LabsServicesPage() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="bg-black/60 border border-gray-800 rounded-xl p-6 hover:border-cyberpunk-pink/30 transition-colors"
               >
-                <h3 className="text-lg font-semibold text-white mb-3">{faq.question}</h3>
+                <h3 className="text-body-lg font-subheading text-white mb-3">{faq.question}</h3>
                 <p className="text-gray-300">{faq.answer}</p>
               </motion.div>
             ))}

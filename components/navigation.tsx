@@ -10,7 +10,6 @@ import { usePathname, useRouter } from "next/navigation"
 import type { ReactNode } from "react"
 
 const navLinks = [
-  { name: "Home", href: "/" },
   { name: "Creative Process", href: "/creative-process" },
   { 
     name: "Services", 
@@ -250,7 +249,7 @@ export default function Navigation({ logoSlot }: NavigationProps) {
         {logoSlot || (
           <Link href="/" className="flex items-center">
             <motion.span
-              className="text-2xl font-bold relative"
+              className="text-2xl font-heading relative"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
@@ -258,7 +257,7 @@ export default function Navigation({ logoSlot }: NavigationProps) {
               <span className="text-cyberpunk-pink tracking-wider">OUT</span>
               <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-cyberpunk-blue via-cyberpunk-purple to-cyberpunk-pink"></span>
             </motion.span>
-            {/* <span className="text-2xl font-bold relative text-white">MOONS OUT</span> Simplified for LCP diagnosis */}
+            {/* <span className="text-2xl font-heading relative text-white">MOONS OUT</span> Simplified for LCP diagnosis */}
           </Link>
         )}
 
@@ -460,7 +459,7 @@ export default function Navigation({ logoSlot }: NavigationProps) {
                               <Link
                                 key={dropdownItem.name}
                                 href={dropdownItem.href}
-                                className="block py-2 px-4 text-gray-300 hover:text-cyberpunk-blue transition-colors text-sm"
+                                className="block py-2 px-4 text-gray-300 hover:text-cyberpunk-blue transition-colors text-body-sm"
                                 onClick={() => setIsMenuOpen(false)}
                               >
                                 {dropdownItem.name}

@@ -21,10 +21,10 @@ export default function CreativeProcessPage() {
           variants={fadeIn}
           className="relative z-10 text-center px-4"
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+          <h1 className="text-5xl md:text-7xl font-heading mb-6">
             Our Creative <span className="text-cyberpunk-blue">Process</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-heading-md md:text-2xl text-gray-300 max-w-3xl mx-auto">
             From discovery to optimization, discover how we bring your vision to life
           </p>
         </motion.div>

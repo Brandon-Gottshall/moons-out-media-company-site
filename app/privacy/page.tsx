@@ -10,11 +10,11 @@ export default function PrivacyPage() {
     <div className="min-h-screen bg-black text-white">
       <div className="container mx-auto px-4 py-16 max-w-4xl">
         <div className="prose prose-invert max-w-none">
-          <h1 className="text-4xl font-bold my-8 text-cyberpunk-blue">
+          <h1 className="text-4xl font-heading my-8 text-cyberpunk-blue">
             Privacy Policy
           </h1>
           
-          <p className="text-lg mb-8 text-gray-300">
+          <p className="text-body-lg mb-8 text-gray-300">
             <strong>Last Updated: May 24, 2025</strong>
           </p>
 
@@ -24,7 +24,7 @@ export default function PrivacyPage() {
             </p>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4 text-cyberpunk-pink">1. Scope</h2>
+              <h2 className="text-2xl font-heading mb-4 text-cyberpunk-pink">1. Scope</h2>
               <p>This Policy applies to:</p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>The Site and any pages that link to it.</li>
@@ -34,7 +34,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4 text-cyberpunk-pink">2. Information We Collect</h2>
+              <h2 className="text-2xl font-heading mb-4 text-cyberpunk-pink">2. Information We Collect</h2>
               <div className="overflow-x-auto">
                 <table className="w-full border-collapse border border-gray-600 mb-4">
                   <thead>
@@ -46,17 +46,17 @@ export default function PrivacyPage() {
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="border border-gray-600 p-3 font-semibold">Contact details</td>
+                      <td className="border border-gray-600 p-3 font-subheading">Contact details</td>
                       <td className="border border-gray-600 p-3">Name, email, phone, company, message content</td>
                       <td className="border border-gray-600 p-3">When you submit a contact form or email us</td>
                     </tr>
                     <tr className="bg-gray-800/50">
-                      <td className="border border-gray-600 p-3 font-semibold">Billing & project data</td>
+                      <td className="border border-gray-600 p-3 font-subheading">Billing & project data</td>
                       <td className="border border-gray-600 p-3">Billing address, invoice IDs, payment status, project specifications, <em>client‑supplied media assets (e.g., video clips, images)</em></td>
                       <td className="border border-gray-600 p-3">When you become a client or request a quote</td>
                     </tr>
                     <tr>
-                      <td className="border border-gray-600 p-3 font-semibold">Technical/usage data</td>
+                      <td className="border border-gray-600 p-3 font-subheading">Technical/usage data</td>
                       <td className="border border-gray-600 p-3">IP address (anonymized in GA4), browser type, device ID, pages visited, timestamps</td>
                       <td className="border border-gray-600 p-3">Automatically via first‑party cookies, server logs, Google Analytics 4</td>
                     </tr>
@@ -69,7 +69,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4 text-cyberpunk-pink">3. How We Use Information</h2>
+              <h2 className="text-2xl font-heading mb-4 text-cyberpunk-pink">3. How We Use Information</h2>
               <ol className="list-decimal pl-6 space-y-2">
                 <li><strong>Respond to inquiries</strong> and provide quotes.</li>
                 <li><strong>Deliver and manage projects,</strong> including storing project assets and sending invoices/status updates (contract performance).</li>
@@ -82,13 +82,13 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4 text-cyberpunk-pink">4. Legal Bases for Future International Compliance</h2>
+              <h2 className="text-2xl font-heading mb-4 text-cyberpunk-pink">4. Legal Bases for Future International Compliance</h2>
               <p>If we process data of individuals in the European Economic Area, our lawful bases will be <strong>Contract</strong>, <strong>Legitimate Interests</strong> (balanced with your rights), or <strong>Consent</strong> (for marketing).</p>
               <p>For Canadian recipients we will obtain <strong>express consent</strong> before sending commercial electronic messages per CASL.</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4 text-cyberpunk-pink">5. Sharing & Disclosure</h2>
+              <h2 className="text-2xl font-heading mb-4 text-cyberpunk-pink">5. Sharing & Disclosure</h2>
               <p>We do <strong>not</strong> sell or share personal information for monetary value or for cross‑context behavioral advertising and <strong>have not done so in the past 12 months</strong>.</p>
               
               <p className="mt-4">We share information only with:</p>
@@ -108,7 +108,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4 text-cyberpunk-pink">6. Cookies & Tracking</h2>
+              <h2 className="text-2xl font-heading mb-4 text-cyberpunk-pink">6. Cookies & Tracking</h2>
               <p>We use first‑party cookies and similar technologies to:</p>
               <ul className="list-disc pl-6 space-y-2 mt-2">
                 <li>Keep the Site secure and remember preferences.</li>
@@ -121,7 +121,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4 text-cyberpunk-pink">7. Your Choices & Rights</h2>
+              <h2 className="text-2xl font-heading mb-4 text-cyberpunk-pink">7. Your Choices & Rights</h2>
               <ul className="list-disc pl-6 space-y-3">
                 <li><strong>Email opt‑out:</strong> Every outreach email contains a clear unsubscribe option. You may also email <a href="mailto:privacy@moonsoutmedia.com" className="text-cyberpunk-blue hover:text-cyberpunk-pink transition-colors">privacy@moonsoutmedia.com</a> with &quot;unsubscribe.&quot; Requests are honored within 10 business days and the address is placed on our suppression list.</li>
                 <li><strong>Access, correct, or delete:</strong> Contact us (email or <a href="/contact" className="text-cyberpunk-blue hover:text-cyberpunk-pink transition-colors">request form</a>) and we will respond to verifiable requests as required by applicable U.S. law.</li>
@@ -134,7 +134,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4 text-cyberpunk-pink">8. Data Security</h2>
+              <h2 className="text-2xl font-heading mb-4 text-cyberpunk-pink">8. Data Security</h2>
               <p>We implement reasonable administrative, technical, and physical safeguards, including:</p>
               <ul className="list-disc pl-6 space-y-2 mt-2">
                 <li>HTTPS encryption across the Site</li>
@@ -146,7 +146,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4 text-cyberpunk-pink">9. Retention</h2>
+              <h2 className="text-2xl font-heading mb-4 text-cyberpunk-pink">9. Retention</h2>
               <ul className="list-disc pl-6 space-y-2">
                 <li><strong>Contact inquiries:</strong> retained up to 2 years after last interaction.</li>
                 <li><strong>Client records & invoices:</strong> retained at least 7 years <em>(IRS record‑keeping requirement).</em></li>
@@ -156,17 +156,17 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4 text-cyberpunk-pink">10. Children&apos;s Privacy</h2>
+              <h2 className="text-2xl font-heading mb-4 text-cyberpunk-pink">10. Children&apos;s Privacy</h2>
               <p>Our services are <strong>not directed to children under 13</strong>, and we do not knowingly collect their personal information. If you believe a child has provided us data, please contact us; we will delete it promptly.</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4 text-cyberpunk-pink">11. Changes to This Policy</h2>
+              <h2 className="text-2xl font-heading mb-4 text-cyberpunk-pink">11. Changes to This Policy</h2>
               <p>We may update this Policy periodically. The &quot;Last Updated&quot; date reflects the latest revision. Material changes will be announced on the Site or, if appropriate, by email.</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-4 text-cyberpunk-pink">12. Contact Us</h2>
+              <h2 className="text-2xl font-heading mb-4 text-cyberpunk-pink">12. Contact Us</h2>
               <div className="bg-gray-800 p-4 rounded-lg border border-cyberpunk-blue/30">
                 <p><strong>Moons Out Media</strong><br />
                 United States Corporation Agents, Inc.<br />
@@ -177,7 +177,7 @@ export default function PrivacyPage() {
               </div>
             </section>
 
-            <div className="bg-gray-800/50 p-4 rounded-lg border border-gray-600 mt-8 text-sm italic">
+            <div className="bg-gray-800/50 p-4 rounded-lg border border-gray-600 mt-8 text-body-sm italic">
               <p><em>(Internal note: International expansion steps—GDPR rights, SCCs, CASL opt‑ins, DPO designation—are tracked in our compliance roadmap and will be added directly to this public Policy when applicable.)</em></p>
             </div>
           </div>

@@ -102,14 +102,14 @@ export default function PainToGain() {
         <div className="md:w-1/2 p-8">
           {/* --- Challenge Section --- */}
           <div className="mb-8">
-            <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-orange-400/20 text-orange-400 mb-3">
+            <span className="inline-block px-3 py-1 rounded-full text-body-sm font-emphasis bg-orange-400/20 text-orange-400 mb-3">
               Challenge
             </span>
-            <h3 className="text-2xl font-bold text-white mb-4">
+            <h3 className="text-2xl font-heading text-white mb-4">
               {activePain.title}
             </h3>
             <div className="bg-black/40 p-5 rounded-lg">
-              <p className="text-white text-lg leading-relaxed">
+              <p className="text-white text-body-lg leading-relaxed">
                 {activePain.description}
               </p>
             </div>
@@ -117,23 +117,23 @@ export default function PainToGain() {
 
           {/* --- Solution Section --- */}
           <div className="mb-6">
-            <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-cyberpunk-pink/20 text-cyberpunk-pink mb-3">
+            <span className="inline-block px-3 py-1 rounded-full text-body-sm font-emphasis bg-cyberpunk-pink/20 text-cyberpunk-pink mb-3">
               Solution
             </span>
-            <h3 className="text-2xl font-bold text-white mb-4">
+            <h3 className="text-2xl font-heading text-white mb-4">
               {activePain.solution.title}
             </h3>
             <div className="bg-black/40 p-5 rounded-lg mb-6">
-              <p className="text-white text-lg leading-relaxed">
+              <p className="text-white text-body-lg leading-relaxed">
                 {activePain.solution.description}
               </p>
             </div>
             <div className="mb-6">
-              <h4 className="text-lg font-medium text-cyberpunk-blue mb-4">Measurable Results:</h4>
+              <h4 className="text-body-lg font-emphasis text-cyberpunk-blue mb-4">Measurable Results:</h4>
               <ul className="space-y-3">
                 {activePain.solution.results.map((result, index) => (
                   <li key={index} className="flex items-start">
-                    <span className="text-cyberpunk-green mr-2 text-lg">✓</span>
+                    <span className="text-cyberpunk-green mr-2 text-body-lg">✓</span>
                     <span className="text-white">{result}</span>
                   </li>
                 ))}
@@ -151,8 +151,8 @@ export default function PainToGain() {
         {/* Challenge Selection - Right Column */}
         <div className="md:w-1/2 border-t md:border-t-0 md:border-l border-gray-800">
           <div className="p-6 border-b border-gray-800">
-            <h3 className="text-xl font-bold text-white">Common Challenges</h3>
-            <p className="text-gray-400 text-sm mt-1">Select a challenge to see our solution</p>
+            <h3 className="text-heading-md font-heading text-white">Common Challenges</h3>
+            <p className="text-gray-400 text-body-sm mt-1">Select a challenge to see our solution</p>
           </div>
 
           <div className="divide-y divide-gray-800">
@@ -170,13 +170,13 @@ export default function PainToGain() {
                   <div className="text-3xl mr-4">{pain.icon}</div>
                   <div>
                     <h4
-                      className={`text-lg font-medium ${
+                      className={`text-body-lg font-emphasis ${
                         activePain.id === pain.id ? "text-cyberpunk-pink" : "text-white"
                       }`}
                     >
                       {pain.title}
                     </h4>
-                    <p className="text-gray-400 text-sm mt-1 line-clamp-2">{pain.description}</p>
+                    <p className="text-gray-400 text-body-sm mt-1 line-clamp-2">{pain.description}</p>
                   </div>
                 </div>
               </button>

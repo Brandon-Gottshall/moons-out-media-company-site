@@ -28,7 +28,7 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-cyberpunk-pink/5 rounded-full blur-3xl z-0"></div>
 
         <div className="container mx-auto text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple">
+          <h2 className="text-3xl md:text-4xl font-heading mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple">
             Our Services
           </h2>
           <div className="bg-black/40 backdrop-blur-sm p-4 rounded-lg border border-gray-800 max-w-2xl mx-auto mb-12">

@@ -118,8 +118,8 @@ export default function PortfolioPage() {
             >
               <div className="container mx-auto px-4">
                 <div className="text-center mb-12 md:mb-16">
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 neon-text">Client Success Projects</h2>
-                  <p className="text-white max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading mb-4 neon-text">Client Success Projects</h2>
+                  <p className="text-white max-w-2xl mx-auto  md:text-body-lg leading-relaxed">
                     See how our projects have transformed businesses and delivered measurable results.
                   </p>
                 </div>
@@ -150,9 +150,9 @@ export default function PortfolioPage() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 neon-green-text">Project Gallery</h2>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading mb-4 neon-green-text">Project Gallery</h2>
               { !isSearchActive && (
-                <p className="text-white max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+                <p className="text-white max-w-2xl mx-auto  md:text-body-lg leading-relaxed">
                   Browse our complete collection of projects and discover the impact we've made.
                 </p>
               ) }

@@ -112,7 +112,7 @@ export default function VideoElevatorPitch() {
                   </div>
                   <Button
                     size="sm"
-                    className="text-xs bg-cyberpunk-pink hover:bg-cyberpunk-pink/80 text-white"
+                    className="text-label-base bg-cyberpunk-pink hover:bg-cyberpunk-pink/80 text-white"
                     onClick={() => router.push("/contact")}
                   >
                     Get Started
@@ -120,8 +120,8 @@ export default function VideoElevatorPitch() {
                 </div>
               </div>
               <div className="p-4">
-                <h3 className="text-lg font-bold text-white mb-2">Discover Moons Out Media</h3>
-                <p className="text-sm text-gray-300">
+                <h3 className="text-body-lg font-heading text-white mb-2">Discover Moons Out Media</h3>
+                <p className="text-body-sm text-gray-300">
                 Authentic story telling, targeted digital advertising, and custom web, AI & DevOps solutions — all designed to connect with your audience and accelerate your business.
                 </p>
               </div>
@@ -134,7 +134,7 @@ export default function VideoElevatorPitch() {
           className="flex items-center justify-center space-x-2 bg-black/80 backdrop-blur-md px-4 py-2 rounded-full border border-cyberpunk-blue/30 text-white hover:bg-black transition-colors"
           aria-label={isOpen ? "Close video pitch" : "Open video pitch"}
         >
-          <span className="text-sm font-medium">Elevator Pitch</span>
+          <span className="text-body-sm font-emphasis">Elevator Pitch</span>
           {isOpen ? (
             <ChevronDown className="h-4 w-4 text-cyberpunk-blue" />
           ) : (

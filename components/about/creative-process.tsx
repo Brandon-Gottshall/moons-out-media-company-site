@@ -67,7 +67,7 @@ export default function CreativeProcess() {
         transition={{ duration: 0.6 }}
         className="container mx-auto px-4"
       >
-        <h2 className="text-4xl font-bold mb-16 text-center">
+        <h2 className="text-4xl font-heading mb-16 text-center">
           Our Creative <span className="text-cyberpunk-blue">Process</span>
         </h2>
 
@@ -143,16 +143,16 @@ export default function CreativeProcess() {
 
                   <div className="flex items-center mb-4 md:mb-6 relative z-10">
                     <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-cyberpunk-purple flex items-center justify-center mr-4 shadow-[0_0_10px_rgba(106,90,205,0.3)]">
-                      <span className="text-base md:text-lg text-white font-bold">
+                      <span className=" md:text-body-lg text-white font-heading">
                         {step.id}
                       </span>
                     </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-white">
+                    <h3 className="text-heading-md md:text-2xl font-heading text-white">
                       {step.title}
                     </h3>
                   </div>
                   <div className="bg-black/40 p-4 rounded-lg relative z-10">
-                    <p className="text-white text-lg leading-relaxed">
+                    <p className="text-white text-body-lg leading-relaxed">
                       {step.description}
                     </p>
                   </div>
@@ -171,21 +171,21 @@ export default function CreativeProcess() {
           className="mt-16 max-w-4xl mx-auto"
         >
           <div className="bg-black/40 border border-gray-800 rounded-lg p-6">
-            <h3 className="text-2xl font-bold mb-6 text-center">
+            <h3 className="text-2xl font-heading mb-6 text-center">
               How We <span className="text-cyberpunk-pink">Work</span>
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center p-4">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-cyberpunk-blue/20 flex items-center justify-center">
-                  <span className="text-2xl font-bold text-cyberpunk-blue">
+                  <span className="text-2xl font-heading text-cyberpunk-blue">
                     1
                   </span>
                 </div>
-                <h4 className="text-lg font-semibold mb-2">
+                <h4 className="text-body-lg font-subheading mb-2">
                   Initial Consultation
                 </h4>
-                <p className="text-sm text-gray-400">
+                <p className="text-body-sm text-gray-400">
                   We begin with a deep dive into your brand, goals, and
                   audience.
                 </p>
@@ -193,14 +193,14 @@ export default function CreativeProcess() {
 
               <div className="text-center p-4">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-cyberpunk-pink/20 flex items-center justify-center">
-                  <span className="text-2xl font-bold text-cyberpunk-pink">
+                  <span className="text-2xl font-heading text-cyberpunk-pink">
                     2
                   </span>
                 </div>
-                <h4 className="text-lg font-semibold mb-2">
+                <h4 className="text-body-lg font-subheading mb-2">
                   Content Development
                 </h4>
-                <p className="text-sm text-gray-400">
+                <p className="text-body-sm text-gray-400">
                   Our team crafts your story with precision and creative
                   excellence.
                 </p>
@@ -208,14 +208,14 @@ export default function CreativeProcess() {
 
               <div className="text-center p-4">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-cyberpunk-green/20 flex items-center justify-center">
-                  <span className="text-2xl font-bold text-cyberpunk-green">
+                  <span className="text-2xl font-heading text-cyberpunk-green">
                     3
                   </span>
                 </div>
-                <h4 className="text-lg font-semibold mb-2">
+                <h4 className="text-body-lg font-subheading mb-2">
                   Launch & Optimize
                 </h4>
-                <p className="text-sm text-gray-400">
+                <p className="text-body-sm text-gray-400">
                   We deploy your content and continuously refine for maximum
                   impact.
                 </p>

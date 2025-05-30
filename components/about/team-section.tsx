@@ -96,7 +96,7 @@ export default function TeamSection() {
         transition={{ duration: 0.6 }}
         className="container mx-auto px-4"
       >
-        <h2 className="text-4xl font-bold mb-16 text-center">
+        <h2 className="text-4xl font-heading mb-16 text-center">
           Meet Our <span className="text-cyberpunk-green">Team</span>
         </h2>
 
@@ -130,9 +130,9 @@ export default function TeamSection() {
               </div>
 
               <div className="absolute bottom-0 left-0 w-full p-6 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-300 flex flex-col justify-center items-center">
-                <h3 className="text-xl font-bold text-white">{member.name}</h3>
+                <h3 className="text-heading-md font-heading text-white">{member.name}</h3>
                 <p className="text-cyberpunk-blue font-small mb-3 text-center">{member.role}</p>
-                <p className="text-gray-300 text-sm opacity-0 hidden transition-display group-hover:block group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                <p className="text-gray-300 text-body-sm opacity-0 hidden transition-display group-hover:block group-hover:opacity-100 transition-opacity duration-300 delay-100">
                   {member.bio.substring(0, 80)}...
                 </p>
                 <div className="mt-4 flex space-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
@@ -188,8 +188,8 @@ export default function TeamSection() {
                 </div>
 
                 <div className="w-full md:w-2/3">
-                  <h3 className="text-2xl font-bold text-white">{activeTeamMember.name}</h3>
-                  <p className="text-cyberpunk-blue font-medium mb-4">{activeTeamMember.role}</p>
+                  <h3 className="text-2xl font-heading text-white">{activeTeamMember.name}</h3>
+                  <p className="text-cyberpunk-blue font-emphasis mb-4">{activeTeamMember.role}</p>
                   <p className="text-gray-300 mb-6">{activeTeamMember.bio}</p>
 
                   <div className="flex space-x-4">

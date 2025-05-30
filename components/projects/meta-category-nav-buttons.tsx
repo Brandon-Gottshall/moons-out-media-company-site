@@ -38,8 +38,8 @@ export default function MetaCategoryNavButtons({
 
         // Consistent styling for all buttons, with hover effects using their theme color
         let buttonClasses = `
-          px-2 py-1.5 sm:py-1 md:px-5 md:py-2.5 vh-short:px-2 vh-short:py-1 text-xs md:text-sm vh-short:text-xs rounded-md md:rounded-lg transition-all duration-300 ease-in-out 
-          font-semibold border md:border-2 vh-short:border focus:outline-none focus:ring-2 md:focus:ring-4 focus:ring-opacity-50
+          px-2 py-1.5 sm:py-1 md:px-5 md:py-2.5 vh-short:px-2 vh-short:py-1 text-label-base md:text-body-sm vh-short:text-label-base rounded-md md:rounded-lg transition-all duration-300 ease-in-out 
+          font-subheading border md:border-2 vh-short:border focus:outline-none focus:ring-2 md:focus:ring-4 focus:ring-opacity-50
           bg-black/60`; // Base background
 
         if (isGlobalAllButton) {

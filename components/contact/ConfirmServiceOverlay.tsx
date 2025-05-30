@@ -62,10 +62,10 @@ export default function ConfirmServiceOverlay({ children, onConfirm }: ConfirmSe
       <div className="pointer-events-none">{children}</div>
       {/* overlay */}
       <div className="absolute inset-0 bg-black/20">
-        <div className="absolute inset-y-0 left-0 w-1/5 border-2 border-red-500 flex items-center justify-center text-red-500 font-bold">
+        <div className="absolute inset-y-0 left-0 w-1/5 border-2 border-red-500 flex items-center justify-center text-red-500 font-heading">
           Pick
         </div>
-        <div className="absolute inset-y-0 left-1/5 w-4/5 border-2 border-green-500 flex flex-col items-center justify-center text-green-500 font-bold">
+        <div className="absolute inset-y-0 left-1/5 w-4/5 border-2 border-green-500 flex flex-col items-center justify-center text-green-500 font-heading">
           Confirm
           {countdown > 0 && (
             <div className="mt-2 flex space-x-1">

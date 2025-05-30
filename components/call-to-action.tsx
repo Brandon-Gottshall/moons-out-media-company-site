@@ -53,25 +53,25 @@ export default function CallToAction({
             viewport={{ once: true }}
           >
             <h2
-              className="text-2xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 glitch-text tracking-tight"
+              className="text-2xl md:text-4xl lg:text-5xl font-hero mb-4 md:mb-6 glitch-text tracking-tight"
               data-text={title}
             >
               {title}
             </h2>
-            <p className="text-base md:text-xl text-gray-200 mb-6 md:mb-8 max-w-2xl mx-auto font-medium">
+            <p className=" md:text-heading-md text-gray-200 mb-6 md:mb-8 max-w-2xl mx-auto font-emphasis">
               {description}
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4 mb-8 md:mb-12">
               <Button
-                className="cyberpunk-button text-base md:text-lg py-4 md:py-6 px-6 md:px-8 shadow-glow-blue"
+                className="cyberpunk-button font-hero md:text-body-lg py-4 md:py-6 px-6 md:px-8 shadow-glow-blue"
                 onClick={() => (window.location.href = primaryButtonLink)}
               >
                 {primaryButtonText}
               </Button>
               <Button
                 variant="outline"
-                className="border-cyberpunk-blue text-cyberpunk-blue hover:bg-cyberpunk-blue/10 text-base md:text-lg py-4 md:py-6 px-6 md:px-8 shadow-glow-subtle"
+                className="border-cyberpunk-blue text-cyberpunk-blue font-hero hover:bg-cyberpunk-blue/10  md:text-body-lg py-4 md:py-6 px-6 md:px-8 shadow-glow-subtle"
                 onClick={() => (window.location.href = secondaryButtonLink)}
               >
                 {secondaryButtonText}
@@ -86,8 +86,8 @@ export default function CallToAction({
               viewport={{ once: true }}
               className="bg-black/60 backdrop-blur-sm rounded-lg border border-cyberpunk-pink/30 p-5 md:p-8 max-w-lg mx-auto"
             >
-              <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-white">Stay Updated</h3>
-              <p className="text-sm md:text-base text-gray-300 mb-5 md:mb-6">
+              <h3 className="text-heading-md md:text-2xl font-heading mb-3 md:mb-4 text-white">Stay Updated</h3>
+              <p className="text-body-sm md:text-body-base text-gray-300 mb-5 md:mb-6">
                 Subscribe to our newsletter for the latest insights on storytelling, marketing trends, and creative
                 inspiration.
               </p>
@@ -102,12 +102,12 @@ export default function CallToAction({
                     onChange={(e) => setEmail(e.target.value)}
                     required
                   />
-                  <Button type="submit" className="cyberpunk-button whitespace-nowrap">
+                  <Button type="submit" className="cyberpunk-button font-hero whitespace-nowrap">
                     Subscribe
                   </Button>
                 </form>
               ) : (
-                <div className="text-cyberpunk-green font-medium">Thanks for subscribing! We'll be in touch soon.</div>
+                <div className="text-cyberpunk-green font-emphasis">Thanks for subscribing! We'll be in touch soon.</div>
               )}
             </motion.div>
           )}

@@ -121,10 +121,10 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
               <Badge variant="outline" className="bg-cyberpunk-blue/20 text-cyberpunk-blue border-cyberpunk-blue/30 mb-4">
                 {displayCategory}
               </Badge>
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">{currentItem.title}</h1>
-              <p className="text-xl text-cyberpunk-pink mb-6">Client: {currentItem.clientName}</p>
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-heading mb-4 text-white">{currentItem.title}</h1>
+              <p className="text-heading-md text-cyberpunk-pink mb-6">Client: {currentItem.clientName}</p>
               {currentItem.summary && (
-                <p className="text-base md:text-xl text-white mb-8 max-w-3xl bg-black/30 backdrop-blur-sm p-4 rounded-md border border-gray-800/50">
+                <p className=" md:text-heading-md text-white mb-8 max-w-3xl bg-black/30 backdrop-blur-sm p-4 rounded-md border border-gray-800/50">
                   {currentItem.summary}
                 </p>
               )}
@@ -156,7 +156,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <span className="text-cyberpunk-pink text-sm mb-2">Scroll for details</span>
+          <span className="text-cyberpunk-pink text-body-sm mb-2">Scroll for details</span>
           <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}>
             <ChevronDown className="h-6 w-6 text-cyberpunk-pink" />
           </motion.div>
@@ -171,7 +171,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
               <div className="flex overflow-x-auto space-x-1 sm:space-x-2 mb-8 pb-2 border-b border-gray-800/50">
                 {currentItem.challenge && (
                   <button
-                    className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
+                    className={`px-3 py-2 whitespace-nowrap font-emphasis text-body-sm sm:text-body-base ${
                       activeTab === "challenge"
                         ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
                         : "text-gray-400 hover:text-white"
@@ -183,7 +183,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
                 )}
                 {currentItem.solution && (
                   <button
-                    className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
+                    className={`px-3 py-2 whitespace-nowrap font-emphasis text-body-sm sm:text-body-base ${
                       activeTab === "solution"
                         ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
                         : "text-gray-400 hover:text-white"
@@ -195,7 +195,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
                 )}
                 {currentItem.results && (
                   <button
-                    className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
+                    className={`px-3 py-2 whitespace-nowrap font-emphasis text-body-sm sm:text-body-base ${
                       activeTab === "results"
                         ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
                         : "text-gray-400 hover:text-white"
@@ -207,7 +207,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
                 )}
                 {currentItem.galleryImages && currentItem.galleryImages.length > 0 && (
                   <button
-                    className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
+                    className={`px-3 py-2 whitespace-nowrap font-emphasis text-body-sm sm:text-body-base ${
                       activeTab === "gallery"
                         ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
                         : "text-gray-400 hover:text-white"
@@ -219,7 +219,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
                 )}
                 {currentItem.showcaseVideos && currentItem.showcaseVideos.length > 0 && (
                   <button
-                    className={`px-3 py-2 whitespace-nowrap font-medium text-sm sm:text-base ${
+                    className={`px-3 py-2 whitespace-nowrap font-emphasis text-body-sm sm:text-body-base ${
                       activeTab === "videos"
                         ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
                         : "text-gray-400 hover:text-white"
@@ -234,7 +234,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
               <AnimatePresence mode="wait">
                 {activeTab === "challenge" && currentItem.challenge && (
                   <motion.div key="challenge" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }}>
-                    <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">The Challenge</h2>
+                    <h2 className="text-2xl md:text-3xl font-heading mb-6 text-white">The Challenge</h2>
                     <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6 md:p-8 mb-8">
                       <SimpleRichText content={currentItem.challenge} />
                     </div>
@@ -243,19 +243,19 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
 
                 {activeTab === "solution" && currentItem.solution && (
                   <motion.div key="solution" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }}>
-                    <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Our Solution</h2>
+                    <h2 className="text-2xl md:text-3xl font-heading mb-6 text-white">Our Solution</h2>
                     <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6 md:p-8 mb-8">
                       <SimpleRichText content={currentItem.solution} />
                     </div>
                     {currentItem.keyFeatures && currentItem.keyFeatures.length > 0 && (
                       <div className="mb-8">
-                        <h3 className="text-xl md:text-2xl font-semibold mb-4 text-white">Key Features Delivered</h3>
+                        <h3 className="text-heading-md md:text-2xl font-subheading mb-4 text-white">Key Features Delivered</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           {currentItem.keyFeatures.map((feature, index) => (
                             <div key={index} className="bg-black/50 border border-gray-700/70 p-4 rounded-md">
                               {feature.featureIcon && <Lightbulb className="h-6 w-6 text-cyberpunk-blue mb-2" />}
-                              <h4 className="font-bold text-white mb-1">{feature.featureTitle}</h4>
-                              <p className="text-sm text-gray-300">{feature.featureDescription}</p>
+                              <h4 className="font-heading text-white mb-1">{feature.featureTitle}</h4>
+                              <p className="text-body-sm text-gray-300">{feature.featureDescription}</p>
                             </div>
                           ))}
                         </div>
@@ -266,7 +266,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
 
                 {activeTab === "results" && currentItem.results && (
                   <motion.div key="results" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }}>
-                    <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Project Results</h2>
+                    <h2 className="text-2xl md:text-3xl font-heading mb-6 text-white">Project Results</h2>
                     <div className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg p-6 md:p-8 mb-8">
                       <SimpleRichText content={currentItem.results} />
                     </div>
@@ -280,10 +280,10 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
                             transition={{ duration: 0.2, delay: index * 0.05 }}
                             className="bg-black/50 border border-gray-700/70 rounded-lg p-4 text-center flex flex-col justify-center items-center"
                           >
-                            <p className="text-2xl font-bold text-cyberpunk-green">{metric.metricValue}</p>
-                            <p className="text-sm text-white mt-1">{metric.metricLabel}</p>
-                            {metric.metricChange && <p className="text-xs text-gray-400">({metric.metricChange})</p>}
-                            {metric.metricDescription && <p className="text-xs text-gray-500 mt-1">{metric.metricDescription}</p>}
+                            <p className="text-2xl font-heading text-cyberpunk-green">{metric.metricValue}</p>
+                            <p className="text-body-sm text-white mt-1">{metric.metricLabel}</p>
+                            {metric.metricChange && <p className="text-label-base text-gray-400">({metric.metricChange})</p>}
+                            {metric.metricDescription && <p className="text-label-base text-gray-500 mt-1">{metric.metricDescription}</p>}
                           </motion.div>
                         ))}
                       </div>
@@ -297,10 +297,10 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
                             width={60} height={60} 
                             className="rounded-full mx-auto mb-4 border-2 border-cyberpunk-pink" />
                         )}
-                        <blockquote className="text-lg italic text-white mb-4 text-center">"{currentItem.testimonial.quote}"</blockquote>
+                        <blockquote className="text-body-lg italic text-white mb-4 text-center">"{currentItem.testimonial.quote}"</blockquote>
                         <div className="text-center">
-                          <p className="font-bold text-white">{currentItem.testimonial.authorName}</p>
-                          {currentItem.testimonial.authorTitle && <p className="text-sm text-gray-400">{currentItem.testimonial.authorTitle}</p>}
+                          <p className="font-heading text-white">{currentItem.testimonial.authorName}</p>
+                          {currentItem.testimonial.authorTitle && <p className="text-body-sm text-gray-400">{currentItem.testimonial.authorTitle}</p>}
                         </div>
                       </div>
                     )}
@@ -309,7 +309,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
 
                 {activeTab === "gallery" && currentItem.galleryImages && currentItem.galleryImages.length > 0 && (
                   <motion.div key="gallery" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }}>
-                    <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Project Gallery</h2>
+                    <h2 className="text-2xl md:text-3xl font-heading mb-6 text-white">Project Gallery</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-8">
                       {currentItem.galleryImages.map((galleryItem, index) => (
                         <motion.div
@@ -327,7 +327,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
                           />
                           {galleryItem.caption && (
                             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3">
-                              <p className="text-white text-sm">{galleryItem.caption}</p>
+                              <p className="text-white text-body-sm">{galleryItem.caption}</p>
                             </div>
                           )}
                         </motion.div>
@@ -338,11 +338,11 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
 
                 {activeTab === "videos" && currentItem.showcaseVideos && currentItem.showcaseVideos.length > 0 && (
                   <motion.div key="videos" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }}>
-                    <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Showcase Videos</h2>
+                    <h2 className="text-2xl md:text-3xl font-heading mb-6 text-white">Showcase Videos</h2>
                     <div className="space-y-8">
                       {currentItem.showcaseVideos.map((video, index) => (
                         <div key={video.muxPlaybackId || index} className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg overflow-hidden shadow-lg">
-                          {video.title && <h3 className="text-xl font-semibold p-4 text-white bg-black/30">{video.title}</h3>}
+                          {video.title && <h3 className="text-heading-md font-subheading p-4 text-white bg-black/30">{video.title}</h3>}
                           <div className="aspect-video bg-black">
                             <MuxPlayer
                               streamType="on-demand"
@@ -374,7 +374,7 @@ export default function PortfolioItemPage({ params }: { params: Promise<{ slug: 
       })().length > 0 && (
         <section className="py-16 md:py-24 bg-gradient-to-b from-black/50 to-cyberpunk-background">
           <div className="container mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-white text-center">Other Projects You Might Like</h2>
+            <h2 className="text-2xl md:text-3xl font-heading mb-8 text-white text-center">Other Projects You Might Like</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {allPortfolioItems
                 .filter(p => p.slug !== slug && p.status === 'published')

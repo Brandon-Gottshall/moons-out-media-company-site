@@ -32,18 +32,18 @@ export function PortfolioItemCard({ item, index }: PortfolioItemCardProps) {
         </div>
 
         <div className="p-5 flex flex-col flex-grow">
-          <h3 className="text-lg md:text-xl font-bold text-white mb-2 leading-tight group-hover:text-cyberpunk-blue transition-colors">
+          <h3 className="text-body-lg md:text-heading-md font-heading text-white mb-2 leading-tight group-hover:text-cyberpunk-blue transition-colors">
             {item.title}
           </h3>
           
-          <p className="text-sm text-cyberpunk-pink mb-3">Client: {item.clientName}</p>
+          <p className="text-body-sm text-cyberpunk-pink mb-3">Client: {item.clientName}</p>
 
-          <p className="text-gray-300 text-sm leading-relaxed line-clamp-3 mb-6 flex-grow">
+          <p className="text-gray-300 text-body-sm leading-relaxed line-clamp-3 mb-6 flex-grow">
             {item.summary}
           </p>
 
           <div className="mt-auto">
-            <div className="inline-flex items-center text-sm font-medium text-cyberpunk-blue group-hover:text-cyberpunk-blue/80 group-hover:underline underline-offset-4">
+            <div className="inline-flex items-center text-body-sm font-emphasis text-cyberpunk-blue group-hover:text-cyberpunk-blue/80 group-hover:underline underline-offset-4">
               View Project
               <ExternalLink className="ml-1.5 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
             </div>

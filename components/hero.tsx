@@ -65,32 +65,32 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-center max-w-4xl mx-auto"
         >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-hero mb-6">
             <span
               className="block glitch-text font-extrabold tracking-tight"
               data-text="Authentic Stories"
             >
               Authentic Stories
             </span>
-            <span className="block mt-2 text-cyberpunk-pink font-black tracking-tight text-shadow-lg">
+            <span className="block mt-2 text-cyberpunk-pink font-hero tracking-tight text-shadow-lg">
               Cinematic Experiences
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto font-medium">
+          <p className="text-heading-md md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto font-emphasis">
             Authentic story telling, targeted digital advertising, and
             custom web, AI & DevOps solutions— all designed to connect with your
             audience and accelerate your business.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button
-              className="bg-cyberpunk-purple text-white border-cyberpunk-gold border-2 py-6 px-8 font-bold shadow-glow-blue"
+              className="bg-cyberpunk-purple text-white border-cyberpunk-gold border-2 py-6 px-8 font-hero shadow-glow-blue"
               onClick={() => (window.location.href = "/contact")}
             >
               Start Your Story
             </Button>
             <Button
               variant="outline"
-              className="border-cyberpunk-pink text-cyberpunk-pink hover:bg-cyberpunk-pink/10 text-lg py-6 px-8 font-bold shadow-glow-subtle"
+              className="border-cyberpunk-pink text-cyberpunk-pink hover:bg-cyberpunk-pink/10 text-body-lg py-6 px-8 font-hero shadow-glow-subtle"
               onClick={() => (window.location.href = "/portfolio")}
             >
               View Our Work

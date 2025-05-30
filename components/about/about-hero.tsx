@@ -47,7 +47,7 @@ export default function AboutHero({ sections, activeSection, onSectionClick }: A
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1, duration: 0.4 }}
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
+          <h1 className="text-5xl md:text-7xl font-heading mb-6 text-white">
             <span className="text-cyberpunk-blue">Who</span> We Are
           </h1>
         </motion.div>
@@ -58,7 +58,7 @@ export default function AboutHero({ sections, activeSection, onSectionClick }: A
           transition={{ delay: 0.2, duration: 0.4 }}
           className="max-w-3xl mx-auto"
         >
-          <p className="text-xl md:text-2xl text-gray-200 mb-8 vh-short:mb-4">
+          <p className="text-heading-md md:text-2xl text-gray-200 mb-8 vh-short:mb-4">
             A collective of storytellers, digital artists, and marketing strategists pushing the boundaries of creative
             content.
           </p>
@@ -111,7 +111,7 @@ export default function AboutHero({ sections, activeSection, onSectionClick }: A
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}
       >
-        <span className="text-cyberpunk-pink text-sm mb-2 vh-short:-mb-1">Discover Our Story</span>
+        <span className="text-cyberpunk-pink text-body-sm mb-2 vh-short:-mb-1">Discover Our Story</span>
         <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}>
           <ChevronDown className="h-6 w-6 text-cyberpunk-pink vh-short:-mb-[0.5rem]" />
         </motion.div>

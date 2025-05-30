@@ -43,7 +43,7 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
           {service.icon}
         </div>
         <h3
-          className={`text-xl font-bold mb-3 text-cyberpunk-${service.color}`}
+          className={`text-heading-md font-heading mb-3 text-cyberpunk-${service.color}`}
         >
           {service.title}
         </h3>

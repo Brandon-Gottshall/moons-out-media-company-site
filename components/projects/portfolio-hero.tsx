@@ -312,7 +312,7 @@ export default function PortfolioHero({
 
         <div className="container mx-auto px-4 relative z-30">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading mb-6">
               <span className="block">Stories That Inspire</span>
             </h1>
           </div>
@@ -411,14 +411,14 @@ export default function PortfolioHero({
             <AnimatePresence mode="wait">
               {!isSearchActive && (
                 <motion.h1
-                  className="transform-gpu text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-5xl vh-short:text-lg font-bold"
+                  className="transform-gpu text-heading-md sm:text-2xl md:text-3xl lg:text-5xl xl:text-5xl vh-short:text-body-lg font-heading"
                   initial={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.2 }}
                 >
                   <div className="flex flex-col items-center lg:items-start">
                     <span className="text-white mb-1 vh-short:mb-0">Our Work</span>
-                    <div className="neon-text-accent w-full h-16 sm:h-20 md:h-24 lg:h-20 xl:h-20 vh-short:h-8 whitespace-normal break-words text-center lg:text-left text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl vh-short:text-xl" key={currentIndex}>
+                    <div className="neon-text-accent w-full h-16 sm:h-20 md:h-24 lg:h-20 xl:h-20 vh-short:h-8 whitespace-normal break-words text-center lg:text-left text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl vh-short:text-heading-md" key={currentIndex}>
                       <AnimatedTypewriter word={storyContent[currentIndex].word} />
                     </div>
                   </div>
@@ -446,7 +446,7 @@ export default function PortfolioHero({
                   ref={searchInputRef}
                   type="text"
                   placeholder="Search stories..."
-                  className="bg-black/50 border-gray-700 focus:border-cyberpunk-blue text-white pl-10 h-10 vh-short:h-8 text-sm"
+                  className="bg-black/50 border-gray-700 focus:border-cyberpunk-blue text-white pl-10 h-10 vh-short:h-8 text-body-sm"
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
@@ -469,7 +469,7 @@ export default function PortfolioHero({
               </div>
               <Button
                 type="submit"
-                className="cyberpunk-button h-10 vh-short:h-8 px-4 vh-short:px-3 text-sm vh-short:text-xs"
+                className="cyberpunk-button h-10 vh-short:h-8 px-4 vh-short:px-3 text-body-sm vh-short:text-label-base"
                 onClick={(e) => e.stopPropagation()}
               >
                 Search
@@ -539,7 +539,7 @@ export default function PortfolioHero({
       >
         {!isSearchActive && (
           <>
-            <span className="text-cyberpunk-pink text-sm mb-1 vh-short:mb-0">Explore Stories</span>
+            <span className="text-cyberpunk-pink text-body-sm mb-1 vh-short:mb-0">Explore Stories</span>
             <motion.div className="transform-gpu" animate={{ y: [0, 5, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}>
               <ChevronDown className="h-5 w-5 vh-short:h-4 vh-short:w-4 text-cyberpunk-pink" />
             </motion.div>

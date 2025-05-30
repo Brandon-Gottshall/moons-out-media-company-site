@@ -53,7 +53,7 @@ function MetaCategoryCard({
       <div className={`absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-${category.color}`}></div>
       
       <div className="absolute bottom-0 left-0 right-0 p-3 z-10">
-        <h3 className={`text-lg font-bold line-clamp-2 transition-colors duration-300
+        <h3 className={`text-body-lg font-heading line-clamp-2 transition-colors duration-300
           ${isSelected ? `text-${category.color}` : 'text-white group-hover:text-gray-100'}`}>
           {category.title}
         </h3>

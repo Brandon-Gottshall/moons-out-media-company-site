@@ -262,7 +262,7 @@ export default function ContactForm() {
         borderColor: "rgba(101, 206, 240, 0.4)",
       }}
     >
-      <h2 className="text-3xl font-bold mb-6 text-white relative inline-block">
+      <h2 className="text-3xl font-heading mb-6 text-white relative inline-block">
         Get In Touch
         <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-pink"></span>
       </h2>
@@ -306,7 +306,7 @@ export default function ContactForm() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+            <label htmlFor="name" className="block text-body-sm font-emphasis text-gray-300 mb-1">
               Name <span className="text-cyberpunk-pink">*</span>
             </label>
             <Input
@@ -325,7 +325,7 @@ export default function ContactForm() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+            <label htmlFor="email" className="block text-body-sm font-emphasis text-gray-300 mb-1">
               Email <span className="text-cyberpunk-pink">*</span>
             </label>
             <Input
@@ -345,7 +345,7 @@ export default function ContactForm() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
+            <label htmlFor="phone" className="block text-body-sm font-emphasis text-gray-300 mb-1">
               Phone Number
             </label>
             <Input
@@ -366,7 +366,7 @@ export default function ContactForm() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-          <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-1 text-left">
+          <label htmlFor="company" className="block text-body-sm font-emphasis text-gray-300 mb-1 text-left">
             Company (optional)
             </label>
           <Input
@@ -391,7 +391,7 @@ export default function ContactForm() {
               onMouseEnter={handleServiceMouseEnter}
               className="overflow-hidden"
             >
-              <label className="block text-sm font-medium text-gray-300 mb-1">Service Interest</label>
+              <label className="block text-body-sm font-emphasis text-gray-300 mb-1">Service Interest</label>
               <div className="space-y-2">
                 <div className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
                   <Checkbox
@@ -422,7 +422,7 @@ export default function ContactForm() {
                           onClick={e => e.stopPropagation()}
                           className="h-6 w-6 mr-2"
                         />
-                        <span className="text-gray-300 font-semibold text-sm">Moons Out Media</span>
+                        <span className="text-gray-300 font-subheading text-body-sm">Moons Out Media</span>
                       </div>
                       <ChevronDown className="h-4 w-4" />
                     </div>
@@ -453,7 +453,7 @@ export default function ContactForm() {
                           onClick={e => e.stopPropagation()}
                           className="h-6 w-6 mr-2"
                         />
-                        <span className="text-gray-300 font-semibold text-sm">Moons Out Labs</span>
+                        <span className="text-gray-300 font-subheading text-body-sm">Moons Out Labs</span>
                       </div>
                       <ChevronDown className="h-4 w-4" />
                     </div>
@@ -505,7 +505,7 @@ export default function ContactForm() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          <label htmlFor="findUs" className="block text-sm font-medium text-gray-300 mb-1">
+          <label htmlFor="findUs" className="block text-body-sm font-emphasis text-gray-300 mb-1">
             How did you find us?
           </label>
           <Input
@@ -524,7 +524,7 @@ export default function ContactForm() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.7 }}
         >
-          <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
+          <label htmlFor="message" className="block text-body-sm font-emphasis text-gray-300 mb-1">
             Message <span className="text-cyberpunk-pink">*</span>
           </label>
           <textarea
@@ -541,7 +541,7 @@ export default function ContactForm() {
         <motion.button
           type="submit"
           disabled={!isFormValid || isSubmitting}
-          className={`w-full py-3 px-6 font-bold rounded-md transition-all duration-300 relative overflow-hidden ${
+          className={`w-full py-3 px-6 font-heading rounded-md transition-all duration-300 relative overflow-hidden ${
             !isFormValid || isSubmitting
               ? "bg-black border border-cyberpunk-blue/50 text-white/50 cursor-not-allowed shadow-[0_0_10px_rgba(0,204,255,0.2)]"
               : "bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple text-white hover:from-cyberpunk-purple hover:to-cyberpunk-blue"
@@ -593,7 +593,7 @@ export default function ContactForm() {
             setIsBookingDialogOpen(true)
           }}
           disabled={!isFormValid || isSubmitting} 
-          className={`w-full py-3 px-6 font-bold rounded-md transition-all duration-300 relative overflow-hidden ${
+          className={`w-full py-3 px-6 font-heading rounded-md transition-all duration-300 relative overflow-hidden ${
             !isFormValid || isSubmitting
               ? "bg-black border border-cyberpunk-green/50 text-white/50 cursor-not-allowed shadow-[0_0_10px_rgba(0,255,127,0.2)]"
               : "bg-gradient-to-r from-cyberpunk-green to-cyberpunk-teal text-white hover:from-cyberpunk-teal hover:to-cyberpunk-green"

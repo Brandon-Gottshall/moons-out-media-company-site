@@ -27,10 +27,10 @@ export default function ServiceInterestConfirmed({ selectionType, services, onCh
         <CardTitle>Service Interest Confirmed</CardTitle>
       </CardHeader>
       <CardContent>
-        {typeLabel && !showServices && <p className="text-lg font-semibold text-cyberpunk-blue">{typeLabel}</p>}
+        {typeLabel && !showServices && <p className="text-body-lg font-subheading text-cyberpunk-blue">{typeLabel}</p>}
         {showServices && (
           <div className="space-y-1">
-            <p className="text-lg font-semibold text-cyberpunk-blue mb-2">Your Selected Services:</p>
+            <p className="text-body-lg font-subheading text-cyberpunk-blue mb-2">Your Selected Services:</p>
             <ul className="list-disc list-inside space-y-1 pl-4">
               {services.map(service => {
                 const svc = MASTER_SERVICES.find((s: Service) => s.id === service)

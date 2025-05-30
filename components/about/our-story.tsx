@@ -24,7 +24,7 @@ export default function OurStory() {
         transition={{ duration: 0.6 }}
         className="max-w-4xl mx-auto"
       >
-        <h2 className="text-4xl font-bold mb-12 text-center">
+        <h2 className="text-4xl font-heading mb-12 text-center">
           <span className="text-cyberpunk-blue">Our</span> Story
         </h2>
 
@@ -35,9 +35,9 @@ export default function OurStory() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeIn}
-            className="text-lg leading-relaxed"
+            className="text-body-lg leading-relaxed"
           >
-            <span className="text-2xl font-bold text-cyberpunk-pink">Moons Out Media</span> was born from a simple yet
+            <span className="text-2xl font-heading text-cyberpunk-pink">Moons Out Media</span> was born from a simple yet
             powerful idea: authentic stories create meaningful connections. Founded in 2018 by a group of filmmakers,
             digital marketers, and storytelling enthusiasts, we set out to transform how brands communicate with their
             audiences.
@@ -49,7 +49,7 @@ export default function OurStory() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeIn}
-            className="text-lg leading-relaxed"
+            className="text-body-lg leading-relaxed"
           >
             What began as a small documentary production team quickly evolved into a full-service creative agency. We
             recognized that the authentic story telling approach—with its emphasis on authenticity, emotional resonance, and
@@ -63,7 +63,7 @@ export default function OurStory() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeIn}
-            className="text-lg leading-relaxed"
+            className="text-body-lg leading-relaxed"
           >
             Today, we're a diverse collective of creators, strategists, and digital innovators united by our passion for
             storytelling. We've helped over 100 brands discover and amplify their unique voice, creating content that
@@ -79,11 +79,11 @@ export default function OurStory() {
             className="py-8 px-8 border-l-4 border-cyberpunk-blue bg-black/30 rounded-r-md relative"
           >
             <Quote className="absolute text-cyberpunk-blue/20 h-16 w-16 -top-6 -left-6" />
-            <p className="text-xl italic text-gray-100">
+            <p className="text-heading-md italic text-gray-100">
               "We don't just tell stories—we craft experiences that transform how audiences perceive and connect with
               brands."
             </p>
-            <p className="mt-4 text-cyberpunk-blue font-semibold">— Alex Rivera, Founder & Creative Director</p>
+            <p className="mt-4 text-cyberpunk-blue font-subheading">— Alex Rivera, Founder & Creative Director</p>
           </motion.div>
         </div>
 
@@ -95,7 +95,7 @@ export default function OurStory() {
           viewport={{ once: true }}
           className="mt-16"
         >
-          <h3 className="text-2xl font-bold mb-8 text-center">
+          <h3 className="text-2xl font-heading mb-8 text-center">
             Our <span className="text-cyberpunk-pink">Journey</span>
           </h3>
 
@@ -145,7 +145,7 @@ export default function OurStory() {
                 <div
                   className={`bg-black/40 border border-gray-800 rounded-lg p-4 md:w-[calc(50%-20px)] ${index % 2 === 0 ? "md:mr-auto" : "md:ml-auto"}`}
                 >
-                  <h4 className="text-xl font-bold mb-2">{item.title}</h4>
+                  <h4 className="text-heading-md font-heading mb-2">{item.title}</h4>
                   <p className="text-gray-100">{item.description}</p>
                 </div>
               </div>

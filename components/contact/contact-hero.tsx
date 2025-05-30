@@ -84,7 +84,7 @@ export default function ContactHero() {
             animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : -20 }}
             transition={{ duration: 0.4 }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <h1 className="text-5xl md:text-6xl font-heading mb-6">
               <span className="text-white">Let's Solve Your</span> <br />
               <motion.span
                 className="bg-clip-text text-transparent bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-blue"
@@ -104,7 +104,7 @@ export default function ContactHero() {
           </motion.div>
 
           <motion.p
-            className="text-xl text-gray-300 mb-10"
+            className="text-heading-md text-gray-300 mb-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: isVisible ? 1 : 0 }}
             transition={{ duration: 0.4, delay: 0.15 }}
@@ -137,14 +137,14 @@ export default function ContactHero() {
                 transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
               >
                 <motion.p
-                  className={`text-3xl font-bold text-cyberpunk-${stat.color}`}
+                  className={`text-3xl font-heading text-cyberpunk-${stat.color}`}
                   initial={{ scale: 0.8 }}
                   animate={{ scale: [0.8, 1.2, 1] }}
                   transition={{ duration: 0.5, delay: 1 + index * 0.2 }}
                 >
                   {stat.value}
                 </motion.p>
-                <p className="text-sm text-white">{stat.label}</p>
+                <p className="text-body-sm text-white">{stat.label}</p>
               </motion.div>
             ))}
           </motion.div>

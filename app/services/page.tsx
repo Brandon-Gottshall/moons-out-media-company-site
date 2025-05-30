@@ -27,7 +27,7 @@ export default function ServicesChooserPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_center,rgba(0,204,255,0.15)_0%,transparent_50%)]"></div>
         <div className="container mx-auto px-4 text-center">
           <motion.h1 
-            className="text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-pink"
+            className="text-4xl md:text-6xl font-heading mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-pink"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -35,7 +35,7 @@ export default function ServicesChooserPage() {
             Choose Your Path
           </motion.h1>
           <motion.p 
-            className="text-xl text-gray-300 max-w-2xl mx-auto mb-12"
+            className="text-heading-md text-gray-300 max-w-2xl mx-auto mb-12"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -66,8 +66,8 @@ export default function ServicesChooserPage() {
                     <div className="w-16 h-16 rounded-full bg-cyberpunk-blue/20 flex items-center justify-center mb-4 group-hover:bg-cyberpunk-blue/30 transition-colors">
                       <Video className="w-8 h-8 text-cyberpunk-blue" />
                     </div>
-                    <h2 className="text-3xl font-bold text-white mb-4">Creative Services</h2>
-                    <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                    <h2 className="text-3xl font-heading text-white mb-4">Creative Services</h2>
+                    <p className="text-gray-300 text-body-lg leading-relaxed mb-6">
                       Cinematic storytelling that converts. From brand narratives to digital campaigns that drive real results.
                     </p>
                   </div>
@@ -92,7 +92,7 @@ export default function ServicesChooserPage() {
 
                   {/* CTA */}
                   <div className="relative z-10 flex items-center text-cyberpunk-blue group-hover:text-white transition-colors">
-                    <span className="font-semibold">Explore Creative Services</span>
+                    <span className="font-subheading">Explore Creative Services</span>
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
@@ -115,8 +115,8 @@ export default function ServicesChooserPage() {
                     <div className="w-16 h-16 rounded-full bg-cyberpunk-pink/20 flex items-center justify-center mb-4 group-hover:bg-cyberpunk-pink/30 transition-colors">
                       <Code2 className="w-8 h-8 text-cyberpunk-pink" />
                     </div>
-                    <h2 className="text-3xl font-bold text-white mb-4">Labs & Tech</h2>
-                    <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                    <h2 className="text-3xl font-heading text-white mb-4">Labs & Tech</h2>
+                    <p className="text-gray-300 text-body-lg leading-relaxed mb-6">
                       Launch a lightning-fast, ADA-ready site in 21 days. Custom web apps, AI automation, and cloud solutions.
                     </p>
                   </div>
@@ -141,7 +141,7 @@ export default function ServicesChooserPage() {
 
                   {/* CTA */}
                   <div className="relative z-10 flex items-center text-cyberpunk-pink group-hover:text-white transition-colors">
-                    <span className="font-semibold">Explore Labs & Tech</span>
+                    <span className="font-subheading">Explore Labs & Tech</span>
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>

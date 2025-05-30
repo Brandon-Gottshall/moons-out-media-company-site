@@ -53,7 +53,7 @@ function ValueCardComponent({ value }: { value: ValueCard }) {
         >
           {value.icon}
         </div>
-        <h3 className="text-xl font-bold text-white">{value.title}</h3>
+        <h3 className="text-heading-md font-heading text-white">{value.title}</h3>
       </div>
       <p className="text-gray-300">{value.description}</p>
     </motion.div>
@@ -142,7 +142,7 @@ export default function CoreValues() {
       >
         <div className="container mx-auto px-4">
           <div className="text-center mb-6">
-            <h2 className="text-4xl font-bold mb-2">
+            <h2 className="text-4xl font-heading mb-2">
               Our <span className="text-cyberpunk-red">Marine Corps DNA</span>
             </h2>
             <div className="mx-auto w-32 h-1 bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-pink rounded-full" />
@@ -181,7 +181,7 @@ export default function CoreValues() {
             ))}
           </motion.div>
 
-          <p className="text-sm text-cyberpunk-red-light text-center">
+          <p className="text-body-sm text-cyberpunk-red-light text-center">
             The same ethos that keeps Marines mission-ready keeps your
             project moving. When we say we'll deliver, it's a promise—backed
             by 247 years of tradition.
@@ -196,7 +196,7 @@ export default function CoreValues() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl font-bold mb-16 text-center"
+            className="text-4xl font-heading mb-16 text-center"
           >
             Our <span className="text-cyberpunk-pink">Core Values</span>
           </motion.h2>
