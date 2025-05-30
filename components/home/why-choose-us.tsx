@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Target, BarChart2, Gem, FlaskConical } from "lucide-react";
+import Link from "next/link";
 
 export function WhyChooseUs() {
   const container = {
@@ -48,7 +49,7 @@ export function WhyChooseUs() {
             <h3 className="text-lg font-semibold text-white mb-2">
               {item.title}
             </h3>
-            {Array.isArray(item.description) ? (
+{Array.isArray(item.description) ? (
               item.description.map((line, i) => (
                 <p
                   key={i}
@@ -56,12 +57,38 @@ export function WhyChooseUs() {
                     i === item.description.length - 1 ? "" : "mb-1"
                   }`}
                 >
-                  {line}
+                  {item.linkText && item.linkHref && line.includes(item.linkText) ? (
+                    <>
+                      {line.split(item.linkText)[0]}
+                      <Link 
+                        href={item.linkHref}
+                        className="text-cyberpunk-purple hover:text-cyberpunk-pink transition-colors underline"
+                      >
+                        {item.linkText}
+                      </Link>
+                      {line.split(item.linkText)[1]}
+                    </>
+                  ) : (
+                    line
+                  )}
                 </p>
               ))
             ) : (
               <p className="w-full text-sm text-gray-300 leading-relaxed text-left">
-                {item.description}
+                {item.linkText && item.linkHref && typeof item.description === 'string' && item.description.includes(item.linkText) ? (
+                  <>
+                    {item.description.split(item.linkText)[0]}
+                    <Link 
+                      href={item.linkHref}
+                      className="text-cyberpunk-purple hover:text-cyberpunk-pink transition-colors underline"
+                    >
+                      {item.linkText}
+                    </Link>
+                    {item.description.split(item.linkText)[1]}
+                  </>
+                ) : (
+                  item.description
+                )}
               </p>
             )}
           </motion.div>
@@ -78,6 +105,8 @@ interface WhyChooseUsItem {
   title: string;
   description: string | string[];
   color: "blue" | "pink" | "green" | "purple";
+  linkText?: string;
+  linkHref?: string;
 }
 
 const whyChooseUsItems: WhyChooseUsItem[] = [
@@ -116,5 +145,7 @@ const whyChooseUsItems: WhyChooseUsItem[] = [
       "We build sites, web apps, and tools that bring your vision to life.",
     ],
     color: "purple",
+    linkText: "Labs",
+    linkHref: "/services/labs",
   },
 ];

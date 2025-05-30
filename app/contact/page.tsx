@@ -1,152 +1,74 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, ArrowRight, Video, Code2 } from "lucide-react"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
-import ContactHero from "@/components/contact/contact-hero"
-import ContactFunnel from "@/components/contact/contact-funnel"
-import ContactInfo from "@/components/contact/contact-info"
 import ContactForm from "@/components/contact/contact-form"
+import Link from "next/link"
+import { useState } from "react"
 
 interface FAQ {
   question: string
   answer: string
 }
 
-const moonsOutMediaFaqs: FAQ[] = [
+const topCreativeFaqs: FAQ[] = [
   {
     question: "What services does Moons Out Media offer?",
-    answer: `We provide a comprehensive suite of creative services that blend cinematic storytelling with modern digital tools, including:
+    answer: `We provide cinematic storytelling and digital marketing services including:
 
-• **Brand Storytelling & Video Production**
-  Documentary-style videos and content that tell your brand's story authentically.
-• **Digital Marketing Campaigns**
-  Targeted ad campaigns (social media, video ads, etc.) built around clear KPIs and continuous A/B optimization.
-• **Web & Application Development**
-  Custom websites and web apps (Next.js / React / Node) designed for scale, security, and speed.
-• **AI & Automation Solutions**
-  Tailored AI/ML pipelines and chatbots (using tools like n8n, Langflow) to automate tasks and enhance user engagement.
-• **Cloud & DevOps**
-  Containerized infrastructure, CI/CD pipelines, Kubernetes/Docker setups, and hybrid cloud hosting for reliable, scalable deployment.
+• **Brand Storytelling & Video Production** - Documentary-style videos that tell your brand's story authentically
+• **Digital Marketing Campaigns** - Targeted ad campaigns built around clear KPIs and continuous optimization
+• **Social Media Content** - Platform-optimized content that builds community and drives engagement
 
-All services are "under one roof" to drive real results. Think of us as a full-service creative agency and tech studio: we handle everything from strategic storytelling to the technical backend.`,
-  },
-  {
-    question: "Who should work with Moons Out Media?",
-    answer:
-      "Mission-driven businesses and organizations that value high-quality, authentic storytelling and measurable results. Ideal clients include: tech companies, e-commerce brands, educational and non-profit initiatives, and government or defense-related projects. If you want in-house craftsmanship, data-driven campaigns, and Marine-veteran discipline, we're a great fit.",
+All services focus on authentic storytelling that converts viewers into customers.`,
   },
   {
     question: "What can I expect from your creative process?",
     answer: `A transparent, collaborative workflow:
 
-1. **Listen & Plan** – Understand your story, goals, and audience.
-2. **Create & Produce** – In-house shooting, editing, and perfecting every visual with a "quality first" mindset.
-3. **Launch & Monitor** – Deploy campaigns, track performance against clear KPIs, and adapt quickly based on results.
+1. **Discovery** – Understand your story, goals, and audience
+2. **Storyboarding** – Visual planning and script development  
+3. **Production** – In-house shooting, editing, and perfecting every visual
+4. **Distribution** – Strategic campaign deployment with performance tracking
 
-You'll be involved at every stage—scripts, edits, strategies—so there are no surprises.`,
+You'll be involved at every stage with no surprises.`,
   },
   {
-    question: "How do you measure the success of your work?",
-    answer:
-      "By real metrics and ROI. We set goals (e.g., website leads, conversions, video engagement) upfront and build campaigns around them. You'll receive regular reports (impressions, click-throughs, conversions) and see how your investment pays off. We then use that data to optimize in real time.",
-  },
-  {
-    question: "Why focus on authentic storytelling?",
-    answer:
-      "Authenticity builds trust. Studies show 88% of consumers say authenticity drives their brand choices—and they'll pay more for brands they trust. We uncover what makes your brand unique and present it through compelling visuals and copy to create deeper audience connections.",
-  },
-  {
-    question: "How does budgeting and commitment work?",
-    answer:
-      "We provide clear, upfront proposals—either a fixed project fee or a retainer. Projects can be phased (concept, production, post-production) with agreed milestones. We never nickel-and-dime; you'll know where every dollar goes, and we deliver on time and on budget.",
-  },
-  {
-    question: "What kind of results can I expect?",
-    answer:
-      "Polished content and measurable business impact. Whether it's documentary-style brand awareness videos or targeted ads driving traffic, we deliver top-tier quality and clear improvements in key metrics—higher sales, more leads, better fundraising results, or improved user experience on your new website or app.",
+    question: "How do you measure creative campaign success?",
+    answer: "By real metrics and ROI. We set goals (website leads, conversions, video engagement) upfront and build campaigns around them. You'll receive regular reports showing impressions, click-throughs, and conversions, then use that data to optimize in real time.",
   },
 ]
 
-const moonsOutLabsFaqs: FAQ[] = [
+const topLabsFaqs: FAQ[] = [
   {
-    question: "What is Moons Out Labs?",
-    answer:
-      "Our technology and engineering division. While Moons Out Media focuses on creative storytelling, Labs builds the software and systems powering your digital initiatives—from websites and web apps to complex AI workflows and robust cloud infrastructure.",
+    question: "What's included in the 21-day sprint?",
+    answer: "Complete custom development including design, backend, frontend, testing, deployment, and knowledge transfer. You'll receive a fully functional, production-ready application with full code ownership.",
   },
   {
-    question: "What technology services can Moons Out Labs provide?",
-    answer: `End-to-end development of high-quality tech products, including:
-
-• **Web & Mobile Apps**
-  Custom applications using Next.js, React, Node.js—fast, secure, and scalable.
-• **AI & Automation**
-  Chatbots, data-analysis tools, machine-learning modules (Langflow, custom models) to automate routine tasks.
-• **Cloud & DevOps**
-  Docker/Kubernetes containerization, CI/CD pipelines, hybrid cloud hosting for reliable, maintainable systems.`,
+    question: "Do you guarantee ADA compliance?",
+    answer: "Yes, all our builds meet WCAG 2.1 AA standards for accessibility, ensuring your site is usable by everyone and legally compliant.",
   },
   {
-    question: "Who should consider working with Moons Out Labs?",
-    answer: `Tech-forward organizations ready to invest in innovation:
-
-• Funded startups (fintech, healthtech, edtech, SaaS)
-• Mid- to large-enterprises undergoing digital transformation
-• E-commerce businesses needing advanced web platforms
-• Established brands (finance, healthcare, government) seeking custom, secure systems`,
-  },
-  {
-    question: "How does the development process work?",
-    answer: `A clear, collaborative workflow:
-
-1. **Discovery Session** – Define goals, requirements, timeline.
-2. **Sprints/Phases** – Design, build, and deliver in iterative increments with regular demos.
-3. **Testing & Launch** – Security checks, load tests, CI/CD deployments.
-4. **Ownership & Handoff** – Full documentation and knowledge transfer; you own the code.`,
-  },
-  {
-    question: "How long do projects take and how are costs structured?",
-    answer: `
-• **Small projects** (simple site/chatbot): a few weeks to 2 months
-• **Mid-size projects** (custom web apps): 2–4 months
-• **Large projects** (enterprise platforms/AI systems): 6+ months
-
-Cost models: fixed-price for defined scopes or time-and-materials retainers. Payments are milestone-based for transparency.`,
-  },
-  {
-    question: "What technology do you use, and will I be locked in?",
-    answer:
-      "We use modern, industry-standard stacks (React/Next.js, Node.js/Express, Python/Node ML libraries, Docker/Kubernetes). Everything is portable, open-source where possible, and fully documented—so you retain complete ownership and avoid vendor lock-in.",
-  },
-  {
-    question: "How do you ensure security and reliability?",
-    answer:
-      "From day one, we enforce secure coding standards, data encryption, and least-privilege access. Our containerized DevOps approach enables environment replication and rapid patching via CI/CD. We conduct unit/integration tests, optional penetration tests, and set up monitoring and alerts for immediate issue detection. Ongoing maintenance or support retainers are available.",
-  },
-  {
-    question: "What happens after the project is completed?",
-    answer:
-      "We provide final documentation, knowledge-transfer sessions, and a short support period. You can choose an ongoing support retainer or take over internally—handoffs are smooth thanks to standard tech and solid processes. We're also available for future updates and long-term partnership.",
+    question: "What happens after the 21 days?",
+    answer: "You receive full ownership of the code, documentation, and training. Our optional Care Plan provides ongoing support, but you're never locked in.",
   },
 ]
 
-const mediaAndLabsSynergyFaqs: FAQ[] = [
+const synergyFaqs: FAQ[] = [
   {
-    question: "How do Moons Out Media and Moons Out Labs work together for my benefit?",
-    answer: "By combining cinematic storytelling with rock-solid engineering, we deliver end-to-end solutions that are both compelling and reliable. Your narrative, brand assets, and technical requirements feed into one unified workflow—no handoffs, no siloed teams—so you get a cohesive product from concept through launch.",
-  },
-  {
-    question: "Can I engage both teams on a single project?",
-    answer: "Absolutely. Whether you need a branded video with an interactive web component or an AI-powered marketing campaign backed by custom infrastructure, we scope, budget, and schedule Media and Labs deliverables together, ensuring consistent communication, shared milestones, and a single point of accountability.",
+    question: "How do Moons Out Media and Labs work together?",
+    answer: "By combining cinematic storytelling with rock-solid engineering, we deliver end-to-end solutions that are both compelling and reliable. Your narrative and technical requirements feed into one unified workflow—no handoffs, no siloed teams.",
   },
   {
     question: "What's the advantage of having creative and technical under one roof?",
-    answer: "You save time, reduce miscommunication, and cut costs. Our cross-team collaboration means creative ideas are technically vetted from day one, and technical builds are informed by strategic storytelling. That synergy accelerates delivery, tightens budgets, and guarantees that what looks great also works flawlessly.",
+    answer: "You save time, reduce miscommunication, and cut costs. Our cross-team collaboration means creative ideas are technically vetted from day one, and technical builds are informed by strategic storytelling.",
   },
 ]
 
 // Helper function to render simple markdown (bold)
 function renderMarkdown(text: string) {
-  const parts = text.split(/(\*\*.*\*\*)/g)
+  const parts = text.split(/(\*\*.*?\*\*)/g)
   return parts.map((part, index) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return <strong key={index}>{part.slice(2, -2)}</strong>
@@ -156,28 +78,139 @@ function renderMarkdown(text: string) {
 }
 
 export default function ContactPage() {
+  const [showMoreFaqs, setShowMoreFaqs] = useState(false)
+
   return (
     <div className="min-h-screen bg-black">
+      {/* Global page styling elements */}
+      <div className="fixed inset-0 bg-[url('/noise.png')] opacity-5 z-50 pointer-events-none"></div>
 
       {/* Main Content */}
       <div className="container mx-auto px-4 pb-16 pt-20">
         <div className="max-w-5xl mx-auto">
 
-          {/* Quick Form Section */}
+          {/* Hero Section */}
           <motion.section
-            id="quick-form"
-            className="mb-20"
+            className="text-center mb-16 pt-12"
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold my-4 inline-block relative">
-                <span className="text-white">Quick Contact Form</span>
-                <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-pink"></span>
-              </h2>
-              <p className="text-gray-300">Need a quick response? Use our simplified contact form.</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-pink">
+              Let's Build Something Amazing
+            </h1>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              Tell us about your next project—or book time instantly.
+            </p>
+          </motion.section>
+
+          {/* Service Selector Cards */}
+          <motion.section
+            className="mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-white mb-4">Choose Your Path</h2>
+              <p className="text-gray-300">Select the service that best fits your needs</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
+              {/* Creative Services Card */}
+              <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-cyberpunk-blue/20 to-cyberpunk-purple/20 border border-cyberpunk-blue/30 p-6 hover:border-cyberpunk-blue/60 transition-all duration-300">
+                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-full bg-cyberpunk-blue/20 flex items-center justify-center mb-4">
+                    <Video className="w-6 h-6 text-cyberpunk-blue" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">Moons Out Media</h3>
+                  <p className="text-gray-300 text-sm mb-4">Creative storytelling, video production, and digital marketing campaigns</p>
+                  <ul className="space-y-1 text-xs text-gray-400">
+                    <li>• Brand Storytelling</li>
+                    <li>• Digital Marketing</li>
+                    <li>• Social Media Content</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Labs Services Card */}
+              <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-cyberpunk-pink/20 to-cyberpunk-purple/20 border border-cyberpunk-pink/30 p-6 hover:border-cyberpunk-pink/60 transition-all duration-300">
+                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-full bg-cyberpunk-pink/20 flex items-center justify-center mb-4">
+                    <Code2 className="w-6 h-6 text-cyberpunk-pink" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">Moons Out Labs</h3>
+                  <p className="text-gray-300 text-sm mb-4">Web development, AI automation, and cloud infrastructure</p>
+                  <ul className="space-y-1 text-xs text-gray-400">
+                    <li>• Web Applications</li>
+                    <li>• AI & Automation</li>
+                    <li>• Cloud & DevOps</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </motion.section>
+
+          {/* Instant Booking Section */}
+          <motion.section
+            className="mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-white mb-4">Book Time Instantly</h2>
+              <p className="text-gray-300">Skip the form and schedule a call directly</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+              <Link 
+                href="https://calendar.app.google/WBDFCapdi8Z9UDvJ7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <div className="bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple p-6 rounded-xl text-center hover:scale-105 transition-transform">
+                  <h3 className="text-lg font-semibold text-white mb-2">Creative Discovery Call</h3>
+                  <p className="text-gray-200 text-sm mb-4">30 minutes • Strategy & Planning</p>
+                  <div className="flex items-center justify-center text-white group-hover:translate-x-1 transition-transform">
+                    <span>Book Now</span>
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </div>
+                </div>
+              </Link>
+
+              <Link 
+                href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ10MfFXCLnngwj5wQ9CRQ6Mqw2r6sF1IBHMYr8y2pQmV4OZ8-kcvoeWxbx8mHgWM2QfLW4aPVZw"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <div className="bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple p-6 rounded-xl text-center hover:scale-105 transition-transform">
+                  <h3 className="text-lg font-semibold text-white mb-2">15-Min Labs Audit</h3>
+                  <p className="text-gray-200 text-sm mb-4">15 minutes • Technical Assessment</p>
+                  <div className="flex items-center justify-center text-white group-hover:translate-x-1 transition-transform">
+                    <span>Book Now</span>
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </div>
+                </div>
+              </Link>
+            </div>
+          </motion.section>
+
+          {/* Contact Form Section */}
+          <motion.section
+            id="contact-form"
+            className="mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-white mb-4">Send Us a Message</h2>
+              <p className="text-gray-300">Prefer to write? Tell us about your project</p>
             </div>
 
             <div className="max-w-2xl mx-auto">
@@ -190,52 +223,68 @@ export default function ContactPage() {
             id="faq"
             className="mb-12"
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
           >
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+            </div>
 
-            <div className="max-w-3xl mx-auto space-y-12">
+            <div className="max-w-3xl mx-auto space-y-8">
+              {/* Creative FAQs */}
               <div>
-                <h3 className="text-2xl font-semibold text-cyberpunk-blue mb-6 text-center">Moons Out Media FAQs</h3>
-                <Accordion type="single" collapsible className="space-y-4">
-                  {moonsOutMediaFaqs.map((faq, index) => (
-                    <AccordionItem key={`media-faq-${index}`} value={`media-faq-${index}`}>
-                      <AccordionTrigger>{faq.question}</AccordionTrigger>
+                <h3 className="text-xl font-semibold text-cyberpunk-blue mb-4 text-center">Creative Services</h3>
+                <Accordion type="single" collapsible className="space-y-3">
+                  {topCreativeFaqs.map((faq, index) => (
+                    <AccordionItem key={`creative-faq-${index}`} value={`creative-faq-${index}`}>
+                      <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
                       <AccordionContent>
-                        <p className="text-gray-300 whitespace-pre-line">{renderMarkdown(faq.answer)}</p>
+                        <div className="text-gray-300 whitespace-pre-line">{renderMarkdown(faq.answer)}</div>
                       </AccordionContent>
                     </AccordionItem>
                   ))}
                 </Accordion>
               </div>
 
+              {/* Labs FAQs */}
               <div>
-                <h3 className="text-2xl font-semibold text-cyberpunk-pink mb-6 text-center">Moons Out Labs FAQs</h3>
-                <Accordion type="single" collapsible className="space-y-4">
-                  {moonsOutLabsFaqs.map((faq, index) => (
+                <h3 className="text-xl font-semibold text-cyberpunk-pink mb-4 text-center">Labs & Tech</h3>
+                <Accordion type="single" collapsible className="space-y-3">
+                  {topLabsFaqs.map((faq, index) => (
                     <AccordionItem key={`labs-faq-${index}`} value={`labs-faq-${index}`}>
-                      <AccordionTrigger>{faq.question}</AccordionTrigger>
+                      <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
                       <AccordionContent>
-                        <p className="text-gray-300 whitespace-pre-line">{renderMarkdown(faq.answer)}</p>
+                        <div className="text-gray-300 whitespace-pre-line">{renderMarkdown(faq.answer)}</div>
                       </AccordionContent>
                     </AccordionItem>
                   ))}
                 </Accordion>
               </div>
 
+              {/* Synergy FAQs */}
               <div>
-                <h3 className="text-2xl font-semibold text-cyberpunk-green mb-6 text-center">Media & Labs Synergy FAQs</h3>
-                <Accordion type="single" collapsible className="space-y-4">
-                  {mediaAndLabsSynergyFaqs.map((faq, index) => (
+                <h3 className="text-xl font-semibold text-cyberpunk-green mb-4 text-center">Working Together</h3>
+                <Accordion type="single" collapsible className="space-y-3">
+                  {synergyFaqs.map((faq, index) => (
                     <AccordionItem key={`synergy-faq-${index}`} value={`synergy-faq-${index}`}>
-                      <AccordionTrigger>{faq.question}</AccordionTrigger>
+                      <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
                       <AccordionContent>
-                        <p className="text-gray-300 whitespace-pre-line">{renderMarkdown(faq.answer)}</p>
+                        <div className="text-gray-300 whitespace-pre-line">{renderMarkdown(faq.answer)}</div>
                       </AccordionContent>
                     </AccordionItem>
                   ))}
                 </Accordion>
+              </div>
+
+              {/* See More Toggle */}
+              <div className="text-center">
+                <button
+                  onClick={() => setShowMoreFaqs(!showMoreFaqs)}
+                  className="text-cyberpunk-blue hover:text-cyberpunk-pink transition-colors flex items-center mx-auto"
+                >
+                  {showMoreFaqs ? "Show Less" : "See More FAQs"}
+                  <ChevronDown className={`w-4 h-4 ml-1 transition-transform ${showMoreFaqs ? "rotate-180" : ""}`} />
+                </button>
               </div>
             </div>
           </motion.section>
@@ -243,29 +292,38 @@ export default function ContactPage() {
           {/* CTA Section */}
           <motion.section
             initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 1.0 }}
             className="relative overflow-hidden rounded-2xl"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-cyberpunk-blue/20 to-cyberpunk-pink/20 z-0"></div>
             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-10"></div>
 
-            {/* Grid Pattern */}
-            <div className="absolute inset-0 z-0 opacity-20">
-              <div className="h-full w-full grid grid-cols-12 gap-4">
-                {Array(12)
-                  .fill(0)
-                  .map((_, i) => (
-                    <div key={i} className="h-full border-r border-cyberpunk-blue/30"></div>
-                  ))}
-              </div>
-              <div className="h-full w-full grid grid-rows-12 gap-4">
-                {Array(12)
-                  .fill(0)
-                  .map((_, i) => (
-                    <div key={i} className="w-full border-b border-cyberpunk-blue/30"></div>
-                  ))}
+            <div className="relative z-20 p-8 text-center">
+              <h2 className="text-2xl font-bold text-white mb-4">Ready to Get Started?</h2>
+              <p className="text-gray-300 mb-6">
+                Thanks for your interest! Expect a reply within 1 business day. 
+                Prefer to pick a time? Use the booking links above.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link 
+                  href="https://calendar.app.google/WBDFCapdi8Z9UDvJ7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple text-white px-6 py-3 rounded-lg font-semibold hover:scale-105 transition-transform"
+                >
+                  Creative Discovery Call
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+                <Link 
+                  href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ10MfFXCLnngwj5wQ9CRQ6Mqw2r6sF1IBHMYr8y2pQmV4OZ8-kcvoeWxbx8mHgWM2QfLW4aPVZw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple text-white px-6 py-3 rounded-lg font-semibold hover:scale-105 transition-transform"
+                >
+                  15-Min Labs Audit
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
               </div>
             </div>
           </motion.section>

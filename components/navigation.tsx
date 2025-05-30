@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, ChevronDown } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { usePathname, useRouter } from "next/navigation"
@@ -11,7 +11,14 @@ import type { ReactNode } from "react"
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/services" },
+  { 
+    name: "Services", 
+    href: "/services",
+    dropdown: [
+      { name: "Creative Services", href: "/services/creative" },
+      { name: "Labs & Tech", href: "/services/labs" }
+    ]
+  },
   { name: "Projects", href: "/projects" },
   { name: "About Us", href: "/about-us" },
   { name: "Contact", href: "/contact" },
@@ -29,7 +36,9 @@ export default function Navigation({ logoSlot }: NavigationProps) {
   const [animationDuration, setAnimationDuration] = useState(0.2)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState<string | null>(null)
   const menuRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
   const router = useRouter()
   const navRef = useRef<HTMLDivElement>(null)
@@ -70,11 +79,14 @@ export default function Navigation({ logoSlot }: NavigationProps) {
     setCurrentPageIndex(currentLinkIndex !== -1 ? currentLinkIndex : 0)
   }, [pathname])
 
-  // Handle click outside to close menu
+  // Handle click outside to close menu and dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setIsMenuOpen(false)
+      }
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(null)
       }
     }
 
@@ -302,6 +314,63 @@ export default function Navigation({ logoSlot }: NavigationProps) {
 
             {navLinks.map((link, index) => {
               const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href))
+              const hasDropdown = link.dropdown && link.dropdown.length > 0
+              
+              if (hasDropdown) {
+                return (
+                  <div
+                    key={link.name}
+                    className="relative nav-item"
+                    ref={link.name === "Services" ? dropdownRef : undefined}
+                    onMouseEnter={() => {
+                      setActiveLink(link.name)
+                      setLastHoveredIndex(index)
+                      setAnimationDuration(calculateAnimationDuration(index))
+                      setDropdownOpen(link.name)
+                    }}
+                    onMouseLeave={() => {
+                      setDropdownOpen(null)
+                    }}
+                  >
+                    <button
+                      className={cn(
+                        "relative py-2 transition-colors duration-300 flex items-center gap-1",
+                        isActive ? "text-cyberpunk-pink" : "text-white hover:text-cyberpunk-blue",
+                      )}
+                    >
+                      {link.name}
+                      <ChevronDown className={cn(
+                        "w-4 h-4 transition-transform duration-200",
+                        dropdownOpen === link.name ? "rotate-180" : ""
+                      )} />
+                    </button>
+                    
+                    <AnimatePresence>
+                      {dropdownOpen === link.name && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute top-full left-0 mt-2 w-48 bg-black/95 border border-cyberpunk-blue/50 rounded-lg shadow-lg backdrop-blur-sm z-50"
+                        >
+                          {link.dropdown.map((dropdownItem) => (
+                            <Link
+                              key={dropdownItem.name}
+                              href={dropdownItem.href}
+                              className="block px-4 py-3 text-white hover:text-cyberpunk-blue hover:bg-cyberpunk-blue/10 transition-colors first:rounded-t-lg last:rounded-b-lg"
+                              onClick={() => setDropdownOpen(null)}
+                            >
+                              {dropdownItem.name}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                )
+              }
+              
               return (
                 <Link
                   key={link.name}
@@ -366,6 +435,42 @@ export default function Navigation({ logoSlot }: NavigationProps) {
               <nav className="flex flex-col space-y-4">
                 {navLinks.map((link) => {
                   const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href))
+                  const hasDropdown = link.dropdown && link.dropdown.length > 0
+                  
+                  if (hasDropdown) {
+                    return (
+                      <motion.div key={link.name} whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                        <div className="border-b border-gray-800">
+                          <Link
+                            href={link.href}
+                            className={cn(
+                              "py-3 transition-colors duration-300 block relative p-4",
+                              isActive ? "active-link" : "text-white hover:text-cyberpunk-blue",
+                            )}
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            {link.name}
+                            {isActive && (
+                              <div className="absolute bottom-0 left-0 right-0 h-[3px] microled-highlight highlight-flicker" />
+                            )}
+                          </Link>
+                          <div className="pl-4 pb-2">
+                            {link.dropdown.map((dropdownItem) => (
+                              <Link
+                                key={dropdownItem.name}
+                                href={dropdownItem.href}
+                                className="block py-2 px-4 text-gray-300 hover:text-cyberpunk-blue transition-colors text-sm"
+                                onClick={() => setIsMenuOpen(false)}
+                              >
+                                {dropdownItem.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )
+                  }
+                  
                   return (
                     <motion.div key={link.name} whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
                       <Link

@@ -1,6 +1,14 @@
 import { NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 import type { NextRequest } from 'next/server'
+import createSesTransport from 'nodemailer-ses-transport'
+
+// --- DIAGNOSTIC LOGS --- Start ---
+console.log('[CONTACT_ROUTE_INIT] AWS_REGION:', process.env.AWS_REGION);
+console.log('[CONTACT_ROUTE_INIT] AWS_ACCESS_KEY_ID present:', !!process.env.AWS_ACCESS_KEY_ID);
+console.log('[CONTACT_ROUTE_INIT] AWS_SECRET_ACCESS_KEY present:', !!process.env.AWS_SECRET_ACCESS_KEY);
+console.log('[CONTACT_ROUTE_INIT] SES_FROM_EMAIL_ADDRESS:', process.env.SES_FROM_EMAIL_ADDRESS);
+// --- DIAGNOSTIC LOGS --- End ---
 
 // Define the expected shape of the form data
 interface ContactFormData {
@@ -15,16 +23,32 @@ interface ContactFormData {
   selectionType?: 'unsure' | 'both' | 'media' | 'labs' | 'services' // Helps determine recipient
 }
 
-// Environment variables (ensure these are set in your .env.local or Vercel environment)
-const EMAIL_HOST = process.env.EMAIL_HOST
-const EMAIL_PORT = process.env.EMAIL_PORT ? parseInt(process.env.EMAIL_PORT, 10) : 587
-const EMAIL_USER = process.env.EMAIL_USER
-const EMAIL_PASS = process.env.EMAIL_PASS
-const NODEMAILER_FROM_EMAIL = process.env.NODEMAILER_FROM_EMAIL || '"Moons Out Media Contact Form" <noreply@moonsoutmedia.com>'
+// Environment variables
+const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
+const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY;
+const AWS_REGION = process.env.AWS_REGION;
+const SES_FROM_EMAIL_ADDRESS = process.env.SES_FROM_EMAIL_ADDRESS || '"Moons Out Media Contact Form" <noreply@moonsoutmedia.com>'; // Must be a verified SES sender
 const BRANDON_EMAIL = process.env.BRANDON_EMAIL || 'brandon@moonsoutmedia.com'
 const LEVI_EMAIL = process.env.LEVI_EMAIL || 'levi@moonsoutmedia.com'
 const TEAM_EMAIL = process.env.TEAM_EMAIL || 'team@moonsoutmedia.com'
 
+// Nodemailer transporter using SES transport
+let contactTransporter: nodemailer.Transporter | null = null;
+
+if (AWS_ACCESS_KEY_ID && AWS_SECRET_ACCESS_KEY && AWS_REGION && SES_FROM_EMAIL_ADDRESS) {
+  console.log('[CONTACT_ROUTE_INIT] Creating nodemailer-ses-transport...');
+  
+  // Create transporter with dedicated SES transport plugin
+  contactTransporter = nodemailer.createTransport(createSesTransport({
+    accessKeyId: AWS_ACCESS_KEY_ID,
+    secretAccessKey: AWS_SECRET_ACCESS_KEY,
+    region: AWS_REGION,
+  } as any)); // Cast to any to silence TypeScript issues with the nodemailer-ses-transport types
+  
+  console.log('[CONTACT_ROUTE_INIT] Nodemailer transporter created with nodemailer-ses-transport.');
+} else {
+  console.log('[CONTACT_ROUTE_INIT] Skipped SES transporter creation due to missing ENV VARS.');
+}
 
 function getRecipientEmail(formData: ContactFormData): string {
   const { branch, selectionType, service } = formData
@@ -62,9 +86,9 @@ function getRecipientEmail(formData: ContactFormData): string {
 }
 
 export async function POST(request: NextRequest) {
-  if (!EMAIL_HOST || !EMAIL_USER || !EMAIL_PASS) {
-    console.error('Email server environment variables are not configured.')
-    return NextResponse.json({ message: 'Server configuration error.' }, { status: 500 })
+  if (!contactTransporter) {
+    console.error('Email transporter (SES V3) is not configured. Check AWS environment variables.')
+    return NextResponse.json({ message: 'Server configuration error for email.' }, { status: 500 })
   }
 
   try {
@@ -75,16 +99,6 @@ export async function POST(request: NextRequest) {
     }
     
     const recipientEmail = getRecipientEmail(formData)
-
-    const transporter = nodemailer.createTransport({
-      host: EMAIL_HOST,
-      port: EMAIL_PORT,
-      secure: EMAIL_PORT === 465, // true for 465, false for other ports
-      auth: {
-        user: EMAIL_USER,
-        pass: EMAIL_PASS,
-      },
-    })
 
     const subject = `New Contact Form Submission: ${formData.name}`
     
@@ -157,8 +171,8 @@ export async function POST(request: NextRequest) {
       </html>
     `
 
-    await transporter.sendMail({
-      from: NODEMAILER_FROM_EMAIL,
+    await contactTransporter.sendMail({
+      from: SES_FROM_EMAIL_ADDRESS,
       to: recipientEmail,
       replyTo: formData.email,
       subject: subject,

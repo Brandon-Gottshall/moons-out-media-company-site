@@ -1,26 +1,26 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import createSesTransport from 'nodemailer-ses-transport';
 
-// Environment variables for Nodemailer/SendGrid Email Sending
-const EMAIL_HOST = process.env.EMAIL_HOST;
-const EMAIL_PORT = process.env.EMAIL_PORT ? parseInt(process.env.EMAIL_PORT, 10) : 587;
-const EMAIL_USER = process.env.EMAIL_USER; // Should be "apikey" for SendGrid
-const EMAIL_PASS = process.env.EMAIL_PASS; // Should be your main SendGrid API Key (for sending email)
-const NODEMAILER_FROM_EMAIL = process.env.NODEMAILER_FROM_EMAIL || '"Moons Out Test Email Agent" <test@moonsoutmedia.com>';
-const TEST_EMAIL_RECIPIENT = process.env.STATUS_EMAIL_RECIPIENT; // Send test to the same recipient as status updates for now
+// Environment variables for Nodemailer/AWS SES Email Sending
+const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
+const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY;
+const AWS_REGION = process.env.AWS_REGION;
+const SES_FROM_EMAIL_ADDRESS = process.env.SES_FROM_EMAIL_ADDRESS || '"Moons Out Test Email Agent" <test@moonsoutmedia.com>';
+const TEST_EMAIL_RECIPIENT = process.env.STATUS_EMAIL_RECIPIENT;
 
-// Nodemailer transporter
+// Nodemailer transporter using SES transport
 let testEmailTransporter: nodemailer.Transporter | null = null;
-if (EMAIL_HOST && EMAIL_USER && EMAIL_PASS && TEST_EMAIL_RECIPIENT && NODEMAILER_FROM_EMAIL) {
-  testEmailTransporter = nodemailer.createTransport({
-    host: EMAIL_HOST,
-    port: EMAIL_PORT,
-    secure: EMAIL_PORT === 465, // true for 465, false for other ports
-    auth: {
-      user: EMAIL_USER,
-      pass: EMAIL_PASS,
-    },
-  });
+
+if (AWS_ACCESS_KEY_ID && AWS_SECRET_ACCESS_KEY && AWS_REGION && SES_FROM_EMAIL_ADDRESS && TEST_EMAIL_RECIPIENT) {
+  console.log('[TEST_EMAIL_ROUTE] Creating transporter with nodemailer-ses-transport');
+  
+  // Create transporter with dedicated SES transport plugin
+  testEmailTransporter = nodemailer.createTransport(createSesTransport({
+    accessKeyId: AWS_ACCESS_KEY_ID,
+    secretAccessKey: AWS_SECRET_ACCESS_KEY,
+    region: AWS_REGION,
+  } as any)); // Cast to any to silence TypeScript issues with the nodemailer-ses-transport types
 }
 
 export async function GET(request: Request) {
@@ -28,7 +28,7 @@ export async function GET(request: Request) {
   console.log(`Test email cron job triggered at: ${timestamp}`);
 
   if (!testEmailTransporter) {
-    const errorMessage = 'Test email transporter not configured. Missing one or more environment variables (EMAIL_HOST, EMAIL_USER, EMAIL_PASS, STATUS_EMAIL_RECIPIENT, NODEMAILER_FROM_EMAIL).';
+    const errorMessage = 'Test email transporter not configured. Missing environment variables (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, SES_FROM_EMAIL_ADDRESS, STATUS_EMAIL_RECIPIENT).';
     console.error(errorMessage);
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
@@ -36,17 +36,16 @@ export async function GET(request: Request) {
   if (!TEST_EMAIL_RECIPIENT) {
     const errorMessage = 'TEST_EMAIL_RECIPIENT (STATUS_EMAIL_RECIPIENT) is not set. Cannot send test email.';
     console.error(errorMessage);
-    // No need to try sending email if recipient is missing.
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
   
-  const subject = `Test Email from Moons Out Media @ ${timestamp}`;
-  const textContent = `This is a test email sent from the Vercel cron job at ${timestamp}. If you received this, Nodemailer and SendGrid email sending (via API key) is configured correctly.`;
-  const htmlContent = `<p>This is a test email sent from the Vercel cron job at <strong>${timestamp}</strong>.</p><p>If you received this, Nodemailer and SendGrid email sending (via API key) is configured correctly.</p>`;
+  const subject = `Test Email from Moons Out Media (SES Transport) @ ${timestamp}`;
+  const textContent = `This is a test email sent from the Vercel cron job at ${timestamp}. If you received this, Nodemailer with nodemailer-ses-transport is configured correctly.`;
+  const htmlContent = `<p>This is a test email sent from the Vercel cron job at <strong>${timestamp}</strong>.</p><p>If you received this, Nodemailer with nodemailer-ses-transport is configured correctly.</p>`;
 
   try {
     await testEmailTransporter.sendMail({
-      from: NODEMAILER_FROM_EMAIL,
+      from: SES_FROM_EMAIL_ADDRESS,
       to: TEST_EMAIL_RECIPIENT,
       subject: subject,
       text: textContent,
@@ -61,8 +60,8 @@ export async function GET(request: Request) {
       details: {
         message: error.message,
         code: error.code,
-        response: error.response,
-        command: error.command,
+        ...(error.response && { response: error.response }),
+        ...(error.command && { command: error.command }),
       }
     }, { status: 500 });
   }

@@ -21,22 +21,24 @@ export default function Footer() {
               Quick Links
             </h4>
             <ul className="space-y-2">
-              {["Home", "Services", "Portfolio", "About Us", "Contact"].map(
-                (link) => (
-                  <li key={link}>
-                    <Link
-                      href={`/${
-                        link === "Home"
-                          ? ""
-                          : link.toLowerCase().replace(" ", "-")
-                      }`}
-                      className="text-gray-300 hover:text-cyberpunk-blue transition-colors"
-                    >
-                      {link}
-                    </Link>
-                  </li>
-                )
-              )}
+              {[
+                { name: "Home", href: "/" },
+                { name: "Services", href: "/services" },
+                { name: "Creative Services", href: "/services/creative" },
+                { name: "Labs & Tech", href: "/services/labs" },
+                { name: "Portfolio", href: "/portfolio" },
+                { name: "About Us", href: "/about-us" },
+                { name: "Contact", href: "/contact" }
+              ].map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-300 hover:text-cyberpunk-blue transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
