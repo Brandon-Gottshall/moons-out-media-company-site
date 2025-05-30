@@ -5,7 +5,6 @@ import { motion } from "framer-motion"
 import AboutHero from "@/components/about/about-hero"
 import TeamSection from "@/components/about/team-section"
 import CoreValues from "@/components/about/core-values"
-import CreativeProcess from "@/components/about/creative-process"
 import CallToAction from "@/components/call-to-action"
 // import OurStory from "@/components/about/our-story"
 
@@ -16,7 +15,6 @@ export default function AboutPage() {
     // { id: "story", label: "Our Story" },
     { id: "values", label: "Core Values" },
     { id: "team", label: "Our Team" },
-    { id: "process", label: "Creative Process" },
   ]
 
   const fadeIn = {
@@ -76,7 +74,6 @@ export default function AboutPage() {
         {/* {activeSection === "story" && <OurStory />} */}
         {activeSection === "values" && <CoreValues />}
         {activeSection === "team" && <TeamSection />}
-        {activeSection === "process" && <CreativeProcess />}
       </motion.div>
     </div>
   )

@@ -11,6 +11,7 @@ import type { ReactNode } from "react"
 
 const navLinks = [
   { name: "Home", href: "/" },
+  { name: "Creative Process", href: "/creative-process" },
   { 
     name: "Services", 
     href: "/services",
