@@ -2,6 +2,20 @@
 
 import { motion } from "framer-motion"
 import CreativeProcess from "@/components/about/creative-process"
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
+
+// FAQs for Working Together section
+interface FAQ { question: string; answer: string }
+const synergyFaqs: FAQ[] = [
+  {
+    question: "How do Moons Out Media and Labs work together?",
+    answer: "By combining cinematic storytelling with rock-solid engineering, we deliver end-to-end solutions that are both compelling and reliable. Your narrative and technical requirements feed into one unified workflow—no handoffs, no siloed teams.",
+  },
+  {
+    question: "What's the advantage of having creative and technical under one roof?",
+    answer: "You save time, reduce miscommunication, and cut costs. Our cross-team collaboration means creative ideas are technically vetted from day one, and technical builds are informed by strategic storytelling.",
+  },
+]
 
 export default function CreativeProcessPage() {
   const fadeIn = {
@@ -46,6 +60,34 @@ export default function CreativeProcessPage() {
       >
         <CreativeProcess />
       </motion.div>
+
+      {/* Working Together FAQs */}
+      <motion.section
+        id="faq"
+        className="py-20 relative"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-heading text-white mb-4">Working Together</h2>
+        </div>
+
+        <div className="max-w-3xl mx-auto">
+          <Accordion type="single" collapsible className="space-y-3">
+            {synergyFaqs.map((faq, index) => (
+              <AccordionItem key={`synergy-faq-${index}`} value={`synergy-faq-${index}`}>
+                <AccordionTrigger className="text-left text-body-lg font-subheading text-white">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent>
+                  <p className="text-gray-300">{faq.answer}</p>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </motion.section>
     </div>
   )
 } 

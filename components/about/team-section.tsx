@@ -89,14 +89,14 @@ export default function TeamSection() {
   }
 
   return (
-    <section className="py-16">
+    <section className="py-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="container mx-auto px-4"
       >
-        <h2 className="text-4xl font-heading mb-16 text-center">
+        <h2 className="text-4xl font-heading mb-12 text-center">
           Meet Our <span className="text-cyberpunk-green">Team</span>
         </h2>
 
@@ -105,7 +105,7 @@ export default function TeamSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {team.map((member, index) => (
             <motion.div

@@ -5,6 +5,50 @@ import Link from "next/link"
 import { ArrowRight, Play, Target, Users, TrendingUp, Camera, Edit, Share2 } from "lucide-react"
 import { MASTER_SERVICES } from "@/app/data/services"
 import ServiceShowcase from "@/components/services/service-showcase"
+import { useState } from "react"
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
+
+// Define FAQ type and creative services FAQs
+interface FAQ { question: string; answer: string }
+
+const creativeFaqs: FAQ[] = [
+  {
+    question: "What services does Moons Out Media offer?",
+    answer: `We provide cinematic storytelling and digital marketing services including:
+
+• **Brand Storytelling & Video Production** - Documentary-style videos that tell your brand's story authentically
+• **Digital Marketing Campaigns** - Targeted ad campaigns built around clear KPIs and continuous optimization
+• **Social Media Content** - Platform-optimized content that builds community and drives engagement
+
+All services focus on authentic storytelling that converts viewers into customers.`,
+  },
+  {
+    question: "What can I expect from your creative process?",
+    answer: `A transparent, collaborative workflow:
+
+1. **Discovery** – Understand your story, goals, and audience
+2. **Storyboarding** – Visual planning and script development  
+3. **Production** – In-house shooting, editing, and perfecting every visual
+4. **Distribution** – Strategic campaign deployment with performance tracking
+
+You'll be involved at every stage with no surprises.`,
+  },
+  {
+    question: "How do you measure creative campaign success?",
+    answer: "By real metrics and ROI. We set goals (website leads, conversions, video engagement) upfront and build campaigns around them. You'll receive regular reports showing impressions, click-throughs, and conversions, then use that data to optimize in real time.",
+  },
+]
+
+// Simple markdown renderer for bold text
+function renderMarkdown(text: string) {
+  const parts = text.split(/(\*\*.*?\*\*)/g)
+  return parts.map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>
+    }
+    return part
+  })
+}
 
 export default function CreativeServicesPage() {
   const creativeServices = MASTER_SERVICES.filter(service => service.branch === "media")
@@ -186,6 +230,35 @@ export default function CreativeServicesPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <motion.section
+        id="faq"
+        className="py-20 relative"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-heading text-white mb-4">Frequently Asked Questions</h2>
+        </div>
+
+        <div className="max-w-3xl mx-auto space-y-8">
+          <div>
+            <h3 className="text-heading-md font-subheading text-cyberpunk-blue mb-4 text-center">Creative Services</h3>
+            <Accordion type="single" collapsible className="space-y-3">
+              {creativeFaqs.map((faq, index) => (
+                <AccordionItem key={`creative-faq-${index}`} value={`creative-faq-${index}`}>
+                  <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
+                  <AccordionContent>
+                    <div className="text-gray-300 whitespace-pre-line">{renderMarkdown(faq.answer)}</div>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+      </motion.section>
     </div>
   )
 } 

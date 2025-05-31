@@ -5,6 +5,7 @@ import Link from "next/link"
 import { ArrowRight, Clock, CheckCircle, Code2, Bot, Cloud, Zap, Shield, Gauge } from "lucide-react"
 import { MASTER_SERVICES } from "@/app/data/services"
 import ServiceShowcase from "@/components/services/service-showcase"
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 
 
 export default function LabsServicesPage() {
@@ -179,27 +180,24 @@ export default function LabsServicesPage() {
           <motion.h2 
             className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             Frequently Asked Questions
           </motion.h2>
-          
-          <div className="max-w-3xl mx-auto space-y-6">
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-black/60 border border-gray-800 rounded-xl p-6 hover:border-cyberpunk-pink/30 transition-colors"
-              >
-                <h3 className="text-body-lg font-subheading text-white mb-3">{faq.question}</h3>
-                <p className="text-gray-300">{faq.answer}</p>
-              </motion.div>
-            ))}
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible className="space-y-3">
+              {faqs.map((faq, index) => (
+                <AccordionItem key={`faq-${index}`} value={`faq-${index}`}>
+                  <AccordionTrigger className="text-left text-body-lg font-subheading text-white">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <p className="text-gray-300">{faq.answer}</p>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </div>
       </section>

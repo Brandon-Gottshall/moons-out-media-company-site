@@ -1,85 +1,11 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ChevronDown, ArrowRight, Video, Code2 } from "lucide-react"
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
+import { ArrowRight, Video, Code2 } from "lucide-react"
 import ContactForm from "@/components/contact/contact-form"
 import Link from "next/link"
-import { useState } from "react"
-
-interface FAQ {
-  question: string
-  answer: string
-}
-
-const topCreativeFaqs: FAQ[] = [
-  {
-    question: "What services does Moons Out Media offer?",
-    answer: `We provide cinematic storytelling and digital marketing services including:
-
-• **Brand Storytelling & Video Production** - Documentary-style videos that tell your brand's story authentically
-• **Digital Marketing Campaigns** - Targeted ad campaigns built around clear KPIs and continuous optimization
-• **Social Media Content** - Platform-optimized content that builds community and drives engagement
-
-All services focus on authentic storytelling that converts viewers into customers.`,
-  },
-  {
-    question: "What can I expect from your creative process?",
-    answer: `A transparent, collaborative workflow:
-
-1. **Discovery** – Understand your story, goals, and audience
-2. **Storyboarding** – Visual planning and script development  
-3. **Production** – In-house shooting, editing, and perfecting every visual
-4. **Distribution** – Strategic campaign deployment with performance tracking
-
-You'll be involved at every stage with no surprises.`,
-  },
-  {
-    question: "How do you measure creative campaign success?",
-    answer: "By real metrics and ROI. We set goals (website leads, conversions, video engagement) upfront and build campaigns around them. You'll receive regular reports showing impressions, click-throughs, and conversions, then use that data to optimize in real time.",
-  },
-]
-
-const topLabsFaqs: FAQ[] = [
-  {
-    question: "What's included in the 21-day sprint?",
-    answer: "Complete custom development including design, backend, frontend, testing, deployment, and knowledge transfer. You'll receive a fully functional, production-ready application with full code ownership.",
-  },
-  {
-    question: "Do you guarantee ADA compliance?",
-    answer: "Yes, all our builds meet WCAG 2.1 AA standards for accessibility, ensuring your site is usable by everyone and legally compliant.",
-  },
-  {
-    question: "What happens after the 21 days?",
-    answer: "You receive full ownership of the code, documentation, and training. Our optional Care Plan provides ongoing support, but you're never locked in.",
-  },
-]
-
-const synergyFaqs: FAQ[] = [
-  {
-    question: "How do Moons Out Media and Labs work together?",
-    answer: "By combining cinematic storytelling with rock-solid engineering, we deliver end-to-end solutions that are both compelling and reliable. Your narrative and technical requirements feed into one unified workflow—no handoffs, no siloed teams.",
-  },
-  {
-    question: "What's the advantage of having creative and technical under one roof?",
-    answer: "You save time, reduce miscommunication, and cut costs. Our cross-team collaboration means creative ideas are technically vetted from day one, and technical builds are informed by strategic storytelling.",
-  },
-]
-
-// Helper function to render simple markdown (bold)
-function renderMarkdown(text: string) {
-  const parts = text.split(/(\*\*.*?\*\*)/g)
-  return parts.map((part, index) => {
-    if (part.startsWith("**") && part.endsWith("**")) {
-      return <strong key={index}>{part.slice(2, -2)}</strong>
-    }
-    return part
-  })
-}
 
 export default function ContactPage() {
-  const [showMoreFaqs, setShowMoreFaqs] = useState(false)
-
   return (
     <div className="min-h-screen bg-black">
       {/* Global page styling elements */}
@@ -218,76 +144,7 @@ export default function ContactPage() {
             </div>
           </motion.section>
 
-          {/* FAQ Section */}
-          <motion.section
-            id="faq"
-            className="mb-12"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-          >
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-heading text-white mb-4">Frequently Asked Questions</h2>
-            </div>
-
-            <div className="max-w-3xl mx-auto space-y-8">
-              {/* Creative FAQs */}
-              <div>
-                <h3 className="text-heading-md font-subheading text-cyberpunk-blue mb-4 text-center">Creative Services</h3>
-                <Accordion type="single" collapsible className="space-y-3">
-                  {topCreativeFaqs.map((faq, index) => (
-                    <AccordionItem key={`creative-faq-${index}`} value={`creative-faq-${index}`}>
-                      <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
-                      <AccordionContent>
-                        <div className="text-gray-300 whitespace-pre-line">{renderMarkdown(faq.answer)}</div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </div>
-
-              {/* Labs FAQs */}
-              <div>
-                <h3 className="text-heading-md font-subheading text-cyberpunk-pink mb-4 text-center">Labs & Tech</h3>
-                <Accordion type="single" collapsible className="space-y-3">
-                  {topLabsFaqs.map((faq, index) => (
-                    <AccordionItem key={`labs-faq-${index}`} value={`labs-faq-${index}`}>
-                      <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
-                      <AccordionContent>
-                        <div className="text-gray-300 whitespace-pre-line">{renderMarkdown(faq.answer)}</div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </div>
-
-              {/* Synergy FAQs */}
-              <div>
-                <h3 className="text-heading-md font-subheading text-cyberpunk-green mb-4 text-center">Working Together</h3>
-                <Accordion type="single" collapsible className="space-y-3">
-                  {synergyFaqs.map((faq, index) => (
-                    <AccordionItem key={`synergy-faq-${index}`} value={`synergy-faq-${index}`}>
-                      <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
-                      <AccordionContent>
-                        <div className="text-gray-300 whitespace-pre-line">{renderMarkdown(faq.answer)}</div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </div>
-
-              {/* See More Toggle */}
-              <div className="text-center">
-                <button
-                  onClick={() => setShowMoreFaqs(!showMoreFaqs)}
-                  className="text-cyberpunk-blue hover:text-cyberpunk-pink transition-colors flex items-center mx-auto"
-                >
-                  {showMoreFaqs ? "Show Less" : "See More FAQs"}
-                  <ChevronDown className={`w-4 h-4 ml-1 transition-transform ${showMoreFaqs ? "rotate-180" : ""}`} />
-                </button>
-              </div>
-            </div>
-          </motion.section>
+          {/* FAQs moved to Creative Process page */}
 
           {/* CTA Section */}
           <motion.section
