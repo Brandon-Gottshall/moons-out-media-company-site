@@ -4,76 +4,18 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowRight, Clock, CheckCircle, Code2, Bot, Cloud, Zap, Shield, Gauge } from "lucide-react"
 import { MASTER_SERVICES } from "@/app/data/services"
+import ServiceShowcase from "@/components/services/service-showcase"
 
 
 export default function LabsServicesPage() {
   const labsServices = MASTER_SERVICES.filter(service => service.branch === "labs")
 
-  const sprintTimeline = [
-    {
-      phase: "Week 1",
-      title: "Discovery & Blueprint",
-      description: "Requirements gathering, technical architecture, and detailed project blueprint",
-      icon: <Code2 className="w-6 h-6" />
-    },
-    {
-      phase: "Week 2",
-      title: "Core Development",
-      description: "Backend infrastructure, database design, and core functionality implementation",
-      icon: <Bot className="w-6 h-6" />
-    },
-    {
-      phase: "Week 3",
-      title: "Frontend & Integration",
-      description: "User interface development, API integration, and comprehensive testing",
-      icon: <Cloud className="w-6 h-6" />
-    },
-    {
-      phase: "Launch",
-      title: "Deploy & Optimize",
-      description: "Production deployment, performance optimization, and knowledge transfer",
-      icon: <Zap className="w-6 h-6" />
-    }
-  ]
 
-  const offerStack = [
-    {
-      title: "Free Technical Audit",
-      price: "Free",
-      description: "15-minute assessment of your current tech stack and growth opportunities",
-      features: ["Performance Analysis", "Security Review", "Scalability Assessment", "Recommendations Report"],
-      cta: "Book Free Audit",
-      highlight: false
-    },
-    {
-      title: "Technical Blueprint",
-      price: "$750",
-      description: "Comprehensive technical strategy and implementation roadmap",
-      features: ["Detailed Architecture", "Technology Stack Selection", "Timeline & Milestones", "Cost Breakdown"],
-      cta: "Get Blueprint",
-      highlight: true
-    },
-    {
-      title: "Full Development",
-      price: "$6k-12k",
-      description: "Complete custom development with 21-day delivery guarantee",
-      features: ["Custom Development", "ADA Compliance", "Performance Optimization", "Security Implementation"],
-      cta: "Start Project",
-      highlight: false
-    },
-    {
-      title: "Ongoing Care",
-      price: "$199/mo",
-      description: "Continuous monitoring, updates, and technical support",
-      features: ["24/7 Monitoring", "Security Updates", "Performance Optimization", "Priority Support"],
-      cta: "Add Care Plan",
-      highlight: false
-    }
-  ]
+
 
   const proofPoints = [
     {
-      metric: "100",
+      metric: "90+",
       label: "Lighthouse Score",
       description: "Mobile Performance"
     },
@@ -91,24 +33,24 @@ export default function LabsServicesPage() {
 
   const faqs = [
     {
-      question: "What's included in the 21-day sprint?",
-      answer: "Complete custom development including design, backend, frontend, testing, deployment, and knowledge transfer. You'll receive a fully functional, production-ready application."
-    },
-    {
       question: "Do you guarantee ADA compliance?",
       answer: "Yes, all our builds meet WCAG 2.1 AA standards for accessibility, ensuring your site is usable by everyone and legally compliant."
     },
     {
-      question: "What happens after the 21 days?",
-      answer: "You receive full ownership of the code, documentation, and training. Our optional Care Plan provides ongoing support, but you're never locked in."
+      question: "What happens after we finish your project?",
+      answer: "You receive full ownership of the code, documentation, and training. Our optional Care Plan and retainer packages provide ongoing support, but you're never locked in."
     },
     {
       question: "Can you work with our existing systems?",
-      answer: "Absolutely. We specialize in integrations and can work with your current CRM, payment systems, databases, and third-party tools."
+      answer: "Absolutely. We excel in integrations and can work with your current CRM, payment systems, databases, and third-party tools. We're also experts in building custom solutions to fit your unique needs."
     },
     {
       question: "What if we need changes during development?",
-      answer: "Our agile process includes regular check-ins and allows for adjustments. Major scope changes may affect timeline, but we'll communicate this upfront."
+      answer: "Our agile development process includes regular check-ins and allows for adjustments. We include you in the design process and can make changes as needed. Major scope changes may affect timeline, but we'll communicate this upfront or when changes are requested."
+    },
+    {
+      question: "What technologies do you use? How do we know our project is secure, reliable, and future-proof?",
+      answer: "We use the latest and greatest technologies to build your project. We're also experts in security and reliability. We're also experts in building custom solutions to fit your unique needs."
     }
   ]
 
@@ -163,152 +105,9 @@ export default function LabsServicesPage() {
         </div>
       </section>
 
-      {/* 21-Day Sprint Timeline */}
+      {/* Service Showcase Carousel */}
       <section className="py-20 relative">
-        <div className="container mx-auto px-4">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            21-Day Development Sprint
-          </motion.h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {sprintTimeline.map((phase, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="text-center relative"
-              >
-                {/* Connection line */}
-                {index < sprintTimeline.length - 1 && (
-                  <div className="hidden lg:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-cyberpunk-pink to-transparent z-0"></div>
-                )}
-                
-                <div className="relative z-10">
-                  <div className="w-16 h-16 bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple rounded-full flex items-center justify-center mx-auto mb-4">
-                    {phase.icon}
-                  </div>
-                  <div className="text-body-sm text-cyberpunk-pink font-subheading mb-2">{phase.phase}</div>
-                  <h3 className="text-heading-md font-heading text-white mb-3">{phase.title}</h3>
-                  <p className="text-gray-300">{phase.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Offer Stack */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyberpunk-pink/5 to-cyberpunk-purple/5"></div>
-        <div className="container mx-auto px-4">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Our Service Stack
-          </motion.h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {offerStack.map((offer, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`relative rounded-xl p-6 border ${
-                  offer.highlight 
-                    ? 'border-cyberpunk-pink bg-gradient-to-br from-cyberpunk-pink/20 to-cyberpunk-purple/20' 
-                    : 'border-gray-800 bg-black/60'
-                } hover:border-cyberpunk-pink/50 transition-all duration-300`}
-              >
-                {offer.highlight && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple text-white px-4 py-1 rounded-full text-body-sm font-subheading">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
-                
-                <div className="text-center mb-6">
-                  <h3 className="text-heading-md font-heading text-white mb-2">{offer.title}</h3>
-                  <div className="text-3xl font-heading text-cyberpunk-pink mb-2">{offer.price}</div>
-                  <p className="text-gray-300 text-body-sm">{offer.description}</p>
-                </div>
-                
-                <ul className="space-y-3 mb-6">
-                  {offer.features.map((feature, i) => (
-                    <li key={i} className="flex items-center text-body-sm text-gray-300">
-                      <CheckCircle className="w-4 h-4 text-cyberpunk-pink mr-2 flex-shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                
-                <button className={`w-full py-3 rounded-lg font-subheading transition-all duration-300 ${
-                  offer.highlight
-                    ? 'bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple text-white hover:scale-105'
-                    : 'border border-cyberpunk-pink text-cyberpunk-pink hover:bg-cyberpunk-pink hover:text-white'
-                }`}>
-                  {offer.cta}
-                </button>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Service Tiles */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Our Technical Services
-          </motion.h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {labsServices.map((service, index) => (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="group"
-              >
-                <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-black/60 to-gray-900/60 border border-gray-800 p-6 h-full hover:border-cyberpunk-pink/50 transition-all duration-300 group-hover:scale-105">
-                  <div className="text-4xl mb-4">{service.icon}</div>
-                  <h3 className="text-heading-md font-heading text-white mb-3">{service.shortTitle || service.title}</h3>
-                  <p className="text-gray-300 mb-4">{service.shortDescription}</p>
-                  <ul className="space-y-2">
-                    {service.features?.slice(0, 4).map((feature, i) => (
-                      <li key={i} className="flex items-center text-body-sm text-gray-400">
-                        <div className="w-1.5 h-1.5 bg-cyberpunk-pink rounded-full mr-2"></div>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        <ServiceShowcase branch="labs" />
       </section>
 
       {/* Proof Strip */}

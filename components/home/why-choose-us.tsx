@@ -2,7 +2,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Target, BarChart2, Gem, FlaskConical } from "lucide-react";
-import Link from "next/link";
 
 export function WhyChooseUs() {
   const container = {
@@ -21,76 +20,39 @@ export function WhyChooseUs() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className="flex-col justify-center w-2/3"
+      className="mx-auto max-w-7xl px-6 md:px-10 py-20 flex flex-col"
     >
-      <h2 className="text-2xl font-heading mb-6 text-white relative inline-block text-center w-full">
+      <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
         Why Choose Us
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
         {whyChooseUsItems.map((item, index) => (
           <motion.div
             key={index}
-            className="flex flex-col items-center text-center bg-black/30 rounded-lg p-6 shadow border border-gray-800 w-full max-w-xs"
+            className="flex flex-col items-center text-center bg-zinc-900/60 backdrop-blur-md rounded-xl p-8 min-h-[250px] shadow-md border border-white/10 w-full"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1, duration: 0.5 }}
             whileHover={{ y: -4, scale: 1.03 }}
           >
-            <motion.div
-              className={`w-12 h-12 rounded-full bg-cyberpunk-${item.color}/20 flex items-center justify-center mb-4`}
-              whileHover={{
-                scale: 1.1,
-                backgroundColor: `rgba(var(--color-cyberpunk-${item.color}-rgb), 0.3)`,
-              }}
-            >
-              {item.icon}
-            </motion.div>
-            <h3 className="text-body-lg font-subheading text-white mb-2">
+            <div className="flex justify-center w-full mb-4">
+              <motion.div
+                className={`w-12 h-12 rounded-full bg-cyberpunk-${item.color}/20 flex items-center justify-center`}
+                whileHover={{
+                  scale: 1.1,
+                  backgroundColor: `rgba(var(--color-cyberpunk-${item.color}-rgb), 0.3)`,
+                }}
+              >
+                {item.icon}
+              </motion.div>
+            </div>
+            <h3 className="text-center font-semibold text-lg md:text-xl text-white mb-2">
               {item.title}
             </h3>
-{Array.isArray(item.description) ? (
-              item.description.map((line, i) => (
-                <p
-                  key={i}
-                  className={`w-full text-body-sm text-gray-300 leading-relaxed text-left ${
-                    i === item.description.length - 1 ? "" : "mb-1"
-                  }`}
-                >
-                  {item.linkText && item.linkHref && line.includes(item.linkText) ? (
-                    <>
-                      {line.split(item.linkText)[0]}
-                      <Link 
-                        href={item.linkHref}
-                        className="text-cyberpunk-purple hover:text-cyberpunk-pink transition-colors underline"
-                      >
-                        {item.linkText}
-                      </Link>
-                      {line.split(item.linkText)[1]}
-                    </>
-                  ) : (
-                    line
-                  )}
-                </p>
-              ))
-            ) : (
-              <p className="w-full text-body-sm text-gray-300 leading-relaxed text-left">
-                {item.linkText && item.linkHref && typeof item.description === 'string' && item.description.includes(item.linkText) ? (
-                  <>
-                    {item.description.split(item.linkText)[0]}
-                    <Link 
-                      href={item.linkHref}
-                      className="text-cyberpunk-purple hover:text-cyberpunk-pink transition-colors underline"
-                    >
-                      {item.linkText}
-                    </Link>
-                    {item.description.split(item.linkText)[1]}
-                  </>
-                ) : (
-                  item.description
-                )}
-              </p>
-            )}
+            <div className="w-full text-body-sm text-gray-300 leading-relaxed text-center">
+              {item.descriptionJsx}
+            </div>
           </motion.div>
         ))}
       </div>
@@ -103,49 +65,69 @@ export function WhyChooseUs() {
 interface WhyChooseUsItem {
   icon: React.ReactNode;
   title: string;
-  description: string | string[];
+  descriptionJsx: React.ReactNode;
   color: "blue" | "pink" | "green" | "purple";
-  linkText?: string;
-  linkHref?: string;
 }
 
 const whyChooseUsItems: WhyChooseUsItem[] = [
   {
-    icon: <Target className="w-5 h-5 text-cyberpunk-blue" />,
+    icon: <Target className="w-12 h-12 text-cyberpunk-blue" />,
     title: "Mission-Ready Media",
-    description: [
-      "Marine-veteran discipline shapes our approach.",
-      "Digital native instincts help us find the clicks.",
-    ],
+    descriptionJsx: (
+      <>
+        <p className="mt-2 italic text-base md:text-lg text-zinc-200/90">
+          Need a media partner who delivers with precision?
+        </p>
+        <p className="mt-3 max-w-[50ch] text-sm md:text-base leading-relaxed text-zinc-400">
+          Mission-Ready Media leverages Marine-veteran discipline and digital-native savvy to execute campaigns that hit your mark, every time.
+        </p>
+      </>
+    ),
     color: "blue",
   },
   {
-    icon: <BarChart2 className="w-5 h-5 text-cyberpunk-pink" />,
+    icon: <BarChart2 className="w-12 h-12 text-cyberpunk-pink" />,
     title: "Results You Can Track",
-    description: [
-      "Campaigns built around clear, measurable KPIs.",
-      "We adapt quickly to keep you on track.",
-    ],
+    descriptionJsx: (
+      <>
+        <p className="mt-2 italic text-base md:text-lg text-zinc-200/90">
+          Tired of marketing that doesn't move the needle?
+        </p>
+        <p className="mt-3 max-w-[50ch] text-sm md:text-base leading-relaxed text-zinc-400">
+          With Results You Can Track, we build campaigns around crystal-clear KPIs. You'll see exactly how your investment is performing as we adapt quickly to keep your growth on target.
+        </p>
+      </>
+    ),
     color: "pink",
   },
   {
-    icon: <Gem className="w-5 h-5 text-cyberpunk-green" />,
+    icon: <Gem className="w-12 h-12 text-cyberpunk-green" />,
     title: "Quality First, Always",
-    description: [
-      "We shoot, edit, and perfect every visual ourselves.",
-      "Human craftsmanship defines Moons Out Media.",
-    ],
+    descriptionJsx: (
+      <>
+        <p className="mt-2 italic text-base md:text-lg text-zinc-200/90">
+          Does your visual content truly reflect your brand's quality?
+        </p>
+        <p className="mt-3 max-w-[50ch] text-sm md:text-base leading-relaxed text-zinc-400">
+          Quality First, Always is our promise. By managing every aspect of production in-house, our human craftsmanship ensures your brand is presented flawlessly and powerfully.
+        </p>
+      </>
+    ),
     color: "green",
   },
   {
-    icon: <FlaskConical className="w-5 h-5 text-cyberpunk-purple" />,
+    icon: <FlaskConical className="w-12 h-12 text-cyberpunk-purple" />,
     title: "In-House Innovation",
-    description: [
-      "Labs creates custom apps and tech-driven solutions.",
-      "We build sites, web apps, and tools that bring your vision to life.",
-    ],
+    descriptionJsx: (
+      <>
+        <p className="mt-2 italic text-base md:text-lg text-zinc-200/90">
+          We're not just storytellers; we're builders.
+        </p>
+        <p className="mt-3 max-w-[50ch] text-sm md:text-base leading-relaxed text-zinc-400">
+          Custom websites, applications, and digital solutions you need to connect all the dots, turning your broader vision into a functional, engaging reality.
+        </p>
+      </>
+    ),
     color: "purple",
-    linkText: "Labs",
-    linkHref: "/services/labs",
   },
 ];

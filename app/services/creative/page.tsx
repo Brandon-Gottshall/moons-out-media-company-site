@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowRight, Play, Target, Users, TrendingUp, Camera, Edit, Share2 } from "lucide-react"
 import { MASTER_SERVICES } from "@/app/data/services"
+import ServiceShowcase from "@/components/services/service-showcase"
 
 export default function CreativeServicesPage() {
   const creativeServices = MASTER_SERVICES.filter(service => service.branch === "media")
@@ -113,8 +114,7 @@ export default function CreativeServicesPage() {
           <motion.h2 
             className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             Our Creative Services
@@ -125,8 +125,7 @@ export default function CreativeServicesPage() {
               <motion.div
                 key={service.id}
                 initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className="group"
               >
@@ -149,88 +148,9 @@ export default function CreativeServicesPage() {
         </div>
       </section>
 
-      {/* Mini Case Carousel */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyberpunk-blue/5 to-cyberpunk-purple/5"></div>
-        <div className="container mx-auto px-4">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Proven Results
-          </motion.h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {caseStudies.map((study, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="group"
-              >
-                <div className="relative overflow-hidden rounded-xl bg-black/60 border border-gray-800 hover:border-cyberpunk-blue/50 transition-all duration-300">
-                  <div className="aspect-video relative overflow-hidden">
-                    <img 
-                      src={study.image} 
-                      alt={study.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                  </div>
-                  <div className="p-6">
-                    <div className="text-2xl font-heading text-cyberpunk-blue mb-2">{study.title}</div>
-                    <div className="text-body-sm text-cyberpunk-purple mb-2">{study.metric}</div>
-                    <p className="text-gray-300">{study.description}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 4-Step Process */}
+      {/* Service Showcase Carousel */}
       <section className="py-20 relative">
-        <div className="container mx-auto px-4">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Our Creative Process
-          </motion.h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {processSteps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="text-center"
-              >
-                <div className="relative mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple rounded-full flex items-center justify-center mx-auto mb-4">
-                    {step.icon}
-                  </div>
-                  <div className="text-4xl font-heading text-cyberpunk-blue/30 absolute -top-2 -right-2">
-                    {step.number}
-                  </div>
-                </div>
-                <h3 className="text-heading-md font-heading text-white mb-3">{step.title}</h3>
-                <p className="text-gray-300">{step.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        <ServiceShowcase branch="media" />
       </section>
 
       {/* CTA Bar */}
@@ -241,8 +161,7 @@ export default function CreativeServicesPage() {
           <motion.h2 
             className="text-3xl md:text-4xl font-heading mb-6 text-white"
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             Ready to Tell Your Story?
@@ -250,16 +169,14 @@ export default function CreativeServicesPage() {
           <motion.p 
             className="text-heading-md text-gray-300 mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             Let's create cinematic content that converts your audience into customers.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <Link href="/contact" className="inline-flex items-center bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple text-white px-8 py-4 rounded-lg font-subheading hover:scale-105 transition-transform">

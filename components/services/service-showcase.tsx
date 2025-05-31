@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { motion, AnimatePresence, useInView } from "framer-motion"
+import { motion, AnimatePresence, useInView, LayoutGroup } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ChevronRight, ExternalLink, ChevronLeft } from "lucide-react"
 import Link from "next/link"
@@ -18,6 +18,12 @@ import "swiper/css/effect-fade"
 
 import { MASTER_SERVICES } from "@/app/data/services"
 
+// Allow filtering by service branch
+type ServiceBranch = 'media' | 'labs'
+interface ServiceShowcaseProps {
+  branch?: ServiceBranch
+}
+
 const getServiceRgbaColor = (colorName: string, opacity: number = 1): string => {
   const colors: Record<string, string> = {
     blue: "0, 204, 255",
@@ -31,13 +37,23 @@ const getServiceRgbaColor = (colorName: string, opacity: number = 1): string => 
   return `rgba(${(colors[colorName] || colors.blue)}, ${opacity})`
 }
 
-export default function ServiceShowcase() {
+export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const swiperRef = useRef<SwiperInstance | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { once: true, amount: 0.1 })
+  // Detect desktop width for static layout
+  const [isDesktop, setIsDesktop] = useState(false)
+  useEffect(() => {
+    const handleResize = () => setIsDesktop(window.innerWidth >= 1024)
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
-  const activeService = MASTER_SERVICES[activeIndex]
+  // Filter services by branch if provided
+  const services = branch ? MASTER_SERVICES.filter(s => s.branch === branch) : MASTER_SERVICES
+  const activeService = services[activeIndex]
   const activeRgbaColor = getServiceRgbaColor(activeService.color)
   const activeTailwindColorName = activeService.color // e.g. "blue", "pink"
   // Pre-construct strings for dynamic Tailwind classes that involve interpolation
@@ -71,80 +87,125 @@ export default function ServiceShowcase() {
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <div className="relative mb-8 md:mb-12 px-4">
-        <Swiper
-          modules={[Navigation, A11y, EffectFade]}
-          onSwiper={(swiper: SwiperInstance) => { swiperRef.current = swiper }}
-          onSlideChange={handleSlideChange}
-          loop={true}
-          grabCursor={true}
-          centeredSlides={true}
-          slidesPerView={1.2}
-          spaceBetween={16}
-          breakpoints={{
-            768: { slidesPerView: 2.5, spaceBetween: 24 },
-            1024: { slidesPerView: 3, spaceBetween: 32 },
-          }}
-          navigation={{
-            nextEl: ".swiper-button-next-custom",
-            prevEl: ".swiper-button-prev-custom",
-          }}
-          className="!py-8"
-        >
-          {MASTER_SERVICES.map((service, index) => {
-            const isServiceActive = index === activeIndex;
-            const serviceBorderClass = isServiceActive ? activeBorderClass : 'border-gray-800 hover:border-gray-700';
-            const serviceTitleClass = isServiceActive ? activeTextClass : 'text-white';
-            
-            return (
-              <SwiperSlide key={service.id} className="h-auto">
+        <LayoutGroup>
+        {isDesktop ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {services.map((service, index) => {
+              const isServiceActive = index === activeIndex
+              const serviceBorderClass = isServiceActive ? activeBorderClass : 'border-gray-800 hover:border-gray-700'
+              const serviceTitleClass = isServiceActive ? activeTextClass : 'text-white'
+              return (
                 <motion.div
-                  className={`relative aspect-[3/4] rounded-xl overflow-hidden cursor-pointer group border-2 ${serviceBorderClass} transition-all duration-300 ease-in-out bg-black/30`}
-                  onClick={() => slideTo(index)}
+                  key={service.id}
+                  className={`relative aspect-[3/4] rounded-xl overflow-hidden group border-2 ${serviceBorderClass} transition-all duration-300 ${isServiceActive ? 'scale-105 -translate-y-1.5' : ''}`}
+                  onClick={() => setActiveIndex(index)}
                   whileHover={{ scale: 1.03 }}
-                  animate={{ scale: isServiceActive ? 1.05 : 1, y: isServiceActive ? -5 : 0}}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  transition={{ duration: 0.4, ease: 'easeOut' }}
                 >
-                  <motion.img
+                  <img
                     src={service.image}
                     alt={service.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-300"
-                    initial={{ scale: 1.1 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 0.8 }}
+                    className="absolute inset-0 w-full h-full object-cover opacity-60"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 z-10">
+                  <div className="absolute bottom-0 left-0 right-0 p-4 z-10 text-center">
                     <h4 className={`text-body-lg md:text-heading-md font-subheading transition-colors duration-300 ${serviceTitleClass}`}>
                       {service.title}
                     </h4>
                   </div>
                   {isServiceActive && (
-                     <motion.div 
+                    <motion.div
                       className="absolute top-2 right-2 w-3 h-3 rounded-full"
                       style={{ backgroundColor: activeRgbaColor }}
                       layoutId="active-indicator"
                     />
                   )}
                 </motion.div>
-              </SwiperSlide>
+              )
+            })}
+          </div>
+        ) : (
+          <Swiper
+            modules={[Navigation, A11y, EffectFade]}
+            onSwiper={(swiper: SwiperInstance) => { swiperRef.current = swiper }}
+            onSlideChange={handleSlideChange}
+            loop={false}
+            rewind={true}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={1.2}
+            spaceBetween={16}
+            breakpoints={{
+              768: { slidesPerView: 2.5, spaceBetween: 24 },
+              1024: { slidesPerView: 3, spaceBetween: 32 },
+            }}
+            navigation={{
+              nextEl: ".swiper-button-next-custom",
+              prevEl: ".swiper-button-prev-custom",
+            }}
+            className="!py-8"
+          >
+            {services.map((service, index) => {
+              const isServiceActive = index === activeIndex;
+              const serviceBorderClass = isServiceActive ? activeBorderClass : 'border-gray-800 hover:border-gray-700';
+              const serviceTitleClass = isServiceActive ? activeTextClass : 'text-white';
+              
+              return (
+                <SwiperSlide key={service.id} className="h-auto">
+                  <motion.div
+                    className={`relative aspect-[3/4] rounded-xl overflow-hidden cursor-pointer group border-2 ${serviceBorderClass} transition-all duration-300 ease-in-out bg-black/30`}
+                    onClick={() => slideTo(index)}
+                    whileHover={{ scale: 1.03 }}
+                    animate={{ scale: isServiceActive ? 1.05 : 1, y: isServiceActive ? -5 : 0}}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                  >
+                    <motion.img
+                      src={service.image}
+                      alt={service.title}
+                      className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-300"
+                      initial={{ scale: 1.1 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 0.8 }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 z-10">
+                      <h4 className={`text-body-lg md:text-heading-md font-subheading transition-colors duration-300 ${serviceTitleClass}`}>
+                        {service.title}
+                      </h4>
+                    </div>
+                    {isServiceActive && (
+                       <motion.div 
+                        className="absolute top-2 right-2 w-3 h-3 rounded-full"
+                        style={{ backgroundColor: activeRgbaColor }}
+                        layoutId="active-indicator"
+                      />
+                    )}
+                  </motion.div>
+                </SwiperSlide>
+              )}
             )}
-          )}
-        </Swiper>
+          </Swiper>
+        )}
+        </LayoutGroup>
 
-        <button
-          aria-label="Previous service"
-          className={`swiper-button-prev-custom absolute top-1/2 -translate-y-1/2 left-0 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-all text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black ${activeRingClass}`}
-          style={{ marginLeft: '-10px' }}
-        >
-          <ChevronLeft className="h-6 w-6" />
-        </button>
-        <button
-          aria-label="Next service"
-          className={`swiper-button-next-custom absolute top-1/2 -translate-y-1/2 right-0 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-all text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black ${activeRingClass}`}
-          style={{ marginRight: '-10px' }}
-        >
-          <ChevronRight className="h-6 w-6" />
-        </button>
+        {!isDesktop && (
+          <>
+            <button
+              aria-label="Previous service"
+              className={`swiper-button-prev-custom absolute top-1/2 -translate-y-1/2 left-0 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-all text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black ${activeRingClass}`}
+              style={{ marginLeft: '-10px' }}
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+            <button
+              aria-label="Next service"
+              className={`swiper-button-next-custom absolute top-1/2 -translate-y-1/2 right-0 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-all text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black ${activeRingClass}`}
+              style={{ marginRight: '-10px' }}
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
+          </>
+        )}
       </div>
 
       <div 

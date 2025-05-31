@@ -270,7 +270,7 @@ export function VideoHero() {
 
       {/* Scroll indicator - positioned at the bottom of hero section */}
       <motion.div
-        className="absolute bottom-4 vh-short:bottom-2 left-1/2 transform -translate-x-1/2 z-50"
+        className="absolute bottom-4 vh-short:bottom-2 left-1/2 transform -translate-x-1/2 z-40"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.4 }}

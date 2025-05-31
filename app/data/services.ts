@@ -107,7 +107,8 @@ export const MASTER_SERVICES: Service[] = [
     // shortTitle: "Social Content" // Example if needed
     description:
       "We create engaging, platform-optimized content that builds community, drives engagement, and establishes your brand as a thought leader in your industry.",
-    // shortDescription: "Engaging content for social platforms." // Example if needed
+    shortDescription: "Platform-optimized content that builds community and drives engagement.",
+    icon: "📣",
     features: [
       "Platform-Specific Content",
       "Community Building",
