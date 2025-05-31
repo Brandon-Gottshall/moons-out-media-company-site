@@ -102,14 +102,19 @@ export default function BookingConfirmationDialog({
       <DialogContent className="sm:max-w-[425px] bg-black/80 backdrop-blur-md border-cyberpunk-blue text-white">
         <DialogHeader>
           <DialogTitle className="text-cyberpunk-blue">Confirm External Booking</DialogTitle>
-          <DialogDescription className="text-gray-300 pt-2">
+          <DialogDescription className="text-gray-300 pt-2 text-body">
+            <p className="mb-2">
             You are about to be directed to an external site (Google Calendar, LinkedIn, or Reddit) to schedule your appointment.
-            <br /><br />
-            Please be aware that you may need to re-enter your name, email, and optionally your company information on the booking page.
-            <br /><br />
+            </p>
+            <p className="mb-2">
+            Please be aware that you will need to re-enter your name, email accurately on the booking page.
+            </p>
+            <p className="mb-2">
             We apologize for this inconvenience and are actively working on a more streamlined solution. To help us connect your booking with this inquiry, please try to use the same information.
-            <br /><br />
+            </p>
+            <p className="mb-2">
             By proceeding, we'll also ensure your message from this form reaches our team.
+            </p>
           </DialogDescription>
         </DialogHeader>
         {renderFooter()}
