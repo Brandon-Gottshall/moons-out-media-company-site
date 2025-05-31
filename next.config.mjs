@@ -9,6 +9,10 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  productionBrowserSourceMaps: true,
+  experimental: {
+    optimizeCss: true,
+  },
   async redirects() {
     return [
       {
