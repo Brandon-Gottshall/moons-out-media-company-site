@@ -14,6 +14,7 @@ interface CallToActionProps {
   secondaryButtonLink?: string
   showNewsletter?: boolean // To control newsletter section visibility
   heightPercentage?: number // optional height percentage to scale component height
+  hideSecondaryButton?: boolean // optionally hide the secondary button
 }
 
 export default function CallToAction({
@@ -25,6 +26,7 @@ export default function CallToAction({
   secondaryButtonLink = "/portfolio",
   showNewsletter = false, // Default to false
   heightPercentage,
+  hideSecondaryButton = false,
 }: CallToActionProps) {
   const [email, setEmail] = useState("")
   const [submitted, setSubmitted] = useState(false)
@@ -76,13 +78,15 @@ export default function CallToAction({
               >
                 {primaryButtonText}
               </Button>
-              <Button
-                variant="outline"
-                className="border-cyberpunk-blue text-cyberpunk-blue font-hero hover:bg-cyberpunk-blue/10  md:text-body-lg py-4 md:py-6 px-6 md:px-8 shadow-glow-subtle"
-                onClick={() => (window.location.href = secondaryButtonLink)}
-              >
-                {secondaryButtonText}
-              </Button>
+              {!hideSecondaryButton && (
+                <Button
+                  variant="outline"
+                  className="border-cyberpunk-blue text-cyberpunk-blue font-hero hover:bg-cyberpunk-blue/10  md:text-body-lg py-4 md:py-6 px-6 md:px-8 shadow-glow-subtle"
+                  onClick={() => (window.location.href = secondaryButtonLink)}
+                >
+                  {secondaryButtonText}
+                </Button>
+              )}
             </div>
           </motion.div>
           {showNewsletter && (

@@ -170,7 +170,7 @@ export default function PortfolioPage() {
       </motion.section>
 
       {/* Call to Action - always visible */}
-      <CallToAction />
+      <CallToAction hideSecondaryButton />
     </div>
   )
 }

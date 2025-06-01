@@ -18,6 +18,7 @@ export default function Footer() {
               {footerDescription.map((line, index) => (
                 <p 
                   key={index}
+                  className="max-w-sm"
                   dangerouslySetInnerHTML={{ __html: line }}
                 />
               ))}
