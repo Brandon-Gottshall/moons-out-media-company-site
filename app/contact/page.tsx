@@ -93,6 +93,8 @@ export default function ContactPage() {
       console.error(error)
     } finally {
       setIsSubmittingContact(false)
+      // Ensure countdown starts even if the API call fails
+      setContactSent(true)
     }
   }
 
