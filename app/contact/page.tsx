@@ -48,6 +48,7 @@ export default function ContactPage() {
       audit: "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2_Woqu-NgofXbtzKO4uG7jDVqeaN9Ix9nfH3OYN-7pM_-_fRNQogkllypawboVowoGlcCqTMQB"
     },
     both: {
+      discovery: "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0j_9jF_j4qd-GUPZxxyt9oicMUSIaVXSDHPgwEbxwNN-XC53TuuhgLrDflxTlXDsXMjJF8TFOy",
       audit: "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2aH1pzQypmOn60h6UVK6MK6zt9O4Me-VDYYk4kb9BaRJtlU9Pl2gP5xUlt7PyyPHfU6MLSQ98i"
     }
   }
