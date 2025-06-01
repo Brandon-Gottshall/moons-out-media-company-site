@@ -117,7 +117,7 @@ export default function ServicesChooserPage() {
                     </div>
                     <h2 className="text-3xl font-heading text-white mb-4">Labs & Tech</h2>
                     <p className="text-gray-300 text-body-lg leading-relaxed mb-6">
-                      Launch a lightning-fast, ADA-ready site in 21 days. Custom web apps, AI automation, and cloud solutions.
+                      Launch a lightning-fast, ADA-ready site in no time. Custom web apps, AI automation, and cloud solutions.
                     </p>
                   </div>
 
