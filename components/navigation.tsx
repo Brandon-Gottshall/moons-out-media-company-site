@@ -20,7 +20,7 @@ const navLinks = [
     ]
   },
   { name: "Projects", href: "/projects" },
-  { name: "Our Team", href: "/about-us" },
+  { name: "Our Team", href: "/our-team" },
   { name: "Contact", href: "/contact" },
 ]
 
@@ -332,18 +332,20 @@ export default function Navigation({ logoSlot }: NavigationProps) {
                       setDropdownOpen(null)
                     }}
                   >
-                    <button
+                    <Link
+                      href={link.href}
                       className={cn(
                         "relative py-2 transition-colors duration-300 flex items-center gap-1",
                         isActive ? "text-cyberpunk-pink" : "text-white hover:text-cyberpunk-blue",
                       )}
+                      onClick={() => setDropdownOpen(null)}
                     >
                       {link.name}
                       <ChevronDown className={cn(
                         "w-4 h-4 transition-transform duration-200",
                         dropdownOpen === link.name ? "rotate-180" : ""
                       )} />
-                    </button>
+                    </Link>
                     
                     <AnimatePresence>
                       {dropdownOpen === link.name && (

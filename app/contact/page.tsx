@@ -225,48 +225,140 @@ export default function ContactPage() {
           {/* Selection Summary */}
           {step !== 'intro' && (
             <div className="flex flex-wrap gap-2 mb-8">
-              <span className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm">
+              <button
+                type="button"
+                onClick={() => {
+                  setStep('intro')
+                  setEmailValue('')
+                  setPhoneValue('')
+                  setCompanyValue('')
+                  setRoleValue('')
+                  setPathSelection('')
+                  setFoundValue('')
+                  setOtherSourceValue('')
+                  setAppointmentType('')
+                  setGoalValue('')
+                }}
+                className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm"
+              >
                 Name: {nameValue}
-              </span>
+              </button>
               {emailValue && (
-                <span className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStep('contact')
+                    setCompanyValue('')
+                    setRoleValue('')
+                    setPathSelection('')
+                    setFoundValue('')
+                    setOtherSourceValue('')
+                    setAppointmentType('')
+                    setGoalValue('')
+                  }}
+                  className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm"
+                >
                   Email: {emailValue}
-                </span>
+                </button>
               )}
               {phoneValue && (
-                <span className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStep('contact')
+                    setCompanyValue('')
+                    setRoleValue('')
+                    setPathSelection('')
+                    setFoundValue('')
+                    setOtherSourceValue('')
+                    setAppointmentType('')
+                    setGoalValue('')
+                  }}
+                  className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm"
+                >
                   Phone: {phoneValue}
-                </span>
+                </button>
               )}
               {companyValue && (
-                <span className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStep('info')
+                    setPathSelection('')
+                    setFoundValue('')
+                    setOtherSourceValue('')
+                    setAppointmentType('')
+                    setGoalValue('')
+                  }}
+                  className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm"
+                >
                   Company: {companyValue}
-                </span>
+                </button>
               )}
               {roleValue && (
-                <span className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStep('info')
+                    setPathSelection('')
+                    setFoundValue('')
+                    setOtherSourceValue('')
+                    setAppointmentType('')
+                    setGoalValue('')
+                  }}
+                  className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm"
+                >
                   Role: {roleValue}
-                </span>
+                </button>
               )}
               {foundValue && (
-                <span className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStep('source')
+                    setAppointmentType('')
+                    setGoalValue('')
+                  }}
+                  className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm"
+                >
                   Found via: {foundValue}
-                </span>
+                </button>
               )}
               {pathSelection && (
-                <span className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStep('choose')
+                    setFoundValue('')
+                    setOtherSourceValue('')
+                    setAppointmentType('')
+                    setGoalValue('')
+                  }}
+                  className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm"
+                >
                   Path: {pathSelection === 'media' ? 'Moons Out Media' : pathSelection === 'labs' ? 'Moons Out Labs' : 'Both'}
-                </span>
+                </button>
               )}
               {appointmentType && (
-                <span className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStep('book')
+                    setGoalValue('')
+                  }}
+                  className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm"
+                >
                   Appointment: {appointmentType === 'discovery' ? 'Creative Discovery Call' : '15-Min Labs Audit'}
-                </span>
+                </button>
               )}
               {goalValue && (
-                <span className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm">
+                <button
+                  type="button"
+                  onClick={() => setStep('goal')}
+                  className="inline-flex items-center bg-black/60 border border-gray-700 px-3 py-1 rounded-full text-gray-300 text-sm"
+                >
                   Goal: {goalValue}
-                </span>
+                </button>
               )}
             </div>
           )}

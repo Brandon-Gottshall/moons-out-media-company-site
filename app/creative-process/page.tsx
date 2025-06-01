@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import CreativeProcess from "@/components/about/creative-process"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
+import CallToAction from "@/components/call-to-action"
 
 // FAQs for Working Together section
 interface FAQ { question: string; answer: string }
@@ -88,6 +89,7 @@ export default function CreativeProcessPage() {
           </Accordion>
         </div>
       </motion.section>
+      <CallToAction />
     </div>
   )
 } 

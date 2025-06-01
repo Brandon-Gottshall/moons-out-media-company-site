@@ -209,11 +209,11 @@ export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
       </div>
 
       <div 
-        className="relative bg-black/60 backdrop-blur-md border border-gray-800 rounded-lg overflow-hidden w-full max-w-4xl mx-auto p-6 md:p-8"
+        className="relative bg-black/60 backdrop-blur-md border border-gray-800 rounded-lg overflow-visible w-full max-w-4xl mx-auto p-6 md:p-8"
         aria-live="polite"
       >
         <motion.div
-          className="absolute -inset-2 rounded-lg opacity-20 blur-2xl z-0"
+          className="absolute inset-x-0 top-[-20%] bottom-[-50%] rounded-lg opacity-20 blur-2xl z-0"
           key={`${activeService.id}-glow`}
           initial={{ background: `radial-gradient(circle at 50% 50%, ${getServiceRgbaColor(activeService.color, 0)} 0%, transparent 70%)` }}
           animate={{

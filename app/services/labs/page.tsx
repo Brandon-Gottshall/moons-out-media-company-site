@@ -73,8 +73,8 @@ export default function LabsServicesPage() {
       ></div>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_center,rgba(255,105,180,0.15)_0%,transparent_50%)]"></div>
+      <section className="pt-32 pb-20 relative overflow-visible">
+        <div className="absolute inset-x-0 top-0 bottom-[-50%] bg-[radial-gradient(circle_at_top_center,rgba(255,105,180,0.15)_0%,transparent_50%)]"></div>
         <div className="container mx-auto px-4 text-center">
           <motion.h1 
             className="text-4xl md:text-6xl font-heading mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple"
@@ -131,46 +131,6 @@ export default function LabsServicesPage() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Calendly Embed */}
-      <section id="audit" className="py-20 relative">
-        <div className="container mx-auto px-4">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Book Your Free 15-Minute Technical Audit
-          </motion.h2>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="bg-black/60 border border-gray-800 rounded-xl p-8">
-                             <div className="h-96 flex items-center justify-center">
-                 <div className="text-center">
-                   <div className="text-gray-300 mb-4">Ready to get started?</div>
-                   <Link 
-                     href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ10MfFXCLnngwj5wQ9CRQ6Mqw2r6sF1IBHMYr8y2pQmV4OZ8-kcvoeWxbx8mHgWM2QfLW4aPVZw"
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     className="inline-flex items-center bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple text-white px-8 py-4 rounded-lg font-subheading hover:scale-105 transition-transform"
-                   >
-                     Book Free 15-Min Audit
-                     <ArrowRight className="w-5 h-5 ml-2" />
-                   </Link>
-                 </div>
-               </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 
