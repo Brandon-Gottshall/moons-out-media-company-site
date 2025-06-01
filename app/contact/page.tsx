@@ -68,35 +68,30 @@ export default function ContactPage() {
     setStep('schedule')
   }
 
-  const handleScheduleAndRedirect = async () => {
+  const handleScheduleAndRedirect = () => {
     // Open blank window immediately to avoid popup blocker
     bookingWindowRef.current = window.open("", "_blank")
+    // Start the booking redirect countdown
+    setContactSent(true)
     setIsSubmittingContact(true)
-    try {
-      const response = await fetch('/api/schedule', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: nameValue.trim(),
-          email: emailValue.trim(),
-          phone: phoneValue.trim(),
-          company: companyValue.trim(),
-          role: roleValue.trim(),
-          path: pathSelection,
-          found: foundValue.trim(),
-          appointmentType,
-          goal: goalValue.trim(),
-        })
-      })
-      if (!response.ok) throw new Error('Schedule email failed')
-      setContactSent(true)
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setIsSubmittingContact(false)
-      // Ensure countdown starts even if the API call fails
-      setContactSent(true)
-    }
+    // Run schedule API call in background
+    fetch('/api/schedule', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: nameValue.trim(),
+        email: emailValue.trim(),
+        phone: phoneValue.trim(),
+        company: companyValue.trim(),
+        role: roleValue.trim(),
+        path: pathSelection,
+        found: foundValue.trim(),
+        appointmentType,
+        goal: goalValue.trim(),
+      }),
+    })
+      .catch(error => console.error(error))
+      .finally(() => setIsSubmittingContact(false))
   }
 
   useEffect(() => {
