@@ -178,7 +178,7 @@ export default function ContactForm() {
     const messages = []
     if (formState.name.trim() === "") messages.push("Name is required.")
     if (!emailRegex.test(formState.email)) messages.push("A valid email is required.")
-    if (formState.phone && !isPossiblePhoneNumber(formState.phone, 'US')) messages.push("Please enter a valid phone number.")
+    if (formState.phone && !isPossiblePhoneNumber(formState.phone, 'US')) messages.push("Please enter a valid phone number, or leave it blank.")
     if (formState.message.trim() === "") messages.push("Message is required.")
     if (!(formState.service.length > 0 || formState.branch !== "")) messages.push("Please select a service interest.")
     return messages
@@ -328,6 +328,9 @@ export default function ContactForm() {
             <label htmlFor="email" className="block text-body-sm font-emphasis text-gray-300 mb-1">
               Email <span className="text-cyberpunk-pink">*</span>
             </label>
+            {hasInteracted && formState.email !== "" && !emailRegex.test(formState.email) && (
+              <p className="text-red-500 text-sm mb-1">Please enter a valid email address.</p>
+            )}
             <Input
               id="email"
               name="email"
@@ -348,6 +351,9 @@ export default function ContactForm() {
             <label htmlFor="phone" className="block text-body-sm font-emphasis text-gray-300 mb-1">
               Phone Number
             </label>
+            {hasInteracted && formState.phone !== "" && !isPossiblePhoneNumber(formState.phone, 'US') && (
+              <p className="text-red-500 text-sm mb-1">Please enter a valid phone number.</p>
+            )}
             <Input
               id="phone"
               name="phone"

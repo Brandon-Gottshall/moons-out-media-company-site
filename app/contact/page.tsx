@@ -31,6 +31,11 @@ export default function ContactPage() {
   const [isSubmittingContact, setIsSubmittingContact] = useState(false)
   const [contactSent, setContactSent] = useState(false)
   const isDebug = process.env.NODE_ENV === 'development'
+  const emailRegex = /\S+@\S+\.\S+/
+  const isEmailValid = emailRegex.test(emailValue)
+  const phoneDigits = phoneValue.replace(/\D/g, "")
+  const isPhoneValid = phoneDigits === "" || phoneDigits.length >= 10
+  const isContactValid = isEmailValid && isPhoneValid
   const countdownStart = isDebug ? 5 : 3
   const [progress, setProgress] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
@@ -171,6 +176,9 @@ export default function ContactPage() {
                 <p className="text-gray-300">Please provide your email and optional phone number.</p>
               </div>
               <div className="max-w-md mx-auto flex flex-col items-center space-y-4">
+                {emailValue !== "" && !isEmailValid && (
+                  <p className="text-red-500 text-sm mb-1 w-full text-left">Please enter a valid email address.</p>
+                )}
                 <Input
                   id="contact-email"
                   type="email"
@@ -180,6 +188,9 @@ export default function ContactPage() {
                   className="bg-black/60 border-gray-700 text-white focus:border-cyberpunk-blue"
                   required
                 />
+                {phoneValue !== "" && !isPhoneValid && (
+                  <p className="text-red-500 text-sm mb-1 w-full text-left">Please enter a valid phone number, or leave it blank.</p>
+                )}
                 <Input
                   id="contact-phone"
                   type="tel"
@@ -189,7 +200,7 @@ export default function ContactPage() {
                   className="bg-black/60 border-gray-700 text-white focus:border-cyberpunk-blue"
                 />
                 <button
-                  disabled={!emailValue.trim()}
+                  disabled={!isContactValid}
                   onClick={() => setStep('info')}
                   className="mt-4 inline-flex items-center bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-pink text-white px-6 py-2 rounded-lg font-subheading hover:scale-105 transition-transform disabled:opacity-50"
                 >
