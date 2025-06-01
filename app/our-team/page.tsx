@@ -12,7 +12,7 @@ export default function OurTeamPage() {
       {/* Content positioned above the background effect */}
       <div className="relative z-10 pt-16">
         <TeamSection />
-        <CallToAction />
+        <CallToAction heightPercentage={50} />
       </div>
     </div>
   );
