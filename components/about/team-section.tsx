@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { Twitter, Linkedin, Mail, ExternalLink } from "lucide-react"
+import { Twitter, Linkedin, Mail, ExternalLink, Globe } from "lucide-react"
 
 interface TeamMember {
   name: string
@@ -11,9 +11,10 @@ interface TeamMember {
   bio: string
   image: string
   social: {
-    twitter: string
-    linkedin: string
-    email: string
+    twitter?: string
+    linkedin?: string
+    email?: string
+    site?: string
   }
 }
 
@@ -25,8 +26,8 @@ export default function TeamSection() {
   const team: TeamMember[] = [
     {
       name: "Levi Armentrout",
-      role: "HNIC",
-      bio: "Levi Armentrout, HNIC at Moons Out Media, brings Marine Corps discipline and a documentary cinematographer's eye to every project. After multiple tours of duty, he immersed himself in authentic storytelling—directing and shooting films that uncover untold personal narratives. As HNIC, Levi shapes narrative strategy, oversees brand-film direction, and guides creative execution, ensuring each story combines cinematic polish with genuine human emotion. His steady leadership and visual expertise drive Moons Out's mission to craft memorable, human-centered experiences that linger long after the credits roll.",
+      role: "Founder",
+      bio: "As a U.S. Marine Corps Veteran, father, and the heart behind Moon Out Media, my path has been uniquely shaped by a profound realization from my service: pivotal stories deserve to be preserved through video and photography. This conviction, coupled with the discipline honed in the Marines and a deep-seated love for local enterprise learned in my family's childhood pizza shop, fuels my passion to see local businesses thrive. Working alongside inspiring Ohio businesses like Dave Arbogast and ThinkTV, I've witnessed firsthand that while well-planned ads are vital for reach, it's a business's courage to authentically share its story that truly builds lasting trust and paves the way for genuine, sustainable growth. This core belief is why Moon Out Media is dedicated to partnering with you—to teach, collaborate, and ensure your unique narrative not only connects but helps your business flourish.",
       image: "/images/Levi.webp",
       social: {
         twitter: "#",
@@ -136,21 +137,26 @@ export default function TeamSection() {
                   {member.bio.substring(0, 80)}...
                 </p>
                 <div className="mt-4 flex space-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
-                  <a href={member.social.twitter} className="text-gray-400 hover:text-cyberpunk-blue transition-colors">
-                    <Twitter size={16} />
-                  </a>
-                  <a
-                    href={member.social.linkedin}
-                    className="text-gray-400 hover:text-cyberpunk-blue transition-colors"
-                  >
-                    <Linkedin size={16} />
-                  </a>
-                  <a
-                    href={`mailto:${member.social.email}`}
-                    className="text-gray-400 hover:text-cyberpunk-pink transition-colors"
-                  >
-                    <Mail size={16} />
-                  </a>
+                  {member.social.twitter && (
+                    <a href={member.social.twitter} className="text-gray-400 hover:text-cyberpunk-blue transition-colors">
+                      <Twitter size={16} />
+                    </a>
+                  )}
+                  {member.social.linkedin && (
+                    <a href={member.social.linkedin} className="text-gray-400 hover:text-cyberpunk-blue transition-colors">
+                      <Linkedin size={16} />
+                    </a>
+                  )}
+                  {member.social.email && (
+                    <a href={`mailto:${member.social.email}`} className="text-gray-400 hover:text-cyberpunk-pink transition-colors">
+                      <Mail size={16} />
+                    </a>
+                  )}
+                  {member.social.site && (
+                    <a href={member.social.site} className="text-gray-400 hover:text-cyberpunk-pink transition-colors">
+                      <Globe size={16} />
+                    </a>
+                  )}
                 </div>
               </div>
 
@@ -193,24 +199,26 @@ export default function TeamSection() {
                   <p className="text-gray-300 mb-6">{activeTeamMember.bio}</p>
 
                   <div className="flex space-x-4">
-                    <a
-                      href={activeTeamMember.social.twitter}
-                      className="p-2 rounded-full bg-cyberpunk-blue/10 text-cyberpunk-blue hover:bg-cyberpunk-blue/20 transition-colors"
-                    >
-                      <Twitter size={18} />
-                    </a>
-                    <a
-                      href={activeTeamMember.social.linkedin}
-                      className="p-2 rounded-full bg-cyberpunk-blue/10 text-cyberpunk-blue hover:bg-cyberpunk-blue/20 transition-colors"
-                    >
-                      <Linkedin size={18} />
-                    </a>
-                    <a
-                      href={`mailto:${activeTeamMember.social.email}`}
-                      className="p-2 rounded-full bg-cyberpunk-pink/10 text-cyberpunk-pink hover:bg-cyberpunk-pink/20 transition-colors"
-                    >
-                      <Mail size={18} />
-                    </a>
+                    {activeTeamMember.social.twitter && (
+                      <a href={activeTeamMember.social.twitter} className="p-2 rounded-full bg-cyberpunk-blue/10 text-cyberpunk-blue hover:bg-cyberpunk-blue/20 transition-colors">
+                        <Twitter size={18} />
+                      </a>
+                    )}
+                    {activeTeamMember.social.linkedin && (
+                      <a href={activeTeamMember.social.linkedin} className="p-2 rounded-full bg-cyberpunk-blue/10 text-cyberpunk-blue hover:bg-cyberpunk-blue/20 transition-colors">
+                        <Linkedin size={18} />
+                      </a>
+                    )}
+                    {activeTeamMember.social.email && (
+                      <a href={`mailto:${activeTeamMember.social.email}`} className="p-2 rounded-full bg-cyberpunk-pink/10 text-cyberpunk-pink hover:bg-cyberpunk-pink/20 transition-colors">
+                        <Mail size={18} />
+                      </a>
+                    )}
+                    {activeTeamMember.social.site && (
+                      <a href={activeTeamMember.social.site} className="p-2 rounded-full bg-cyberpunk-blue/10 text-cyberpunk-blue hover:bg-cyberpunk-blue/20 transition-colors">
+                        <Globe size={18} />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
