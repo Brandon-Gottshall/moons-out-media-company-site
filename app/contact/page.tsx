@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { ArrowRight, ArrowLeft, Video, Code2 } from "lucide-react"
 import ContactForm from "@/components/contact/contact-form"
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Input } from "@/components/ui/input"
 
 export default function ContactPage() {
@@ -35,6 +35,8 @@ export default function ContactPage() {
   const [countdown, setCountdown] = useState(countdownStart)
   const [progress, setProgress] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
+  // Reference to booking window to avoid popup blocker
+  const bookingWindowRef = useRef<Window | null>(null)
 
   const scheduleUrls: Record<string, Record<string, string>> = {
     labs: {
@@ -66,6 +68,8 @@ export default function ContactPage() {
   }
 
   const handleScheduleAndRedirect = async () => {
+    // Open blank window immediately to avoid popup blocker
+    bookingWindowRef.current = window.open("", "_blank")
     setIsSubmittingContact(true)
     try {
       const response = await fetch('/api/schedule', {
@@ -100,7 +104,8 @@ export default function ContactPage() {
         setCountdown(c => {
           if (c <= 1) {
             clearInterval(interval)
-            window.open(bookingLink, '_blank')
+            // Navigate the opened window to the booking link
+            bookingWindowRef.current?.location.assign(bookingLink)
             return 0
           }
           return c - 1
