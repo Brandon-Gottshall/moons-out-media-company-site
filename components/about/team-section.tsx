@@ -65,7 +65,7 @@ export default function TeamSection() {
     },
     {
       name: "Emma",
-      role: "UX & Creative Strategist",
+      role: "UX/UI Designer & Creative Strategist",
       bio: "Emma brings clarity and strategic insight to Moons Out Media's user experience and creative direction. With a sharp eye for detail and a passion for intuitive design, she bridges storytelling with interactive design, ensuring every digital touchpoint is seamless, engaging, and conversion-focused. Emma's expertise in UX/UI design, content strategy, and creative ideation empowers the team to craft compelling experiences that resonate deeply with audiences and drive meaningful results.",
       image: "/images/Emma.webp",
       social: {
