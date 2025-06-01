@@ -150,6 +150,11 @@ export default function ContactFunnel() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
+  const emailValid = /\S+@\S+\.\S+/.test(formData.email)
+  const phoneValue = formData.phone.trim()
+  const phoneValid = phoneValue === "" || /^[0-9]{10,}$/.test(phoneValue)
+  const isFormValid = Boolean(formData.name.trim()) && emailValid && Boolean(formData.company.trim()) && phoneValid
+
   const handleChallengeSelect = (challenge: Challenge) => {
     setSelectedChallenge(challenge)
     setCurrentStep(1)
@@ -442,6 +447,9 @@ export default function ContactFunnel() {
                       <label htmlFor="email" className="block text-body-sm font-emphasis text-gray-300 mb-1">
                         Email <span className="text-cyberpunk-pink">*</span>
                       </label>
+                      {!emailValid && (
+                        <p className="text-red-500 text-sm mb-1">Please enter a valid email address.</p>
+                      )}
                       <Input
                         id="email"
                         name="email"
@@ -471,6 +479,11 @@ export default function ContactFunnel() {
                       <label htmlFor="phone" className="block text-body-sm font-emphasis text-gray-300 mb-1">
                         Phone (optional)
                       </label>
+                      {phoneValue !== "" && !phoneValid && (
+                        <p className="text-red-500 text-sm mb-1">
+                          Please enter a valid phone number (digits only, at least 10 digits).
+                        </p>
+                      )}
                       <Input
                         id="phone"
                         name="phone"
@@ -510,7 +523,7 @@ export default function ContactFunnel() {
                     <Button
                       type="submit"
                       className="cyberpunk-button flex items-center"
-                      disabled={isSubmitting || !formData.name || !formData.email || !formData.company}
+                      disabled={isSubmitting || !isFormValid}
                     >
                       {isSubmitting ? (
                         <>

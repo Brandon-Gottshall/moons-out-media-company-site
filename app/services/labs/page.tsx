@@ -82,7 +82,7 @@ export default function LabsServicesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            Launch a Lightning-Fast, ADA-Ready Site in 21 Days
+            Launch a Lightning-Fast, ADA-Ready Site in No Time!
           </motion.h1>
           <motion.p 
             className="text-heading-md text-gray-300 max-w-3xl mx-auto mb-8"
@@ -90,8 +90,8 @@ export default function LabsServicesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Custom web applications, AI automation, and cloud infrastructure built with Marine-veteran precision. 
-            No templates, no compromises—just results.
+            Custom web applications, AI automation, and cloud infrastructure built with Marine-veteran precision, adaptability, and attention to detail. 
+            No compromises—just results.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -135,7 +135,7 @@ export default function LabsServicesPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 relative">
+      <section className="py-20 relative mx-4 md:mx-0">
         <div className="container mx-auto px-4">
           <motion.h2 
             className="text-3xl md:text-4xl font-heading text-center mb-12 text-white"

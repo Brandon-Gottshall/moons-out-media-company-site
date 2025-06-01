@@ -70,7 +70,7 @@ export const MASTER_SERVICES: Service[] = [
       "We leverage the power of artificial intelligence to automate repetitive tasks and streamline your business processes. Our team of AI experts will help you identify opportunities for automation and implement solutions that drive efficiency and reduce costs.",
     shortDescription: "Tailored AI/ML pipelines, chatbots and workflow automations (n8n, Langflow, etc.).",
     features: [
-      "Custom ML model development",
+      "Custom ML model fine-tuning and deployment",
       "Conversational chatbot integration",
       "End-to-end workflow orchestration",
       "Data preprocessing & ETL pipelines",
@@ -86,13 +86,13 @@ export const MASTER_SERVICES: Service[] = [
     title: "Cloud & DevOps Solutions",
     // shortTitle can be omitted
     description:
-      "End-to-end containerized infrastructure, CI/CD pipelines and hybrid-cloud hosting to keep your apps up, fast and secure at any scale.",
+      "We provide end-to-end cloud and devops solutions to keep your apps up, fast and secure at any scale.",
     shortDescription: "Containerized infrastructure, CI/CD pipelines, Kubernetes, Docker & hybrid-cloud hosting.",
     features: [
-      "Kubernetes & Docker orchestration",
-      "Automated CI/CD pipelines",
-      "Monitoring, alerting & auto-scaling",
-      "Infrastructure as Code (Terraform/Ansible)",
+      "Cloud-native Architecture, Hybrid-Cloud Hosting, and On-Premise Hosting Development, Management, and Maintenance.",
+      "Kubernetes & Docker Orchestration",
+      "Automated CI/CD Pipelines",
+      "Monitoring, Alerting & Auto-Scaling"
     ],
     image: "/images/cloud-devops.webp",
     caseStudyLink: "/projects/enterprise-cloud-devops",
