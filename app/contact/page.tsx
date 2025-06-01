@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { ArrowRight, ArrowLeft, Video, Code2 } from "lucide-react"
 import ContactForm from "@/components/contact/contact-form"
 import Link from "next/link"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { Input } from "@/components/ui/input"
 
 export default function ContactPage() {
@@ -32,11 +32,8 @@ export default function ContactPage() {
   const [contactSent, setContactSent] = useState(false)
   const isDebug = process.env.NODE_ENV === 'development'
   const countdownStart = isDebug ? 5 : 3
-  const [countdown, setCountdown] = useState(countdownStart)
   const [progress, setProgress] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
-  // Reference to booking window to avoid popup blocker
-  const bookingWindowRef = useRef<Window | null>(null)
 
   const scheduleUrls: Record<string, Record<string, string>> = {
     labs: {
@@ -69,12 +66,10 @@ export default function ContactPage() {
   }
 
   const handleScheduleAndRedirect = () => {
-    // Open blank window immediately to avoid popup blocker
-    bookingWindowRef.current = window.open("", "_blank")
-    // Start the booking redirect countdown
-    setContactSent(true)
+    // Open the actual booking page immediately
+    window.open(bookingLink, '_blank')
     setIsSubmittingContact(true)
-    // Run schedule API call in background
+    // Fire off scheduling email in background
     fetch('/api/schedule', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -93,26 +88,6 @@ export default function ContactPage() {
       .catch(error => console.error(error))
       .finally(() => setIsSubmittingContact(false))
   }
-
-  useEffect(() => {
-    if (contactSent && !isPaused) {
-      setProgress(0)
-      setCountdown(countdownStart)
-      const interval = setInterval(() => {
-        setCountdown(c => {
-          if (c <= 1) {
-            clearInterval(interval)
-            // Navigate the opened window to the booking link
-            bookingWindowRef.current?.location.assign(bookingLink)
-            return 0
-          }
-          return c - 1
-        })
-        setProgress(p => p + 100 / countdownStart)
-      }, 1000)
-      return () => clearInterval(interval)
-    }
-  }, [contactSent, bookingLink, isPaused, countdownStart])
 
   return (
     <div className="min-h-[80dvh] bg-black">
@@ -699,10 +674,7 @@ export default function ContactPage() {
                   {contactSent
                     ? (isPaused
                         ? 'Paused'
-                        : (countdown > 0
-                            ? `${countdown}${isDebug ? ' (debug mode)' : ''}`
-                            : 'Redirecting...'
-                          )
+                        : 'Redirecting...'
                       )
                     : isSubmittingContact
                       ? 'Sending...'
@@ -715,8 +687,6 @@ export default function ContactPage() {
                     <h3 className="font-semibold mb-2">Debug Info</h3>
                     <p>isSubmittingContact: {isSubmittingContact.toString()}</p>
                     <p>contactSent: {contactSent.toString()}</p>
-                    <p>countdown: {countdown}</p>
-                    <p>progress: {Math.round(progress)}%</p>
                     <button
                       onClick={() => setIsPaused(!isPaused)}
                       className="mt-2 inline-flex items-center bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500"
@@ -732,9 +702,6 @@ export default function ContactPage() {
                     <div className="bg-cyberpunk-blue h-2 rounded" style={{ width: `${progress}%`, transition: "width 1s linear" }} />
                   </div>
                 </div>
-              )}
-              {contactSent && (
-                <p className="text-gray-300 mt-2 text-center">Redirecting in {contactSent ? countdown : 0} seconds...</p>
               )}
               <p className="text-gray-300 mb-4 text-body-sm mx-auto max-w-xs mt-2">
                 By clicking "Send my Information and Book Now", agreeing to send your information to us and you'll be redirected to Google Calendar to schedule your meeting.
