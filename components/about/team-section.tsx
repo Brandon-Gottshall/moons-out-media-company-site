@@ -43,7 +43,7 @@ export default function TeamSection() {
       },
     },
     {
-      name: "Brandon",
+      name: "Brandon Gottshall",
       role: "Software Alchemist / Technical Director",
       bio: "Brandon Gottshall is a Marine Corps veteran who architects containerized infrastructures, secure reverse-proxy gateways, and AI-driven automation pipelines for Moons Out Media. He leverages Vercel, Docker, Next.js, Tailwind, ShadCN, and PostgreSQL to deploy scalable web platforms. At Moons Out Labs, he implemented Authelia for internal AI-service authentication and orchestrated n8n, Langflow, and LibreChat workflows to eliminate repetitive tasks. With a focus on CI/CD best practices, infrastructure as code, and maintainability, Brandon transforms complex requirements into robust systems that empower creative teams to focus on storytelling.",
       image: "/images/Brandon.webp",
@@ -64,7 +64,7 @@ export default function TeamSection() {
       },
     },
     {
-      name: "Emma",
+      name: "Emma Gibbons",
       role: "UX/UI Designer & Creative Strategist",
       bio: "Emma brings clarity and strategic insight to Moons Out Media's user experience and creative direction. With a sharp eye for detail and a passion for intuitive design, she bridges storytelling with interactive design, ensuring every digital touchpoint is seamless, engaging, and conversion-focused. Emma's expertise in UX/UI design, content strategy, and creative ideation empowers the team to craft compelling experiences that resonate deeply with audiences and drive meaningful results.",
       image: "/images/Emma.webp",
@@ -218,12 +218,28 @@ export default function TeamSection() {
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="flex flex-col md:flex-row gap-6">
-                  <div className="w-full md:w-1/4 aspect-square relative rounded-lg overflow-hidden mt-8">
+                  <div
+                    className="w-full md:w-1/4 aspect-square relative rounded-lg overflow-hidden mt-8"
+                    >
                     <Image
                       src={activeTeamMember.image || "/images/placeholder.svg"}
                       alt={activeTeamMember.name}
                       fill
-                      className="object-cover"
+                      className={
+                        "object-cover " +
+                        (activeTeamMember.name === "Emma Gibbons"
+                          ? "object-[80%_30%] "
+                          : "") +
+                        (activeTeamMember.name === "Jacai"
+                          ? "object-[65%_50%] "
+                          : "") +
+                        (activeTeamMember.name === "Brandon Gottshall"
+                          ? "object-[45%_10%] "
+                          : "") +
+                        (activeTeamMember.name === "Levi Armentrout"
+                          ? "object-[63%_50%] "
+                          : "object-center")
+                      }
                     />
                   </div>
 
