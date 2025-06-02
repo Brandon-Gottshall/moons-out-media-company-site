@@ -43,6 +43,20 @@ function SimpleRichText({ content }: { content?: string }) {
   );
 }
 
+// Helper to map orientation to correct aspect ratio class
+function getAspectClass(orientation?: string) {
+  switch (orientation) {
+    case 'portrait':
+    case 'tall':
+      return 'aspect-[9/16]';
+    case 'square':
+      return 'aspect-square';
+    case 'landscape':
+    default:
+      return 'aspect-video'; // 16:9 landscape
+  }
+}
+
 export default function PortfolioItemPage({
   params,
 }: {
@@ -62,20 +76,28 @@ export default function PortfolioItemPage({
     ) || [];
   const primaryVideo = validShowcaseVideos.find((v) => v.order === 1);
 
-  // Calculate initial tab to prevent layout shift (must be before early returns)
-  const getInitialTab = () => {
-    if (!currentItem) return "challenge";
-    if (currentItem.challenge || currentItem.solution) return "challenge";
-    if (currentItem.results) return "results";
-    if (currentItem.galleryImages && currentItem.galleryImages.length > 0) return "gallery";
-    if (validShowcaseVideos.length > 0) return "videos";
-    return "challenge";
-  };
-  
-  const [activeTab, setActiveTab] = useState(getInitialTab());
+  // Initialize with a stable default to prevent hydration mismatch
+  const [activeTab, setActiveTab] = useState("challenge");
+  const [mounted, setMounted] = useState(false);
 
   // Generate stable playerInitTime to prevent hydration mismatch
-  const playerInitTime = 0; // Use 0 or a fixed timestamp
+  const playerInitTime = 0;
+
+  // Calculate available tabs after component mounts to prevent hydration issues
+  useEffect(() => {
+    if (!currentItem) return;
+    
+    const getInitialTab = () => {
+      if (currentItem.challenge || currentItem.solution) return "challenge";
+      if (currentItem.results) return "results";
+      if (currentItem.galleryImages && currentItem.galleryImages.length > 0) return "gallery";
+      if (validShowcaseVideos.length > 0) return "videos";
+      return "challenge";
+    };
+    
+    setActiveTab(getInitialTab());
+    setMounted(true);
+  }, [currentItem, validShowcaseVideos.length]);
 
   if (!currentItem) {
     notFound();
@@ -93,15 +115,19 @@ export default function PortfolioItemPage({
   const displayCategory =
     currentItem.tags?.[0] || currentItem.industry || "Case Study";
 
+  // Get the correct aspect ratio class for this item's orientation
+  const heroAspectClass = getAspectClass(currentItem.orientation);
+
   return (
     <>
       <style jsx global>{`
         mux-player {
           --media-object-fit: cover;
           --media-object-position: center;
+          /* Remove mux default aspect so our wrapper owns sizing */
+          aspect-ratio: auto !important;
           width: 100% !important;
           height: 100% !important;
-          aspect-ratio: unset !important;
         }
       `}</style>
       <div className="min-h-screen bg-cyberpunk-background">
@@ -180,67 +206,40 @@ export default function PortfolioItemPage({
             </div>
           </div>
 
-          {/* Hero Video / Image Container */}
+          {/* Hero Video / Image Container - Orientation-aware aspect ratio from first paint */}
           <div className="z-30 mx-auto py-8 w-full max-w-4xl px-4 md:px-8">
             {primaryVideo?.muxPlaybackId ? (
-              currentItem.orientation === "portrait" ? (
-                <div className="w-full max-w-md mx-auto h-[30dvh] relative overflow-hidden rounded-lg bg-black">
-                  <MuxPlayer
-                    playerInitTime={playerInitTime}
-                    streamType="on-demand"
-                    playbackId={primaryVideo.muxPlaybackId}
-                    autoPlay
-                    muted
-                    maxResolution="1080p"
-                    minResolution="1080p"
-                    className="w-full h-full"
-                    poster={currentItem.heroImage?.url || ""}
-                    accentColor="#00CCFF"
-                    storyboardSrc=""
-                    envKey={process.env.NEXT_PUBLIC_MUX_DATA_ENV_KEY}
-                  />
-                </div>
-              ) : (
-                <div className="aspect-video relative overflow-hidden rounded-lg bg-black">
-                  <MuxPlayer
-                    playerInitTime={playerInitTime}
-                    streamType="on-demand"
-                    playbackId={primaryVideo.muxPlaybackId}
-                    autoPlay
-                    muted
-                    maxResolution="1080p"
-                    minResolution="1080p"
-                    className="w-full h-full"
-                    poster={currentItem.heroImage?.url || ""}
-                    accentColor="#00CCFF"
-                    storyboardSrc=""
-                    envKey={process.env.NEXT_PUBLIC_MUX_DATA_ENV_KEY}
-                  />
-                </div>
-              )
+              <div className={`relative w-full ${currentItem.orientation === 'portrait' || currentItem.orientation === 'tall' ? 'max-w-sm' : 'max-w-4xl'} mx-auto ${heroAspectClass} ${heroAspectClass === 'aspect-video' ? 'min-h-[400px]' : ''} overflow-hidden rounded-lg bg-black`}>
+                <MuxPlayer
+                  playerInitTime={playerInitTime}
+                  streamType="on-demand"
+                  playbackId={primaryVideo.muxPlaybackId}
+                  autoPlay
+                  muted
+                  maxResolution="1080p"
+                  minResolution="1080p"
+                  className="absolute inset-0 w-full h-full"
+                  style={{ width: '100%', height: '100%' }}
+                  poster={currentItem.heroImage?.url || ""}
+                  accentColor="#00CCFF"
+                  storyboardSrc=""
+                  envKey={process.env.NEXT_PUBLIC_MUX_DATA_ENV_KEY}
+                />
+              </div>
             ) : currentItem.heroImage ? (
-              currentItem.orientation === "portrait" ? (
-                <div className="w-full max-w-md mx-auto h-[30dvh] relative overflow-hidden rounded-lg bg-black">
-                  <Image
-                    src={currentItem.heroImage.url}
-                    alt={currentItem.heroImage.alt}
-                    fill
-                    className="w-full h-full object-cover"
-                    priority
-                  />
-                </div>
-              ) : (
-                <div className="aspect-video relative overflow-hidden rounded-lg bg-black">
-                  <Image
-                    src={currentItem.heroImage.url}
-                    alt={currentItem.heroImage.alt}
-                    fill
-                    className="w-full h-full object-cover"
-                    priority
-                  />
-                </div>
-              )
-            ) : null}
+              <div className={`relative w-full ${currentItem.orientation === 'portrait' || currentItem.orientation === 'tall' ? 'max-w-sm' : 'max-w-4xl'} mx-auto ${heroAspectClass} overflow-hidden rounded-lg bg-black`}>
+                <Image
+                  src={currentItem.heroImage.url}
+                  alt={currentItem.heroImage.alt}
+                  fill
+                  className="w-full h-full object-cover"
+                  priority
+                />
+              </div>
+            ) : (
+              // Placeholder with correct aspect ratio
+              <div className={`w-full ${currentItem.orientation === 'portrait' || currentItem.orientation === 'tall' ? 'max-w-sm' : 'max-w-4xl'} mx-auto ${heroAspectClass} bg-gray-900/50 rounded-lg`} />
+            )}
           </div>
         </section>
 
@@ -249,60 +248,63 @@ export default function PortfolioItemPage({
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
               <div className="lg:col-span-2">
-                <div className="flex overflow-x-auto space-x-1 sm:space-x-2 mb-8 pb-2 border-b border-gray-800/50">
-                  {(currentItem.challenge || currentItem.solution) && (
-                    <button
-                      className={`px-3 py-2 whitespace-nowrap font-emphasis text-body-sm sm:text-body-base ${
-                        activeTab === "challenge"
-                          ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
-                          : "text-gray-400 hover:text-white"
-                      }`}
-                      onClick={() => setActiveTab("challenge")}
-                    >
-                      <Target className="inline h-4 w-4 mr-1.5 sm:mr-2" />{" "}
-                      Challenge & Solution
-                    </button>
-                  )}
-                  {currentItem.results && (
-                    <button
-                      className={`px-3 py-2 whitespace-nowrap font-emphasis text-body-sm sm:text-body-base ${
-                        activeTab === "results"
-                          ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
-                          : "text-gray-400 hover:text-white"
-                      }`}
-                      onClick={() => setActiveTab("results")}
-                    >
-                      <BarChart2 className="inline h-4 w-4 mr-1.5 sm:mr-2" />{" "}
-                      Results
-                    </button>
-                  )}
-                  {currentItem.galleryImages &&
-                    currentItem.galleryImages.length > 0 && (
+                {/* Only render tabs after mounting to prevent hydration mismatch */}
+                {mounted && (
+                  <div className="flex overflow-x-auto space-x-1 sm:space-x-2 mb-8 pb-2 border-b border-gray-800/50">
+                    {(currentItem.challenge || currentItem.solution) && (
                       <button
                         className={`px-3 py-2 whitespace-nowrap font-emphasis text-body-sm sm:text-body-base ${
-                          activeTab === "gallery"
+                          activeTab === "challenge"
                             ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
                             : "text-gray-400 hover:text-white"
                         }`}
-                        onClick={() => setActiveTab("gallery")}
+                        onClick={() => setActiveTab("challenge")}
                       >
-                        <Camera className="inline h-4 w-4 mr-1.5 sm:mr-2" />{" "}
-                        Gallery
+                        <Target className="inline h-4 w-4 mr-1.5 sm:mr-2" />{" "}
+                        Challenge & Solution
                       </button>
                     )}
-                  {validShowcaseVideos.length > 0 && (
-                    <button
-                      className={`px-3 py-2 whitespace-nowrap font-emphasis text-body-sm sm:text-body-base ${
-                        activeTab === "videos"
-                          ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
-                          : "text-gray-400 hover:text-white"
-                      }`}
-                      onClick={() => setActiveTab("videos")}
-                    >
-                      <Video className="inline h-4 w-4 mr-1.5 sm:mr-2" /> Videos
-                    </button>
-                  )}
-                </div>
+                    {currentItem.results && (
+                      <button
+                        className={`px-3 py-2 whitespace-nowrap font-emphasis text-body-sm sm:text-body-base ${
+                          activeTab === "results"
+                            ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
+                            : "text-gray-400 hover:text-white"
+                        }`}
+                        onClick={() => setActiveTab("results")}
+                      >
+                        <BarChart2 className="inline h-4 w-4 mr-1.5 sm:mr-2" />{" "}
+                        Results
+                      </button>
+                    )}
+                    {currentItem.galleryImages &&
+                      currentItem.galleryImages.length > 0 && (
+                        <button
+                          className={`px-3 py-2 whitespace-nowrap font-emphasis text-body-sm sm:text-body-base ${
+                            activeTab === "gallery"
+                              ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
+                              : "text-gray-400 hover:text-white"
+                          }`}
+                          onClick={() => setActiveTab("gallery")}
+                        >
+                          <Camera className="inline h-4 w-4 mr-1.5 sm:mr-2" />{" "}
+                          Gallery
+                        </button>
+                      )}
+                    {validShowcaseVideos.length > 0 && (
+                      <button
+                        className={`px-3 py-2 whitespace-nowrap font-emphasis text-body-sm sm:text-body-base ${
+                          activeTab === "videos"
+                            ? "text-cyberpunk-blue border-b-2 border-cyberpunk-blue"
+                            : "text-gray-400 hover:text-white"
+                        }`}
+                        onClick={() => setActiveTab("videos")}
+                      >
+                        <Video className="inline h-4 w-4 mr-1.5 sm:mr-2" /> Videos
+                      </button>
+                    )}
+                  </div>
+                )}
 
                 <div className="min-h-[400px]">
                 <AnimatePresence mode="wait">
@@ -473,39 +475,22 @@ export default function PortfolioItemPage({
                                 {video.title}
                               </h3>
                             )}
-                            {currentItem.orientation === "portrait" ? (
-                              <div className="w-full max-w-md mx-auto aspect-[9/16] max-h-[70vh] bg-black">
-                                <MuxPlayer
-                                  playerInitTime={playerInitTime}
-                                  streamType="on-demand"
-                                  playbackId={video.muxPlaybackId}
-                                  maxResolution="1080p"
-                                  minResolution="1080p"
-                                  className="w-full h-full"
-                                  title={video.title || currentItem.title}
-                                  accentColor="#00CCFF"
-                                  poster={video.thumbnailUrl || currentItem.heroImage?.url || ""}
-                                  storyboardSrc=""
-                                  envKey={process.env.NEXT_PUBLIC_MUX_DATA_ENV_KEY}
-                                />
-                              </div>
-                            ) : (
-                              <div className="aspect-video bg-black">
-                                <MuxPlayer
-                                  playerInitTime={playerInitTime}
-                                  streamType="on-demand"
-                                  playbackId={video.muxPlaybackId}
-                                  maxResolution="1080p"
-                                  minResolution="1080p"
-                                  className="w-full h-full"
-                                  title={video.title || currentItem.title}
-                                  accentColor="#00CCFF"
-                                  poster={video.thumbnailUrl || currentItem.heroImage?.url || ""}
-                                  storyboardSrc=""
-                                  envKey={process.env.NEXT_PUBLIC_MUX_DATA_ENV_KEY}
-                                />
-                              </div>
-                            )}
+                            <div className={`relative w-full ${currentItem.orientation === 'portrait' || currentItem.orientation === 'tall' ? 'max-w-sm mx-auto' : 'max-w-4xl'} ${getAspectClass(currentItem.orientation)} ${getAspectClass(currentItem.orientation) === 'aspect-video' ? 'min-h-[400px]' : ''} bg-black`}>
+                              <MuxPlayer
+                                playerInitTime={playerInitTime}
+                                streamType="on-demand"
+                                playbackId={video.muxPlaybackId}
+                                maxResolution="1080p"
+                                minResolution="1080p"
+                                className="absolute inset-0 w-full h-full"
+                                style={{ width: '100%', height: '100%' }}
+                                title={video.title || currentItem.title}
+                                accentColor="#00CCFF"
+                                poster={video.thumbnailUrl || currentItem.heroImage?.url || ""}
+                                storyboardSrc=""
+                                envKey={process.env.NEXT_PUBLIC_MUX_DATA_ENV_KEY}
+                              />
+                            </div>
                           </div>
                         ))}
                       </div>
