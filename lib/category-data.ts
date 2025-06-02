@@ -28,7 +28,7 @@ export const metaCategoriesData: MetaCategory[] = [
   {
     id: "all-projects",
     title: "All Projects",
-    image: "",
+    image: "/images/Sunglasses_Animation.webp",
     color: "cyberpunk-blue",
     isGlobalAll: true,
     subCategories: [],

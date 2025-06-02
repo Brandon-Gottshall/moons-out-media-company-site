@@ -1,464 +1,269 @@
 export interface PortfolioItem {
-  title: string
-  slug: string
-  clientName: string
-  industry?: string
-  projectYear?: string | number
-  status: 'draft' | 'published' | 'archived'
-  publishedDate?: string // ISO date string
-  heroImage: { url: string; alt: string }
-  summary: string
-  challenge?: string // RichText, simplified to string for placeholder
-  solution?: string // RichText, simplified to string for placeholder
-  results?: string // RichText, simplified to string for placeholder. Was: results: string
-  servicesRendered: string[] // Slugs of services
+  title: string;
+  slug: string;
+  clientName: string;
+  industry?: string;
+  projectYear?: string | number;
+  status: "draft" | "published" | "archived";
+  publishedDate?: string; // ISO date string
+  heroImage: { url: string; alt: string };
+  summary: string;
+  challenge?: string;
+  solution?: string;
+  results?: string;
+  servicesRendered: string[];
   keyFeatures?: Array<{
-    featureTitle: string
-    featureDescription: string
-    featureIcon?: string // e.g., Lucide icon name
-  }>
+    featureTitle: string;
+    featureDescription: string;
+    featureIcon?: string;
+  }>;
   metrics?: Array<{
-    metricLabel: string
-    metricValue: string
-    metricChange?: string
-    metricDescription?: string
-  }>
+    metricLabel: string;
+    metricValue: string;
+    metricChange?: string;
+    metricDescription?: string;
+  }>;
   testimonial?: {
-    quote: string
-    authorName: string
-    authorTitle?: string
-    authorImage?: { url: string; alt: string }
-  }
+    quote: string;
+    authorName: string;
+    authorTitle?: string;
+    authorImage?: { url: string; alt: string };
+  };
   galleryImages?: Array<{
-    image: { url: string; alt: string }
-    caption?: string
-  }>
-  tags?: string[] // Slugs or names of tags
+    image: { url: string; alt: string };
+    caption?: string;
+  }>;
+  tags?: string[];
   callToAction?: {
-    ctaLabel: string
-    ctaUrl: string
-    ctaType: 'internal' | 'external'
-    ctaVariant?: 'primary' | 'secondary'
-  }
-  showcaseVideos?: Array<{  // Updated for Mux
-    muxPlaybackId: string // Changed from url to muxPlaybackId
-    title?: string
-    thumbnailUrl?: string
-    order: number
-    description?: string
-  }>
-  metaCategory: string; // New field for top-level category
-  subCategory: string; // Renamed from 'category' for specific sub-category filtering
+    ctaLabel: string;
+    ctaUrl: string;
+    ctaType: "internal" | "external";
+    ctaVariant?: "primary" | "secondary";
+  };
+  showcaseVideos?: Array<{
+    muxPlaybackId: string;
+    title?: string;
+    thumbnailUrl?: string;
+    order: number;
+    description?: string;
+  }>;
+  metaCategory: string;
+  subCategory: string;
 }
 
+export const glassHouseVolunteerDay: PortfolioItem = {
+  /* ──────────────────────────
+     Required fields
+  ────────────────────────── */
+  title: "Glass House Realty × Rebuilding Together Volunteer Day",
+  slug: "glass-house-rebuilding-dayton",
+  clientName: "Glass House Realty Group",
+  status: "published",
+  summary:
+    "Recap film capturing Glass House Realty agents and community volunteers teaming up with Rebuilding Together Dayton to beautify a caregiver's home through painting, landscaping, and a healthy dose of springtime goodwill.",
+
+  heroImage: {
+    url: "/images/portfolio/glass-house-rebuilding-dayton/hero.jpg",
+    alt: "Volunteer crew painting a Dayton home's exterior during spring cleanup",
+  },
+
+  servicesRendered: [
+    "video-production",
+    "event-coverage",
+    "editing",
+    "color-grading",
+  ],
+
+  metaCategory: "media",
+  subCategory: "brand-storytelling",
+
+  /* ──────────────────────────
+     Strongly-recommended extras
+  ────────────────────────── */
+  industry: "Real Estate",
+  projectYear: 2025,
+  publishedDate: "2025-06-01T00:00:00Z",
+
+  challenge:
+    "Showcase Glass House Realty's commitment to community service by telling a genuine, people-focused story—without scripted narration or a commercial feel.",
+  solution:
+    "We embedded with the volunteer crew for a single-day shoot, filming handheld interviews, gimbal B-roll, and time-lapses of the exterior transformation. Natural-light color grading and upbeat pacing kept the piece authentic and uplifting.",
+  // Results can be filled in once social / listing metrics are available
+  results:
+    "Video deployed across Facebook and Instagram; early engagement drove inquiries from additional volunteers (metrics pending).",
+
+  keyFeatures: [
+    {
+      featureTitle: "On-location Interviews",
+      featureDescription:
+        "Heartfelt sound bites from realtors, volunteers, and Rebuilding Together staff.",
+    },
+    {
+      featureTitle: "Before-and-After Visuals",
+      featureDescription:
+        "Quick match-cuts highlight the property's curb-appeal transformation.",
+    },
+    {
+      featureTitle: "Same-Day Edit Teaser",
+      featureDescription:
+        "A 30-second reel delivered that evening to spur next-day social buzz.",
+    },
+  ],
+
+  testimonial: {
+    quote:
+      "My favorite part was the volunteers actually wanting to go out and buy flowers for the homeowners. They were really excited to help out and give back and put their own special touch on it.",
+    authorName: "Lauren",
+    authorTitle: "Project Manager, Rebuilding Together Dayton",
+  },
+
+  galleryImages: [
+    {
+      image: {
+        url: "/images/portfolio/glass-house-rebuilding-dayton/gallery-01.jpg",
+        alt: "Volunteers planting flowers",
+      },
+      caption: "Adding pops of color with fresh annuals",
+    },
+    {
+      image: {
+        url: "/images/portfolio/glass-house-rebuilding-dayton/gallery-02.jpg",
+        alt: "Realtor painting trim",
+      },
+      caption: "Fresh coat for the porch trim",
+    },
+    {
+      image: {
+        url: "/images/portfolio/glass-house-rebuilding-dayton/gallery-03.jpg",
+        alt: "Team group photo",
+      },
+      caption: "Glass House Realty crew & homeowners",
+    },
+  ],
+
+  tags: ["community", "volunteer", "realtor", "dayton"],
+
+  callToAction: {
+    ctaLabel: "Volunteer with Rebuilding Together Dayton",
+    ctaUrl: "https://rebuildingtogetherdayton.org/volunteer",
+    ctaType: "external",
+    ctaVariant: "primary",
+  },
+
+  showcaseVideos: [
+    {
+      muxPlaybackId: "CG6pijG02K02AOgKiKx6uZ9DqD7gKQNZH01xlOGaXdvS2E",
+      order: 1,
+      title: "Full Recap Video",
+      description: "2-minute highlight film",
+    },
+  ],
+};
+
+// lib/placeholder-data/portfolio-items.ts
+export const cookingWithMissyBourbonSalmon: PortfolioItem = {
+  /* ──────────────────────────
+     Required fields
+  ────────────────────────── */
+  title: "Cooking with Missy – Bourbon-Glazed Salmon",
+  slug: "cooking-with-missy-bourbon-glazed-salmon",
+  clientName: "Cooking with Missy",
+  status: "published",
+  summary:
+    "In this upbeat recipe episode, Missy shows step-by-step how to make her favorite bourbon-glazed salmon using Stephen Curry’s Gentleman's Cut bourbon for a sweet, tangy kick.",
+
+  heroImage: {
+    url: "/images/portfolio/cooking-with-missy-bourbon-salmon/hero.jpg", // TODO replace with hosted frame-grab
+    alt: "Missy brushing bourbon glaze onto sizzling salmon fillets",
+  },
+
+  servicesRendered: [
+    "video-production",
+    "food-styling",
+    "editing",
+    "color-grading",
+  ],
+
+  metaCategory: "media",
+  subCategory: "social-media-content",
+
+  /* ──────────────────────────
+     Strongly-recommended extras
+  ────────────────────────── */
+  industry: "Food & Beverage",
+  projectYear: 2025,
+  publishedDate: "2025-06-01T00:00:00Z",
+
+  challenge:
+    "Create an engaging, easy-to-follow cooking segment that highlights both the recipe and the featured bourbon without feeling like an ad.",
+  solution:
+    "Shot a single-camera kitchen setup with close-up insert shots of each step. Natural dialogue, quick jump-cuts, and macro B-roll of the glaze keep the pacing lively while product mentions stay organic.",
+  // Add concrete numbers once available
+  results:
+    "Episode published to YouTube Shorts, Instagram Reels, and TikTok; early engagement surpassed channel averages (metrics pending).",
+
+  keyFeatures: [
+    {
+      featureTitle: "Product Integration",
+      featureDescription:
+        "Gentleman's Cut bourbon called out naturally during the glazing step.",
+    },
+    {
+      featureTitle: "Step-Count Seasoning Tips",
+      featureDescription:
+        "Missy shares her unique pepper-shake 'count' method for consistent flavor.",
+    },
+    {
+      featureTitle: "Kitchen-Ready Length",
+      featureDescription:
+        "Kept under 3 minutes so viewers can follow along in real time.",
+    },
+  ],
+
+  galleryImages: [
+    {
+      image: {
+        url: "/images/portfolio/cooking-with-missy-bourbon-salmon/gallery-01.jpg",
+        alt: "Four salmon fillets patted dry on parchment",
+      },
+      caption: "Prepping and pat-drying the salmon",
+    },
+    {
+      image: {
+        url: "/images/portfolio/cooking-with-missy-bourbon-salmon/gallery-02.jpg",
+        alt: "Close-up of bourbon glaze bubbling in saucepan",
+      },
+      caption: "Bourbon glaze coming to temperature",
+    },
+    {
+      image: {
+        url: "/images/portfolio/cooking-with-missy-bourbon-salmon/gallery-03.jpg",
+        alt: "Finished salmon plated with glaze drizzle",
+      },
+      caption: "Final plated presentation",
+    },
+  ],
+
+  tags: ["recipe", "bourbon", "salmon", "home-cooking"],
+
+  callToAction: {
+    ctaLabel: "Watch the Full Recipe",
+    ctaUrl: "https://youtube.com/@cookingwithmissy",
+    ctaType: "external",
+    ctaVariant: "primary",
+  },
+
+  showcaseVideos: [
+    {
+      muxPlaybackId: "placeholder-cooking-missy-bourbon-salmon", // placeholder until video uploaded
+      order: 1,
+      title: "Full Episode",
+      description: "3-minute bourbon-glazed salmon tutorial",
+    },
+  ],
+};
+
 export const allPortfolioItems: PortfolioItem[] = [
-  {
-    title: "Project Alpha (Debug: All Tabs)",
-    slug: "project-alpha",
-    clientName: "Innovatech Solutions",
-    industry: "VR/AR Development",
-    projectYear: 2023,
-    status: "published",
-    publishedDate: "2023-11-01T00:00:00Z",
-    heroImage: { url: "https://media.giphy.com/media/3oEduXqfCv6iR65zGM/giphy.gif", alt: "VR Tech GIF" },
-    summary: "A groundbreaking VR training platform for surgical procedures, enhancing realism and skill acquisition.",
-    challenge: "Traditional surgical training methods are expensive, time-consuming, and lack realistic haptic feedback. Innovatech needed a scalable and immersive solution.",
-    solution: "We developed a high-fidelity VR simulation with custom haptic controllers, replicating the tactile sensations of surgery. The platform includes a comprehensive curriculum and performance analytics.",
-    results: "Reduced training costs by 40%, improved surgical skill proficiency by 25% based on standardized tests, and received overwhelmingly positive feedback from trainees and instructors.",
-    servicesRendered: ["vr-ar-development", "custom-software-development", "ui-ux-design"],
-    keyFeatures: [
-      { featureTitle: "Realistic Haptic Feedback", featureDescription: "Custom controllers simulate surgical tool interaction." },
-      { featureTitle: "Comprehensive Analytics", featureDescription: "Detailed performance tracking for trainees." }
-    ],
-    tags: ["VR", "Medical Training", "Simulation"],
-    metaCategory: "all-projects", // Placeholder
-    subCategory: "all-projects" // Placeholder
-  },
-  {
-    title: "Project Beta (Debug: No Solution Tab)",
-    slug: "project-beta",
-    clientName: "FutureGadget Labs",
-    industry: "Artificial Intelligence",
-    projectYear: 2024,
-    status: "published",
-    publishedDate: "2024-01-20T00:00:00Z",
-    heroImage: { url: "https://media.giphy.com/media/l3vR8HnO1LhP900tW/giphy.gif", alt: "AI Thinking GIF" },
-    summary: "An AI-powered personal assistant app designed to learn user habits and proactively manage schedules and tasks.",
-    challenge: "Existing personal assistant apps lack true proactivity and deep personalization. The goal was to create an AI that genuinely anticipates user needs.",
-    results: "Achieved a 90% accuracy in predicting user needs after a two-week learning period. Beta users reported a 30% increase in daily productivity.",
-    servicesRendered: ["ai-ml-solutions", "mobile-app-development"],
-    tags: ["AI", "Productivity", "Mobile App"],
-    metaCategory: "all-projects", // Placeholder
-    subCategory: "all-projects" // Placeholder
-  },
-  {
-    title: "Project Gamma (Debug: No Results Tab)",
-    slug: "project-gamma",
-    clientName: "EcoPlanet Initiatives",
-    industry: "Environmental Tech",
-    projectYear: 2023,
-    status: "published",
-    publishedDate: "2023-07-05T00:00:00Z",
-    heroImage: { url: "https://media.giphy.com/media/3oKIPEqD8XJ8NGmdP2/giphy.gif", alt: "Green Tech GIF" },
-    summary: "A global platform connecting volunteers with environmental projects, featuring a dynamic mapping and impact tracking system.",
-    challenge: "Environmental organizations struggled to reach and coordinate volunteers effectively. A centralized platform was needed to bridge this gap.",
-    solution: "We designed and developed a web platform with interactive maps, project listings, volunteer management tools, and real-time impact reporting.",
-    servicesRendered: ["web-development", "data-visualization", "cloud-solutions"],
-    tags: ["Environment", "Non-profit", "Web Platform"],
-    metaCategory: "all-projects", // Placeholder
-    subCategory: "all-projects" // Placeholder
-  },
-  {
-    title: "Project Delta (Debug: Only Challenge Tab)",
-    slug: "project-delta",
-    clientName: "CyberSecure Corp",
-    industry: "Cybersecurity",
-    projectYear: 2024,
-    status: "published",
-    publishedDate: "2024-04-15T00:00:00Z",
-    heroImage: { url: "https://media.giphy.com/media/10nZNevH2qVTQA/giphy.gif", alt: "Cybersecurity Matrix GIF" },
-    summary: "Development of a next-generation threat intelligence platform with predictive analytics.",
-    challenge: "The rapidly evolving landscape of cyber threats requires a proactive and intelligent system to identify and mitigate risks before they impact organizations.",
-    servicesRendered: ["ai-ml-solutions", "custom-software-development"],
-    keyFeatures: [
-      { featureTitle: "Predictive Threat Modeling", featureDescription: "AI algorithms analyze global threat data to predict potential attacks." },
-      { featureTitle: "Real-time Alerting", featureDescription: "Instant notifications for critical security events." },
-    ],
-    tags: ["Cybersecurity", "AI", "Platform"],
-    callToAction: { ctaType: "external", ctaLabel: "Request a Demo", ctaUrl: "/request-demo?project=delta" },
-    metaCategory: "all-projects",
-    subCategory: "all-projects"
-  },
-  {
-    title: "Project Epsilon (Debug: No Challenge, Solution, or Results)",
-    slug: "project-epsilon",
-    clientName: "QuantumLeap Computing",
-    industry: "Quantum Computing",
-    projectYear: "Upcoming",
-    status: "published",
-    publishedDate: "2024-05-01T00:00:00Z",
-    heroImage: { url: "https://media.giphy.com/media/xUPGчимtU5bF6x91m/giphy.gif", alt: "Quantum Physics GIF" },
-    summary: "Exploratory research and framework development for a novel quantum algorithm.",
-    servicesRendered: ["research-development"],
-    tags: ["Quantum Computing", "R&D"],
-    metaCategory: "all-projects", // Placeholder
-    subCategory: "all-projects" // Placeholder
-  },
-  {
-    title: "Project Zeta (Debug: Solution & Results Only)",
-    slug: "project-zeta",
-    clientName: "HealthSync Medical",
-    industry: "Healthcare Technology",
-    projectYear: 2023,
-    status: "published",
-    publishedDate: "2023-10-20T00:00:00Z",
-    heroImage: { url: "https://media.giphy.com/media/3oFzm6et50S2A20xWM/giphy.gif", alt: "Healthcare Tech GIF" },
-    summary: "A platform for secure medical data exchange between hospitals and clinics.",
-    solution: "Leveraging blockchain technology and advanced encryption, we created a HIPAA-compliant data sharing network that ensures patient privacy and data integrity.",
-    results: "Reduced data transfer times by 60% and eliminated 99% of data breach risks associated with previous methods. Adopted by 50+ healthcare providers.",
-    servicesRendered: ["blockchain-development", "custom-software-development", "cloud-solutions"],
-    tags: ["Healthcare", "Blockchain", "Security"],
-    metrics: [
-        { metricLabel: "Data Transfer Time Reduction", metricValue: "60%" },
-        { metricLabel: "Risk Elimination (Breaches)", metricValue: "99%" },
-        { metricLabel: "Provider Adoption", metricValue: "50+" }
-    ],
-    metaCategory: "all-projects", // Placeholder
-    subCategory: "all-projects" // Placeholder
-  },
-  {
-    title: "Project Eta (Debug: Challenge & Solution Only)",
-    slug: "project-eta",
-    clientName: "SmartGrid Energy",
-    industry: "Energy Management",
-    projectYear: 2024,
-    status: "published",
-    publishedDate: "2024-02-10T00:00:00Z",
-    heroImage: { url: "https://media.giphy.com/media/l0HlO1mg802y9L0Hu/giphy.gif", alt: "Smart Energy GIF" },
-    summary: "An IoT system for optimizing energy distribution in urban environments.",
-    challenge: "Inefficient energy distribution in large cities leads to significant waste and high costs. A smarter grid was needed to balance supply and demand dynamically.",
-    solution: "We developed an IoT network of sensors and AI-driven control units that monitor energy consumption in real-time and adjust distribution patterns to optimize efficiency and reduce load on the grid.",
-    servicesRendered: ["iot-solutions", "ai-ml-solutions", "cloud-solutions"],
-    tags: ["Energy", "IoT", "Smart City"],
-    keyFeatures: [
-        { featureTitle: "Real-Time Monitoring", featureDescription: "Live data streams from thousands of sensors across the city." },
-        { featureTitle: "AI-Powered Optimization", featureDescription: "Machine learning models predict demand and optimize distribution." }
-    ],
-    metaCategory: "all-projects", // Placeholder
-    subCategory: "all-projects" // Placeholder
-  },
-  {
-    title: "Project Theta (Debug: Videos Only)",
-    slug: "project-theta",
-    clientName: "ViralVids Co.",
-    industry: "Digital Media",
-    projectYear: 2024,
-    status: "published",
-    publishedDate: "2024-06-01T00:00:00Z",
-    heroImage: { url: "https://media.giphy.com/media/3o7TKz6e9PrQnN4D28/giphy.gif", alt: "Video Reel GIF" },
-    summary: "A showcase of compelling video content, demonstrating storytelling through motion pictures. This project primarily features a collection of videos.",
-    servicesRendered: ["video-production", "content-marketing"],
-    tags: ["Video Production", "Short Film", "Brand Video"],
-    showcaseVideos: [
-      {
-        muxPlaybackId: "placeholderMuxIdViral1",
-        title: "The Art of Motion - Showcase Reel",
-        order: 1,
-        description: "A dynamic reel highlighting our best video work.",
-        thumbnailUrl: "/placeholder-images/video-thumb1.jpg"
-      },
-      {
-        muxPlaybackId: "placeholderMuxIdViral2",
-        title: "Client Success Story: TechSpark",
-        order: 2,
-        description: "A compelling testimonial video for TechSpark.",
-        thumbnailUrl: "/placeholder-images/video-thumb2.jpg"
-      }
-    ],
-    metaCategory: "all-projects", // Placeholder
-    subCategory: "all-projects" // Placeholder
-  },
-  {
-    title: "Galactic Archives Holo-Library",
-    slug: "galactic-archives-holo-library",
-    clientName: "Galactic Archives",
-    industry: "Historical Research",
-    projectYear: "2023",
-    status: "published",
-    publishedDate: "2023-08-01T10:00:00Z",
-    heroImage: { url: "https://media.giphy.com/media/3oEduEoy1Lz98wzQkM/giphy.gif", alt: "Space Library GIF" },
-    summary: "A digital archive of historical artifacts and cultural relics from across the galaxy.",
-    challenge: "Galactic Archives faced the challenge of preserving and digitizing a vast collection of historical artifacts and cultural relics. They needed a scalable and secure platform to manage and access this vast collection.",
-    solution: "We developed a digital archive platform that integrates advanced search algorithms, 3D reconstruction technology, and secure access controls. The platform allows users to explore and interact with artifacts in a virtual environment, providing a rich and immersive experience.",
-    results: "The platform successfully digitized and preserved over 100,000 artifacts, making them accessible to researchers and enthusiasts worldwide. The platform also facilitated a 50% increase in visitor engagement and a 30% increase in donations.",
-    servicesRendered: ["web-development", "data-visualization", "cloud-solutions"],
-    keyFeatures: [
-      { featureTitle: "Advanced Search Algorithms", featureDescription: "Utilizes machine learning to enhance search capabilities and accuracy." },
-      { featureTitle: "3D Reconstruction Technology", featureDescription: "Reconstructs artifacts in 3D for immersive experiences." },
-      { featureTitle: "Secure Access Controls", featureDescription: "Ensures the integrity and security of sensitive data." }
-    ],
-    metrics: [
-      { metricLabel: "Artifact Digitization", metricValue: "+100,000" },
-      { metricLabel: "Visitor Engagement", metricValue: "+50%" },
-      { metricLabel: "Donation Increase", metricValue: "+30%" },
-    ],
-    testimonial: {
-      quote: "Moons Out Media's digital solutions have been instrumental in our mission to preserve and share the rich history of the galaxy. Their expertise in cloud architecture and data visualization has transformed our archive into a powerful tool for education and research.",
-      authorName: "Dr. Thalia Starlight",
-      authorTitle: "Director, Galactic Archives"
-    },
-    galleryImages: [
-      { image: { url: "https://via.placeholder.com/800x600?text=Galactic+Archives+Still+1", alt: "Inside the Galactic Archives" }, caption: "The holographic library in action." },
-      { image: { url: "https://via.placeholder.com/800x600?text=Galactic+Archives+Still+2", alt: "Digital archive of historical artifacts" }, caption: "The digital archive in action." },
-    ],
-    tags: ["Historical Research", "Digital Archive", "Cultural Preservation", "3D Reconstruction"],
-    callToAction: {
-      ctaLabel: "Visit the Galactic Archives",
-      ctaUrl: "https://galacticarchives.com",
-      ctaType: "external"
-    },
-    showcaseVideos: [
-      {
-        muxPlaybackId: "placeholderMuxIdGalacticArchivesTrailer", // Placeholder Mux Playback ID
-        title: "Galactic Archives - Trailer",
-        order: 1,
-        description: "Official trailer for the Galactic Archives digital archive."
-      },
-      {
-        muxPlaybackId: "placeholderMuxIdGalacticArchivesBTS", // Placeholder Mux Playback ID
-        title: "Behind the Scenes: Galactic Archives",
-        order: 2,
-        description: "A quick look at the making of our digital archive."
-      }
-    ],
-    metaCategory: "creative-narrative-driven", // Placeholder - PLEASE UPDATE
-    subCategory: "all-creative-narrative-driven", // Placeholder - PLEASE UPDATE
-  },
-  {
-    title: "EcoTech Innovations: Igniting Brand Awareness with Documentary Storytelling",
-    slug: "ecotech-innovations-documentary",
-    clientName: "EcoTech Innovations",
-    industry: "Sustainable Technology",
-    projectYear: "2023",
-    status: "published",
-    publishedDate: "2023-10-15T10:00:00Z",
-    heroImage: { url: "https://media.giphy.com/media/l41lHj9DEejLz99hS/giphy.gif", alt: "Sustainability Animation GIF" },
-    summary: "Discover how our documentary series amplified EcoTech's message, showcasing their green solutions and achieving a 42% surge in brand recognition.",
-    challenge: "EcoTech Innovations, a pioneer in sustainable energy solutions, struggled to convey the real-world impact and technical sophistication of their products to a broader audience. Their existing marketing materials were dense and failed to capture the passion behind their mission, leading to low engagement and difficulty attracting new investors and talent.",
-    solution: "We partnered with EcoTech to produce a compelling three-part documentary series, \"The Future is Green.\" Each episode focused on a different aspect of their technology, featuring interviews with engineers, testimonials from early adopters, and stunning visuals of their solutions in practice. The narrative was crafted to be accessible, inspiring, and emotionally resonant, humanizing the technology and highlighting its positive global impact.",
-    servicesRendered: ["documentary-production", "brand-strategy", "content-marketing"],
-    keyFeatures: [
-      { featureTitle: "Cinematic Visuals", featureDescription: "High-quality, on-location filming to capture the scale and beauty of EcoTech's projects." },
-      { featureTitle: "Expert Interviews", featureDescription: "In-depth conversations with key EcoTech personnel and industry leaders." },
-      { featureTitle: "Global Distribution Strategy", featureDescription: "Targeted outreach to environmental publications and platforms." },
-    ],
-    results: "The documentary series became a cornerstone of EcoTech's communication strategy. It led to a significant increase in media mentions, investor inquiries, and a marked improvement in public perception. The engaging storytelling transformed complex concepts into an inspiring vision for a sustainable future.",
-    metrics: [
-      { metricLabel: "Brand Awareness Increase", metricValue: "+42%" },
-      { metricLabel: "Investor Inquiries", metricValue: "+156%" },
-      { metricLabel: "Website Traffic from Series", metricValue: "+75%" },
-    ],
-    testimonial: {
-      quote: "Moons Out Media didn't just create videos; they told our story with a passion and clarity that resonated deeply. The documentary series has been transformative for our brand.",
-      authorName: "Dr. Alistair Finch",
-      authorTitle: "CEO, EcoTech Innovations",
-      authorImage: { url: "https://via.placeholder.com/100x100?text=AF", alt: "Dr. Alistair Finch" }
-    },
-    galleryImages: [
-      { image: { url: "https://via.placeholder.com/800x600?text=EcoTech+Docu+Still+1", alt: "Behind the scenes of EcoTech documentary" }, caption: "Filming the solar panel installation." },
-      { image: { url: "https://via.placeholder.com/800x600?text=EcoTech+Docu+Still+2", alt: "Interview with EcoTech engineer" }, caption: "Capturing expert insights." },
-    ],
-    tags: ["Documentary", "Sustainability", "Brand Storytelling", "Corporate Video"],
-    callToAction: {
-      ctaLabel: "Watch The Series",
-      ctaUrl: "https://example.com/ecotech-series",
-      ctaType: "external",
-      ctaVariant: "primary"
-    },
-    showcaseVideos: [
-      {
-        muxPlaybackId: "placeholderMuxIdEcoTechTrailer", // Placeholder Mux Playback ID
-        title: "EcoTech Innovations - Series Trailer",
-        order: 1,
-        description: "Official trailer for The Future is Green documentary series."
-      },
-      {
-        muxPlaybackId: "placeholderMuxIdEcoTechBTS", // Placeholder Mux Playback ID
-        title: "Behind the Scenes: EcoTech Solar Fields",
-        order: 2,
-        description: "A quick look at the making of our documentary."
-      }
-    ],
-    metaCategory: "creative-narrative-driven", // Placeholder - PLEASE UPDATE
-    subCategory: "all-creative-narrative-driven", // Placeholder - PLEASE UPDATE
-  },
-  {
-    title: "Urban Fitness: Powering Growth with Authentic Social Campaigns",
-    slug: "urban-fitness-transformation",
-    clientName: "Urban Fitness Co.",
-    industry: "Health & Wellness",
-    projectYear: "2022",
-    status: "published",
-    publishedDate: "2022-11-20T10:00:00Z",
-    heroImage: { url: "https://media.giphy.com/media/l41YvXYq2z00wZ2o0/giphy.gif", alt: "Fitness Workout GIF" },
-    summary: "A targeted social media campaign showcasing real member transformations drove a 73% increase in membership inquiries for Urban Fitness.",
-    challenge: "Urban Fitness Co. offered excellent facilities and trainers but faced stiff competition in a crowded market. Their social media presence was generic and failed to highlight their unique community-focused approach, resulting in stagnant growth and low engagement on their posts.",
-    solution: "We launched the #MyUrbanJourney social media campaign, centered around authentic video and photo stories of real members and their fitness transformations. Content focused on overcoming challenges, building community, and celebrating personal achievements, rather than just before-and-after shots. This was supported by targeted ads and influencer collaborations with local fitness personalities.",
-    servicesRendered: ["social-media-marketing", "video-production", "influencer-marketing"],
-    results: "The campaign significantly boosted Urban Fitness Co.'s online presence and brand perception. Engagement rates soared, and the authentic storytelling resonated with their target audience, leading to a substantial increase in class bookings and membership sign-ups. The campaign also fostered a stronger sense of community among existing members.",
-    metrics: [
-      { metricLabel: "Membership Inquiries", metricValue: "+73%" },
-      { metricLabel: "Social Media Engagement", metricValue: "+215%" },
-      { metricLabel: "Campaign ROI", metricValue: "3.5x" },
-    ],
-    tags: ["Social Media", "Fitness", "Community Building", "Video Marketing"],
-    testimonial: {
-      quote: "The #MyUrbanJourney campaign was a game-changer. Moons Out Media understood our ethos and brought our members' stories to life in a way that felt real and inspiring.",
-      authorName: "Sarah Chen",
-      authorTitle: "Founder, Urban Fitness Co."
-    },
-    showcaseVideos: [
-      {
-        muxPlaybackId: "placeholderMuxIdUrbanFitnessMontage", // Placeholder Mux Playback ID
-        title: "Urban Fitness - Member Transformation Montage",
-        order: 1,
-        description: "See the incredible journeys of Urban Fitness members."
-      }
-    ],
-    metaCategory: "creative-narrative-driven", // Placeholder - PLEASE UPDATE
-    subCategory: "all-creative-narrative-driven", // Placeholder - PLEASE UPDATE
-  },
-  {
-    title: "Artisan Collective: Weaving Narratives for E-commerce Success",
-    slug: "artisan-collective-showcase",
-    clientName: "The Artisan Collective",
-    industry: "Handcrafted Goods & E-commerce",
-    projectYear: "2023",
-    status: "published",
-    publishedDate: "2023-09-05T10:00:00Z",
-    heroImage: { url: "https://media.giphy.com/media/3o7TKtsBMu4kM2mY4U/giphy.gif", alt: "Online Shopping GIF" },
-    summary: "Intimate artisan profiles and a revamped e-commerce visual strategy led to a 94% increase in online sales for The Artisan Collective.",
-    challenge: "The Artisan Collective curated beautiful, high-quality handcrafted goods, but their online store struggled to convey the skill and passion behind each product. Product photography was inconsistent, and the brand story was lost, leading to high cart abandonment rates and difficulty competing with mass-produced alternatives.",
-    solution: "We developed a series of short video profiles for key artisans, showcasing their creative process, inspiration, and dedication. This was complemented by a complete overhaul of their product photography and website visuals, emphasizing a cohesive, aspirational aesthetic. The brand narrative was woven throughout the customer journey, from product pages to email marketing.",
-    servicesRendered: ["brand-storytelling", "e-commerce-strategy", "product-photography", "video-production"],
-    keyFeatures: [
-      { featureTitle: "Artisan Profile Videos", featureDescription: "Short, emotive videos telling the story behind the makers and their craft." },
-      { featureTitle: "Consistent Visual Identity", featureDescription: "High-quality, uniform photography stijl across all products and marketing materials." },
-      { featureTitle: "Narrative-Driven Product Descriptions", featureDescription: "Copy that highlights the uniqueness and story of each item." }
-    ],
-    results: "The new content strategy humanized The Artisan Collective, creating a strong emotional connection with customers. The improved visuals and storytelling significantly enhanced the perceived value of the products, leading to higher conversion rates, increased average order value, and a loyal customer base proud to support artisan craftsmanship.",
-    metrics: [
-      { metricLabel: "E-commerce Sales Growth", metricValue: "+94%" },
-      { metricLabel: "Average Order Value", metricValue: "+35%" },
-      { metricLabel: "Cart Abandonment Rate Reduction", metricValue: "-28%" },
-    ],
-    tags: ["Brand Storytelling", "E-commerce", "Artisan Goods", "Visual Content"],
-    callToAction: {
-      ctaLabel: "Shop The Collection",
-      ctaUrl: "/shop", // Placeholder internal link
-      ctaType: "internal"
-    },
-    metaCategory: "creative-narrative-driven", // Placeholder - PLEASE UPDATE
-    subCategory: "all-creative-narrative-driven", // Placeholder - PLEASE UPDATE
-  },
-  {
-    title: "Custom Web App for Innovate Solutions: Streamlining Complex Workflows",
-    slug: "custom-web-applications",
-    clientName: "Innovate Solutions Ltd.",
-    industry: "Enterprise Software",
-    projectYear: "2024",
-    status: "published",
-    publishedDate: "2024-01-10T10:00:00Z",
-    heroImage: { url: "https://media.giphy.com/media/xTiTnqUxyWbsAXq7Ju/giphy.gif", alt: "Software Interface GIF" },
-    summary: "A bespoke web application built with Next.js and Node.js, designed to automate Innovate Solutions' core operational processes, resulting in a 30% efficiency gain.",
-    challenge: "Innovate Solutions was relying on a patchwork of spreadsheets, email, and outdated legacy software to manage their complex project workflows. This led to inefficiencies, data silos, frequent errors, and an inability to scale their operations effectively. They needed a centralized, modern solution tailored to their specific needs.",
-    solution: "We designed and developed a custom web application from the ground up using Next.js for the frontend and Node.js for the backend API. The application featured role-based access control, a real-time project dashboard, automated reporting, and integration with their existing CRM. The UI/UX was meticulously designed for ease of use, even for non-technical staff.",
-    servicesRendered: ["web-application-development", "ui-ux-design", "api-development", "devops-consulting"],
-    results: "The new web application revolutionized Innovate Solutions' operations. It provided a single source of truth, streamlined communication, and automated many previously manual tasks. This led to a significant reduction in errors, improved project turnaround times, and enabled the company to handle a larger volume of work without increasing headcount.",
-    metrics: [
-      { metricLabel: "Operational Efficiency Gain", metricValue: "+30%" },
-      { metricLabel: "Reduction in Manual Errors", metricValue: "-95%" },
-      { metricLabel: "User Adoption Rate", metricValue: "98% within 3 months" },
-    ],
-    tags: ["Web Development", "SaaS", "Enterprise Solutions", "Next.js", "Node.js"],
-    testimonial: {
-      quote: "The custom application Moons Out Media built for us is more than just software; it's the backbone of our new, more efficient operation. Their technical expertise and understanding of our business needs were exceptional.",
-      authorName: "David Miller",
-      authorTitle: "COO, Innovate Solutions Ltd."
-    },
-    metaCategory: "creative-narrative-driven", // Placeholder - PLEASE UPDATE
-    subCategory: "all-creative-narrative-driven", // Placeholder - PLEASE UPDATE
-  },
-  {
-    title: "AI-Driven Automation for DataCorp: Unlocking Insights & Efficiency",
-    slug: "ai-driven-automation",
-    clientName: "DataCorp Analytics",
-    industry: "Data Analytics & Business Intelligence",
-    projectYear: "2023",
-    status: "published",
-    publishedDate: "2023-11-01T10:00:00Z",
-    heroImage: { url: "https://media.giphy.com/media/3oKIPEsPZOv95fX16M/giphy.gif", alt: "Data Analytics GIF" },
-    summary: "Implemented a custom AI/ML pipeline to automate DataCorp's report generation, reducing processing time by 70% and uncovering new actionable insights.",
-    challenge: "DataCorp Analytics processed vast amounts of client data to generate market intelligence reports. Their existing manual processes were time-consuming, prone to human error, and limited their ability to extract deeper, predictive insights from the data. They needed to scale their analytical capabilities and offer more sophisticated services.",
-    solution: "We developed a tailored AI/ML pipeline that automated data ingestion, cleaning, analysis, and report generation. This involved creating custom machine learning models for trend prediction and anomaly detection. The solution was built using Python, TensorFlow, and integrated with their existing cloud infrastructure, providing a scalable and robust platform.",
-    servicesRendered: ["ai-ml-development", "data-engineering", "cloud-architecture", "automation-solutions"],
-    keyFeatures: [
-      { featureTitle: "Automated Data Processing", featureDescription: "End-to-end automation from data ingestion to report delivery." },
-      { featureTitle: "Predictive Analytics Models", featureDescription: "Custom ML models to forecast market trends and identify opportunities." },
-      { featureTitle: "Scalable Cloud Architecture", featureDescription: "Built on AWS to handle growing data volumes and processing needs." }
-    ],
-    results: "The AI-driven automation solution transformed DataCorp's service delivery. Report generation time was drastically reduced, allowing analysts to focus on higher-value interpretation and client consultation. The new predictive capabilities enabled DataCorp to offer premium services, opening up new revenue streams and enhancing their competitive edge.",
-    metrics: [
-      { metricLabel: "Report Processing Time Reduction", metricValue: "-70%" },
-      { metricLabel: "New Insights Generated", metricValue: "+25% annually" },
-      { metricLabel: "Client Satisfaction (Premium Reports)", metricValue: "95%" },
-    ],
-    testimonial: {
-      quote: "Moons Out Media's AI expertise helped us leapfrog our competition. The automation solution is not just efficient; it's a strategic asset that unlocks new value from our data.",
-      authorName: "Dr. Emily Carter",
-      authorTitle: "Chief Data Scientist, DataCorp Analytics"
-    },
-    metaCategory: "creative-narrative-driven", // Placeholder - PLEASE UPDATE
-    subCategory: "all-creative-narrative-driven", // Placeholder - PLEASE UPDATE
-  }
-] 
+  glassHouseVolunteerDay,
+  cookingWithMissyBourbonSalmon,
+];
