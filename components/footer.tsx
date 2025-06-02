@@ -59,7 +59,6 @@ export default function Footer() {
               <li className="text-gray-300">
                 Dayton, Ohio, USA
               </li>
-              <li className="text-gray-300">+1 (937) 451-0042</li>
               <li className="text-gray-300">team@moonsoutmedia.com</li>
             </ul>
           </div>
