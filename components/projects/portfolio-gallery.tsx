@@ -1,10 +1,11 @@
 "use client"
 
 import { useState, useEffect, useMemo } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { allPortfolioItems, type PortfolioItem } from "@/lib/placeholder-data/portfolio-items"
 import { PortfolioItemCard } from "@/components/projects/portfolio-item-card"
+import { MasonryGrid } from "@/components/ui/masonry-grid"
 
 interface PortfolioGalleryProps {
   selectedMetaCategoryId: string;
@@ -71,14 +72,11 @@ export default function PortfolioGallery({
     <motion.div
       className="w-full"
     >
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-4 md:mt-6">
-        <AnimatePresence>
-          {displayedItems.map((item, index) => (
-            <PortfolioItemCard key={item.slug} item={item} index={index} />
-          ))}
-        </AnimatePresence>
-      </div>
+      <MasonryGrid className="mt-4 md:mt-6">
+        {displayedItems.map((item, index) => (
+          <PortfolioItemCard key={item.slug} item={item} index={index} />
+        ))}
+      </MasonryGrid>
 
       {filteredItems.length === 0 && selectedMetaCategoryId !== "all-projects" && (
         <div className="text-center py-12">
