@@ -20,14 +20,17 @@ export function PortfolioItemCard({ item, index }: PortfolioItemCardProps) {
   const isTall = item.orientation === "tall"
   const [imageError, setImageError] = useState(false)
   
-  // Calculate padding-based aspect ratio
+  // Calculate padding-based aspect ratio - more generous for content
   const aspectPadding = isTall ? "177.78%" : // 9:16
-                       isPortrait ? "75%" : // 4:3
+                       isPortrait ? "85%" : // 5:4 (taller than 4:3)
                        isSquare ? "100%" : // 1:1
-                       "56.25%" // 16:9 (landscape/video)
+                       "110%" // Much taller for landscape cards with lots of content
   
   // Dynamic padding based on card height
   const contentPadding = isTall ? "p-8 pb-10" : "p-6 pb-8"
+  
+  // Dynamic line clamping based on card height
+  const summaryClamp = isTall ? "line-clamp-4" : "line-clamp-3"
   
   return (
     <Link href={`/portfolio/${item.slug}`} className="block h-full group" aria-label={`View details for ${item.title}`}>
@@ -55,7 +58,7 @@ export function PortfolioItemCard({ item, index }: PortfolioItemCardProps) {
           )}
           
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/20" />
           
           {/* Content Overlay */}
           <div className={cn("absolute inset-0 flex flex-col justify-end", contentPadding)}>
@@ -65,7 +68,7 @@ export function PortfolioItemCard({ item, index }: PortfolioItemCardProps) {
             
             <p className="text-body-sm text-cyberpunk-pink mb-3">Client: {item.clientName}</p>
 
-            <p className="text-gray-300 text-body-sm leading-relaxed line-clamp-2 mb-4">
+            <p className={cn("text-gray-300 text-body-sm leading-relaxed mb-4", summaryClamp)}>
               {item.summary}
             </p>
 
