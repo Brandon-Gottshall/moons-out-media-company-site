@@ -147,7 +147,7 @@ export const glassHouseVolunteerDay: PortfolioItem = {
 
   callToAction: {
     ctaLabel: "Volunteer with Rebuilding Together Dayton",
-    ctaUrl: "https://rebuildingtogetherdayton.org/volunteer",
+    ctaUrl: "https://www.rtdayton.org/volunteer",
     ctaType: "external",
     ctaVariant: "primary",
   },

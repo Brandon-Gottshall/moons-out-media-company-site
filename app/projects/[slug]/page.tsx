@@ -210,6 +210,10 @@ export default function PortfolioItemPage({
           <div className="z-30 mx-auto py-8 w-full max-w-4xl px-4 md:px-8">
             {primaryVideo?.muxPlaybackId ? (
               <div className={`relative w-full ${currentItem.orientation === 'portrait' || currentItem.orientation === 'tall' ? 'max-w-sm' : 'max-w-4xl'} mx-auto ${heroAspectClass} ${heroAspectClass === 'aspect-video' ? 'min-h-[400px]' : ''} overflow-hidden rounded-lg bg-black`}>
+                {/* Debug: Show what orientation we're using */}
+                <div className="absolute top-2 left-2 text-xs text-white bg-red-600/70 px-2 py-1 rounded z-10">
+                  HERO: {currentItem.orientation} → {heroAspectClass}
+                </div>
                 <MuxPlayer
                   playerInitTime={playerInitTime}
                   streamType="on-demand"
@@ -218,8 +222,8 @@ export default function PortfolioItemPage({
                   muted
                   maxResolution="1080p"
                   minResolution="1080p"
-                  className="absolute inset-0 w-full h-full"
-                  style={{ width: '100%', height: '100%' }}
+                  className="absolute inset-0 w-full h-1/3"
+                  style={{ width: '100%' }}
                   poster={currentItem.heroImage?.url || ""}
                   accentColor="#00CCFF"
                   storyboardSrc=""
@@ -468,22 +472,17 @@ export default function PortfolioItemPage({
                         {validShowcaseVideos.map((video, index) => (
                           <div
                             key={video.muxPlaybackId || index}
-                            className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg overflow-hidden shadow-lg"
-                          >
-                            {video.title && (
-                              <h3 className="text-heading-md font-subheading p-4 text-white bg-black/30">
-                                {video.title}
-                              </h3>
-                            )}
-                            <div className={`relative w-full ${currentItem.orientation === 'portrait' || currentItem.orientation === 'tall' ? 'max-w-sm mx-auto' : 'max-w-4xl'} ${getAspectClass(currentItem.orientation)} ${getAspectClass(currentItem.orientation) === 'aspect-video' ? 'min-h-[400px]' : ''} bg-black`}>
+                            className="bg-black/60 backdrop-blur-sm border border-gray-800/50 rounded-lg overflow-hidden shadow-lg max-w-fit"
+                          > 
+                            <div className="relative mx-auto bg-black rounded-lg overflow-hidden" style={{ maxWidth: '400px'}}>
                               <MuxPlayer
                                 playerInitTime={playerInitTime}
                                 streamType="on-demand"
                                 playbackId={video.muxPlaybackId}
                                 maxResolution="1080p"
                                 minResolution="1080p"
-                                className="absolute inset-0 w-full h-full"
-                                style={{ width: '100%', height: '100%' }}
+                                className="w-full h-auto"
+                                style={{ objectFit: 'contain' }}
                                 title={video.title || currentItem.title}
                                 accentColor="#00CCFF"
                                 poster={video.thumbnailUrl || currentItem.heroImage?.url || ""}
