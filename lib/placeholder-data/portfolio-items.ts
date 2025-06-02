@@ -217,9 +217,9 @@ export const cookingWithMissyBourbonSalmon: PortfolioItem = {
         "Missy shares her unique pepper-shake 'count' method for consistent flavor.",
     },
     {
-      featureTitle: "Kitchen-Ready Length",
+      featureTitle: "30 Second Ad",
       featureDescription:
-        "Kept under 3 minutes so viewers can follow along in real time.",
+        "Perfect for TV, Social Media, and Digital Mediums.",
     },
   ],
 
