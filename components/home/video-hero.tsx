@@ -242,7 +242,7 @@ export function VideoHero() {
           </h1>
           <div className="bg-black/40 backdrop-blur-sm p-3 vh-short:p-2 sm:p-4 md:p-6 rounded-lg border border-cyberpunk-blue/20 max-w-lg sm:max-w-xl md:max-w-2xl mx-auto mb-4 vh-short:mb-3 sm:mb-6 md:mb-8">
             <p className=" vh-short:text-body-sm sm:text-body-lg md:text-heading-md lg:text-heading-md text-gray-200 leading-relaxed">
-            At Moon Out Media, we transform your unique story into compelling video content that builds trust and drives measurable growth. Our targeted ad strategies connect you directly with your ideal audience, turning views into valuable leads and, ultimately, sales.
+            At Moons Out Media, we transform your unique story into compelling video content that builds trust and drives measurable growth. Our targeted ad strategies connect you directly with your ideal audience, turning views into valuable leads and, ultimately, sales.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
