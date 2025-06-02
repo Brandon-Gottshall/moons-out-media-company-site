@@ -106,11 +106,11 @@ export default function PortfolioItemPage({
       `}</style>
       <div className="min-h-screen bg-cyberpunk-background">
         {/* Hero Section */}
-        <section className="relative min-h-screen overflow-hidden flex items-start justify-center">
+        <section className="relative min-h-screen overflow-hidden flex items-center justify-center">
           <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-cyberpunk-background z-10"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,90,205,0.15)_0%,transparent_70%)] z-20"></div>
 
-          <div className="container px-4 relative z-30 w-1/2 mt-48">
+          <div className="container pl-24 pr-4 relative z-30 w-1/2">
             <Link
               href="/portfolio"
               className="inline-flex items-center text-white hover:text-cyberpunk-blue transition-colors mb-6 group"
@@ -184,7 +184,7 @@ export default function PortfolioItemPage({
           <div className="z-30 mx-auto py-8 w-full max-w-4xl px-4 md:px-8">
             {primaryVideo?.muxPlaybackId ? (
               currentItem.orientation === "portrait" ? (
-                <div className="aspect-[9/16] relative overflow-hidden rounded-lg bg-black">
+                <div className="w-full max-w-md mx-auto h-[30dvh] relative overflow-hidden rounded-lg bg-black">
                   <MuxPlayer
                     playerInitTime={playerInitTime}
                     streamType="on-demand"
@@ -220,7 +220,7 @@ export default function PortfolioItemPage({
               )
             ) : currentItem.heroImage ? (
               currentItem.orientation === "portrait" ? (
-                <div className="aspect-[9/16] relative overflow-hidden rounded-lg bg-black">
+                <div className="w-full max-w-md mx-auto h-[30dvh] relative overflow-hidden rounded-lg bg-black">
                   <Image
                     src={currentItem.heroImage.url}
                     alt={currentItem.heroImage.alt}
@@ -473,21 +473,39 @@ export default function PortfolioItemPage({
                                 {video.title}
                               </h3>
                             )}
-                            <div className="aspect-video bg-black">
-                              <MuxPlayer
-                                playerInitTime={playerInitTime}
-                                streamType="on-demand"
-                                playbackId={video.muxPlaybackId}
-                                maxResolution="1080p"
-                                minResolution="1080p"
-                                className="w-full h-full"
-                                title={video.title || currentItem.title}
-                                accentColor="#00CCFF"
-                                poster={video.thumbnailUrl || currentItem.heroImage?.url || ""}
-                                storyboardSrc=""
-                                envKey={process.env.NEXT_PUBLIC_MUX_DATA_ENV_KEY}
-                              />
-                            </div>
+                            {currentItem.orientation === "portrait" ? (
+                              <div className="w-full max-w-md mx-auto aspect-[9/16] max-h-[70vh] bg-black">
+                                <MuxPlayer
+                                  playerInitTime={playerInitTime}
+                                  streamType="on-demand"
+                                  playbackId={video.muxPlaybackId}
+                                  maxResolution="1080p"
+                                  minResolution="1080p"
+                                  className="w-full h-full"
+                                  title={video.title || currentItem.title}
+                                  accentColor="#00CCFF"
+                                  poster={video.thumbnailUrl || currentItem.heroImage?.url || ""}
+                                  storyboardSrc=""
+                                  envKey={process.env.NEXT_PUBLIC_MUX_DATA_ENV_KEY}
+                                />
+                              </div>
+                            ) : (
+                              <div className="aspect-video bg-black">
+                                <MuxPlayer
+                                  playerInitTime={playerInitTime}
+                                  streamType="on-demand"
+                                  playbackId={video.muxPlaybackId}
+                                  maxResolution="1080p"
+                                  minResolution="1080p"
+                                  className="w-full h-full"
+                                  title={video.title || currentItem.title}
+                                  accentColor="#00CCFF"
+                                  poster={video.thumbnailUrl || currentItem.heroImage?.url || ""}
+                                  storyboardSrc=""
+                                  envKey={process.env.NEXT_PUBLIC_MUX_DATA_ENV_KEY}
+                                />
+                              </div>
+                            )}
                           </div>
                         ))}
                       </div>
