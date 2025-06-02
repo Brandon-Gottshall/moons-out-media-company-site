@@ -255,7 +255,7 @@ export const cookingWithMissyBourbonSalmon: PortfolioItem = {
 
   showcaseVideos: [
     {
-      muxPlaybackId: "placeholder-cooking-missy-bourbon-salmon", // placeholder until video uploaded
+      muxPlaybackId: "rU01i200kEowDcTrk8giILnBGvx02zLGjHML00qjmLTi02600", // placeholder until video uploaded
       order: 1,
       title: "Full Episode",
       description: "3-minute bourbon-glazed salmon tutorial",
