@@ -136,7 +136,7 @@ export default function PortfolioItemPage({
           <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-cyberpunk-background z-10"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,90,205,0.15)_0%,transparent_70%)] z-20"></div>
 
-          <div className="container pl-24 pr-4 relative z-30 w-1/2">
+          <div className="relative z-30 py-8 w-1/2 pl-24 pr-4">
             <Link
               href="/portfolio"
               className="inline-flex items-center text-white hover:text-cyberpunk-blue transition-colors mb-6 group"
@@ -207,13 +207,9 @@ export default function PortfolioItemPage({
           </div>
 
           {/* Hero Video / Image Container - Orientation-aware aspect ratio from first paint */}
-          <div className="z-30 mx-auto py-8 w-full max-w-4xl px-4 md:px-8">
+          <div className="relative z-30 py-8 w-1/2 pl-4 pr-24">
             {primaryVideo?.muxPlaybackId ? (
               <div className={`relative w-full ${currentItem.orientation === 'portrait' || currentItem.orientation === 'tall' ? 'max-w-sm' : 'max-w-4xl'} mx-auto ${heroAspectClass} ${heroAspectClass === 'aspect-video' ? 'min-h-[400px]' : ''} overflow-hidden rounded-lg bg-black`}>
-                {/* Debug: Show what orientation we're using */}
-                <div className="absolute top-2 left-2 text-xs text-white bg-red-600/70 px-2 py-1 rounded z-10">
-                  HERO: {currentItem.orientation} → {heroAspectClass}
-                </div>
                 <MuxPlayer
                   playerInitTime={playerInitTime}
                   streamType="on-demand"
@@ -439,7 +435,8 @@ export default function PortfolioItemPage({
                           {currentItem.galleryImages.map((galleryItem, index) => (
                             <div
                               key={index}
-                              className="group relative overflow-hidden rounded-lg border border-gray-800/50 aspect-video"
+                              className="group relative w-full overflow-hidden rounded-lg border border-gray-800/50 aspect-video"
+                              style={{ aspectRatio: '16/9' }}
                             >
                               <Image
                                 src={galleryItem.image.url}

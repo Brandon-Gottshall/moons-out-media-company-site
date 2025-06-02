@@ -271,7 +271,83 @@ export const cookingWithMissyBourbonSalmon: PortfolioItem = {
   ],
 };
 
+// lib/placeholder-data/portfolio-items.ts
+export const gmcDenaliUltimateShowcase: PortfolioItem = {
+  /* ──────────────────────────
+     Required
+  ────────────────────────── */
+  title:       "GMC Sierra Denali Ultimate — Interior & Exterior Showcase",
+  slug:        "gmc-denali-ultimate-showcase",
+  clientName:  "Arbogast Buick GMC",
+  status:      "published",
+  summary:
+    "One-minute spec film that pairs low-angle slider moves and macro close-ups to spotlight the 2023 GMC Sierra Denali Ultimate’s bold grille, 22-inch wheels, and Alpine Umber interior.",
+  heroImage: {
+    url: "/images/portfolio/GMC Denali Ultimate/Denali.webp",
+    alt: "Front three-quarter view of a GMC Sierra Denali Ultimate parked on grass"
+  },
+  servicesRendered: [
+    "video-production",
+    "automotive-visuals",
+    "editing",
+    "color-grading"
+  ],
+  metaCategory: "video",
+  subCategory:  "automotive",
+
+  /* ──────────────────────────
+     Strongly-recommended extras
+  ────────────────────────── */
+  industry:      "Automotive",
+  projectYear:   2025,
+  publishedDate: "2025-06-02T00:00:00Z",
+
+  challenge:
+    "Convey premium craftsmanship inside a full-size pickup while retaining the Denali’s rugged identity, all within a single-location daylight shoot and without voice-over.",
+  solution:
+    "Natural-light exteriors, handheld macro passes on chrome and leather, and interior gimbal shots through the panoramic sunroof. A warm, contrast-rich grade accentuates Alpine Umber leather and the exclusive ‘Ultimate’ wood grain.",
+
+    keyFeatures: [
+      { featureTitle: "Signature Denali Chrome Grille", featureDescription: "Low‑angle slider shot emphasizes the multi‑dimensional chrome grille and LED headlamps." },
+      { featureTitle: "22‑inch Ultra‑Bright Wheels",  featureDescription: "Tight orbit highlights the intricate spoke design and GMC center cap." },
+      { featureTitle: "Alpine Umber Leather Cabin",    featureDescription: "Macro inserts capture the two‑tone leather, contrast stitching, and laser‑etched topographical accents." },
+      { featureTitle: "Dual‑Pane Panoramic Sunroof",    featureDescription: "Interior dolly move reveals the full‑length glass roof flooding the cabin with natural light." },
+      { featureTitle: "13.4” Infotainment & Digital Cluster", featureDescription: "Rear‑seat perspective shows the expansive center screen and customizable driver display." }
+    ],
+  
+
+  galleryImages: [
+    {
+      image: { url: "/images/portfolio/GMC Denali Ultimate/Denali Still 1.webp", alt: "GMC Sierra Denali Ultimate front grille and wheel" }, // Still 2.4.1
+      caption: "Denali chrome and 22-inch wheels"
+    },
+    {
+      image: { url: "/images/portfolio/GMC Denali Ultimate/Denali Still 2.webp", alt: "Driver seat and console with open door" },             // Still 2.5.1
+      caption: "Alpine Umber driver cockpit"
+    },
+    {
+      image: { url: "/images/portfolio/GMC Denali Ultimate/Denali Still 3.webp", alt: "Close-up of door panel with Ultimate badge" },        // Still 2.6.1
+      caption: "Ultimate-trim door detail"
+    },
+    {
+      image: { url: "/images/portfolio/GMC Denali Ultimate/Denali Still 4.webp", alt: "Rear-seat view toward dash and infotainment" },       // Still 2.7.1
+      caption: "Full-cabin perspective"
+    }
+  ],
+
+  tags: ["denali", "luxury-truck", "automotive", "spec-film"],
+
+  callToAction: {
+    ctaLabel:  "View Sierra Denali Inventory",
+    ctaUrl:    "https://www.davearbogast.com/new-vehicles/sierra-1500/?trim=Denali+Ultimate", // TODO verify
+    ctaType:   "external",
+    ctaVariant:"primary"
+  }
+};
+
+
 export const allPortfolioItems: PortfolioItem[] = [
   glassHouseVolunteerDay,
   cookingWithMissyBourbonSalmon,
+  gmcDenaliUltimateShowcase,
 ];
