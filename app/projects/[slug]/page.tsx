@@ -184,33 +184,33 @@ export default function PortfolioItemPage({
           </motion.div>
         </motion.div>
 
-        {/* Video/Image Container - Outside backdrop for proper z-indexing */}
-        <div className="self-center flex justify-center items-center z-30 h-full">
+        {/* Hero Video / Image Container */}
+        <div className="z-30 mx-auto py-8 w-full max-w-4xl px-4 md:px-8">
           {primaryVideo?.muxPlaybackId ? (
-            <div className="w-2/3 h-1/3 flex items-center justify-center p-4 md:p-8">
+            <div className="aspect-video bg-black rounded-lg overflow-hidden">
               <MuxPlayer
                 streamType="on-demand"
                 playbackId={primaryVideo.muxPlaybackId}
-                autoPlay="muted"
-                className="w-full h-auto"
+                autoPlay
+                muted
+                className="w-full h-full"
                 poster={currentItem.heroImage?.url || ""}
                 accentColor="#00CCFF"
                 storyboardSrc=""
+                envKey={process.env.NEXT_PUBLIC_MUX_DATA_ENV_KEY}
               />
             </div>
-          ) : (
-            currentItem.heroImage && (
-              <div className="relative w-full h-full max-h-[calc(100%-4rem)]">
-                <Image
-                  src={currentItem.heroImage.url}
-                  alt={currentItem.heroImage.alt}
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
-            )
-          )}
+          ) : currentItem.heroImage ? (
+            <div className="aspect-video bg-black rounded-lg overflow-hidden">
+              <Image
+                src={currentItem.heroImage.url}
+                alt={currentItem.heroImage.alt}
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          ) : null}
         </div>
       </section>
 
@@ -485,6 +485,7 @@ export default function PortfolioItemPage({
                                 ""
                               }
                               storyboardSrc=""
+                              envKey={process.env.NEXT_PUBLIC_MUX_DATA_ENV_KEY}
                             />
                           </div>
                         </div>

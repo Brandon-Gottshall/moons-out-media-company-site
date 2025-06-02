@@ -49,6 +49,7 @@ export interface PortfolioItem {
   }>;
   metaCategory: string;
   subCategory: string;
+  orientation?: "portrait" | "landscape" | "square" | "tall";
 }
 
 export const glassHouseVolunteerDay: PortfolioItem = {
@@ -63,7 +64,7 @@ export const glassHouseVolunteerDay: PortfolioItem = {
     "Recap film capturing Glass House Realty agents and community volunteers teaming up with Rebuilding Together Dayton to beautify a caregiver's home through painting, landscaping, and a healthy dose of springtime goodwill.",
 
   heroImage: {
-    url: "/images/portfolio/glass-house-rebuilding-dayton/hero.jpg",
+    url: "/images/portfolio/Glass House Shortened.webp",
     alt: "Volunteer crew painting a Dayton home's exterior during spring cleanup",
   },
 
@@ -76,6 +77,7 @@ export const glassHouseVolunteerDay: PortfolioItem = {
 
   metaCategory: "media",
   subCategory: "brand-storytelling",
+  orientation: "tall",
 
   /* ──────────────────────────
      Strongly-recommended extras
@@ -170,10 +172,10 @@ export const cookingWithMissyBourbonSalmon: PortfolioItem = {
   clientName: "Cooking with Missy",
   status: "published",
   summary:
-    "In this upbeat recipe episode, Missy shows step-by-step how to make her favorite bourbon-glazed salmon using Stephen Curry’s Gentleman's Cut bourbon for a sweet, tangy kick.",
+    "In this upbeat recipe episode, Missy shows step-by-step how to make her favorite bourbon-glazed salmon using Stephen Curry's Gentleman's Cut bourbon for a sweet, tangy kick.",
 
   heroImage: {
-    url: "/images/portfolio/cooking-with-missy-bourbon-salmon/hero.jpg", // TODO replace with hosted frame-grab
+    url: "/images/portfolio/Missy.webp", 
     alt: "Missy brushing bourbon glaze onto sizzling salmon fillets",
   },
 
@@ -186,6 +188,7 @@ export const cookingWithMissyBourbonSalmon: PortfolioItem = {
 
   metaCategory: "media",
   subCategory: "social-media-content",
+  orientation: "landscape",
 
   /* ──────────────────────────
      Strongly-recommended extras
