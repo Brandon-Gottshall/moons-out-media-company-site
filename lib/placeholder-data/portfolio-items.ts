@@ -175,7 +175,7 @@ export const cookingWithMissyBourbonSalmon: PortfolioItem = {
     "In this upbeat recipe episode, Missy shows step-by-step how to make her favorite bourbon-glazed salmon using Stephen Curry's Gentleman's Cut bourbon for a sweet, tangy kick.",
 
   heroImage: {
-    url: "/images/portfolio/Missy.webp", 
+    url: "/images/portfolio/Missy/Missy.webp", 
     alt: "Missy brushing bourbon glaze onto sizzling salmon fillets",
   },
 
@@ -207,6 +207,11 @@ export const cookingWithMissyBourbonSalmon: PortfolioItem = {
 
   keyFeatures: [
     {
+      featureTitle: "Celebrity-Adjacent Chef",
+      featureDescription:
+        "Missy is actually John Legend's sister.",
+    },
+    {
       featureTitle: "Product Integration",
       featureDescription:
         "Gentleman's Cut bourbon called out naturally during the glazing step.",
@@ -226,35 +231,35 @@ export const cookingWithMissyBourbonSalmon: PortfolioItem = {
   galleryImages: [
     {
       image: {
-        url: "/images/portfolio/cooking-with-missy-bourbon-salmon/gallery-01.jpg",
-        alt: "Four salmon fillets patted dry on parchment",
+        url: "/images/portfolio/Missy/Missy Still 1.webp",
+        alt: "Woman gesturing beside a pot on a stovetop in a modern kitchen.",
       },
-      caption: "Prepping and pat-drying the salmon",
+      caption: "Missy explains her cooking process while standing at the stove, with potted plants and a bottle of bourbon visible behind her.",
     },
     {
       image: {
-        url: "/images/portfolio/cooking-with-missy-bourbon-salmon/gallery-02.jpg",
-        alt: "Close-up of bourbon glaze bubbling in saucepan",
+        url: "/images/portfolio/Missy/Missy Still 2.webp ",
+        alt: "Woman taking a bite of salmon from a plate in a kitchen.",
       },
-      caption: "Bourbon glaze coming to temperature",
+      caption: "Missy samples her bourbon-glazed salmon and roasted vegetables at the countertop, bourbon bottle on display in the background.",
     },
     {
       image: {
-        url: "/images/portfolio/cooking-with-missy-bourbon-salmon/gallery-03.jpg",
-        alt: "Finished salmon plated with glaze drizzle",
+        url: "/images/portfolio/Missy/Missy Still 3.webp",
+        alt: "Woman gesturing with hands in a kitchen setting.",
       },
-      caption: "Final plated presentation",
+      caption: "Missy describes her recipe steps, speaking animatedly in front of a bronze-tone backsplash and potted window plants.",
+    },
+    {
+      image: {
+        url: "/images/portfolio/Missy/Missy Still 4.webp",
+        alt: "Hand blotting salmon fillets on a parchment-lined baking tray.",
+      },
+      caption: "Missy uses a paper towel to pat dry raw salmon fillets before baking.",
     },
   ],
 
   tags: ["recipe", "bourbon", "salmon", "home-cooking"],
-
-  callToAction: {
-    ctaLabel: "Watch the Full Recipe",
-    ctaUrl: "https://youtube.com/@cookingwithmissy",
-    ctaType: "external",
-    ctaVariant: "primary",
-  },
 
   showcaseVideos: [
     {
