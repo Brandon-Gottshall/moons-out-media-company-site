@@ -26,6 +26,9 @@ export function PortfolioItemCard({ item, index }: PortfolioItemCardProps) {
                        isSquare ? "100%" : // 1:1
                        "56.25%" // 16:9 (landscape/video)
   
+  // Dynamic padding based on card height
+  const contentPadding = isTall ? "p-8 pb-10" : "p-6 pb-8"
+  
   return (
     <Link href={`/portfolio/${item.slug}`} className="block h-full group" aria-label={`View details for ${item.title}`}>
       <motion.div
@@ -55,8 +58,8 @@ export function PortfolioItemCard({ item, index }: PortfolioItemCardProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
           
           {/* Content Overlay */}
-          <div className="absolute inset-0 p-5 flex flex-col justify-end">
-            <h3 className="text-body-lg md:text-heading-md font-heading text-white mb-2 leading-tight group-hover:text-cyberpunk-blue transition-colors">
+          <div className={cn("absolute inset-0 flex flex-col justify-end", contentPadding)}>
+            <h3 className="text-body-lg md:text-heading-md font-heading text-white mb-2 leading-tight break-words group-hover:text-cyberpunk-blue transition-colors">
               {item.title}
             </h3>
             

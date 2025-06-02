@@ -345,9 +345,85 @@ export const gmcDenaliUltimateShowcase: PortfolioItem = {
   }
 };
 
+// lib/placeholder-data/portfolio-items.ts
+export const bottomsUpCoffeeSpec: PortfolioItem = {
+  /* ──────────────────────────
+     Required
+  ────────────────────────── */
+  title:       "Bottoms Up Coffee — ASMR Social Spot",
+  slug:        "bottoms-up-coffee-asmr-spot",
+  clientName:  "Bottoms Up Coffee Co-Op (spec)",
+  status:      "published",
+  summary:
+    "A sensory one-minute piece that pairs slow-motion visuals with the gentle noises of café prep, and cotton candy cloud production set to Marek Jakubowicz’s “Another Rainy Day.” Shot for social to spotlight Bottoms Up Coffee’s craft-first vibe.",
+
+  heroImage: {
+    url: "/images/portfolio/Bottoms Up Coffee/Bottoms Up.webp",          // screenshot_009.jpg — exterior
+    alt: "Brick-and-mural façade of Bottoms Up Coffee Co-Op on a cloudy afternoon"
+  },
+
+  servicesRendered: [
+    "video-production",
+    "spec-commercial",
+    "sound-design",
+    "editing",
+    "color-grading"
+  ],
+
+  metaCategory: "video",
+  subCategory:  "food-beverage",
+
+  /* ──────────────────────────
+     Strongly-recommended extras
+  ────────────────────────── */
+  industry:      "Food & Beverage",
+  projectYear:   2019,
+  publishedDate: "2019-05-15T00:00:00Z",
+
+  challenge:
+    "Create an attention-grabbing micro-ad for social feeds without voice-over or text, relying solely on ambient café audio and evocative imagery.",
+  solution:
+    "Captured macro B-roll of beans tumbling, espresso pulling, and the shop’s signature cotton-candy cloud over hot coffee. Layered high-fidelity location audio with the chill instrumental track “Another Rainy Day.” Final deliverable trimmed to 59 s for Instagram.",
+  results:
+    "Uploaded to the shop’s Instagram; the post out-performed their average video reach by 3× and became a pinned highlight.",
+
+  keyFeatures: [
+    { featureTitle: "Bean Pour Macro",        featureDescription: "60 fps overhead shot of freshly roasted beans cascading into the grinder (screenshot_002)." },
+    { featureTitle: "Espresso Extraction",    featureDescription: "Tight lens on the first rich drops hitting a white demitasse (screenshot_003)." },
+    { featureTitle: "Cotton-Candy Cloud",     featureDescription: "Signature sugar puff slowly melts aromatic steam into the cup (screenshots_006-007)." },
+    { featureTitle: "Authentic Café Foley",   featureDescription: "Steam wand hiss, cup clinks, and grinder rumble recorded on-site for ASMR effect." }
+  ],
+
+  galleryImages: [
+    { image: { url: "/images/portfolio/Bottoms Up Coffee/Still 1.webp", alt: "Customer entering teal door of Bottoms Up Coffee" },                caption: "Neighborhood arrival" },
+    { image: { url: "/images/portfolio/Bottoms Up Coffee/Still 2.webp", alt: "Coffee beans pouring into metal grinder" },                       caption: "Fresh-roasted beans" },
+    { image: { url: "/images/portfolio/Bottoms Up Coffee/Still 3.webp", alt: "Close-up of espresso dripping into cup" },                         caption: "Liquid gold" },
+    { image: { url: "/images/portfolio/Bottoms Up Coffee/Still 4.webp", alt: "Barista spinning cotton candy around stick" },                     caption: "Crafting the cloud" },
+    { image: { url: "/images/portfolio/Bottoms Up Coffee/Still 5.webp", alt: "Barista in AC/DC shirt sliding mug across counter" },              caption: "Rock-n-roll service" },
+  ],
+
+  tags: ["coffee", "asmr", "macro-b-roll", "spec-ad"],
+
+  callToAction: {
+    ctaLabel:  "Visit Bottoms Up Coffee",
+    ctaUrl:    "https://www.bottomsupcoffee.com/",    // verify
+    ctaType:   "external",
+    ctaVariant:"primary"
+  },
+
+  showcaseVideos: [
+    {
+      muxPlaybackId: "o3bUN2tHpLk8fcYhEAFtsS8t2xDI02g1ApXCmcSpU2pg",
+      order: 1,
+      title: "60-second ASMR Spot",
+      description: "No dialogue • music by Marek Jakubowicz"
+    }
+  ]
+};
 
 export const allPortfolioItems: PortfolioItem[] = [
   glassHouseVolunteerDay,
   cookingWithMissyBourbonSalmon,
   gmcDenaliUltimateShowcase,
+  bottomsUpCoffeeSpec,
 ];
