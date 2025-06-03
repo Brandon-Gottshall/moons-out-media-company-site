@@ -283,7 +283,7 @@ export const gmcDenaliUltimateShowcase: PortfolioItem = {
   summary:
     "One-minute spec film that pairs low-angle slider moves and macro close-ups to spotlight the 2023 GMC Sierra Denali Ultimate’s bold grille, 22-inch wheels, and Alpine Umber interior.",
   heroImage: {
-    url: "/images/portfolio/GMC Denali Ultimate/Denali.webp",
+    url: "/images/portfolio/GMC Denali Ultimate/denali.webp",
     alt: "Front three-quarter view of a GMC Sierra Denali Ultimate parked on grass"
   },
   servicesRendered: [
