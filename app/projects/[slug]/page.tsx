@@ -132,11 +132,11 @@ export default function PortfolioItemPage({
       `}</style>
       <div className="min-h-screen bg-cyberpunk-background">
         {/* Hero Section */}
-        <section className="relative min-h-screen overflow-hidden flex items-center justify-center">
+        <section className="relative min-h-screen overflow-hidden flex flex-col sm:flex-row items-center justify-center">
           <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-cyberpunk-background z-10"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,90,205,0.15)_0%,transparent_70%)] z-20"></div>
 
-          <div className="relative z-30 py-8 w-1/2 pl-24 pr-4">
+          <div className="relative z-30 py-8 w-full sm:w-1/2 px-4 sm:pl-24 sm:pr-4">
             <Link
               href="/portfolio"
               className="inline-flex items-center text-white hover:text-cyberpunk-blue transition-colors mb-6 group"
@@ -155,7 +155,7 @@ export default function PortfolioItemPage({
                 >
                   {displayCategory}
                 </Badge>
-                <h1 className="text-3xl md:text-5xl lg:text-6xl font-heading mb-4 text-white">
+                <h1 className="text-sm sm:text-3xl md:text-5xl lg:text-6xl font-heading mb-4 text-white">
                   {currentItem.title}
                 </h1>
                 <p className="text-heading-md text-cyberpunk-pink mb-6">
@@ -207,7 +207,7 @@ export default function PortfolioItemPage({
           </div>
 
           {/* Hero Video / Image Container - Orientation-aware aspect ratio from first paint */}
-          <div className="relative z-30 py-8 w-1/2 pl-4 pr-24">
+          <div className="relative z-30 py-8 w-5/6 sm:w-1/2 sm:pl-4 sm:pr-24">
             {primaryVideo?.muxPlaybackId ? (
               <div className={`relative w-full ${currentItem.orientation === 'portrait' || currentItem.orientation === 'tall' ? 'max-w-sm' : 'max-w-4xl'} mx-auto ${heroAspectClass} ${heroAspectClass === 'aspect-video' ? 'min-h-[400px]' : ''} overflow-hidden rounded-lg bg-black`}>
                 <MuxPlayer
