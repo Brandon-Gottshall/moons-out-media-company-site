@@ -384,8 +384,6 @@ export const bottomsUpCoffeeSpec: PortfolioItem = {
     "Create an attention-grabbing micro-ad for social feeds without voice-over or text, relying solely on ambient café audio and evocative imagery.",
   solution:
     "Captured macro B-roll of beans tumbling, espresso pulling, and the shop’s signature cotton-candy cloud over hot coffee. Layered high-fidelity location audio with the chill instrumental track “Another Rainy Day.” Final deliverable trimmed to 59 s for Instagram.",
-  results:
-    "Uploaded to the shop’s Instagram; the post out-performed their average video reach by 3× and became a pinned highlight.",
 
   keyFeatures: [
     { featureTitle: "Bean Pour Macro",        featureDescription: "60 fps overhead shot of freshly roasted beans cascading into the grinder (screenshot_002)." },
@@ -421,9 +419,72 @@ export const bottomsUpCoffeeSpec: PortfolioItem = {
   ]
 };
 
+// lib/placeholder-data/portfolio-items.ts
+export const cadillacCt6vShowcase: PortfolioItem = {
+  /* ──────────────────────────
+     Required
+  ────────────────────────── */
+  title:      "Cadillac CT6-V — Blackwing Showcase",
+  slug:       "cadillac-ct6v-blackwing-showcase",
+  clientName: "Spec • Dave Arbogast Cadillac",
+  status:     "published",
+  summary:
+    "A one-minute spec film that pairs low-angle dolly moves and macro inserts to spotlight the 2020 Cadillac CT6-V’s Blackwing twin-turbo V8, V-Series grille, and carbon-trimmed cabin.",
+
+  heroImage: {
+    url: "/images/portfolio/Caddy Blackwing/Caddy.webp",                 // Still 3.2.1 recommended
+    alt: "Front three-quarter view of a white 2020 Cadillac CT6-V at Arbogast Cadillac"
+  },
+
+  servicesRendered: [
+    "video-production",
+    "automotive-visuals",
+    "editing",
+    "color-grading"
+  ],
+
+  metaCategory: "video",
+  subCategory:  "automotive",
+
+  /* ──────────────────────────
+     Strongly-recommended extras
+  ────────────────────────── */
+  industry:      "Automotive",
+  projectYear:   2025,
+  publishedDate: "2025-06-02T00:00:00Z",
+
+  challenge:
+    "Capture the CT6-V’s performance pedigree while retaining its executive-class elegance — all during a single golden-hour slot on the dealer lot.",
+  solution:
+    "Used a two-person crew: one on a low-slung motorized slider for exterior hero passes, the other on a macro lens for wheel, badge, and Blackwing engine details. Natural-light grade leans warm to accent metallic white paint and carbon interior accents.",
+
+  keyFeatures: [
+    { featureTitle: "Blackwing 4.2L Twin-Turbo V8",  featureDescription: "Engine close-up highlights bespoke intake covers and twin-scroll turbos (Still 3.8.1)." },
+    { featureTitle: "V-Series Mesh Grille",         featureDescription: "Head-on dolly pass shows off the dark mesh and vertical LED DRLs (Still 3.2.1)." },
+    { featureTitle: "20-inch V-Spoke Wheels",       featureDescription: "Tight orbital shot on polished alloys and Brembo calipers (Stills 3.4.1 / 3.5.1)." },
+    { featureTitle: "Carbon-Weave Door Trim",       featureDescription: "Interior insert reveals carbon beltline with contrast stitching (Still 3.7.1)." },
+    { featureTitle: "Driver-Focused Cockpit",       featureDescription: "Shallow-depth look at the leather-wrapped V-badge steering wheel (Still 3.6.1)." }
+  ],
+
+  galleryImages: [
+    { image: { url: "/images/portfolio/Caddy Blackwing/Still 1.webp", alt: "Cadillac CT6-V under tree shade on dealer lot" },          caption: "CT6-V stance" },          // 3.1.1
+    { image: { url: "/images/portfolio/Caddy Blackwing/Still 2.webp", alt: "Head-on shot of Cadillac CT6-V grille and headlights" }, caption: "Signature fascia" },      // 3.2.1
+    { image: { url: "/images/portfolio/Caddy Blackwing/Still 3.webp", alt: "Macro of vertical LED and front wheel" },                caption: "Vertical light blade" },  // 3.3.1
+    { image: { url: "/images/portfolio/Caddy Blackwing/Still 4.webp", alt: "Close-up of V-Series fender badge and wheel" },          caption: "V-Series details" },      // 3.4.1
+    { image: { url: "/images/portfolio/Caddy Blackwing/Still 5.webp", alt: "20-inch V-Series wheel with Michelin Pilot Sport tire" },caption: "Performance rubber" },    // 3.5.1
+    { image: { url: "/images/portfolio/Caddy Blackwing/Still 6.webp", alt: "Leather-wrapped steering wheel with Cadillac crest" },   caption: "Command center" },        // 3.6.1
+    { image: { url: "/images/portfolio/Caddy Blackwing/Still 7.webp", alt: "Rear-door panel with carbon-fiber insert" },             caption: "Carbon interior trim" },  // 3.7.1
+    { image: { url: "/images/portfolio/Caddy Blackwing/Still 8.webp", alt: "Blackwing twin-turbo V8 engine bay" },                  caption: "Blackwing power" }        // 3.8.1
+  ],
+
+  tags: ["ct6-v", "blackwing", "luxury-sedan", "photo-spec"],
+};
+
+
 export const allPortfolioItems: PortfolioItem[] = [
   glassHouseVolunteerDay,
   cookingWithMissyBourbonSalmon,
   gmcDenaliUltimateShowcase,
+  cadillacCt6vShowcase,
   bottomsUpCoffeeSpec,
 ];
