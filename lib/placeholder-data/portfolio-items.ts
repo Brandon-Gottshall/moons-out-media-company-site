@@ -122,21 +122,28 @@ export const glassHouseVolunteerDay: PortfolioItem = {
   galleryImages: [
     {
       image: {
-        url: "/images/portfolio/glass-house-rebuilding-dayton/gallery-01.jpg",
+        url: "/images/portfolio/Glass House/Still 1.webp",
         alt: "Volunteers planting flowers",
       },
       caption: "Adding pops of color with fresh annuals",
     },
     {
       image: {
-        url: "/images/portfolio/glass-house-rebuilding-dayton/gallery-02.jpg",
+        url: "/images/portfolio/Glass House/Still 2.webp",
         alt: "Realtor painting trim",
       },
       caption: "Fresh coat for the porch trim",
     },
     {
       image: {
-        url: "/images/portfolio/glass-house-rebuilding-dayton/gallery-03.jpg",
+        url: "/images/portfolio/Glass House/Still 3.webp",
+        alt: "Team group photo",
+      },
+      caption: "Glass House Realty crew & homeowners",
+    },
+    {
+      image: {
+        url: "/images/portfolio/Glass House/Still 4.webp",
         alt: "Team group photo",
       },
       caption: "Glass House Realty crew & homeowners",
