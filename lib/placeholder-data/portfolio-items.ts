@@ -105,11 +105,6 @@ export const glassHouseVolunteerDay: PortfolioItem = {
       featureDescription:
         "Quick match-cuts highlight the property's curb-appeal transformation.",
     },
-    {
-      featureTitle: "Same-Day Edit Teaser",
-      featureDescription:
-        "A 30-second reel delivered that evening to spur next-day social buzz.",
-    },
   ],
 
   testimonial: {
@@ -396,7 +391,8 @@ export const bottomsUpCoffeeSpec: PortfolioItem = {
     { featureTitle: "Bean Pour Macro",        featureDescription: "60 fps overhead shot of freshly roasted beans cascading into the grinder (screenshot_002)." },
     { featureTitle: "Espresso Extraction",    featureDescription: "Tight lens on the first rich drops hitting a white demitasse (screenshot_003)." },
     { featureTitle: "Cotton-Candy Cloud",     featureDescription: "Signature sugar puff slowly melts aromatic steam into the cup (screenshots_006-007)." },
-    { featureTitle: "Authentic Café Foley",   featureDescription: "Steam wand hiss, cup clinks, and grinder rumble recorded on-site for ASMR effect." }
+    { featureTitle: "Authentic Café Foley",   featureDescription: "Steam wand hiss, cup clinks, and grinder rumble recorded on-site for ASMR effect." },
+    { featureTitle: "Shot and delivered in 6 hours", featureDescription: "The entire project was shot and delivered in 6 hours." }
   ],
 
   galleryImages: [
