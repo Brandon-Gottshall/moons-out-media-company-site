@@ -33,7 +33,7 @@ export function PortfolioItemCard({ item, index }: PortfolioItemCardProps) {
   const summaryClamp = isTall ? "line-clamp-4" : "line-clamp-3"
   
   return (
-    <Link href={`/portfolio/${item.slug}`} className="block h-full group" aria-label={`View details for ${item.title}`}>
+    <Link href={`/projects/${item.slug}`} className="block h-full group" aria-label={`View details for ${item.title}`}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

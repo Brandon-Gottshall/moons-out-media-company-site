@@ -84,6 +84,7 @@ export default function MetaCategorySwiper({
   const swiperContainerRef = useRef<HTMLDivElement>(null); // Ref for the Swiper container
   const [isFitMode, setIsFitMode] = useState(false);
   const [currentTotalSlidesWidth, setCurrentTotalSlidesWidth] = useState(0);
+  const hasIgnoredInitialSlideChangeRef = useRef(false);
 
   const selectedIndex = metaCategories.findIndex(cat => cat.id === selectedMetaCategoryId);
 
@@ -136,6 +137,11 @@ export default function MetaCategorySwiper({
     return () => window.removeEventListener("resize", calculateMode);
   }, [metaCategories, swiperContainerRef.current]); // Add swiperContainerRef.current to dependencies
 
+  useEffect(() => {
+    // Reset for safety if this component remounts.
+    hasIgnoredInitialSlideChangeRef.current = false;
+  }, []);
+
   return (
     <TooltipProvider>
       <div 
@@ -147,6 +153,10 @@ export default function MetaCategorySwiper({
           onSwiper={(swiper) => { swiperRef.current = swiper; }}
           initialSlide={selectedIndex === -1 ? 0 : selectedIndex}
           onSlideChange={(swiper) => {
+            if (!hasIgnoredInitialSlideChangeRef.current) {
+              hasIgnoredInitialSlideChangeRef.current = true;
+              return;
+            }
             if (metaCategories[swiper.activeIndex] && metaCategories[swiper.activeIndex].id !== selectedMetaCategoryId) {
               onMetaCategorySelect(metaCategories[swiper.activeIndex].id);
             }

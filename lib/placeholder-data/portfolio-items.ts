@@ -294,7 +294,7 @@ export const gmcDenaliUltimateShowcase: PortfolioItem = {
     "editing",
     "color-grading"
   ],
-  metaCategory: "video",
+  metaCategory: "media",
   subCategory:  "automotive",
 
   /* ──────────────────────────
@@ -372,7 +372,7 @@ export const bottomsUpCoffeeSpec: PortfolioItem = {
     "color-grading"
   ],
 
-  metaCategory: "video",
+  metaCategory: "media",
   subCategory:  "food-beverage",
 
   /* ──────────────────────────
@@ -446,7 +446,7 @@ export const cadillacCt6vShowcase: PortfolioItem = {
     "color-grading"
   ],
 
-  metaCategory: "video",
+  metaCategory: "media",
   subCategory:  "automotive",
 
   /* ──────────────────────────
