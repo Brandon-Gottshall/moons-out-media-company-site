@@ -159,93 +159,93 @@ export default function Navigation({ logoSlot }: NavigationProps) {
           0%,
           100% {
             opacity: 1;
-            text-shadow: 0 0 5px rgba(0, 204, 255, 0.7);
+            text-shadow: 0 0 5px rgba(var(--cp-blue-rgb), 0.7);
           }
           25% {
             opacity: 0.9;
-            text-shadow: 0 0 4px rgba(0, 204, 255, 0.5);
+            text-shadow: 0 0 4px rgba(var(--cp-blue-rgb), 0.5);
           }
           50% {
             opacity: 1;
-            text-shadow: 0 0 5px rgba(0, 204, 255, 0.7);
+            text-shadow: 0 0 5px rgba(var(--cp-blue-rgb), 0.7);
           }
           75% {
             opacity: 0.92;
-            text-shadow: 0 0 4px rgba(0, 204, 255, 0.6);
+            text-shadow: 0 0 4px rgba(var(--cp-blue-rgb), 0.6);
           }
         }
 
         @keyframes dramaticFlicker {
           0% {
             opacity: 1;
-            box-shadow: 0 0 5px rgba(0, 204, 255, 0.7);
+            box-shadow: 0 0 5px rgba(var(--cp-blue-rgb), 0.7);
           }
           3% {
             opacity: 0.7;
-            box-shadow: 0 0 4px rgba(0, 204, 255, 0.5);
+            box-shadow: 0 0 4px rgba(var(--cp-blue-rgb), 0.5);
           }
           6% {
             opacity: 1;
-            box-shadow: 0 0 6px rgba(0, 204, 255, 0.8);
+            box-shadow: 0 0 6px rgba(var(--cp-blue-rgb), 0.8);
           }
           9% {
             opacity: 0.8;
-            box-shadow: 0 0 4px rgba(0, 204, 255, 0.6);
+            box-shadow: 0 0 4px rgba(var(--cp-blue-rgb), 0.6);
           }
           12% {
             opacity: 1;
-            box-shadow: 0 0 5px rgba(0, 204, 255, 0.7);
+            box-shadow: 0 0 5px rgba(var(--cp-blue-rgb), 0.7);
           }
           20% {
             opacity: 0.9;
-            box-shadow: 0 0 4px rgba(0, 204, 255, 0.6);
+            box-shadow: 0 0 4px rgba(var(--cp-blue-rgb), 0.6);
           }
           23% {
             opacity: 1;
-            box-shadow: 0 0 6px rgba(0, 204, 255, 0.8);
+            box-shadow: 0 0 6px rgba(var(--cp-blue-rgb), 0.8);
           }
           35% {
             opacity: 0.8;
-            box-shadow: 0 0 4px rgba(0, 204, 255, 0.5);
+            box-shadow: 0 0 4px rgba(var(--cp-blue-rgb), 0.5);
           }
           38% {
             opacity: 1;
-            box-shadow: 0 0 5px rgba(0, 204, 255, 0.7);
+            box-shadow: 0 0 5px rgba(var(--cp-blue-rgb), 0.7);
           }
           52% {
             opacity: 0.9;
-            box-shadow: 0 0 4px rgba(0, 204, 255, 0.6);
+            box-shadow: 0 0 4px rgba(var(--cp-blue-rgb), 0.6);
           }
           55% {
             opacity: 1;
-            box-shadow: 0 0 6px rgba(0, 204, 255, 0.8);
+            box-shadow: 0 0 6px rgba(var(--cp-blue-rgb), 0.8);
           }
           70% {
             opacity: 0.8;
-            box-shadow: 0 0 4px rgba(0, 204, 255, 0.5);
+            box-shadow: 0 0 4px rgba(var(--cp-blue-rgb), 0.5);
           }
           73% {
             opacity: 1;
-            box-shadow: 0 0 5px rgba(0, 204, 255, 0.7);
+            box-shadow: 0 0 5px rgba(var(--cp-blue-rgb), 0.7);
           }
           88% {
             opacity: 0.9;
-            box-shadow: 0 0 4px rgba(0, 204, 255, 0.6);
+            box-shadow: 0 0 4px rgba(var(--cp-blue-rgb), 0.6);
           }
           91% {
             opacity: 1;
-            box-shadow: 0 0 6px rgba(0, 204, 255, 0.8);
+            box-shadow: 0 0 6px rgba(var(--cp-blue-rgb), 0.8);
           }
           100% {
             opacity: 1;
-            box-shadow: 0 0 5px rgba(0, 204, 255, 0.7);
+            box-shadow: 0 0 5px rgba(var(--cp-blue-rgb), 0.7);
           }
         }
 
         .active-link {
-          color: #ffffff; /* White text */
-          text-shadow: 0 0 4px rgba(255, 255, 255, 0.6),
-            0 0 7px rgba(255, 255, 255, 0.4), 0 0 10px rgba(255, 255, 255, 0.2); /* Subtle white glow */
+          color: var(--ui-white); /* White text */
+          text-shadow: 0 0 4px rgba(var(--ui-white-rgb), 0.6),
+            0 0 7px rgba(var(--ui-white-rgb), 0.4), 0 0 10px rgba(var(--ui-white-rgb), 0.2); /* Subtle white glow */
           animation: none; /* Remove previous blue text flicker */
         }
 
@@ -256,13 +256,13 @@ export default function Navigation({ logoSlot }: NavigationProps) {
         .microled-highlight {
           background: linear-gradient(
             to right,
-            rgba(0, 204, 255, 0.5) 0%,
-            rgba(0, 204, 255, 0.1) 48%,
-            rgba(255, 105, 180, 0.1) 52%,
-            rgba(255, 105, 180, 0.5) 100%
+            rgba(var(--cp-blue-rgb), 0.5) 0%,
+            rgba(var(--cp-blue-rgb), 0.1) 48%,
+            rgba(var(--cp-pink-rgb), 0.1) 52%,
+            rgba(var(--cp-pink-rgb), 0.5) 100%
           );
           border-radius: 6px;
-          box-shadow: 0 0 5px rgba(255, 105, 180, 0.7);
+          box-shadow: 0 0 5px rgba(var(--cp-pink-rgb), 0.7);
           height: 100%;
           animation: textFlicker 8s infinite, dramaticFlicker 8s infinite;
         }
@@ -277,14 +277,14 @@ export default function Navigation({ logoSlot }: NavigationProps) {
             to right,
             transparent,
             transparent 1px,
-            rgba(255, 255, 255, 0.05) 1px,
-            rgba(255, 255, 255, 0.05) 2px
+            rgba(var(--ui-white-rgb), 0.05) 1px,
+            rgba(var(--ui-white-rgb), 0.05) 2px
           );
           border-radius: 6px;
-          border: 1px solid rgba(0, 204, 255, 0.05);
-          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4),
-            inset 0 -1px 1px rgba(255, 255, 255, 0.05);
-          background-color: rgba(0, 0, 0, 0.2);
+          border: 1px solid rgba(var(--cp-blue-rgb), 0.05);
+          box-shadow: inset 0 1px 2px rgba(var(--ui-black-rgb), 0.4),
+            inset 0 -1px 1px rgba(var(--ui-white-rgb), 0.05);
+          background-color: rgba(var(--ui-black-rgb), 0.2);
           overflow: hidden; /* Add this to contain the highlight */
         }
 
@@ -297,23 +297,23 @@ export default function Navigation({ logoSlot }: NavigationProps) {
           width: 100%;
           background-image: linear-gradient(
               to right,
-              #00ccff,
-              #00ccff 30%,
-              #ff69b4 70%,
-              #ff69b4
+              var(--cp-blue),
+              var(--cp-blue) 30%,
+              var(--cp-pink) 70%,
+              var(--cp-pink)
             ),
             repeating-linear-gradient(
               to right,
               transparent,
               transparent 1px,
-              rgba(255, 255, 255, 0.3) 1px,
-              rgba(255, 255, 255, 0.3) 2px
+              rgba(var(--ui-white-rgb), 0.3) 1px,
+              rgba(var(--ui-white-rgb), 0.3) 2px
             );
           background-blend-mode: overlay;
           border-radius: 6px;
-          border: 1px solid rgba(255, 105, 180, 0.5);
-          box-shadow: 0 0 3px rgba(0, 204, 255, 0.5),
-            inset 0 1px 1px rgba(0, 0, 0, 0.4);
+          border: 1px solid rgba(var(--cp-pink-rgb), 0.5);
+          box-shadow: 0 0 3px rgba(var(--cp-blue-rgb), 0.5),
+            inset 0 1px 1px rgba(var(--ui-black-rgb), 0.4);
           opacity: 0;
           transition: opacity 0.3s ease;
         }
@@ -530,7 +530,7 @@ export default function Navigation({ logoSlot }: NavigationProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="absolute top-full left-0 right-0 bg-black/95 border-t border-cyberpunk-blue/50 md:hidden vh-short:block shadow-[0_5px_20px_rgba(0,204,255,0.15)]"
+            className="absolute top-full left-0 right-0 bg-black/95 border-t border-cyberpunk-blue/50 md:hidden vh-short:block shadow-[0_5px_20px_rgba(var(--cp-blue-rgb), 0.15)]"
           >
             <div className="container mx-auto px-4 py-6">
               <nav className="flex flex-col space-y-4">

@@ -26,13 +26,13 @@ interface ServiceShowcaseProps {
 
 const getServiceRgbaColor = (colorName: string, opacity: number = 1): string => {
   const colors: Record<string, string> = {
-    blue: "0, 204, 255",
-    pink: "255, 105, 180",
-    purple: "106, 90, 205",
-    green: "0, 255, 127",
-    teal: "32, 178, 170",
-    yellow: "255, 223, 0",
-    cyan: "0, 255, 255",
+    blue: "var(--cp-blue-rgb)",
+    pink: "var(--cp-pink-rgb)",
+    purple: "var(--cp-purple-light-rgb)",
+    green: "var(--cp-green-rgb)",
+    teal: "var(--cp-teal-soft-rgb)",
+    yellow: "var(--cp-yellow-rich-rgb)",
+    cyan: "var(--cp-blue-aqua-rgb)",
   }
   return `rgba(${(colors[colorName] || colors.blue)}, ${opacity})`
 }
@@ -319,4 +319,3 @@ export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
     </motion.div>
   )
 }
-

@@ -258,8 +258,8 @@ export default function ContactForm() {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
       whileHover={{
-        boxShadow: "0 0 20px rgba(101, 206, 240, 0.2)",
-        borderColor: "rgba(101, 206, 240, 0.4)",
+        boxShadow: "0 0 20px rgba(var(--ui-cyan-accent-rgb), 0.2)",
+        borderColor: "rgba(var(--ui-cyan-accent-rgb), 0.4)",
       }}
     >
       <h2 className="text-3xl font-heading mb-6 text-white relative inline-block">
@@ -399,7 +399,7 @@ export default function ContactForm() {
             >
               <label className="block text-body-sm font-emphasis text-gray-300 mb-1">Service Interest</label>
               <div className="space-y-2">
-                <div className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+                <div className="flex items-center min-h-[36px] gap-2 hover-bg-white-subtle cursor-pointer">
                   <Checkbox
                     id="help-me-choose"
                     checked={formState.service.includes("unsure") && formState.service.length === 1}
@@ -408,7 +408,7 @@ export default function ContactForm() {
                   />
                   <label htmlFor="help-me-choose" className="text-gray-300">Help me choose</label>
                 </div>
-                <div className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+                <div className="flex items-center min-h-[36px] gap-2 hover-bg-white-subtle cursor-pointer">
                   <Checkbox
                     id="group-both"
                     checked={allChecked}
@@ -419,7 +419,7 @@ export default function ContactForm() {
                 </div>
                 <Collapsible defaultOpen>
                   <CollapsibleTrigger asChild>
-                    <div className="flex justify-between items-center w-full min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+                    <div className="flex justify-between items-center w-full min-h-[36px] gap-2 hover-bg-white-subtle cursor-pointer">
                       <div className="flex items-center gap-2">
                         <Checkbox
                           id="branch-media"
@@ -435,7 +435,7 @@ export default function ContactForm() {
                   </CollapsibleTrigger>
                   <CollapsibleContent className="pl-4 space-y-1">
                     {MASTER_SERVICES.filter(s => s.branch === "media").map(s => (
-                      <div key={s.id} className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+                      <div key={s.id} className="flex items-center min-h-[36px] gap-2 hover-bg-white-subtle cursor-pointer">
                         <Checkbox
                           id={`service-${s.id}`}
                           name="service"
@@ -450,7 +450,7 @@ export default function ContactForm() {
                 </Collapsible>
                 <Collapsible defaultOpen>
                   <CollapsibleTrigger asChild>
-                    <div className="flex justify-between items-center w-full min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+                    <div className="flex justify-between items-center w-full min-h-[36px] gap-2 hover-bg-white-subtle cursor-pointer">
                       <div className="flex items-center gap-2">
                         <Checkbox
                           id="branch-labs"
@@ -466,7 +466,7 @@ export default function ContactForm() {
                   </CollapsibleTrigger>
                   <CollapsibleContent className="pl-4 space-y-1">
                     {MASTER_SERVICES.filter(s => s.branch === "labs").map(s => (
-                      <div key={s.id} className="flex items-center min-h-[36px] gap-2 hover:bg-[#ffffff0b] cursor-pointer">
+                      <div key={s.id} className="flex items-center min-h-[36px] gap-2 hover-bg-white-subtle cursor-pointer">
                         <Checkbox
                           id={`service-${s.id}`}
               name="service"
@@ -549,7 +549,7 @@ export default function ContactForm() {
           disabled={!isFormValid || isSubmitting}
           className={`w-full py-3 px-6 font-heading rounded-md transition-all duration-300 relative overflow-hidden ${
             !isFormValid || isSubmitting
-              ? "bg-black border border-cyberpunk-blue/50 text-white/50 cursor-not-allowed shadow-[0_0_10px_rgba(0,204,255,0.2)]"
+              ? "bg-black border border-cyberpunk-blue/50 text-white/50 cursor-not-allowed shadow-[0_0_10px_rgba(var(--cp-blue-rgb), 0.2)]"
               : "bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple text-white hover:from-cyberpunk-purple hover:to-cyberpunk-blue"
           }`}
           initial={{ opacity: 0, y: 20 }}
@@ -557,7 +557,7 @@ export default function ContactForm() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.8 }}
           whileHover={{
-            boxShadow: "0 0 20px rgba(101, 206, 240, 0.5)",
+            boxShadow: "0 0 20px rgba(var(--ui-cyan-accent-rgb), 0.5)",
           }}
         >
           {isSubmitting ? (
@@ -601,7 +601,7 @@ export default function ContactForm() {
           disabled={!isFormValid || isSubmitting} 
           className={`w-full py-3 px-6 font-heading rounded-md transition-all duration-300 relative overflow-hidden ${
             !isFormValid || isSubmitting
-              ? "bg-black border border-cyberpunk-green/50 text-white/50 cursor-not-allowed shadow-[0_0_10px_rgba(0,255,127,0.2)]"
+              ? "bg-black border border-cyberpunk-green/50 text-white/50 cursor-not-allowed shadow-[0_0_10px_rgba(var(--cp-green-rgb), 0.2)]"
               : "bg-gradient-to-r from-cyberpunk-green to-cyberpunk-teal text-white hover:from-cyberpunk-teal hover:to-cyberpunk-green"
           }`}
           initial={{ opacity: 0, y: 20 }}
@@ -609,7 +609,7 @@ export default function ContactForm() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.9 }} // Slightly later delay
           whileHover={{
-            boxShadow: "0 0 20px rgba(0, 255, 127, 0.5)", // Greenish glow
+            boxShadow: "0 0 20px rgba(var(--cp-green-rgb), 0.5)", // Greenish glow
           }}
         >
           <span className="flex items-center justify-center">
@@ -629,4 +629,3 @@ export default function ContactForm() {
     </motion.div>
   )
 }
-

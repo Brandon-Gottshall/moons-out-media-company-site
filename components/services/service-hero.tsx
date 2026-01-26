@@ -34,8 +34,8 @@ export default function ServiceHero() {
         className="absolute inset-0 z-10 opacity-20"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(0, 204, 255, 0.1) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0, 204, 255, 0.1) 1px, transparent 1px)
+            linear-gradient(to right, rgba(var(--cp-blue-rgb), 0.1) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(var(--cp-blue-rgb), 0.1) 1px, transparent 1px)
           `,
           backgroundSize: "40px 40px",
         }}
@@ -99,7 +99,7 @@ export default function ServiceHero() {
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-cyberpunk-background z-10"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,90,205,0.2)_0%,transparent_70%)] z-20"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(var(--cp-purple-light-rgb),0.2)_0%,transparent_70%)] z-20"></div>
         <Image
           alt="Services Hero Image"
           className="absolute w-full h-full object-cover"
@@ -141,8 +141,8 @@ export default function ServiceHero() {
                 className="absolute inset-0 opacity-0"
                 animate={{
                   background: [
-                    "linear-gradient(90deg, transparent 0%, rgba(0, 204, 255, 0.1) 50%, transparent 100%)",
-                    "linear-gradient(90deg, transparent 0%, rgba(0, 204, 255, 0) 50%, transparent 100%)",
+                    "linear-gradient(90deg, transparent 0%, rgba(var(--cp-blue-rgb), 0.1) 50%, transparent 100%)",
+                    "linear-gradient(90deg, transparent 0%, rgba(var(--cp-blue-rgb), 0) 50%, transparent 100%)",
                   ],
                   opacity: [0, 0.5, 0],
                   left: ["-100%", "100%"],
@@ -237,4 +237,3 @@ function TypewriterEffect() {
     </>
   )
 }
-

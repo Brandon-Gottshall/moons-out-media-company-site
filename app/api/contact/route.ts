@@ -128,14 +128,22 @@ export async function POST(request: NextRequest) {
       <html>
         <head>
           <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
-            h2 { color: #555; }
-            strong { color: #000; }
+            :root {
+              --ui-black: #000;
+              --ui-gray-900: #333;
+              --ui-gray-800: #555;
+              --ui-gray-200: #ddd;
+              --ui-gray-100: #eee;
+              --ui-gray-50: #f9f9f9;
+            }
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: var(--ui-gray-900); }
+            .container { max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid var(--ui-gray-200); border-radius: 5px; }
+            h2 { color: var(--ui-gray-800); }
+            strong { color: var(--ui-black); }
             .field-group { margin-bottom: 15px; }
-            .label { font-weight: bold; color: #555; }
+            .label { font-weight: bold; color: var(--ui-gray-800); }
             .value { margin-left: 5px; }
-            .message-box { padding: 10px; background-color: #f9f9f9; border: 1px solid #eee; border-radius: 3px; }
+            .message-box { padding: 10px; background-color: var(--ui-gray-50); border: 1px solid var(--ui-gray-100); border-radius: 3px; }
           </style>
         </head>
         <body>

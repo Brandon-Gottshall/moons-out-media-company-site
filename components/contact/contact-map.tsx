@@ -12,8 +12,8 @@ export default function ContactMap() {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
       whileHover={{
-        boxShadow: "0 0 20px rgba(101, 206, 240, 0.2)",
-        borderColor: "rgba(101, 206, 240, 0.4)",
+        boxShadow: "0 0 20px rgba(var(--ui-cyan-accent-rgb), 0.2)",
+        borderColor: "rgba(var(--ui-cyan-accent-rgb), 0.4)",
       }}
     >
       <h2 className="text-3xl font-heading mb-6 text-white relative inline-block">
@@ -54,7 +54,7 @@ export default function ContactMap() {
           className="bg-black/60 p-4 rounded-lg border border-gray-700"
           whileHover={{
             scale: 1.02,
-            borderColor: "rgba(101, 206, 240, 0.5)",
+            borderColor: "rgba(var(--ui-cyan-accent-rgb), 0.5)",
           }}
         >
           <div className="flex items-center mb-2">
@@ -70,7 +70,7 @@ export default function ContactMap() {
           className="bg-black/60 p-4 rounded-lg border border-gray-700"
           whileHover={{
             scale: 1.02,
-            borderColor: "rgba(255, 86, 246, 0.5)",
+            borderColor: "rgba(var(--ui-purple-accent-rgb), 0.5)",
           }}
         >
           <div className="flex items-center mb-2">

@@ -75,19 +75,19 @@ export default function CreativeProcess() {
         <div ref={containerRef} className="relative max-w-4xl mx-auto">
           {/* Progress Line */}
           <div className="absolute left-8 md:left-16 top-0 bottom-0 w-1 bg-gray-800 hidden md:block"></div>
-          <motion.div
-            className="absolute left-8 md:left-16 top-0 bottom-0 w-1 hidden md:block"
-            style={{
-              scaleY: progressWidth,
-              transformOrigin: "top",
-              background:
-                "linear-gradient(to bottom, #00ccff, #ff69b4, #00ff7f)",
-            }}
-          ></motion.div>
+              <motion.div
+                className="absolute left-8 md:left-16 top-0 bottom-0 w-1 hidden md:block"
+                style={{
+                  scaleY: progressWidth,
+                  transformOrigin: "top",
+                  background:
+                "linear-gradient(to bottom, var(--cp-blue), var(--cp-pink), var(--cp-green))",
+                }}
+              ></motion.div>
 
           {/* Glowing dot that follows progress */}
           <motion.div
-            className="absolute left-8 md:left-16 w-3 h-3 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)] hidden md:block z-20"
+            className="absolute left-8 md:left-16 w-3 h-3 rounded-full bg-white shadow-[0_0_10px_rgba(var(--ui-white-rgb), 0.8)] hidden md:block z-20"
             style={{
               top: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]),
               translateX: "-50%",
@@ -104,7 +104,7 @@ export default function CreativeProcess() {
                 transition={{ duration: 0.7, delay: index * 0.1 }}
                 className="flex flex-col md:flex-row items-start gap-6 md:gap-10"
               >
-                <div className="flex-shrink-0 w-16 h-16 md:w-32 md:h-32 rounded-full bg-black/80 flex items-center justify-center z-10 shadow-[0_0_15px_rgba(0,255,255,0.2)] relative">
+                <div className="flex-shrink-0 w-16 h-16 md:w-32 md:h-32 rounded-full bg-black/80 flex items-center justify-center z-10 shadow-[0_0_15px_rgba(var(--cp-blue-rgb),0.2)] relative">
                   {/* Pulsing ring effect */}
                   <motion.div
                     className="absolute inset-0 rounded-full border-2 border-cyberpunk-blue opacity-0"
@@ -122,17 +122,17 @@ export default function CreativeProcess() {
                   <span className="text-3xl md:text-5xl">{step.icon}</span>
                 </div>
 
-                <div className="flex-1 bg-black/80 backdrop-blur-sm border border-gray-800 rounded-lg p-6 md:p-8 shadow-[0_4px_12px_rgba(0,0,0,0.2)] relative overflow-hidden group">
+                <div className="flex-1 bg-black/80 backdrop-blur-sm border border-gray-800 rounded-lg p-6 md:p-8 shadow-[0_4px_12px_rgba(var(--ui-black-rgb), 0.2)] relative overflow-hidden group">
                   {/* Animated gradient border on hover */}
                   <motion.div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100"
                     animate={{
-                      background: [
-                        "linear-gradient(90deg, transparent, rgba(0, 204, 255, 0.1), transparent)",
-                        "linear-gradient(90deg, transparent, rgba(255, 105, 180, 0.1), transparent)",
-                        "linear-gradient(90deg, transparent, rgba(0, 255, 127, 0.1), transparent)",
-                        "linear-gradient(90deg, transparent, rgba(0, 204, 255, 0.1), transparent)",
-                      ],
+                    background: [
+                      "linear-gradient(90deg, transparent, rgba(var(--cp-blue-rgb), 0.1), transparent)",
+                      "linear-gradient(90deg, transparent, rgba(var(--cp-pink-rgb), 0.1), transparent)",
+                      "linear-gradient(90deg, transparent, rgba(var(--cp-green-rgb), 0.1), transparent)",
+                      "linear-gradient(90deg, transparent, rgba(var(--cp-blue-rgb), 0.1), transparent)",
+                    ],
                     }}
                     transition={{
                       duration: 4,
@@ -142,7 +142,7 @@ export default function CreativeProcess() {
                   ></motion.div>
 
                   <div className="flex items-center mb-4 md:mb-6 relative z-10">
-                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-cyberpunk-purple flex items-center justify-center mr-4 shadow-[0_0_10px_rgba(106,90,205,0.3)]">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-cyberpunk-purple flex items-center justify-center mr-4 shadow-[0_0_10px_rgba(var(--cp-purple-light-rgb),0.3)]">
                       <span className=" md:text-body-lg text-white font-heading">
                         {step.id}
                       </span>

@@ -256,8 +256,8 @@ export default function ContactFunnel() {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
         whileHover={{
-          boxShadow: "0 0 20px rgba(101, 206, 240, 0.2)",
-          borderColor: "rgba(101, 206, 240, 0.4)",
+          boxShadow: "0 0 20px rgba(var(--ui-cyan-accent-rgb), 0.2)",
+          borderColor: "rgba(var(--ui-cyan-accent-rgb), 0.4)",
         }}
       >
         {/* Progress Indicator */}
@@ -302,7 +302,7 @@ export default function ContactFunnel() {
                             : "bg-black/60 border border-gray-700 hover:border-cyberpunk-blue/50"
                         }`}
                         onClick={() => handleChallengeSelect(challenge)}
-                        whileHover={{ scale: 1.02, boxShadow: "0 0 15px rgba(101, 206, 240, 0.2)" }}
+                        whileHover={{ scale: 1.02, boxShadow: "0 0 15px rgba(var(--ui-cyan-accent-rgb), 0.2)" }}
                         whileTap={{ scale: 0.98 }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}

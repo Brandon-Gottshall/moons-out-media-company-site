@@ -111,7 +111,7 @@ export default function TeamSection() {
               className="group relative overflow-hidden rounded-lg bg-black/40 hover:bg-black/60 transition-all duration-300"
               whileHover={{
                 y: -5,
-                boxShadow: `0 10px 25px -5px rgba(0, 240, 255, 0.2)`,
+                boxShadow: `0 10px 25px -5px rgba(var(--cp-blue-electric-rgb), 0.2)`,
               }}
               onClick={() => setActiveTeamMember(member)}
             >

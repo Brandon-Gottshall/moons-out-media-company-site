@@ -31,8 +31,8 @@ export default function ContactInfo() {
         className="bg-black/40 backdrop-blur-sm p-6 rounded-lg border border-gray-800"
         variants={item}
         whileHover={{
-          boxShadow: "0 0 20px rgba(255, 86, 246, 0.2)",
-          borderColor: "rgba(255, 86, 246, 0.4)",
+          boxShadow: "0 0 20px rgba(var(--ui-purple-accent-rgb), 0.2)",
+          borderColor: "rgba(var(--ui-purple-accent-rgb), 0.4)",
         }}
       >
         <h2 className="text-2xl font-heading mb-6 text-white relative inline-block">
@@ -96,23 +96,23 @@ export default function ContactInfo() {
         >
           <h3 className=" font-subheading text-white mb-4">Connect With Us</h3>
           <div className="flex flex-wrap gap-3">
-            {[
-              { name: "twitter", color: "#1DA1F2" },
-              { name: "facebook", color: "#4267B2" },
-              { name: "instagram", color: "#C13584" },
-              { name: "linkedin", color: "#0077B5" },
-              { name: "youtube", color: "#FF0000" },
-            ].map((social, index) => (
+              {[
+                { name: "twitter", color: "var(--social-twitter)" },
+                { name: "facebook", color: "var(--social-facebook)" },
+                { name: "instagram", color: "var(--social-instagram)" },
+                { name: "linkedin", color: "var(--social-linkedin)" },
+                { name: "youtube", color: "var(--social-youtube)" },
+              ].map((social, index) => (
               <motion.a
                 key={social.name}
                 href={`https://${social.name}.com`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-black/60 border border-gray-700 flex items-center justify-center hover:border-cyberpunk-blue transition-colors duration-300 group"
-                whileHover={{
-                  scale: 1.1,
-                  boxShadow: "0 0 15px rgba(101, 206, 240, 0.5)",
-                }}
+                  whileHover={{
+                    scale: 1.1,
+                    boxShadow: "0 0 15px rgba(var(--ui-cyan-accent-rgb), 0.5)",
+                  }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -128,4 +128,3 @@ export default function ContactInfo() {
     </motion.div>
   )
 }
-

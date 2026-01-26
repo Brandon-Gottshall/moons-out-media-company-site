@@ -230,7 +230,7 @@ export default function StoryWheel() {
               className={cn(
                 "absolute w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden cursor-pointer transition-all duration-300 border-2",
                 activeCategory.id === category.id
-                  ? "border-cyberpunk-blue shadow-[0_0_15px_rgba(0,255,255,0.7)]"
+                  ? "border-cyberpunk-blue shadow-[0_0_15px_rgba(var(--cp-blue-aqua-rgb), 0.7)]"
                   : "border-gray-700",
               )}
               style={{

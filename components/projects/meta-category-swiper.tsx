@@ -65,7 +65,7 @@ function MetaCategoryCard({
             className={`absolute top-2 right-2 w-2.5 h-2.5 rounded-full z-20 bg-${category.color}`}
             // For boxShadow, we need a real color. Using a generic bright glow or define themed shadows in Tailwind.
             // Option 1: Generic bright glow
-            style={{ boxShadow: `0 0 6px #fff` }} 
+            style={{ boxShadow: `0 0 6px var(--ui-white)` }} 
             // Option 2: If you have themed shadow color utilities in Tailwind (e.g., shadow-glow-cyberpunk-blue)
             // you could add them to className, e.g., className={`... shadow-glow-${category.color}`}
           />

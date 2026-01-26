@@ -111,8 +111,8 @@ export default function CreativeServicesPage() {
         className="fixed inset-0 z-40 opacity-5 pointer-events-none"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(0, 204, 255, 0.1) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0, 204, 255, 0.1) 1px, transparent 1px)
+            linear-gradient(to right, rgba(var(--cp-blue-rgb), 0.1) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(var(--cp-blue-rgb), 0.1) 1px, transparent 1px)
           `,
           backgroundSize: "40px 40px",
         }}
@@ -120,7 +120,7 @@ export default function CreativeServicesPage() {
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-visible">
-        <div className="absolute inset-x-0 top-0 bottom-[-50%] bg-[radial-gradient(circle_at_top_center,rgba(0,204,255,0.15)_0%,transparent_50%)]"></div>
+        <div className="absolute inset-x-0 top-0 bottom-[-50%] bg-[radial-gradient(circle_at_top_center,rgba(var(--cp-blue-rgb),0.15)_0%,transparent_50%)]"></div>
         <div className="container mx-auto px-4 text-center">
           <motion.h1 
             className="text-4xl md:text-6xl font-heading mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple"

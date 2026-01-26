@@ -22,13 +22,13 @@ export default function NotFound() {
         </p>
 
         <div className="flex flex-col space-y-4">
-          <Link href="/" className="cyberpunk-button w-full inline-flex items-center justify-center rounded-md text-body-sm font-emphasis transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 px-4 py-2 border border-transparent shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.2),inset_0_1px_1px_0_rgba(0,0,0,0.1)] bg-gradient-to-b from-black/10 to-transparent hover:shadow-[inset_0_1px_3px_0_rgba(0,0,0,0.1)] active:shadow-[inset_0_1px_1px_0_rgba(0,0,0,0.05)]">
+          <Link href="/" className="cyberpunk-button w-full inline-flex items-center justify-center rounded-md text-body-sm font-emphasis transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 px-4 py-2 border border-transparent shadow-[inset_0_2px_4px_0_rgba(var(--ui-black-rgb), 0.2),inset_0_1px_1px_0_rgba(var(--ui-black-rgb), 0.1)] bg-gradient-to-b from-black/10 to-transparent hover:shadow-[inset_0_1px_3px_0_rgba(var(--ui-black-rgb), 0.1)] active:shadow-[inset_0_1px_1px_0_rgba(var(--ui-black-rgb), 0.05)]">
             Return to Home
           </Link>
 
           <Link
             href="/contact"
-            className="border-cyberpunk-pink text-cyberpunk-pink hover:bg-cyberpunk-pink/10 w-full inline-flex items-center justify-center rounded-md text-body-sm font-emphasis transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 px-4 py-2 border border-transparent shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.2),inset_0_1px_1px_0_rgba(0,0,0,0.1)] bg-gradient-to-b from-black/10 to-transparent hover:shadow-[inset_0_1px_3px_0_rgba(0,0,0,0.1)] active:shadow-[inset_0_1px_1px_0_rgba(0,0,0,0.05)]"
+            className="border-cyberpunk-pink text-cyberpunk-pink hover:bg-cyberpunk-pink/10 w-full inline-flex items-center justify-center rounded-md text-body-sm font-emphasis transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 px-4 py-2 border border-transparent shadow-[inset_0_2px_4px_0_rgba(var(--ui-black-rgb), 0.2),inset_0_1px_1px_0_rgba(var(--ui-black-rgb), 0.1)] bg-gradient-to-b from-black/10 to-transparent hover:shadow-[inset_0_1px_3px_0_rgba(var(--ui-black-rgb), 0.1)] active:shadow-[inset_0_1px_1px_0_rgba(var(--ui-black-rgb), 0.05)]"
           >
             Contact Support
           </Link>

@@ -237,14 +237,14 @@ const CARD_GAP_PX = 12        // Corresponds to gap-3
 // Helper function for RGBA colors similar to ServiceShowcase
 const getColorValue = (colorName: string, opacity: number = 1): string => {
   const colors: Record<string, string> = {
-    'cyberpunk-blue': '0, 204, 255',
-    'cyberpunk-pink': '255, 105, 180',
-    'cyberpunk-green': '0, 255, 127',
-    'cyberpunk-purple-light': '106, 90, 205',
-    'cyberpunk-teal': '32, 178, 170',
-    'cyberpunk-orange': '255, 127, 80',
+    'cyberpunk-blue': 'var(--cp-blue-rgb)',
+    'cyberpunk-pink': 'var(--cp-pink-rgb)',
+    'cyberpunk-green': 'var(--cp-green-rgb)',
+    'cyberpunk-purple-light': 'var(--cp-purple-light-rgb)',
+    'cyberpunk-teal': 'var(--cp-teal-rgb)',
+    'cyberpunk-orange': 'var(--cp-orange-rgb)',
   };
-  
+
   return `rgba(${colors[colorName] || colors['cyberpunk-blue']}, ${opacity})`;
 };
 
@@ -322,28 +322,28 @@ export default function PortfolioCategories({
     // Create a more explicit color mapping that always returns a valid value
     const getDotColor = () => {
       switch(category.color) {
-        case 'cyberpunk-blue': return '#00CCFF';
-        case 'cyberpunk-pink': return '#FF69B4';
-        case 'cyberpunk-green': return '#00FF7F';
-        case 'cyberpunk-purple-light': return '#6A5ACD';
-        case 'cyberpunk-teal': return '#20B2AA';
-        case 'cyberpunk-orange': return '#FF7F50';
+        case 'cyberpunk-blue': return 'var(--cp-blue)';
+        case 'cyberpunk-pink': return 'var(--cp-pink)';
+        case 'cyberpunk-green': return 'var(--cp-green)';
+        case 'cyberpunk-purple-light': return 'var(--cp-purple-light)';
+        case 'cyberpunk-teal': return 'var(--cp-teal)';
+        case 'cyberpunk-orange': return 'var(--cp-orange)';
         // Add new colors here if needed, or rely on default
-        case 'cyberpunk-blue-light': return '#7DF9FF'; // Example for 'All'
-        case 'cyberpunk-yellow': return '#FFFF00';
-        case 'cyberpunk-lime': return '#32CD32';
-        case 'cyberpunk-sky': return '#87CEEB';
-        case 'cyberpunk-red': return '#FF0000';
-        case 'cyberpunk-gold': return '#FFD700';
-        case 'cyberpunk-magenta': return '#FF00FF';
-        case 'cyberpunk-gray': return '#808080';
-        case 'cyberpunk-light-green': return '#90EE90';
-        case 'cyberpunk-dark-blue': return '#00008B';
-        case 'cyberpunk-silver': return '#C0C0C0';
-        case 'cyberpunk-forest-green': return '#228B22';
-        case 'cyberpunk-olive': return '#808000';
-        case 'cyberpunk-brown': return '#A52A2A';
-        default: return '#00CCFF'; // Default to blue
+        case 'cyberpunk-blue-light': return 'var(--cp-blue-light)'; // Example for 'All'
+        case 'cyberpunk-yellow': return 'var(--cp-yellow-bright)';
+        case 'cyberpunk-lime': return 'var(--cp-lime)';
+        case 'cyberpunk-sky': return 'var(--cp-sky)';
+        case 'cyberpunk-red': return 'var(--cp-red-bright)';
+        case 'cyberpunk-gold': return 'var(--cp-gold)';
+        case 'cyberpunk-magenta': return 'var(--cp-magenta)';
+        case 'cyberpunk-gray': return 'var(--cp-gray)';
+        case 'cyberpunk-light-green': return 'var(--cp-light-green)';
+        case 'cyberpunk-dark-blue': return 'var(--cp-dark-blue)';
+        case 'cyberpunk-silver': return 'var(--cp-silver)';
+        case 'cyberpunk-forest-green': return 'var(--cp-forest-green)';
+        case 'cyberpunk-olive': return 'var(--cp-olive)';
+        case 'cyberpunk-brown': return 'var(--cp-brown)';
+        default: return 'var(--cp-blue)'; // Default to blue
       }
     };
     
@@ -475,7 +475,7 @@ export default function PortfolioCategories({
             {/* Navigation buttons - Keeping class on one line to prevent string termination errors */}
             <button 
               aria-label="Previous Category"
-              className="portfolio-cat-prev absolute top-1/2 -translate-y-1/2 -left-12 md:-left-14 z-20 p-3 rounded-full bg-cyberpunk-background border-2 border-cyberpunk-blue/50 hover:border-cyberpunk-blue transition-colors shadow-[0_0_10px_rgba(0,204,255,0.3)] text-white group disabled:opacity-50 disabled:pointer-events-none"
+              className="portfolio-cat-prev absolute top-1/2 -translate-y-1/2 -left-12 md:-left-14 z-20 p-3 rounded-full bg-cyberpunk-background border-2 border-cyberpunk-blue/50 hover:border-cyberpunk-blue transition-colors shadow-[0_0_10px_rgba(var(--cp-blue-rgb), 0.3)] text-white group disabled:opacity-50 disabled:pointer-events-none"
               onClick={handlePrevCategory}
               disabled={selectedIndex <= 0}
             >
@@ -483,7 +483,7 @@ export default function PortfolioCategories({
             </button>
             <button 
               aria-label="Next Category"
-              className="portfolio-cat-next absolute top-1/2 -translate-y-1/2 -right-12 md:-right-14 z-20 p-3 rounded-full bg-cyberpunk-background border-2 border-cyberpunk-blue/50 hover:border-cyberpunk-blue transition-colors shadow-[0_0_10px_rgba(0,204,255,0.3)] text-white group disabled:opacity-50 disabled:pointer-events-none"
+              className="portfolio-cat-next absolute top-1/2 -translate-y-1/2 -right-12 md:-right-14 z-20 p-3 rounded-full bg-cyberpunk-background border-2 border-cyberpunk-blue/50 hover:border-cyberpunk-blue transition-colors shadow-[0_0_10px_rgba(var(--cp-blue-rgb), 0.3)] text-white group disabled:opacity-50 disabled:pointer-events-none"
               onClick={handleNextCategory}
               disabled={selectedIndex >= categoriesData.length - 1}
             >
@@ -495,4 +495,3 @@ export default function PortfolioCategories({
     </TooltipProvider>
   );
 }
-

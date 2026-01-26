@@ -149,50 +149,50 @@ const config: Config = {
         },
         // Cyberpunk theme colors
         cyberpunk: {
-          background: "#121212",
+          background: "var(--cp-background)",
           purple: {
-            light: "#6A5ACD",
-            DEFAULT: "#483D8B",
+            light: "var(--cp-purple-light)",
+            DEFAULT: "var(--cp-purple)",
           },
           blue: {
-            light: "#66F0FF",
-            DEFAULT: "#00CCFF",
+            light: "var(--cp-blue-light)",
+            DEFAULT: "var(--cp-blue)",
           },
           pink: {
-            light: "#FF85C1",
-            DEFAULT: "#FF69B4",
+            light: "var(--cp-pink-light)",
+            DEFAULT: "var(--cp-pink)",
           },
           green: {
-            light: "#66FF99",
-            DEFAULT: "#00FF7F",
+            light: "var(--cp-green-light)",
+            DEFAULT: "var(--cp-green)",
           },
           teal: {
-            light: "#5EEAD4",
-            DEFAULT: "#14B8A6",
+            light: "var(--cp-teal-light)",
+            DEFAULT: "var(--cp-teal)",
           },
           yellow: {
-            light: "#FFF382",
-            DEFAULT: "#FACC15",
+            light: "var(--cp-yellow-light)",
+            DEFAULT: "var(--cp-yellow)",
           },
           cyan: {
-            light: "#9DECF9",
-            DEFAULT: "#22D3EE",
+            light: "var(--cp-cyan-light)",
+            DEFAULT: "var(--cp-cyan)",
           },
           orange: {
-            light: "#FFAA71",
-            DEFAULT: "#FF7F50",
+            light: "var(--cp-orange-light)",
+            DEFAULT: "var(--cp-orange)",
           },
           gold: {
-            light: "#FFE066",
-            DEFAULT: "#FFD700",
+            light: "var(--cp-gold-light)",
+            DEFAULT: "var(--cp-gold)",
           },
           silver: {
-            light: "#E0E0E0",
-            DEFAULT: "#C0C0C0",
+            light: "var(--cp-silver-light)",
+            DEFAULT: "var(--cp-silver)",
           },
           red: {
-            light: "#FFBFB7",
-            DEFAULT: "#A6192E",
+            light: "var(--cp-red-light)",
+            DEFAULT: "var(--cp-red)",
           },
         },
       },
@@ -204,11 +204,11 @@ const config: Config = {
       textShadow: {
         // Adding text shadow utilities based on the industry report
         "neon-blue":
-          "0 0 5px #fff, 0 0 10px #fff, 0 0 15px #00CCFF, 0 0 20px #00CCFF, 0 0 25px #00CCFF, 0 0 30px #00CCFF",
+          "0 0 5px var(--ui-white), 0 0 10px var(--ui-white), 0 0 15px var(--cp-blue), 0 0 20px var(--cp-blue), 0 0 25px var(--cp-blue), 0 0 30px var(--cp-blue)",
         "neon-pink":
-          "0 0 5px #fff, 0 0 10px #fff, 0 0 15px #FF69B4, 0 0 20px #FF69B4, 0 0 25px #FF69B4, 0 0 30px #FF69B4",
+          "0 0 5px var(--ui-white), 0 0 10px var(--ui-white), 0 0 15px var(--cp-pink), 0 0 20px var(--cp-pink), 0 0 25px var(--cp-pink), 0 0 30px var(--cp-pink)",
         "neon-green":
-          "0 0 5px #fff, 0 0 10px #fff, 0 0 15px #00FF7F, 0 0 20px #00FF7F, 0 0 25px #00FF7F, 0 0 30px #00FF7F",
+          "0 0 5px var(--ui-white), 0 0 10px var(--ui-white), 0 0 15px var(--cp-green), 0 0 20px var(--cp-green), 0 0 25px var(--cp-green), 0 0 30px var(--cp-green)",
       },
       keyframes: {
         flicker: {
@@ -217,65 +217,65 @@ const config: Config = {
         },
         pulse: {
           "0%": {
-            textShadow: "0 0 5px #fff, 0 0 10px #fff, 0 0 15px #00CCFF, 0 0 20px #00CCFF, 0 0 25px #00CCFF",
+            textShadow: "0 0 5px var(--ui-white), 0 0 10px var(--ui-white), 0 0 15px var(--cp-blue), 0 0 20px var(--cp-blue), 0 0 25px var(--cp-blue)",
           },
           "100%": {
-            textShadow: "0 0 5px #fff, 0 0 10px #fff, 0 0 20px #00CCFF, 0 0 30px #00CCFF, 0 0 40px #00CCFF",
+            textShadow: "0 0 5px var(--ui-white), 0 0 10px var(--ui-white), 0 0 20px var(--cp-blue), 0 0 30px var(--cp-blue), 0 0 40px var(--cp-blue)",
           },
         },
         // Glow animation for the header bottom border / shadow
         "header-glow": {
           "0%": {
-            boxShadow: "0 4px 15px rgba(0, 204, 255, 0)",
-            borderColor: "rgba(0, 204, 255, 0)",
+            boxShadow: "0 4px 15px rgba(var(--cp-blue-rgb), 0)",
+            borderColor: "rgba(var(--cp-blue-rgb), 0)",
           },
           "40%": {
-            boxShadow: "0 4px 15px rgba(0, 204, 255, 0.1)",
-            borderColor: "rgba(0, 204, 255, 0.2)",
+            boxShadow: "0 4px 15px rgba(var(--cp-blue-rgb), 0.1)",
+            borderColor: "rgba(var(--cp-blue-rgb), 0.2)",
           },
           "45%": {
-            boxShadow: "0 4px 15px rgba(0, 204, 255, 0)",
-            borderColor: "rgba(0, 204, 255, 0)",
+            boxShadow: "0 4px 15px rgba(var(--cp-blue-rgb), 0)",
+            borderColor: "rgba(var(--cp-blue-rgb), 0)",
           },
           "50%": {
-            boxShadow: "0 4px 15px rgba(0, 204, 255, 0.15)",
-            borderColor: "rgba(0, 204, 255, 0.3)",
+            boxShadow: "0 4px 15px rgba(var(--cp-blue-rgb), 0.15)",
+            borderColor: "rgba(var(--cp-blue-rgb), 0.3)",
           },
           "55%": {
-            boxShadow: "0 4px 15px rgba(0, 204, 255, 0)",
-            borderColor: "rgba(0, 204, 255, 0)",
+            boxShadow: "0 4px 15px rgba(var(--cp-blue-rgb), 0)",
+            borderColor: "rgba(var(--cp-blue-rgb), 0)",
           },
           "60%": {
-            boxShadow: "0 4px 15px rgba(0, 204, 255, 0.25)",
-            borderColor: "rgba(0, 204, 255, 0.4)",
+            boxShadow: "0 4px 15px rgba(var(--cp-blue-rgb), 0.25)",
+            borderColor: "rgba(var(--cp-blue-rgb), 0.4)",
           },
           "100%": {
-            boxShadow: "0 4px 15px rgba(0, 204, 255, 0.4)",
-            borderColor: "rgba(0, 204, 255, 0.5)",
+            boxShadow: "0 4px 15px rgba(var(--cp-blue-rgb), 0.4)",
+            borderColor: "rgba(var(--cp-blue-rgb), 0.5)",
           },
         },
         // Glow-out animation when scrolling back to top
         "header-glow-out": {
           "0%": {
-            boxShadow: "0 4px 15px rgba(0, 204, 255, 0.4)",
+            boxShadow: "0 4px 15px rgba(var(--cp-blue-rgb), 0.4)",
           },
           "40%": {
-            boxShadow: "0 4px 15px rgba(0, 204, 255, 0.25)",
+            boxShadow: "0 4px 15px rgba(var(--cp-blue-rgb), 0.25)",
           },
           "45%": {
-            boxShadow: "0 4px 15px rgba(0, 204, 255, 0)",
+            boxShadow: "0 4px 15px rgba(var(--cp-blue-rgb), 0)",
           },
           "50%": {
-            boxShadow: "0 4px 15px rgba(0, 204, 255, 0.15)",
+            boxShadow: "0 4px 15px rgba(var(--cp-blue-rgb), 0.15)",
           },
           "55%": {
-            boxShadow: "0 4px 15px rgba(0, 204, 255, 0)",
+            boxShadow: "0 4px 15px rgba(var(--cp-blue-rgb), 0)",
           },
           "60%": {
-            boxShadow: "0 4px 15px rgba(0, 204, 255, 0.1)",
+            boxShadow: "0 4px 15px rgba(var(--cp-blue-rgb), 0.1)",
           },
           "100%": {
-            boxShadow: "0 4px 15px rgba(0, 204, 255, 0)",
+            boxShadow: "0 4px 15px rgba(var(--cp-blue-rgb), 0)",
           },
         },
       },
@@ -291,4 +291,3 @@ const config: Config = {
 }
 
 export default config
-

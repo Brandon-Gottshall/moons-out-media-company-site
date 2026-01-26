@@ -119,7 +119,7 @@ export default function FeaturedProjects() {
             key={project.id}
             className={`p-4 rounded-lg cursor-pointer transition-all duration-300 ${
               activeProject.id === project.id
-                ? "bg-black/70 border border-cyberpunk-blue/50 shadow-[0_0_15px_rgba(0,255,255,0.3)]"
+                ? "bg-black/70 border border-cyberpunk-blue/50 shadow-[0_0_15px_rgba(var(--cp-blue-aqua-rgb), 0.3)]"
                 : "bg-black/40 border border-gray-800 hover:border-cyberpunk-blue/30"
             }`}
             onClick={() => setActiveProject(project)}

@@ -115,10 +115,10 @@ const searchFormVariants: Variants = {
     width: "100vw",
     marginLeft: 0,
     marginRight: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    backgroundColor: "rgba(var(--ui-black-rgb), 0.8)",
     padding: "1.5rem",
     borderRadius: "0.5rem",
-    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.8)",
+    boxShadow: "0 8px 32px rgba(var(--ui-black-rgb), 0.8)",
     scale: 1.02,
     zIndex: 100,
   },
@@ -301,7 +301,7 @@ export default function PortfolioHero({
       <section className="relative pt-32 pb-24 md:pt-48 md:pb-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-cyberpunk-background z-10"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,90,205,0.2)_0%,transparent_70%)] z-20"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(var(--cp-purple-light-rgb),0.2)_0%,transparent_70%)] z-20"></div>
           <Image
             src="/images/portfolio-hero.webp"
             alt="Portfolio Hero Background"
@@ -370,13 +370,13 @@ export default function PortfolioHero({
           className={`transform-gpu absolute inset-0 z-10 ${isSearchActive ? "cursor-pointer" : ""}`}
           initial={{
             background:
-              "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, var(--cyberpunk-background) 100%)",
+              "linear-gradient(to bottom, rgba(var(--ui-black-rgb), 0.7) 0%, rgba(var(--ui-black-rgb), 0.5) 50%, var(--cyberpunk-background) 100%)",
             position: "absolute",
           }}
           animate={{
             background: isSearchActive
-              ? "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.5) 100%)"
-              : "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, var(--cyberpunk-background) 100%)",
+              ? "linear-gradient(to bottom, rgba(var(--ui-black-rgb), 0.6) 0%, rgba(var(--ui-black-rgb), 0.5) 100%)"
+              : "linear-gradient(to bottom, rgba(var(--ui-black-rgb), 0.7) 0%, rgba(var(--ui-black-rgb), 0.5) 50%, var(--cyberpunk-background) 100%)",
             pointerEvents: isSearchActive ? "auto" : "none",
             position: isSearchActive ? "fixed" : "absolute",
             top: 0,
@@ -392,7 +392,7 @@ export default function PortfolioHero({
           }}
           onClick={() => { if (isSearchActive) { clearSearch(); } }}
         ></motion.div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,90,205,0.2)_0%,transparent_70%)] z-20 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(var(--cp-purple-light-rgb),0.2)_0%,transparent_70%)] z-20 pointer-events-none"></div>
       </div>
 
       {/* Content Wrapper - Flexbox for responsiveness */}

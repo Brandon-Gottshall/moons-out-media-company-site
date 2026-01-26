@@ -270,10 +270,10 @@ export default function StoryMatchmaker() {
                           scale: index === currentQuestion ? 1.2 : 1,
                           backgroundColor:
                             index === currentQuestion
-                              ? "rgb(0, 255, 255)"
+                              ? "rgb(var(--cp-blue-aqua-rgb))"
                               : answers[questions[index]?.id]?.length > 0
-                                ? "rgb(0, 255, 127)"
-                                : "rgb(75, 85, 99)",
+                                ? "rgb(var(--cp-green-rgb))"
+                                : "rgb(var(--ui-gray-600-rgb))",
                         }}
                         transition={{ duration: 0.3 }}
                         className={`w-3 h-3 rounded-full mx-1`}

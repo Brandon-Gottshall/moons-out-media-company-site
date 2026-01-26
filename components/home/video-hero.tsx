@@ -195,15 +195,15 @@ export function VideoHero() {
         {/* Gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-cyberpunk-background z-10"></div>
         <div className="absolute inset-x-0 bottom-0 h-[25%] bg-gradient-to-t from-cyberpunk-background via-cyberpunk-background/95 to-transparent z-20"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,90,205,0.2)_0%,transparent_70%)] z-20"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(var(--cp-purple-light-rgb),0.2)_0%,transparent_70%)] z-20"></div>
 
         {/* Cyberpunk grid overlay */}
         <div
           className="absolute inset-0 z-10 opacity-20"
           style={{
             backgroundImage: `
-              linear-gradient(to right, rgba(0, 204, 255, 0.1) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(0, 204, 255, 0.1) 1px, transparent 1px)
+              linear-gradient(to right, rgba(var(--cp-blue-rgb), 0.1) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(var(--cp-blue-rgb), 0.1) 1px, transparent 1px)
             `,
             backgroundSize: "40px 40px",
             transform: `translateY(${parallaxOffset * 0.5}px)`,
@@ -249,7 +249,7 @@ export function VideoHero() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/contact"
-                className="relative overflow-hidden inline-block bg-cyberpunk-purple/90 text-white px-5 py-2.5 vh-short:px-4 vh-short:py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-md uppercase tracking-wider font-heading text-body-sm sm:text-body-base shadow-[0_0_15px_rgba(106,90,205,0.5)] group"
+                className="relative overflow-hidden inline-block bg-cyberpunk-purple/90 text-white px-5 py-2.5 vh-short:px-4 vh-short:py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-md uppercase tracking-wider font-heading text-body-sm sm:text-body-base shadow-[0_0_15px_rgba(var(--cp-purple-light-rgb),0.5)] group"
               >
                 <span className="relative z-10">Start Your Story</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-cyberpunk-blue/0 via-cyberpunk-blue/30 to-cyberpunk-blue/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -translate-x-full group-hover:translate-x-0"></span>
@@ -258,7 +258,7 @@ export function VideoHero() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/portfolio"
-                className="relative overflow-hidden inline-block bg-black/50 border border-cyberpunk-blue text-white px-5 py-2.5 vh-short:px-4 vh-short:py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-md uppercase tracking-wider font-heading text-body-sm sm:text-body-base shadow-[0_0_10px_rgba(0,204,255,0.3)] group"
+                className="relative overflow-hidden inline-block bg-black/50 border border-cyberpunk-blue text-white px-5 py-2.5 vh-short:px-4 vh-short:py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-md uppercase tracking-wider font-heading text-body-sm sm:text-body-base shadow-[0_0_10px_rgba(var(--cp-blue-rgb), 0.3)] group"
               >
                 <span className="relative z-10">View Our Work</span>
                 <span className="absolute inset-0 bg-cyberpunk-blue/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>

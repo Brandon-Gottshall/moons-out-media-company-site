@@ -156,7 +156,7 @@ export default function ClientSuccessTimeline() {
                   viewport={{ once: true, amount: 0.2 }}
                   className={`p-6 rounded-lg ${
                     isActive
-                      ? "bg-black/80 backdrop-blur-md border border-cyberpunk-blue/50 shadow-[0_0_15px_rgba(0,255,255,0.3)]"
+                      ? "bg-black/80 backdrop-blur-md border border-cyberpunk-blue/50 shadow-[0_0_15px_rgba(var(--cp-blue-aqua-rgb), 0.3)]"
                       : "bg-black/60 border border-gray-800"
                   }`}
                 >

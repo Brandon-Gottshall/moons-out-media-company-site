@@ -67,7 +67,7 @@ function SubCategoryCard({
             // Use Tailwind class for background color
             className={`absolute top-1.5 right-1.5 w-2 h-2 rounded-full z-20 bg-${dotColorName}`}
             // Generic bright glow for boxShadow
-            style={{ boxShadow: `0 0 5px #fff` }} 
+            style={{ boxShadow: `0 0 5px var(--ui-white)` }} 
           />
         )}
     </motion.div>
@@ -164,7 +164,7 @@ export default function SubCategorySwiper({
         animate="visible"
         exit="exit"
         className={`relative py-3 mt-2 mb-4 border-t-2 border-b-2 border-dashed border-gray-700/50 ${isFitMode ? 'flex justify-center' : ''}`}
-        style={{borderColor: metaCategoryColor ? `${metaCategoryColor}33` : '#4B556366'}} 
+        style={{borderColor: metaCategoryColor ? `${metaCategoryColor}33` : 'rgba(var(--ui-gray-600-rgb), 0.4)'}} 
       >
         <Swiper
           modules={[Navigation, A11y]}

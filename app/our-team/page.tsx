@@ -7,7 +7,7 @@ export default function OurTeamPage() {
   return (
     <div className="relative overflow-x-hidden bg-black">
       {/* Radial gradient effect at top center */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_center,rgba(0,204,255,0.15)_0%,transparent_50%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_center,rgba(var(--cp-blue-rgb), 0.15)_0%,transparent_50%)] pointer-events-none" />
 
       {/* Content positioned above the background effect */}
       <div className="relative z-10 pt-16">

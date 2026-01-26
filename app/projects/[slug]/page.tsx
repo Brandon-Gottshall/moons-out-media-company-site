@@ -134,7 +134,7 @@ export default function PortfolioItemPage({
         {/* Hero Section */}
         <section className="relative min-h-screen overflow-hidden flex flex-col sm:flex-row items-center justify-center">
           <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-cyberpunk-background z-10"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,90,205,0.15)_0%,transparent_70%)] z-20"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(var(--cp-purple-light-rgb),0.15)_0%,transparent_70%)] z-20"></div>
 
           <div className="relative z-30 py-8 w-full sm:w-1/2 px-4 sm:pl-24 sm:pr-4">
             <Link
@@ -221,7 +221,7 @@ export default function PortfolioItemPage({
                   className="absolute inset-0 w-full h-1/3"
                   style={{ width: '100%' }}
                   poster={currentItem.heroImage?.url || ""}
-                  accentColor="#00CCFF"
+                  accentColor="var(--cp-blue)"
                   storyboardSrc=""
                   envKey={process.env.NEXT_PUBLIC_MUX_DATA_ENV_KEY}
                 />
@@ -481,7 +481,7 @@ export default function PortfolioItemPage({
                                 className="w-full h-auto"
                                 style={{ objectFit: 'contain' }}
                                 title={video.title || currentItem.title}
-                                accentColor="#00CCFF"
+                                accentColor="var(--cp-blue)"
                                 poster={video.thumbnailUrl || currentItem.heroImage?.url || ""}
                                 storyboardSrc=""
                                 envKey={process.env.NEXT_PUBLIC_MUX_DATA_ENV_KEY}

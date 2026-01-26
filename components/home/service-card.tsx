@@ -14,13 +14,13 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
   // Map colors to their RGB values for box shadows
   const colorToRgb = (color: string): string => {
     switch (color) {
-      case "blue": return "0, 204, 255";
-      case "pink": return "255, 105, 180";
-      case "purple": return "106, 90, 205";
-      case "teal": return "20, 184, 166";
-      case "yellow": return "234, 179, 8";
-      case "cyan": return "6, 182, 212";
-      default: return "0, 204, 255";
+      case "blue": return "var(--cp-blue-rgb)";
+      case "pink": return "var(--cp-pink-rgb)";
+      case "purple": return "var(--cp-purple-light-rgb)";
+      case "teal": return "var(--cp-teal-rgb)";
+      case "yellow": return "var(--cp-yellow-rgb)";
+      case "cyan": return "var(--cp-cyan-rgb)";
+      default: return "var(--cp-blue-rgb)";
     }
   };
 
@@ -32,7 +32,7 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
       viewport={{ once: true, margin: "-100px" }}
       whileHover={{
         y: -5,
-        boxShadow: `0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 0 15px rgba(${colorToRgb(service.color)}, 0.3)`,
+        boxShadow: `0 10px 25px -5px rgba(var(--ui-black-rgb), 0.2), 0 0 15px rgba(${colorToRgb(service.color)}, 0.3)`,
       }}
       className={`bg-black/50 backdrop-blur-sm p-4 rounded-lg border border-cyberpunk-${service.color}/30 transition-all duration-300 flex flex-col justify-between`}
     >

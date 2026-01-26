@@ -170,7 +170,7 @@ export default function PrivacyPage() {
               <div className="bg-gray-800 p-4 rounded-lg border border-cyberpunk-blue/30">
                 <p><strong>Moons Out Media</strong><br />
                 United States Corporation Agents, Inc.<br />
-                1991 Crocker Road #600‑755<br />
+                1991 Crocker Road &#35;600‑755<br />
                 Westlake, OH 44145<br />
                 Email: <a href="mailto:team@moonsoutmedia.com" className="text-cyberpunk-blue hover:text-cyberpunk-pink transition-colors">team@moonsoutmedia.com</a><br />
                 Phone: <strong>(937) 451‑0042</strong></p>
