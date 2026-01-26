@@ -307,7 +307,7 @@
 
   /* Enhanced cyberpunk button */
   .cyberpunk-button {
-    @apply bg-cyberpunk-purple/90;
+    background-color: rgba(var(--cp-purple-rgb), 0.9);
     @apply text-white;
     @apply px-6 py-3;
     @apply rounded-md;
@@ -329,7 +329,7 @@
 
   .cyberpunk-button::before {
     content: "";
-    @apply absolute inset-0 bg-gradient-to-r from-cyberpunk-purple/0 via-white/10 to-cyberpunk-purple/0 opacity-0 transition-opacity duration-300;
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 transition-opacity duration-300;
     transform: skewX(-45deg) translateX(-150%);
   }
 

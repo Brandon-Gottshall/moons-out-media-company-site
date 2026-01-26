@@ -40,7 +40,7 @@ export default function FeaturedProject({
             alt="Featured project image" 
             width={1200}
             height={675}
-            className="w-full h-full object-cover rounded-lg shadow-2xl group-hover:shadow-[0_0_30px_theme(colors.cyberpunk.blue)] transition-all duration-300"
+            className="w-full h-full object-cover rounded-lg shadow-2xl group-hover:shadow-[0_0_30px_rgba(var(--cp-blue-rgb),0.6)] transition-all duration-300"
           />
           {customImageOverlay}
         </div>
@@ -174,4 +174,3 @@ export default function FeaturedProject({
     </Link>
   );
 }
-
