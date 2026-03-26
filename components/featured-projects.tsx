@@ -86,24 +86,24 @@ export default function FeaturedProjects() {
               />
             </div>
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-              <span className="inline-block px-3 py-1 rounded-full text-label-base font-emphasis bg-cyberpunk-blue/30 text-cyberpunk-blue mb-2">
+            <div className="absolute inset-0 bg-background/70 flex flex-col justify-end p-6">
+              <span className="inline-block px-3 py-1 rounded-full text-label-base font-emphasis bg-primary/30 text-primary mb-2">
                 {activeProject.category}
               </span>
-              <h3 className="text-2xl font-heading text-white mb-2">{activeProject.title}</h3>
-              <p className="text-cyberpunk-pink mb-4">Client: {activeProject.client}</p>
-              <p className="text-gray-300 mb-6 max-w-2xl">{activeProject.description}</p>
+              <h3 className="text-2xl font-heading text-foreground mb-2">{activeProject.title}</h3>
+              <p className="text-accent mb-4">Client: {activeProject.client}</p>
+              <p className="text-muted-foreground mb-6 max-w-2xl">{activeProject.description}</p>
 
               <div className="flex flex-wrap gap-4 mb-6">
                 {activeProject.results.map((result, index) => (
-                  <div key={index} className="bg-black/60 px-4 py-2 rounded-full flex items-center">
-                    <span className="text-cyberpunk-green mr-2">✓</span>
-                    <span className="text-body-sm text-white">{result}</span>
+                  <div key={index} className="bg-background/60 px-4 py-2 rounded-full flex items-center">
+                    <span className="text-primary mr-2">✓</span>
+                    <span className="text-body-sm text-foreground">{result}</span>
                   </div>
                 ))}
               </div>
 
-              <Button className="cyberpunk-button w-fit" onClick={() => (window.location.href = activeProject.link)}>
+              <Button className="btn-primary w-fit" onClick={() => (window.location.href = activeProject.link)}>
                 View Full Case Study <ExternalLink className="ml-2 h-4 w-4" />
               </Button>
             </div>
@@ -112,15 +112,15 @@ export default function FeaturedProjects() {
       </div>
 
       <div className="space-y-4">
-        <h3 className="text-heading-md font-heading text-white mb-4 tracking-wide">Featured Projects</h3>
+        <h3 className="text-heading-md font-heading text-foreground mb-4 tracking-wide">Featured Projects</h3>
 
         {projects.map((project) => (
           <div
             key={project.id}
             className={`p-4 rounded-lg cursor-pointer transition-all duration-300 ${
               activeProject.id === project.id
-                ? "bg-black/70 border border-cyberpunk-blue/50 shadow-[0_0_15px_rgba(var(--cp-blue-aqua-rgb), 0.3)]"
-                : "bg-black/40 border border-gray-800 hover:border-cyberpunk-blue/30"
+                ? "bg-background/80 border border-primary/50 shadow-md"
+                : "bg-background/60 border border-border/60 hover:border-primary/30"
             }`}
             onClick={() => setActiveProject(project)}
           >
@@ -133,22 +133,22 @@ export default function FeaturedProjects() {
                 />
               </div>
               <div>
-                <h4 className={`font-emphasis ${activeProject.id === project.id ? "text-white" : "text-gray-300"}`}>
+                <h4 className={`font-emphasis ${activeProject.id === project.id ? "text-foreground" : "text-muted-foreground"}`}>
                   {project.title}
                 </h4>
-                <p className={`text-body-sm ${activeProject.id === project.id ? "text-cyberpunk-blue" : "text-gray-500"}`}>
+                <p className={`text-body-sm ${activeProject.id === project.id ? "text-primary" : "text-muted-foreground"}`}>
                   {project.client}
                 </p>
               </div>
-              {activeProject.id === project.id && <ChevronRight className="ml-auto h-5 w-5 text-cyberpunk-blue" />}
+              {activeProject.id === project.id && <ChevronRight className="ml-auto h-5 w-5 text-primary" />}
             </div>
           </div>
         ))}
 
         <Button
           variant="outline"
-          className="w-full border-cyberpunk-pink text-cyberpunk-pink hover:bg-cyberpunk-pink/10 mt-4 font-heading shadow-glow-pink"
-          onClick={() => (window.location.href = "/portfolio")}
+          className="w-full border-accent text-accent hover:bg-accent/10 mt-4 font-heading "
+          onClick={() => (window.location.href = "/projects")}
         >
           View All Projects
         </Button>
@@ -156,4 +156,3 @@ export default function FeaturedProjects() {
     </div>
   )
 }
-

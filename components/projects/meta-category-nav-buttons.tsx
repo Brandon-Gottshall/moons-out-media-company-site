@@ -33,27 +33,27 @@ export default function MetaCategoryNavButtons({
   return (
     <div className="flex flex-wrap justify-center gap-1.5 sm:gap-3 md:gap-4 py-2 sm:py-4 md:py-6 vh-short:py-1 vh-short:gap-1">
       {metaCategories.map((category) => {
-        const color = category.color || "cyberpunk-blue"; // Fallback color
+        const color = category.color || "primary"; // Fallback color
         const isGlobalAllButton = category.isGlobalAll;
 
         // Consistent styling for all buttons, with hover effects using their theme color
         let buttonClasses = `
           px-2 py-1.5 sm:py-1 md:px-5 md:py-2.5 vh-short:px-2 vh-short:py-1 text-label-base md:text-body-sm vh-short:text-label-base rounded-md md:rounded-lg transition-all duration-300 ease-in-out 
           font-subheading border md:border-2 vh-short:border focus:outline-none focus:ring-2 md:focus:ring-4 focus:ring-opacity-50
-          bg-black/60`; // Base background
+          bg-background/60`; // Base background
 
         if (isGlobalAllButton) {
           // Specific styling for "All Projects" button for better visibility
           buttonClasses += ` 
-            border-cyberpunk-blue-light/70 text-cyberpunk-blue-light 
-            hover:border-cyberpunk-blue-light hover:bg-black/50 hover:text-cyberpunk-blue-light 
-            hover:shadow-md hover:shadow-cyberpunk-blue-light/30 
-            ring-cyberpunk-blue-light/70 focus:ring-cyberpunk-blue-light`;
+            border-primary/70 text-primary 
+            hover:border-primary hover:bg-background/50 hover:text-primary 
+            hover:shadow-md 
+            ring-primary/70 focus:ring-primary`;
         } else {
           buttonClasses += ` 
             border-${color}/50 text-${color}/90 
-            hover:border-${color} hover:text-${color} hover:bg-black/50 
-            hover:shadow-md hover:shadow-${color}/30 
+            hover:border-${color} hover:text-${color} hover:bg-background/50 
+            hover:shadow-md 
             ring-${color}/50 focus:ring-${color}`;
         }
 

@@ -61,7 +61,7 @@ export default function ConfirmServiceOverlay({ children, onConfirm }: ConfirmSe
       {/* children behind */}
       <div className="pointer-events-none">{children}</div>
       {/* overlay */}
-      <div className="absolute inset-0 bg-black/20">
+      <div className="absolute inset-0 bg-background/20">
         <div className="absolute inset-y-0 left-0 w-1/5 border-2 border-red-500 flex items-center justify-center text-red-500 font-heading">
           Pick
         </div>

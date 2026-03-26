@@ -207,36 +207,36 @@ export default function ContactFunnel() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-black/40 backdrop-blur-sm border border-cyberpunk-green/30 rounded-lg p-8 md:p-12 text-center"
+          className="bg-background/40 backdrop-blur-sm border border-primary/30 rounded-lg p-8 md:p-12 text-center"
         >
-          <div className="w-20 h-20 rounded-full bg-cyberpunk-green/20 flex items-center justify-center mx-auto mb-6">
-            <Check className="h-10 w-10 text-cyberpunk-green" />
+          <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-6">
+            <Check className="h-10 w-10 text-primary" />
           </div>
 
-          <h2 className="text-3xl font-heading mb-4 text-white">Thank You for Reaching Out!</h2>
+          <h2 className="text-3xl font-heading mb-4 text-foreground">Thank You for Reaching Out!</h2>
 
-          <div className="bg-black/40 p-6 rounded-lg mb-6">
-            <p className="text-body-lg text-white">
+          <div className="bg-background/40 p-6 rounded-lg mb-6">
+            <p className="text-body-lg text-foreground">
               We've received your information about your{" "}
-              <span className="text-cyberpunk-blue font-emphasis">{selectedChallenge?.title.toLowerCase()}</span>{" "}
+              <span className="text-primary font-emphasis">{selectedChallenge?.title.toLowerCase()}</span>{" "}
               challenge. Our team is already reviewing your details and will craft a tailored solution just for you.
             </p>
           </div>
 
-          <p className="text-body-lg text-white mb-8">
+          <p className="text-body-lg text-foreground mb-8">
             Expect to hear from us within the next 24-48 business hours at{" "}
-            <span className="text-cyberpunk-blue">{formData.email}</span>. We'll schedule a virtual meeting to discuss
+            <span className="text-primary">{formData.email}</span>. We'll schedule a virtual meeting to discuss
             your project in detail.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Button className="cyberpunk-button py-6 " onClick={() => router.push("/portfolio")}>
+            <Button className="btn-primary py-6 " onClick={() => router.push("/projects")}>
               Explore Our Work While You Wait
             </Button>
 
             <Button
               variant="outline"
-              className="border-cyberpunk-green text-cyberpunk-green hover:bg-cyberpunk-green/10 py-6 "
+              className="border-primary text-primary hover:bg-primary/10 py-6 "
               onClick={() => window.open("https://calendly.com", "_blank")}
             >
               Schedule a Strategy Call <ArrowRight className="ml-2 h-4 w-4" />
@@ -250,27 +250,27 @@ export default function ContactFunnel() {
   return (
     <div className="max-w-3xl mx-auto">
       <motion.div
-        className="bg-black/40 backdrop-blur-sm border border-cyberpunk-blue/30 rounded-lg overflow-hidden"
+        className="bg-background/40 backdrop-blur-sm border border-primary/30 rounded-lg overflow-hidden"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
         whileHover={{
-          boxShadow: "0 0 20px rgba(var(--ui-cyan-accent-rgb), 0.2)",
-          borderColor: "rgba(var(--ui-cyan-accent-rgb), 0.4)",
+          boxShadow: "0 0 16px hsl(var(--primary) / 0.2)",
+          borderColor: "hsl(var(--primary) / 0.4)",
         }}
       >
         {/* Progress Indicator */}
-        <div className="p-4 border-b border-gray-800">
+        <div className="p-4 border-b border-border/60">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-body-lg font-emphasis text-white">{steps[currentStep].title}</h3>
-            <div className="text-body-sm text-gray-400">
+            <h3 className="text-body-lg font-emphasis text-foreground">{steps[currentStep].title}</h3>
+            <div className="text-body-sm text-muted-foreground">
               Step {currentStep + 1} of {steps.length}
             </div>
           </div>
-          <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+          <div className="w-full h-2 bg-background/80 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple"
+              className="h-full bg-primary"
               initial={{ width: `${(currentStep / steps.length) * 100}%` }}
               animate={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
               transition={{ duration: 0.5 }}
@@ -290,7 +290,7 @@ export default function ContactFunnel() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <p className="text-gray-300 mb-6">{steps[currentStep].description}</p>
+                  <p className="text-muted-foreground mb-6">{steps[currentStep].description}</p>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                     {challenges.map((challenge, index) => (
@@ -298,23 +298,23 @@ export default function ContactFunnel() {
                         key={challenge.id}
                         className={`p-5 rounded-lg cursor-pointer transition-all duration-300 ${
                           selectedChallenge?.id === challenge.id
-                            ? "bg-cyberpunk-blue/20 border-2 border-cyberpunk-blue"
-                            : "bg-black/60 border border-gray-700 hover:border-cyberpunk-blue/50"
+                            ? "bg-primary/20 border-2 border-primary"
+                            : "bg-background/60 border border-border/60 hover:border-primary/50"
                         }`}
                         onClick={() => handleChallengeSelect(challenge)}
-                        whileHover={{ scale: 1.02, boxShadow: "0 0 15px rgba(var(--ui-cyan-accent-rgb), 0.2)" }}
+                        whileHover={{ scale: 1.02, boxShadow: "0 0 12px hsl(var(--primary) / 0.2)" }}
                         whileTap={{ scale: 0.98 }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1, duration: 0.4 }}
                       >
                         <div className="flex items-center">
-                          <div className="w-10 h-10 rounded-full bg-black/50 flex items-center justify-center mr-4 text-2xl">
+                          <div className="w-10 h-10 rounded-full bg-background/50 flex items-center justify-center mr-4 text-2xl">
                             {challenge.icon}
                           </div>
                           <div>
-                            <h4 className="text-body-lg font-emphasis text-white mb-1">{challenge.title}</h4>
-                            <p className="text-body-sm text-gray-400">{challenge.description}</p>
+                            <h4 className="text-body-lg font-emphasis text-foreground mb-1">{challenge.title}</h4>
+                            <p className="text-body-sm text-muted-foreground">{challenge.description}</p>
                           </div>
                         </div>
                       </motion.div>
@@ -324,7 +324,7 @@ export default function ContactFunnel() {
                   <div className="flex justify-end">
                     <Button
                       type="button"
-                      className="cyberpunk-button flex items-center"
+                      className="btn-primary flex items-center"
                       onClick={handleNext}
                       disabled={!selectedChallenge}
                     >
@@ -342,7 +342,7 @@ export default function ContactFunnel() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <p className="text-gray-300 mb-6">{selectedChallenge?.followUpQuestion}</p>
+                  <p className="text-muted-foreground mb-6">{selectedChallenge?.followUpQuestion}</p>
 
                   <div className="mb-6">
                     <textarea
@@ -350,7 +350,7 @@ export default function ContactFunnel() {
                       value={specificDetails}
                       onChange={(e) => setSpecificDetails(e.target.value)}
                       placeholder="Tell us about your current approach and what you'd like to achieve..."
-                      className="w-full rounded-md border border-gray-700 bg-black/60 text-white py-3 px-4 focus:outline-none focus:border-cyberpunk-blue resize-none h-32"
+                      className="w-full rounded-md border border-border/60 bg-background/60 text-foreground py-3 px-4 focus:outline-none focus:border-primary resize-none h-32"
                       required
                     ></textarea>
                   </div>
@@ -358,13 +358,13 @@ export default function ContactFunnel() {
                   {/* Testimonial */}
                   {currentTestimonial && (
                     <motion.div
-                      className="bg-black/60 p-5 rounded-lg border border-cyberpunk-purple/30 mb-6"
+                      className="bg-background/60 p-5 rounded-lg border border-secondary/30 mb-6"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: 0.2 }}
                     >
                       <div className="flex items-start">
-                        <div className="text-cyberpunk-pink opacity-25 mr-3">
+                        <div className="text-accent opacity-25 mr-3">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="32"
@@ -377,16 +377,16 @@ export default function ContactFunnel() {
                           </svg>
                         </div>
                         <div>
-                          <p className="text-white italic mb-3">{currentTestimonial.quote}</p>
+                          <p className="text-foreground italic mb-3">{currentTestimonial.quote}</p>
                           <div className="flex items-center">
-                            <div className="mr-3 w-8 h-8 bg-cyberpunk-purple/20 rounded-full flex items-center justify-center">
-                              <span className="text-cyberpunk-purple text-body-sm font-heading">
+                            <div className="mr-3 w-8 h-8 bg-secondary/20 rounded-full flex items-center justify-center">
+                              <span className="text-secondary text-body-sm font-heading">
                                 {currentTestimonial.name.charAt(0)}
                               </span>
                             </div>
                             <div>
-                              <p className="font-emphasis text-white">{currentTestimonial.name}</p>
-                              <p className="text-label-base text-gray-400">
+                              <p className="font-emphasis text-foreground">{currentTestimonial.name}</p>
+                              <p className="text-label-base text-muted-foreground">
                                 {currentTestimonial.position}, {currentTestimonial.company}
                               </p>
                             </div>
@@ -400,7 +400,7 @@ export default function ContactFunnel() {
                     <Button
                       type="button"
                       variant="outline"
-                      className="border-gray-600 text-gray-300 hover:bg-gray-800"
+                      className="border-border/60 text-muted-foreground hover:bg-background/80"
                       onClick={handleBack}
                     >
                       <ChevronLeft className="mr-2 h-4 w-4" /> Back
@@ -408,7 +408,7 @@ export default function ContactFunnel() {
 
                     <Button
                       type="button"
-                      className="cyberpunk-button flex items-center"
+                      className="btn-primary flex items-center"
                       onClick={handleNext}
                       disabled={!specificDetails.trim()}
                     >
@@ -426,12 +426,12 @@ export default function ContactFunnel() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <p className="text-gray-300 mb-6">{steps[currentStep].description}</p>
+                  <p className="text-muted-foreground mb-6">{steps[currentStep].description}</p>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                      <label htmlFor="name" className="block text-body-sm font-emphasis text-gray-300 mb-1">
-                        Name <span className="text-cyberpunk-pink">*</span>
+                      <label htmlFor="name" className="block text-body-sm font-emphasis text-muted-foreground mb-1">
+                        Name <span className="text-accent">*</span>
                       </label>
                       <Input
                         id="name"
@@ -439,13 +439,13 @@ export default function ContactFunnel() {
                         value={formData.name}
                         onChange={handleInputChange}
                         required
-                        className="bg-black/60 border-gray-700 text-white focus:border-cyberpunk-blue"
+                        className="bg-background/60 border-border/60 text-foreground focus:border-primary"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-body-sm font-emphasis text-gray-300 mb-1">
-                        Email <span className="text-cyberpunk-pink">*</span>
+                      <label htmlFor="email" className="block text-body-sm font-emphasis text-muted-foreground mb-1">
+                        Email <span className="text-accent">*</span>
                       </label>
                       {!emailValid && (
                         <p className="text-red-500 text-sm mb-1">Please enter a valid email address.</p>
@@ -457,13 +457,13 @@ export default function ContactFunnel() {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="bg-black/60 border-gray-700 text-white focus:border-cyberpunk-blue"
+                        className="bg-background/60 border-border/60 text-foreground focus:border-primary"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="company" className="block text-body-sm font-emphasis text-gray-300 mb-1">
-                        Company <span className="text-cyberpunk-pink">*</span>
+                      <label htmlFor="company" className="block text-body-sm font-emphasis text-muted-foreground mb-1">
+                        Company <span className="text-accent">*</span>
                       </label>
                       <Input
                         id="company"
@@ -471,12 +471,12 @@ export default function ContactFunnel() {
                         value={formData.company}
                         onChange={handleInputChange}
                         required
-                        className="bg-black/60 border-gray-700 text-white focus:border-cyberpunk-blue"
+                        className="bg-background/60 border-border/60 text-foreground focus:border-primary"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="phone" className="block text-body-sm font-emphasis text-gray-300 mb-1">
+                      <label htmlFor="phone" className="block text-body-sm font-emphasis text-muted-foreground mb-1">
                         Phone (optional)
                       </label>
                       {phoneValue !== "" && !phoneValid && (
@@ -490,23 +490,23 @@ export default function ContactFunnel() {
                         type="tel"
                         value={formData.phone}
                         onChange={handleInputChange}
-                        className="bg-black/60 border-gray-700 text-white focus:border-cyberpunk-blue"
+                        className="bg-background/60 border-border/60 text-foreground focus:border-primary"
                       />
                     </div>
                   </div>
 
-                  <div className="bg-black/60 p-5 rounded-lg border border-gray-800 mb-6">
-                    <h4 className="text-white font-emphasis mb-2 flex items-center">
-                      <span className="w-6 h-6 rounded-full bg-cyberpunk-blue/20 flex items-center justify-center mr-2 text-cyberpunk-blue">
+                  <div className="bg-background/60 p-5 rounded-lg border border-border/60 mb-6">
+                    <h4 className="text-foreground font-emphasis mb-2 flex items-center">
+                      <span className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center mr-2 text-primary">
                         <Check className="h-4 w-4" />
                       </span>
                       Challenge Accepted! (Pending Review of Course)
                     </h4>
-                    <p className="text-gray-300 mb-2">
-                      <span className="text-gray-400">Challenge Area:</span> {selectedChallenge?.title}
+                    <p className="text-muted-foreground mb-2">
+                      <span className="text-muted-foreground">Challenge Area:</span> {selectedChallenge?.title}
                     </p>
-                    <p className="text-gray-300">
-                      <span className="text-gray-400">Details:</span> {specificDetails}
+                    <p className="text-muted-foreground">
+                      <span className="text-muted-foreground">Details:</span> {specificDetails}
                     </p>
                   </div>
 
@@ -514,7 +514,7 @@ export default function ContactFunnel() {
                     <Button
                       type="button"
                       variant="outline"
-                      className="border-gray-600 text-gray-300 hover:bg-gray-800"
+                      className="border-border/60 text-muted-foreground hover:bg-background/80"
                       onClick={handleBack}
                     >
                       <ChevronLeft className="mr-2 h-4 w-4" /> Back
@@ -522,13 +522,13 @@ export default function ContactFunnel() {
 
                     <Button
                       type="submit"
-                      className="cyberpunk-button flex items-center"
+                      className="btn-primary flex items-center"
                       disabled={isSubmitting || !isFormValid}
                     >
                       {isSubmitting ? (
                         <>
                           <svg
-                            className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                            className="animate-spin -ml-1 mr-3 h-5 w-5 text-foreground"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
@@ -565,4 +565,3 @@ export default function ContactFunnel() {
     </div>
   )
 }
-

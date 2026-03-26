@@ -34,9 +34,9 @@ function SubCategoryCard({
   metaColor?: string;
   isSearchActive: boolean;
 }) {
-  const borderColor = isSelected ? (category.color || metaColor || "cyberpunk-blue") : "gray-800";
-  const ringColor = category.color || metaColor || "cyberpunk-blue";
-  const dotColorName = category.color || metaColor || "cyberpunk-blue"; // Color name for Tailwind class
+  const borderColor = isSelected ? (category.color || metaColor || "primary") : "border";
+  const ringColor = category.color || metaColor || "primary";
+  const dotColorName = category.color || metaColor || "primary"; // Color name for Tailwind class
 
   return (
     <motion.div
@@ -52,12 +52,12 @@ function SubCategoryCard({
         alt={category.title}
         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+      <div className="absolute inset-0 bg-background/70"></div>
       <div className={`absolute inset-0 opacity-0 group-hover:opacity-15 transition-opacity duration-300 bg-${category.color || metaColor}`}></div>
       
       <div className="absolute bottom-0 left-0 right-0 p-2.5 z-10">
         <h4 className={`text-body-sm font-subheading line-clamp-2 transition-colors duration-300
-          ${isSelected ? `text-${category.color || metaColor}` : 'text-white group-hover:text-gray-200'}`}>
+          ${isSelected ? `text-${category.color || metaColor}` : 'text-foreground group-hover:text-foreground'}`}>
           {category.title}
         </h4>
       </div>
@@ -66,8 +66,7 @@ function SubCategoryCard({
             layoutId="sub-active-indicator" 
             // Use Tailwind class for background color
             className={`absolute top-1.5 right-1.5 w-2 h-2 rounded-full z-20 bg-${dotColorName}`}
-            // Generic bright glow for boxShadow
-            style={{ boxShadow: `0 0 5px var(--ui-white)` }} 
+            style={{ boxShadow: "0 0 5px hsl(var(--primary) / 0.4)" }} 
           />
         )}
     </motion.div>
@@ -78,7 +77,7 @@ export default function SubCategorySwiper({
   subCategories, 
   activeGalleryFilterId, // This prop tells us which sub-category is currently selected
   onSubCategorySelect,
-  metaCategoryColor = "cyberpunk-blue",
+  metaCategoryColor = "primary",
   isSearchActive
 }: SubCategorySwiperProps) {
   const swiperRef = useRef<SwiperInstance | null>(null);
@@ -163,8 +162,8 @@ export default function SubCategorySwiper({
         initial="hidden"
         animate="visible"
         exit="exit"
-        className={`relative py-3 mt-2 mb-4 border-t-2 border-b-2 border-dashed border-gray-700/50 ${isFitMode ? 'flex justify-center' : ''}`}
-        style={{borderColor: metaCategoryColor ? `${metaCategoryColor}33` : 'rgba(var(--ui-gray-600-rgb), 0.4)'}} 
+        className={`relative py-3 mt-2 mb-4 border-t-2 border-b-2 border-dashed border-border/60 ${isFitMode ? 'flex justify-center' : ''}`}
+        style={{ borderColor: "hsl(var(--border))" }}
       >
         <Swiper
           modules={[Navigation, A11y]}
@@ -201,19 +200,19 @@ export default function SubCategorySwiper({
           <>
             <button 
               aria-label="Previous Sub-Category"
-              className="absolute top-1/2 -translate-y-1/2 -left-3 md:-left-5 z-10 p-1.5 rounded-full bg-black/50 border border-gray-600 hover:border-gray-400 transition-colors text-white group disabled:opacity-30 disabled:pointer-events-none"
+              className="absolute top-1/2 -translate-y-1/2 -left-3 md:-left-5 z-10 p-1.5 rounded-full bg-background/50 border border-border/60 hover:border-border/60 transition-colors text-foreground group disabled:opacity-30 disabled:pointer-events-none"
               onClick={handlePrev}
               disabled={selectedIndex <= 0}
             >
-              <ChevronLeft className="h-4 w-4 md:h-5 md:w-5 text-gray-300 group-hover:text-white transition-colors" />
+              <ChevronLeft className="h-4 w-4 md:h-5 md:w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
             </button>
             <button 
               aria-label="Next Sub-Category"
-              className="absolute top-1/2 -translate-y-1/2 -right-3 md:-right-5 z-10 p-1.5 rounded-full bg-black/50 border border-gray-600 hover:border-gray-400 transition-colors text-white group disabled:opacity-30 disabled:pointer-events-none"
+              className="absolute top-1/2 -translate-y-1/2 -right-3 md:-right-5 z-10 p-1.5 rounded-full bg-background/50 border border-border/60 hover:border-border/60 transition-colors text-foreground group disabled:opacity-30 disabled:pointer-events-none"
               onClick={handleNext}
               disabled={selectedIndex >= subCategories.length - 1}
             >
-              <ChevronRight className="h-4 w-4 md:h-5 md:w-5 text-gray-300 group-hover:text-white transition-colors" />
+              <ChevronRight className="h-4 w-4 md:h-5 md:w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
             </button>
           </>
         )}

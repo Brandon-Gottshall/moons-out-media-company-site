@@ -1,97 +1,64 @@
-import Link from "next/link"
-import { VideoHero } from "@/components/home/video-hero"
-import { ServiceCard } from "@/components/home/service-card"
-import CallToAction from "@/components/call-to-action"
-import { WhyChooseUs } from "@/components/home/why-choose-us"
-import { MASTER_SERVICES } from "@/app/data/services"
+import Link from "next/link";
+import { allPortfolioItems } from "@/lib/placeholder-data/portfolio-items";
 
 export default function Home() {
+  const featuredProjects = allPortfolioItems
+    .filter((project) => project.status === "published")
+    .slice(0, 3);
+
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <VideoHero />
-
-      {/* Why Choose Us Section */}
-      <div className="relative py-10 px-4 flex justify-center w-full overflow-visible">
-        {/* Top Gradient Overlay - Blends from Hero's cyberpunk-background */}
-        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-cyberpunk-background/50 via-cyberpunk-background/20 to-transparent pointer-events-none z-10" />
-        <WhyChooseUs />
-        {/* Bottom Gradient Overlay - Blends to Services' top (black/30) */}
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black/15 via-black/5 to-transparent pointer-events-none z-10" />
-      </div>
-
-      {/* Services Section */}
-      <section className="py-20 px-4 relative overflow-hidden">
-        {/* Background elements */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/50 z-0"></div>
-        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-cyberpunk-blue/5 rounded-full blur-3xl z-0"></div>
-        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-cyberpunk-pink/5 rounded-full blur-3xl z-0"></div>
-
-        <div className="container mx-auto text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl font-heading mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-blue to-cyberpunk-purple">
-            Our Services
-          </h2>
-          <div className="bg-black/40 backdrop-blur-sm p-4 rounded-lg border border-gray-800 max-w-2xl mx-auto mb-12">
-            <p className="text-gray-300">
-              Explore our portfolio of authentic story telling content, authentic storytelling, and targeted digital
-              campaigns that drive real results.
-            </p>
+    <main className="min-h-screen bg-background text-foreground">
+      <section className="min-h-screen flex items-center">
+        <div className="mx-auto w-full max-w-6xl px-4 py-16">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div className="space-y-3">
+              <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
+                Media Mode
+              </p>
+              <h1 className="text-4xl md:text-5xl font-heading text-primary">
+                Featured Stories
+              </h1>
+            </div>
+            <Link
+              href="/projects"
+              className="text-xs uppercase tracking-[0.4em] text-accent underline-offset-4 hover:underline"
+            >
+              View full archive
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {MASTER_SERVICES.filter(service => service.icon).map((service, index) => (
-              <ServiceCard
-                key={service.id}
-                service={{
-                  title: service.shortTitle || service.title,
-                  description: service.shortDescription || service.description,
-                  icon: service.icon!,
-                  color: service.color,
-                }}
-                index={index}
-              />
+          <div className="mt-10 grid gap-8 md:grid-cols-3">
+            {featuredProjects.map((project) => (
+              <article
+                key={project.slug}
+                className="overflow-hidden rounded-2xl border border-border bg-card text-card-foreground transition hover:border-primary"
+              >
+                <div
+                  className="h-56 w-full bg-cover bg-center"
+                  style={{ backgroundImage: `url(${project.heroImage.url})` }}
+                />
+                <div className="space-y-3 p-6">
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                    {project.clientName}
+                  </p>
+                  <h2 className="text-xl font-heading text-primary">
+                    {project.title}
+                  </h2>
+                  <p className="text-sm text-muted-foreground">
+                    {project.summary}
+                  </p>
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    className="inline-flex text-xs uppercase tracking-[0.3em] text-accent underline-offset-4 hover:underline"
+                  >
+                    Read case study
+                  </Link>
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
-
-      {/* Call to Action */}
-      <CallToAction />
-    </div>
-  )
+    </main>
+  );
 }
-
-// Static data that can be accessed by both server and client components
-// Static data that can be accessed by both server and client components
-// export const SERVICES = [ // This section is removed
-//   {
-//     title: "Digital Marketing",
-//     description: "Targeted digital ad campaigns that drive measurable results.",
-//     color: "pink",
-//     icon: "📱",
-//   },
-//   {
-//     title: "Brand Storytelling",
-//     description: "Authentic narratives that connect with your audience on a deeper level.",
-//     color: "purple",
-//     icon: "📖",
-//   },
-//   {
-//     title: "Web Application Development",
-//     description: "End-to-end web apps built on Next.js, React & Node—designed for scale, security and speed.",
-//     color: "teal",
-//     icon: "💻",
-//   },
-//   {
-//     title: "AI & Automation Engineering",
-//     description: "Tailored AI/ML pipelines, chatbots and workflow automations (n8n, Langflow, etc.).",
-//     color: "yellow",
-//     icon: "🤖",
-//   },
-//   {
-//     title: "Cloud & DevOps Solutions",
-//     description: "Containerized infrastructure, CI/CD pipelines, Kubernetes, Docker & hybrid-cloud hosting.",
-//     color: "cyan",
-//     icon: "☁️",
-//   },
-// ];

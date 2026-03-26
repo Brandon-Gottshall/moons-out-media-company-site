@@ -74,8 +74,8 @@ export default function BookingConfirmationDialog({
     if (redirectMessage) {
       return (
         <DialogFooter className="pt-4 flex flex-col items-center">
-          <p className="text-cyberpunk-green">{redirectMessage} {redirectCountdown > 0 ? redirectCountdown : ""}</p>
-          <Button variant="outline" onClick={handleCancelAndRedirect} className="mt-2 border-cyberpunk-green text-cyberpunk-green hover:bg-cyberpunk-green/10 hover:text-cyberpunk-green">
+          <p className="text-primary">{redirectMessage} {redirectCountdown > 0 ? redirectCountdown : ""}</p>
+          <Button variant="outline" onClick={handleCancelAndRedirect} className="mt-2 border-primary text-primary hover:bg-primary/10 hover:text-primary">
             Redirect Now <ExternalLink className="ml-2 h-4 w-4" />
           </Button>
         </DialogFooter>
@@ -83,10 +83,10 @@ export default function BookingConfirmationDialog({
     }
     return (
       <DialogFooter className="pt-4">
-        <Button variant="outline" onClick={() => onOpenChange(false)} className="mr-2 border-gray-600 text-gray-300 hover:bg-gray-700" disabled={isDialogSubmitting || isParentSubmitting}>
+        <Button variant="outline" onClick={() => onOpenChange(false)} className="mr-2 border-border/60 text-muted-foreground hover:bg-background/70" disabled={isDialogSubmitting || isParentSubmitting}>
           Cancel
         </Button>
-        <Button onClick={handleProceed} className="bg-cyberpunk-blue hover:bg-cyberpunk-blue/80 text-white" disabled={isDialogSubmitting || isParentSubmitting}>
+        <Button onClick={handleProceed} className="bg-primary hover:bg-primary/80 text-foreground" disabled={isDialogSubmitting || isParentSubmitting}>
           {isDialogSubmitting ? (
             <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending & Preparing Booking...</>
           ) : (
@@ -99,10 +99,10 @@ export default function BookingConfirmationDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] bg-black/80 backdrop-blur-md border-cyberpunk-blue text-white">
+      <DialogContent className="sm:max-w-[425px] bg-background/80 backdrop-blur-md border-primary text-foreground">
         <DialogHeader>
-          <DialogTitle className="text-cyberpunk-blue">Confirm External Booking</DialogTitle>
-          <DialogDescription className="text-gray-300 pt-2 text-body">
+          <DialogTitle className="text-primary">Confirm External Booking</DialogTitle>
+          <DialogDescription className="text-muted-foreground pt-2 text-body">
             <p className="mb-2">
             You are about to be directed to an external site (Google Calendar, LinkedIn, or Reddit) to schedule your appointment.
             </p>

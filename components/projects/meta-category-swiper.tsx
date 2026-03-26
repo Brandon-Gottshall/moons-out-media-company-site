@@ -33,7 +33,7 @@ function MetaCategoryCard({
   onSelect: () => void;
   isSearchActive: boolean;
 }) {
-  // const categoryColorName = category.color || 'cyberpunk-blue'; // Fallback color name
+  // const categoryColorName = category.color || 'primary'; // Fallback color name
 
   return (
     <motion.div
@@ -41,7 +41,7 @@ function MetaCategoryCard({
       onClick={onSelect}
       className={`relative overflow-hidden rounded-lg border-2 group transition-all cursor-pointer
         w-64 ${isSearchActive ? 'h-20' : 'h-40'} flex-shrink-0 
-        ${isSelected ? `border-${category.color} ring-2 ring-${category.color}/30 opacity-100` : 'border-gray-800 opacity-70 hover:opacity-100'}`}
+        ${isSelected ? `border-${category.color} ring-2 ring-${category.color}/30 opacity-100` : 'border-border/60 opacity-70 hover:opacity-100'}`}
       transition={{ duration: 0.3 }}
     >
       <img
@@ -49,12 +49,12 @@ function MetaCategoryCard({
         alt={category.title}
         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent"></div>
+      <div className="absolute inset-0 bg-background/70"></div>
       <div className={`absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-${category.color}`}></div>
       
       <div className="absolute bottom-0 left-0 right-0 p-3 z-10">
         <h3 className={`text-body-lg font-heading line-clamp-2 transition-colors duration-300
-          ${isSelected ? `text-${category.color}` : 'text-white group-hover:text-gray-100'}`}>
+          ${isSelected ? `text-${category.color}` : 'text-foreground group-hover:text-foreground'}`}>
           {category.title}
         </h3>
       </div>
@@ -63,11 +63,7 @@ function MetaCategoryCard({
             layoutId="meta-active-indicator" 
             // Use Tailwind class for background color
             className={`absolute top-2 right-2 w-2.5 h-2.5 rounded-full z-20 bg-${category.color}`}
-            // For boxShadow, we need a real color. Using a generic bright glow or define themed shadows in Tailwind.
-            // Option 1: Generic bright glow
-            style={{ boxShadow: `0 0 6px var(--ui-white)` }} 
-            // Option 2: If you have themed shadow color utilities in Tailwind (e.g., shadow-glow-cyberpunk-blue)
-            // you could add them to className, e.g., className={`... shadow-glow-${category.color}`}
+            style={{ boxShadow: "0 0 6px hsl(var(--primary) / 0.4)" }}
           />
         )}
     </motion.div>
@@ -177,19 +173,19 @@ export default function MetaCategorySwiper({
           <>
             <button 
               aria-label="Previous Meta Category"
-              className="portfolio-cat-prev absolute top-1/2 -translate-y-1/2 -left-4 md:-left-6 z-20 p-2 rounded-full bg-cyberpunk-background/70 border-2 border-cyberpunk-blue/50 hover:border-cyberpunk-blue transition-colors shadow-lg text-white group disabled:opacity-30 disabled:pointer-events-none"
+              className="portfolio-cat-prev absolute top-1/2 -translate-y-1/2 -left-4 md:-left-6 z-20 p-2 rounded-full bg-background/70 border-2 border-primary/50 hover:border-primary transition-colors shadow-lg text-foreground group disabled:opacity-30 disabled:pointer-events-none"
               onClick={handlePrev}
               disabled={selectedIndex <= 0} 
             >
-              <ChevronLeft className="h-5 w-5 md:h-6 md:w-6 text-cyberpunk-blue group-hover:text-white transition-colors" />
+              <ChevronLeft className="h-5 w-5 md:h-6 md:w-6 text-primary group-hover:text-foreground transition-colors" />
             </button>
             <button 
               aria-label="Next Meta Category"
-              className="portfolio-cat-next absolute top-1/2 -translate-y-1/2 -right-4 md:-right-6 z-20 p-2 rounded-full bg-cyberpunk-background/70 border-2 border-cyberpunk-blue/50 hover:border-cyberpunk-blue transition-colors shadow-lg text-white group disabled:opacity-30 disabled:pointer-events-none"
+              className="portfolio-cat-next absolute top-1/2 -translate-y-1/2 -right-4 md:-right-6 z-20 p-2 rounded-full bg-background/70 border-2 border-primary/50 hover:border-primary transition-colors shadow-lg text-foreground group disabled:opacity-30 disabled:pointer-events-none"
               onClick={handleNext}
               disabled={selectedIndex >= metaCategories.length - 1} 
             >
-              <ChevronRight className="h-5 w-5 md:h-6 md:w-6 text-cyberpunk-blue group-hover:text-white transition-colors" />
+              <ChevronRight className="h-5 w-5 md:h-6 md:w-6 text-primary group-hover:text-foreground transition-colors" />
             </button>
           </>
         )}

@@ -28,37 +28,34 @@ export default function ContactInfo() {
       viewport={{ once: true }}
     >
       <motion.div
-        className="bg-black/40 backdrop-blur-sm p-6 rounded-lg border border-gray-800"
+        className="bg-background/80 backdrop-blur-sm p-6 rounded-lg border border-border/60"
         variants={item}
         whileHover={{
-          boxShadow: "0 0 20px rgba(var(--ui-purple-accent-rgb), 0.2)",
-          borderColor: "rgba(var(--ui-purple-accent-rgb), 0.4)",
+          boxShadow: "0 0 16px hsl(var(--primary) / 0.2)",
+          borderColor: "hsl(var(--primary) / 0.4)",
         }}
       >
-        <h2 className="text-2xl font-heading mb-6 text-white relative inline-block">
+        <h2 className="text-2xl font-heading mb-6 text-foreground relative inline-block">
           Contact Details
-          <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-cyberpunk-pink to-cyberpunk-purple"></span>
+          <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-primary/40"></span>
         </h2>
 
         <div className="space-y-5">
           {[
             {
-              icon: <Phone className="w-5 h-5 text-cyberpunk-blue" />,
+              icon: <Phone className="w-5 h-5 text-primary" />,
               title: "Phone",
               content: "(555) 123-4567",
-              color: "blue",
             },
             {
-              icon: <Mail className="w-5 h-5 text-cyberpunk-pink" />,
+              icon: <Mail className="w-5 h-5 text-accent" />,
               title: "Email",
               content: "hello@moonsoutmedia.com",
-              color: "pink",
             },
             {
-              icon: <Clock className="w-5 h-5 text-cyberpunk-green" />,
+              icon: <Clock className="w-5 h-5 text-primary" />,
               title: "Response Time",
               content: "We typically respond within 24 hours to all inquiries",
-              color: "green",
             },
           ].map((item, index) => (
             <motion.div
@@ -71,47 +68,44 @@ export default function ContactInfo() {
               whileHover={{ x: 5 }}
             >
               <motion.div
-                className={`w-12 h-12 rounded-full bg-cyberpunk-${item.color}/20 flex items-center justify-center mr-4 flex-shrink-0`}
-                whileHover={{
-                  scale: 1.1,
-                  backgroundColor: `rgba(var(--color-cyberpunk-${item.color}-rgb), 0.3)`,
-                }}
+                className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0"
+                whileHover={{ scale: 1.05 }}
               >
                 {item.icon}
               </motion.div>
               <div>
-                <h3 className=" font-subheading text-white mb-1">{item.title}</h3>
-                <p className="text-body-sm text-gray-300">{item.content}</p>
+                <h3 className="font-heading text-foreground mb-1">{item.title}</h3>
+                <p className="text-body-sm text-muted-foreground">{item.content}</p>
               </div>
             </motion.div>
           ))}
         </div>
 
         <motion.div
-          className="mt-8 pt-6 border-t border-gray-800"
+          className="mt-8 pt-6 border-t border-border/60"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.7, duration: 0.5 }}
         >
-          <h3 className=" font-subheading text-white mb-4">Connect With Us</h3>
+          <h3 className="font-heading text-foreground mb-4">Connect With Us</h3>
           <div className="flex flex-wrap gap-3">
               {[
-                { name: "twitter", color: "var(--social-twitter)" },
-                { name: "facebook", color: "var(--social-facebook)" },
-                { name: "instagram", color: "var(--social-instagram)" },
-                { name: "linkedin", color: "var(--social-linkedin)" },
-                { name: "youtube", color: "var(--social-youtube)" },
+                { name: "twitter" },
+                { name: "facebook" },
+                { name: "instagram" },
+                { name: "linkedin" },
+                { name: "youtube" },
               ].map((social, index) => (
               <motion.a
                 key={social.name}
                 href={`https://${social.name}.com`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-black/60 border border-gray-700 flex items-center justify-center hover:border-cyberpunk-blue transition-colors duration-300 group"
+                className="w-10 h-10 rounded-full bg-background/80 border border-border/60 flex items-center justify-center hover:border-primary transition-colors duration-300 group"
                   whileHover={{
                     scale: 1.1,
-                    boxShadow: "0 0 15px rgba(var(--ui-cyan-accent-rgb), 0.5)",
+                    boxShadow: "0 0 12px hsl(var(--primary) / 0.2)",
                   }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -119,7 +113,7 @@ export default function ContactInfo() {
                 transition={{ delay: 0.8 + index * 0.05, duration: 0.3 }}
               >
                 <span className="sr-only">{social.name}</span>
-                <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-cyberpunk-blue transition-colors duration-300" />
+                <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
               </motion.a>
             ))}
           </div>

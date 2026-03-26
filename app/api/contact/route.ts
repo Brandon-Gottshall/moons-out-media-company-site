@@ -129,21 +129,23 @@ export async function POST(request: NextRequest) {
         <head>
           <style>
             :root {
-              --ui-black: #000;
-              --ui-gray-900: #333;
-              --ui-gray-800: #555;
-              --ui-gray-200: #ddd;
-              --ui-gray-100: #eee;
-              --ui-gray-50: #f9f9f9;
+              --background: #024029;
+              --foreground: #F5F5DC;
+              --primary: #A68549;
+              --accent: #59052D;
+              --muted: #012A1B;
+              --input: #0E1140;
+              --muted-foreground: #8B8B8B;
             }
-            body { font-family: Arial, sans-serif; line-height: 1.6; color: var(--ui-gray-900); }
-            .container { max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid var(--ui-gray-200); border-radius: 5px; }
-            h2 { color: var(--ui-gray-800); }
-            strong { color: var(--ui-black); }
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: var(--foreground); background-color: var(--background); }
+            .container { max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid var(--primary); border-radius: 6px; background-color: var(--muted); }
+            h2, h3 { color: var(--primary); }
+            strong { color: var(--foreground); }
             .field-group { margin-bottom: 15px; }
-            .label { font-weight: bold; color: var(--ui-gray-800); }
+            .label { font-weight: bold; color: var(--foreground); }
             .value { margin-left: 5px; }
-            .message-box { padding: 10px; background-color: var(--ui-gray-50); border: 1px solid var(--ui-gray-100); border-radius: 3px; }
+            .message-box { padding: 10px; background-color: var(--input); border: 1px solid var(--primary); border-radius: 4px; }
+            .muted { color: var(--muted-foreground); }
           </style>
         </head>
         <body>

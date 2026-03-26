@@ -24,19 +24,6 @@ interface ServiceShowcaseProps {
   branch?: ServiceBranch
 }
 
-const getServiceRgbaColor = (colorName: string, opacity: number = 1): string => {
-  const colors: Record<string, string> = {
-    blue: "var(--cp-blue-rgb)",
-    pink: "var(--cp-pink-rgb)",
-    purple: "var(--cp-purple-light-rgb)",
-    green: "var(--cp-green-rgb)",
-    teal: "var(--cp-teal-soft-rgb)",
-    yellow: "var(--cp-yellow-rich-rgb)",
-    cyan: "var(--cp-blue-aqua-rgb)",
-  }
-  return `rgba(${(colors[colorName] || colors.blue)}, ${opacity})`
-}
-
 export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const swiperRef = useRef<SwiperInstance | null>(null)
@@ -54,13 +41,11 @@ export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
   // Filter services by branch if provided
   const services = branch ? MASTER_SERVICES.filter(s => s.branch === branch) : MASTER_SERVICES
   const activeService = services[activeIndex]
-  const activeRgbaColor = getServiceRgbaColor(activeService.color)
-  const activeTailwindColorName = activeService.color // e.g. "blue", "pink"
-  // Pre-construct strings for dynamic Tailwind classes that involve interpolation
-  const activeBorderClass = `border-cyberpunk-${activeTailwindColorName}`
-  const activeTextClass = `text-cyberpunk-${activeTailwindColorName}`
-  const activeBgClass = `bg-cyberpunk-${activeTailwindColorName}`
-  const activeRingClass = `focus:ring-cyberpunk-${activeTailwindColorName}`
+  const activeBorderClass = "border-primary/40"
+  const inactiveBorderClass = "border-border/60 hover:border-primary/40"
+  const activeTextClass = "text-primary"
+  const activeBgClass = "bg-primary/20"
+  const activeRingClass = "focus:ring-primary/50"
 
   const handleSlideChange = (swiper: SwiperInstance) => {
     setActiveIndex(swiper.realIndex)
@@ -92,8 +77,8 @@ export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {services.map((service, index) => {
               const isServiceActive = index === activeIndex
-              const serviceBorderClass = isServiceActive ? activeBorderClass : 'border-gray-800 hover:border-gray-700'
-              const serviceTitleClass = isServiceActive ? activeTextClass : 'text-white'
+              const serviceBorderClass = isServiceActive ? activeBorderClass : inactiveBorderClass
+              const serviceTitleClass = isServiceActive ? activeTextClass : "text-foreground"
               return (
                 <motion.div
                   key={service.id}
@@ -107,7 +92,7 @@ export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
                     alt={service.title}
                     className="absolute inset-0 w-full h-full object-cover opacity-60"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  <div className="absolute inset-0 bg-background/70" />
                   <div className="absolute bottom-0 left-0 right-0 p-4 z-10 text-center">
                     <h4 className={`text-body-lg md:text-heading-md font-subheading transition-colors duration-300 ${serviceTitleClass}`}>
                       {service.title}
@@ -116,7 +101,7 @@ export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
                   {isServiceActive && (
                     <motion.div
                       className="absolute top-2 right-2 w-3 h-3 rounded-full"
-                      style={{ backgroundColor: activeRgbaColor }}
+                      className="bg-primary"
                       layoutId="active-indicator"
                     />
                   )}
@@ -147,13 +132,13 @@ export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
           >
             {services.map((service, index) => {
               const isServiceActive = index === activeIndex;
-              const serviceBorderClass = isServiceActive ? activeBorderClass : 'border-gray-800 hover:border-gray-700';
-              const serviceTitleClass = isServiceActive ? activeTextClass : 'text-white';
+              const serviceBorderClass = isServiceActive ? activeBorderClass : inactiveBorderClass;
+              const serviceTitleClass = isServiceActive ? activeTextClass : "text-foreground";
               
               return (
                 <SwiperSlide key={service.id} className="h-auto">
                   <motion.div
-                    className={`relative aspect-[3/4] rounded-xl overflow-hidden cursor-pointer group border-2 ${serviceBorderClass} transition-all duration-300 ease-in-out bg-black/30`}
+                    className={`relative aspect-[3/4] rounded-xl overflow-hidden cursor-pointer group border-2 ${serviceBorderClass} transition-all duration-300 ease-in-out bg-background/80`}
                     onClick={() => slideTo(index)}
                     whileHover={{ scale: 1.03 }}
                     animate={{ scale: isServiceActive ? 1.05 : 1, y: isServiceActive ? -5 : 0}}
@@ -167,7 +152,7 @@ export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
                       animate={{ scale: 1 }}
                       transition={{ duration: 0.8 }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                    <div className="absolute inset-0 bg-background/70" />
                     <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 z-10">
                       <h4 className={`text-body-lg md:text-heading-md font-subheading transition-colors duration-300 ${serviceTitleClass}`}>
                         {service.title}
@@ -176,7 +161,7 @@ export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
                     {isServiceActive && (
                        <motion.div 
                         className="absolute top-2 right-2 w-3 h-3 rounded-full"
-                        style={{ backgroundColor: activeRgbaColor }}
+                        className="bg-primary"
                         layoutId="active-indicator"
                       />
                     )}
@@ -192,14 +177,14 @@ export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
           <>
             <button
               aria-label="Previous service"
-              className={`swiper-button-prev-custom absolute top-1/2 -translate-y-1/2 left-0 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-all text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black ${activeRingClass}`}
+              className={`swiper-button-prev-custom absolute top-1/2 -translate-y-1/2 left-0 z-20 p-2 rounded-full bg-background/80 hover:bg-background transition-all text-foreground focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background ${activeRingClass}`}
               style={{ marginLeft: '-10px' }}
             >
               <ChevronLeft className="h-6 w-6" />
             </button>
             <button
               aria-label="Next service"
-              className={`swiper-button-next-custom absolute top-1/2 -translate-y-1/2 right-0 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-all text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black ${activeRingClass}`}
+              className={`swiper-button-next-custom absolute top-1/2 -translate-y-1/2 right-0 z-20 p-2 rounded-full bg-background/80 hover:bg-background transition-all text-foreground focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background ${activeRingClass}`}
               style={{ marginRight: '-10px' }}
             >
               <ChevronRight className="h-6 w-6" />
@@ -209,16 +194,12 @@ export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
       </div>
 
       <div 
-        className="relative bg-black/60 backdrop-blur-md border border-gray-800 rounded-lg overflow-visible w-full max-w-4xl mx-auto p-6 md:p-8"
+        className="relative bg-background/90 backdrop-blur-md border border-border/60 rounded-lg overflow-visible w-full max-w-4xl mx-auto p-6 md:p-8"
         aria-live="polite"
       >
         <motion.div
-          className="absolute inset-x-0 top-[-20%] bottom-[-50%] rounded-lg opacity-20 blur-2xl z-0"
+          className="absolute inset-x-0 top-[-20%] bottom-[-50%] rounded-lg opacity-20 blur-2xl z-0 bg-primary/10"
           key={`${activeService.id}-glow`}
-          initial={{ background: `radial-gradient(circle at 50% 50%, ${getServiceRgbaColor(activeService.color, 0)} 0%, transparent 70%)` }}
-          animate={{
-            background: `radial-gradient(circle at 50% 50%, ${getServiceRgbaColor(activeService.color, 0.5)} 0%, transparent 70%)`,
-          }}
           transition={{ duration: 0.8 }}
         />
 
@@ -233,7 +214,7 @@ export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
           >
             <div className="mb-6 md:mb-8 text-center">
               <motion.h3
-                className="text-3xl md:text-4xl font-heading text-white inline-block"
+                className="text-3xl md:text-4xl font-heading text-foreground inline-block"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
@@ -249,12 +230,12 @@ export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
             </div>
             
             <motion.div
-              className="bg-black/40 p-5 rounded-lg mb-6 border border-gray-700"
+              className="bg-background/80 p-5 rounded-lg mb-6 border border-border/60"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <p className="text-gray-300  md:text-body-lg leading-relaxed">{activeService.description}</p>
+              <p className="text-muted-foreground md:text-body-lg leading-relaxed">{activeService.description}</p>
             </motion.div>
 
             <motion.div
@@ -269,8 +250,8 @@ export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
               </h4>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
                 {activeService.features.map((feature, index) => {
-                  const featureIconContainerClass = `w-5 h-5 rounded-full bg-cyberpunk-${activeTailwindColorName}/20 flex-shrink-0 flex items-center justify-center mt-0.5 mr-2.5 border border-cyberpunk-${activeTailwindColorName}/30`;
-                  const featureIconClass = `h-3 w-3 text-cyberpunk-${activeTailwindColorName}`;
+                  const featureIconContainerClass = "w-5 h-5 rounded-full bg-primary/10 flex-shrink-0 flex items-center justify-center mt-0.5 mr-2.5 border border-primary/30";
+                  const featureIconClass = "h-3 w-3 text-primary";
                   return (
                     <motion.li
                       key={index}
@@ -282,7 +263,7 @@ export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
                       <div className={featureIconContainerClass}>
                         <ChevronRight className={featureIconClass} />
                       </div>
-                      <span className="text-gray-300">{feature}</span>
+                      <span className="text-muted-foreground">{feature}</span>
                     </motion.li>
                   )}
                 )}
@@ -296,18 +277,10 @@ export default function ServiceShowcase({ branch }: ServiceShowcaseProps) {
               className="text-center md:text-left flex justify-center"
             >
               <Link href={activeService.caseStudyLink}>
-                <Button
-                  className={`${activeBgClass} hover:bg-cyberpunk-${activeTailwindColorName}/80 text-white py-3 px-6  relative overflow-hidden group`}
-                >
+                <Button className="btn-primary py-3 px-6 relative overflow-hidden group">
                   <span className="relative z-10 flex items-center">
                     View Our Projects <ExternalLink className="ml-2 h-4 w-4" />
                   </span>
-                  <motion.div
-                    className="absolute inset-0 bg-white/10"
-                    initial={{ x: "-100%", opacity: 0.5 }}
-                    whileHover={{ x: 0, opacity: 0.2 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  ></motion.div>
                 </Button>
               </Link>
             </motion.div>

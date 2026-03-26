@@ -94,7 +94,7 @@ export default function TeamSection() {
         className="container mx-auto px-4"
       >
         <h2 className="text-4xl font-heading mb-12 text-center">
-          Meet Our <span className="text-cyberpunk-green">Team</span>
+          Meet Our <span className="text-primary">Team</span>
         </h2>
 
         <motion.div
@@ -108,10 +108,10 @@ export default function TeamSection() {
             <motion.div
               key={index}
               variants={item}
-              className="group relative overflow-hidden rounded-lg bg-black/40 hover:bg-black/60 transition-all duration-300"
+              className="group relative overflow-hidden rounded-lg bg-background/80 hover:bg-background transition-all duration-300"
               whileHover={{
                 y: -5,
-                boxShadow: `0 10px 25px -5px rgba(var(--cp-blue-electric-rgb), 0.2)`,
+                boxShadow: "0 10px 25px -5px hsl(var(--primary) / 0.2)",
               }}
               onClick={() => setActiveTeamMember(member)}
             >
@@ -123,24 +123,24 @@ export default function TeamSection() {
                   height={400}
                   className="object-contain transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-background/70 opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
               </div>
 
               <div className="absolute bottom-0 left-0 w-full p-6 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-300 flex flex-col justify-center items-center">
-                <h3 className="text-heading-md font-heading text-white">
+                <h3 className="text-heading-md font-heading text-foreground">
                   {member.name}
                 </h3>
-                <p className="text-cyberpunk-blue font-small mb-3 text-center">
+                <p className="text-primary font-small mb-3 text-center">
                   {member.role}
                 </p>
-                <p className="text-gray-300 text-body-sm opacity-0 hidden transition-display group-hover:block group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                <p className="text-muted-foreground text-body-sm opacity-0 hidden transition-display group-hover:block group-hover:opacity-100 transition-opacity duration-300 delay-100">
                   {member.bio.substring(0, 80)}...
                 </p>
                 <div className="mt-4 flex items-center justify-center space-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
                   {member.social.twitter && (
                     <a
                       href={member.social.twitter}
-                      className="text-gray-400 hover:text-cyberpunk-blue transition-colors"
+                      className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       <Image
                         src="/images/x.com.svg"
@@ -154,7 +154,7 @@ export default function TeamSection() {
                   {member.social.linkedin && (
                     <a
                       href={member.social.linkedin}
-                      className="text-gray-400 hover:text-cyberpunk-blue transition-colors"
+                      className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       <Linkedin size={16} />
                     </a>
@@ -162,7 +162,7 @@ export default function TeamSection() {
                   {member.social.email && (
                     <a
                       href={`mailto:${member.social.email}`}
-                      className="text-gray-400 hover:text-cyberpunk-pink transition-colors"
+                      className="text-muted-foreground hover:text-accent transition-colors"
                     >
                       <Mail size={16} />
                     </a>
@@ -170,7 +170,7 @@ export default function TeamSection() {
                   {member.social.site && (
                     <a
                       href={member.social.site}
-                      className="text-gray-400 hover:text-cyberpunk-pink transition-colors"
+                      className="text-muted-foreground hover:text-accent transition-colors"
                     >
                       <Globe size={16} />
                     </a>
@@ -178,8 +178,8 @@ export default function TeamSection() {
                 </div>
               </div>
 
-              <div className="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-cyberpunk-pink opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
-              <div className="absolute bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-cyberpunk-blue opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+              <div className="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-accent opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+              <div className="absolute bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-primary opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
             </motion.div>
           ))}
         </motion.div>
@@ -190,14 +190,14 @@ export default function TeamSection() {
             onClick={() => setActiveTeamMember(null)}
             className="fixed inset-0 z-50 flex items-start sm:items-center justify-center px-4 pt-16 sm:pt-0 sm:flex-row"
           >
-            <div className="absolute inset-0 bg-black/80 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-background/80 pointer-events-none"></div>
             {/* Fixed close button always visible */}
             <div className="flex flex-col items-end gap-y-2">
               <button
                 type="button"
                 aria-label="Close modal"
                 onClick={() => setActiveTeamMember(null)}
-                className="fixed sm:relative top-20 sm:top-0 right-10 sm:right-0 z-[9999] text-gray-400 hover:text-white"
+                className="fixed sm:relative top-20 sm:top-0 right-10 sm:right-0 z-[9999] text-muted-foreground hover:text-foreground"
               >
                 <X size={20} />
               </button>
@@ -205,7 +205,7 @@ export default function TeamSection() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                className="bg-black/90 border border-cyberpunk-blue/30 rounded-lg p-6 max-w-3xl w-full max-h-[90vh] md:max-h-[calc(100vh-6rem)] overflow-y-auto overscroll-y-contain relative z-10"
+                className="bg-background border border-primary/30 rounded-lg p-6 max-w-3xl w-full max-h-[90vh] md:max-h-[calc(100vh-6rem)] overflow-y-auto overscroll-y-contain relative z-10"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="flex flex-col md:flex-row gap-6">
@@ -235,19 +235,19 @@ export default function TeamSection() {
                   </div>
 
                   <div className="w-full md:w-3/4">
-                    <h3 className="text-2xl font-heading text-white">
+                    <h3 className="text-2xl font-heading text-foreground">
                       {activeTeamMember.name}
                     </h3>
-                    <p className="text-cyberpunk-blue font-emphasis mb-4">
+                    <p className="text-primary font-emphasis mb-4">
                       {activeTeamMember.role}
                     </p>
-                    <p className="text-gray-300 mb-6">{activeTeamMember.bio}</p>
+                    <p className="text-muted-foreground mb-6">{activeTeamMember.bio}</p>
 
                     <div className="flex space-x-4 pb-16">
                       {activeTeamMember.social.twitter && (
                         <a
                           href={activeTeamMember.social.twitter}
-                          className="p-2 rounded-full bg-cyberpunk-blue/10 text-cyberpunk-blue hover:bg-cyberpunk-blue/20 transition-colors"
+                          className="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
                         >
                           <Image
                             src="/images/x.com.svg"
@@ -260,7 +260,7 @@ export default function TeamSection() {
                       {activeTeamMember.social.linkedin && (
                         <a
                           href={activeTeamMember.social.linkedin}
-                          className="p-2 rounded-full bg-cyberpunk-blue/10 text-cyberpunk-blue hover:bg-cyberpunk-blue/20 transition-colors"
+                          className="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
                         >
                           <Linkedin size={18} />
                         </a>
@@ -268,7 +268,7 @@ export default function TeamSection() {
                       {activeTeamMember.social.email && (
                         <a
                           href={`mailto:${activeTeamMember.social.email}`}
-                          className="p-2 rounded-full bg-cyberpunk-pink/10 text-cyberpunk-pink hover:bg-cyberpunk-pink/20 transition-colors"
+                          className="p-2 rounded-full bg-accent/10 text-accent hover:bg-accent/20 transition-colors"
                         >
                           <Mail size={18} />
                         </a>
@@ -276,7 +276,7 @@ export default function TeamSection() {
                       {activeTeamMember.social.site && (
                         <a
                           href={activeTeamMember.social.site}
-                          className="p-2 rounded-full bg-cyberpunk-blue/10 text-cyberpunk-blue hover:bg-cyberpunk-blue/20 transition-colors"
+                          className="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
                         >
                           <Globe size={18} />
                         </a>

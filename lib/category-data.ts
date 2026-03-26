@@ -29,7 +29,7 @@ export const metaCategoriesData: MetaCategory[] = [
     id: "all-projects",
     title: "All Projects",
     image: "/images/Sunglasses_Animation.webp",
-    color: "cyberpunk-blue",
+    color: "primary",
     isGlobalAll: true,
     subCategories: [],
   },
@@ -39,7 +39,7 @@ export const metaCategoriesData: MetaCategory[] = [
       id: branch,
       title: branch === "media" ? "Moons Out Media" : "Moons Out Labs",
       image: services[0]?.image || "",
-      color: services[0]?.color || "cyberpunk-blue",
+      color: services[0]?.color || "primary",
       subCategories: services.map(s => ({
         id: s.id,
         title: s.shortTitle ?? s.title,

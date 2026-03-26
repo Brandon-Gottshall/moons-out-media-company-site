@@ -202,10 +202,10 @@ export default function StoryWheel() {
   return (
     <div className="relative h-[700px] md:h-[800px]">
       {/* Center Circle */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-48 md:h-48 rounded-full bg-black/80 border-2 border-cyberpunk-blue z-20 flex items-center justify-center">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-48 md:h-48 rounded-full bg-background/80 border-2 border-primary z-20 flex items-center justify-center">
         <div className="text-center">
-          <h3 className="text-body-lg md:text-heading-md font-heading text-white">Our Work</h3>
-          <p className="text-label-base md:text-body-sm text-gray-400">Explore our universe</p>
+          <h3 className="text-body-lg md:text-heading-md font-heading text-foreground">Our Work</h3>
+          <p className="text-label-base md:text-body-sm text-muted-foreground">Explore our universe</p>
         </div>
       </div>
 
@@ -230,8 +230,8 @@ export default function StoryWheel() {
               className={cn(
                 "absolute w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden cursor-pointer transition-all duration-300 border-2",
                 activeCategory.id === category.id
-                  ? "border-cyberpunk-blue shadow-[0_0_15px_rgba(var(--cp-blue-aqua-rgb), 0.7)]"
-                  : "border-gray-700",
+                  ? "border-primary"
+                  : "border-border/60",
               )}
               style={{
                 left: `calc(50% + ${x}px - 16px)`,
@@ -242,8 +242,8 @@ export default function StoryWheel() {
               }}
               onClick={() => handleCategoryClick(category, index)}
             >
-              <div className="w-full h-full flex items-center justify-center bg-black/70">
-                <p className="text-center text-body-sm md:text-body-base font-emphasis text-white">{category.name}</p>
+              <div className="w-full h-full flex items-center justify-center bg-background/70">
+                <p className="text-center text-body-sm md:text-body-base font-emphasis text-foreground">{category.name}</p>
               </div>
             </div>
           )
@@ -256,15 +256,15 @@ export default function StoryWheel() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="absolute bottom-0 left-0 right-0 bg-black/50 backdrop-blur-sm p-6 rounded-lg border border-cyberpunk-blue/30"
+        className="absolute bottom-0 left-0 right-0 bg-background/50 backdrop-blur-sm p-6 rounded-lg border border-primary/30"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <h3 className="text-2xl font-heading mb-2 text-white">{activeCategory.name}</h3>
-            <p className="text-gray-300 mb-4">{activeCategory.description}</p>
+            <h3 className="text-2xl font-heading mb-2 text-foreground">{activeCategory.name}</h3>
+            <p className="text-muted-foreground mb-4">{activeCategory.description}</p>
             <Button
-              className="cyberpunk-button"
-              onClick={() => router.push(`/portfolio?category=${activeCategory.id}`)}
+              className="btn-primary"
+              onClick={() => router.push(`/projects?category=${activeCategory.id}`)}
             >
               View All Projects <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
@@ -282,8 +282,8 @@ export default function StoryWheel() {
                   alt={project.title}
                   className="w-full h-24 object-cover transition-transform duration-300 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-2">
-                  <p className="text-label-base text-white font-emphasis">{project.title}</p>
+                <div className="absolute inset-0 bg-background/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-2">
+                  <p className="text-label-base text-foreground font-emphasis">{project.title}</p>
                 </div>
               </div>
             ))}
@@ -293,10 +293,10 @@ export default function StoryWheel() {
 
       {/* Project Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
-          <div className="relative bg-cyberpunk-background border border-cyberpunk-blue/30 rounded-lg w-full max-w-4xl overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80">
+          <div className="relative bg-background border border-primary/30 rounded-lg w-full max-w-4xl overflow-hidden">
             <button
-              className="absolute top-4 right-4 z-10 p-2 bg-black/50 rounded-full text-white hover:bg-black/70 transition-colors"
+              className="absolute top-4 right-4 z-10 p-2 bg-background/50 rounded-full text-foreground hover:bg-background/70 transition-colors"
               onClick={() => setSelectedProject(null)}
             >
               <svg
@@ -315,7 +315,7 @@ export default function StoryWheel() {
               </svg>
             </button>
 
-            <div className="aspect-video bg-black">
+            <div className="aspect-video bg-background">
               <img
                 src={selectedProject.thumbnail || "/images/placeholder.svg"}
                 alt={selectedProject.title}
@@ -324,22 +324,22 @@ export default function StoryWheel() {
             </div>
 
             <div className="p-6">
-              <h3 className="text-2xl font-heading mb-1 text-white">{selectedProject.title}</h3>
-              <p className="text-cyberpunk-blue mb-4">Client: {selectedProject.client}</p>
-              <p className="text-gray-300 mb-6">
+              <h3 className="text-2xl font-heading mb-1 text-foreground">{selectedProject.title}</h3>
+              <p className="text-primary mb-4">Client: {selectedProject.client}</p>
+              <p className="text-muted-foreground mb-6">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu
                 sed erat molestie vehicula.
               </p>
               <div className="flex justify-between items-center">
                 <Button
-                  className="cyberpunk-button"
+                  className="btn-primary"
                   onClick={() => router.push(`/projects/${selectedProject.id}`)}
                 >
                   View Full Case Study
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-cyberpunk-blue text-cyberpunk-blue hover:bg-cyberpunk-blue/10"
+                  className="border-primary text-primary hover:bg-primary/10"
                   onClick={() => router.push("/contact")}
                 >
                   Start Your Project
@@ -352,4 +352,3 @@ export default function StoryWheel() {
     </div>
   )
 }
-

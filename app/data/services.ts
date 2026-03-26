@@ -19,7 +19,7 @@ export const MASTER_SERVICES: Service[] = [
     ],
     image: "/images/digital-marketing.webp",
     caseStudyLink: "/projects/conversion-campaigns",
-    color: "pink",
+    color: "primary",
     icon: "📱",
   },
   {
@@ -39,7 +39,7 @@ export const MASTER_SERVICES: Service[] = [
     ],
     image: "/images/storytelling.webp",
     caseStudyLink: "/projects/documentary-storytelling",
-    color: "purple",
+    color: "primary",
     icon: "📖",
   },
   {
@@ -58,7 +58,7 @@ export const MASTER_SERVICES: Service[] = [
     ],
     image: "/images/web-app-development.webp",
     caseStudyLink: "/projects/custom-web-applications",
-    color: "teal",
+    color: "accent",
     icon: "💻",
   },
   {
@@ -77,7 +77,7 @@ export const MASTER_SERVICES: Service[] = [
     ],
     image: "/images/ai-automation.webp",
     caseStudyLink: "/projects/ai-driven-automation",
-    color: "yellow",
+    color: "accent",
     icon: "🤖",
   },
   {
@@ -96,7 +96,7 @@ export const MASTER_SERVICES: Service[] = [
     ],
     image: "/images/cloud-devops.webp",
     caseStudyLink: "/projects/enterprise-cloud-devops",
-    color: "cyan",
+    color: "accent",
     icon: "☁️",
   },
   {
@@ -117,7 +117,7 @@ export const MASTER_SERVICES: Service[] = [
     ],
     image: "/images/Whiteboard Colab Scene.webp",
     caseStudyLink: "/projects/social-media-strategy",
-    color: "green",
+    color: "primary",
     // icon: "👍" // Example icon if desired
   },
 ].sort((a, b) => (a.branch === b.branch ? 0 : a.branch === "media" ? -1 : 1)); 

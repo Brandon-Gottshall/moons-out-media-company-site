@@ -112,21 +112,21 @@ export default function TrustMeter({ className }: TrustMeterProps) {
   return (
     <div ref={containerRef} className={cn("relative py-12", className)}>
       <div className="text-center mb-12">
-        <h3 className="text-2xl md:text-3xl font-heading mb-4 neon-text">Trust Meter</h3>
-        <p className="text-gray-300 max-w-2xl mx-auto">
+        <h3 className="text-2xl md:text-3xl font-heading mb-4 text-primary">Trust Meter</h3>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
           See how our clients' trust grows as you explore our proven track record of success.
         </p>
       </div>
 
       <div className="max-w-4xl mx-auto mb-16">
-        <div className="relative h-8 bg-black/50 rounded-full overflow-hidden border border-gray-700 mb-4">
+        <div className="relative h-8 bg-background/80 rounded-full overflow-hidden border border-primary/30 mb-4">
           <motion.div
-            className="absolute top-0 left-0 h-full bg-gradient-to-r from-cyberpunk-blue via-cyberpunk-purple to-cyberpunk-pink rounded-full"
+            className="absolute top-0 left-0 h-full bg-primary rounded-full"
             style={{ width: `${trustLevel}%` }}
           ></motion.div>
 
           {[25, 50, 75].map((mark) => (
-            <div key={mark} className="absolute top-0 bottom-0 w-0.5 bg-gray-700" style={{ left: `${mark}%` }}></div>
+            <div key={mark} className="absolute top-0 bottom-0 w-0.5 bg-primary/30" style={{ left: `${mark}%` }}></div>
           ))}
 
           <motion.div
@@ -134,11 +134,11 @@ export default function TrustMeter({ className }: TrustMeterProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: trustLevel > 10 ? 1 : 0 }}
           >
-            <span className="text-white font-heading text-body-sm">Trust Level: {trustLevel}%</span>
+            <span className="text-foreground font-heading text-body-sm">Trust Level: {trustLevel}%</span>
           </motion.div>
         </div>
 
-        <div className="flex justify-between text-label-base text-gray-400">
+        <div className="flex justify-between text-label-base text-muted-foreground">
           <span>Initial Contact</span>
           <span>Discovery</span>
           <span>Collaboration</span>
@@ -148,8 +148,8 @@ export default function TrustMeter({ className }: TrustMeterProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
         {/* Testimonials */}
-        <div className="bg-black/50 backdrop-blur-sm rounded-lg border border-cyberpunk-blue/30 p-6 h-[400px] relative overflow-hidden">
-          <h4 className="text-heading-md font-subheading text-white mb-6">Client Testimonials</h4>
+        <div className="bg-background/80 backdrop-blur-sm rounded-lg border border-primary/30 p-6 h-[400px] relative overflow-hidden">
+          <h4 className="text-heading-md font-heading text-foreground mb-6">Client Testimonials</h4>
 
           <div className="relative h-[300px]">
             {testimonials.map((testimonial, index) => (
@@ -174,14 +174,14 @@ export default function TrustMeter({ className }: TrustMeterProps) {
                       />
                     </div>
                     <div>
-                      <h5 className="font-emphasis text-white">{testimonial.name}</h5>
-                      <p className="text-body-sm text-gray-400">
+                      <h5 className="font-heading text-foreground">{testimonial.name}</h5>
+                      <p className="text-body-sm text-muted-foreground">
                         {testimonial.position}, {testimonial.company}
                       </p>
                     </div>
                   </div>
 
-                  <blockquote className="flex-1 italic text-gray-300 border-l-2 border-cyberpunk-blue pl-4">
+                  <blockquote className="flex-1 italic text-muted-foreground border-l-2 border-primary pl-4">
                     "{testimonial.quote}"
                   </blockquote>
                 </div>
@@ -195,7 +195,7 @@ export default function TrustMeter({ className }: TrustMeterProps) {
                 <button
                   key={index}
                   className={`w-2 h-2 rounded-full ${
-                    activeTestimonial === index ? "bg-cyberpunk-blue" : "bg-gray-600"
+                    activeTestimonial === index ? "bg-primary" : "bg-primary/30"
                   }`}
                   onClick={() => setActiveTestimonial(index)}
                   aria-label={`View testimonial ${index + 1}`}
@@ -206,8 +206,8 @@ export default function TrustMeter({ className }: TrustMeterProps) {
         </div>
 
         {/* Stats */}
-        <div className="bg-black/50 backdrop-blur-sm rounded-lg border border-cyberpunk-pink/30 p-6">
-          <h4 className="text-heading-md font-subheading text-white mb-6">By the Numbers</h4>
+        <div className="bg-background/50 backdrop-blur-sm rounded-lg border border-accent/30 p-6">
+          <h4 className="text-heading-md font-subheading text-foreground mb-6">By the Numbers</h4>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16">
             {stats.map((stat, index) => (
@@ -217,10 +217,10 @@ export default function TrustMeter({ className }: TrustMeterProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
                 viewport={{ once: true, amount: 0.3 }}
-                className="bg-black/50 backdrop-blur-sm border border-cyberpunk-blue/20 p-3 md:p-4 rounded-lg text-center shadow-xl"
+                className="bg-background/50 backdrop-blur-sm border border-primary/20 p-3 md:p-4 rounded-lg text-center shadow-xl"
               >
-                <p className="text-3xl font-heading text-cyberpunk-gold mb-2">{stat.value}</p>
-                <p className="text-body-sm text-gray-400">{stat.label}</p>
+                <p className="text-3xl font-heading text-primary mb-2">{stat.value}</p>
+                <p className="text-body-sm text-muted-foreground">{stat.label}</p>
               </motion.div>
             ))}
           </div>
@@ -229,7 +229,7 @@ export default function TrustMeter({ className }: TrustMeterProps) {
 
       {/* Client Logos */}
       <div className="mb-8">
-        <h4 className="text-heading-md font-subheading text-white text-center mb-8">Trusted By</h4>
+        <h4 className="text-heading-md font-subheading text-foreground text-center mb-8">Trusted By</h4>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {clients.map((client) => (
@@ -239,7 +239,7 @@ export default function TrustMeter({ className }: TrustMeterProps) {
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true, margin: "-100px" }}
-              className="bg-black/30 p-4 rounded-lg flex items-center justify-center h-24 border border-gray-800 hover:border-cyberpunk-blue/30 transition-colors"
+              className="bg-background/30 p-4 rounded-lg flex items-center justify-center h-24 border border-border/60 hover:border-primary/30 transition-colors"
             >
               <img src={client.logo || "/images/placeholder.svg"} alt={client.name} className="max-h-12 max-w-full" />
             </motion.div>
@@ -255,7 +255,7 @@ export default function TrustMeter({ className }: TrustMeterProps) {
         viewport={{ once: true, amount: 0.2 }}
       >
         <Link href="/contact">
-          <button className="bg-cyberpunk-blue text-white px-4 py-2 rounded-full">
+          <button className="bg-primary text-foreground px-4 py-2 rounded-full">
             Contact Us
           </button>
         </Link>
@@ -263,4 +263,3 @@ export default function TrustMeter({ className }: TrustMeterProps) {
     </div>
   )
 }
-

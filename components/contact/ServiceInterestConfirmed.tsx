@@ -22,26 +22,26 @@ export default function ServiceInterestConfirmed({ selectionType, services, onCh
   const showServices = selectionType === 'services'
 
   return (
-    <Card className="bg-black/40 backdrop-blur-sm border-gray-800 text-white">
+    <Card className="bg-background/40 backdrop-blur-sm border-border/60 text-foreground">
       <CardHeader>
         <CardTitle>Service Interest Confirmed</CardTitle>
       </CardHeader>
       <CardContent>
-        {typeLabel && !showServices && <p className="text-body-lg font-subheading text-cyberpunk-blue">{typeLabel}</p>}
+        {typeLabel && !showServices && <p className="text-body-lg font-subheading text-primary">{typeLabel}</p>}
         {showServices && (
           <div className="space-y-1">
-            <p className="text-body-lg font-subheading text-cyberpunk-blue mb-2">Your Selected Services:</p>
+            <p className="text-body-lg font-subheading text-primary mb-2">Your Selected Services:</p>
             <ul className="list-disc list-inside space-y-1 pl-4">
               {services.map(service => {
                 const svc = MASTER_SERVICES.find((s: Service) => s.id === service)
-                return <li key={service} className="text-gray-300">{svc?.shortTitle ?? svc?.title}</li>
+                return <li key={service} className="text-muted-foreground">{svc?.shortTitle ?? svc?.title}</li>
               })}
             </ul>
           </div>
         )}
       </CardContent>
       <CardFooter>
-        <Button type="button" variant="outline" onClick={onChange} className="border-cyberpunk-pink text-cyberpunk-pink hover:bg-cyberpunk-pink/10 hover:text-cyberpunk-pink">
+        <Button type="button" variant="outline" onClick={onChange} className="border-accent text-accent hover:bg-accent/10 hover:text-accent">
           Change Selection
         </Button>
       </CardFooter>

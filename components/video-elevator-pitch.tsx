@@ -76,7 +76,7 @@ export default function VideoElevatorPitch() {
               animate={{ opacity: 1, y: 0, height: "auto" }}
               exit={{ opacity: 0, y: 20, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-black/80 backdrop-blur-md rounded-t-lg border border-cyberpunk-blue/30 overflow-hidden mb-2 w-full max-w-xs md:max-w-md"
+              className="bg-background/80 backdrop-blur-md rounded-t-lg border border-primary/30 overflow-hidden mb-2 w-full max-w-xs md:max-w-md"
             >
               <div className="relative aspect-video">
                 <video
@@ -89,30 +89,30 @@ export default function VideoElevatorPitch() {
                   <source src="#" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 flex justify-between items-center">
+                <div className="absolute bottom-0 left-0 right-0 bg-background/70 p-3 flex justify-between items-center">
                   <div className="flex space-x-2">
                     <button
                       onClick={togglePlay}
-                      className="p-1.5 bg-cyberpunk-blue/20 hover:bg-cyberpunk-blue/40 rounded-full transition-colors"
+                      className="p-1.5 bg-primary/20 hover:bg-primary/40 rounded-full transition-colors"
                       aria-label={isPlaying ? "Pause video" : "Play video"}
                     >
-                      {isPlaying ? <Pause className="h-4 w-4 text-white" /> : <Play className="h-4 w-4 text-white" />}
+                      {isPlaying ? <Pause className="h-4 w-4 text-foreground" /> : <Play className="h-4 w-4 text-foreground" />}
                     </button>
                     <button
                       onClick={toggleMute}
-                      className="p-1.5 bg-cyberpunk-blue/20 hover:bg-cyberpunk-blue/40 rounded-full transition-colors"
+                      className="p-1.5 bg-primary/20 hover:bg-primary/40 rounded-full transition-colors"
                       aria-label={isMuted ? "Unmute video" : "Mute video"}
                     >
                       {isMuted ? (
-                        <VolumeX className="h-4 w-4 text-white" />
+                        <VolumeX className="h-4 w-4 text-foreground" />
                       ) : (
-                        <Volume2 className="h-4 w-4 text-white" />
+                        <Volume2 className="h-4 w-4 text-foreground" />
                       )}
                     </button>
                   </div>
                   <Button
                     size="sm"
-                    className="text-label-base bg-cyberpunk-pink hover:bg-cyberpunk-pink/80 text-white"
+                    className="text-label-base bg-accent hover:bg-accent/80 text-foreground"
                     onClick={() => router.push("/contact")}
                   >
                     Get Started
@@ -120,8 +120,8 @@ export default function VideoElevatorPitch() {
                 </div>
               </div>
               <div className="p-4">
-                <h3 className="text-body-lg font-heading text-white mb-2">Discover Moons Out Media</h3>
-                <p className="text-body-sm text-gray-300">
+                <h3 className="text-body-lg font-heading text-foreground mb-2">Discover Moons Out Media</h3>
+                <p className="text-body-sm text-muted-foreground">
                 Authentic story telling, targeted digital advertising, and custom web, AI & DevOps solutions — all designed to connect with your audience and accelerate your business.
                 </p>
               </div>
@@ -131,18 +131,17 @@ export default function VideoElevatorPitch() {
 
         <button
           onClick={toggleOpen}
-          className="flex items-center justify-center space-x-2 bg-black/80 backdrop-blur-md px-4 py-2 rounded-full border border-cyberpunk-blue/30 text-white hover:bg-black transition-colors"
+          className="flex items-center justify-center space-x-2 bg-background/80 backdrop-blur-md px-4 py-2 rounded-full border border-primary/30 text-foreground hover:bg-background transition-colors"
           aria-label={isOpen ? "Close video pitch" : "Open video pitch"}
         >
           <span className="text-body-sm font-emphasis">Elevator Pitch</span>
           {isOpen ? (
-            <ChevronDown className="h-4 w-4 text-cyberpunk-blue" />
+            <ChevronDown className="h-4 w-4 text-primary" />
           ) : (
-            <ChevronUp className="h-4 w-4 text-cyberpunk-blue" />
+            <ChevronUp className="h-4 w-4 text-primary" />
           )}
         </button>
       </div>
     </div>
   )
 }
-

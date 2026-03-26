@@ -1,6 +1,5 @@
 import type React from "react";
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
@@ -57,7 +56,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="font-body2 cyberpunk bg-cyberpunk-background min-h-screen">
+      <body className="font-body bg-background min-h-screen">
         <div className="relative">
           <Navigation logoSlot={<SiteLogo />} />
           <main className="relative">{children}</main>

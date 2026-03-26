@@ -7,14 +7,14 @@ const footerDescription = [
 
 export default function Footer() {
   return (
-    <footer className="bg-black/80 border-t border-cyberpunk-blue/30 pt-16 pb-8 w-full max-w-[100vw]">
+    <footer className="bg-background/80 border-t border-primary/30 pt-16 pb-8 w-full max-w-[100vw]">
       <div className="container mx-auto px-4 w-full">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           <div>
-            <h3 className="text-2xl font-heading mb-4 text-cyberpunk-blue">
-              MOONS<span className="text-cyberpunk-pink">OUT</span>
+            <h3 className="text-2xl font-heading mb-4 text-primary">
+              MOONS<span className="text-accent">OUT</span>
             </h3>
-            <div className="text-gray-300 mb-4 space-y-1">
+            <div className="text-muted-foreground mb-4 space-y-1">
               {footerDescription.map((line, index) => (
                 <p 
                   key={index}
@@ -26,7 +26,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-body-lg font-subheading mb-4 text-white">
+            <h4 className="text-body-lg font-subheading mb-4 text-foreground">
               Quick Links
             </h4>
             <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
@@ -35,14 +35,14 @@ export default function Footer() {
                 { name: "Services", href: "/services" },
                 { name: "Creative Services", href: "/services/creative" },
                 { name: "Labs & Tech", href: "/services/labs" },
-                { name: "Portfolio", href: "/portfolio" },
-                { name: "Our Team", href: "/about-us" },
+                { name: "Projects", href: "/projects" },
+                { name: "Our Team", href: "/our-team" },
                 { name: "Contact", href: "/contact" }
               ].map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-cyberpunk-blue transition-colors"
+                    className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -52,26 +52,26 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-body-lg font-subheading mb-4 text-white">
+            <h4 className="text-body-lg font-subheading mb-4 text-foreground">
               Contact Us
             </h4>
             <ul className="space-y-3">
-              <li className="text-gray-300">
+              <li className="text-muted-foreground">
                 Dayton, Ohio, USA
               </li>
-              <li className="text-gray-300">team@moonsoutmedia.com</li>
+              <li className="text-muted-foreground">team@moonsoutmedia.com</li>
             </ul>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-gray-800 text-center">
-          <p className="text-gray-400 text-body-sm mb-2">
+        <div className="pt-8 border-t border-border/60 text-center">
+          <p className="text-muted-foreground text-body-sm mb-2">
             © {new Date().getFullYear()} Moons Out Media. All rights reserved.
           </p>
           <div className="flex justify-center space-x-4 text-body-sm">
             <Link
               href="/privacy"
-              className="text-gray-400 hover:text-cyberpunk-blue transition-colors"
+              className="text-muted-foreground hover:text-primary transition-colors"
             >
               Privacy Policy
             </Link>

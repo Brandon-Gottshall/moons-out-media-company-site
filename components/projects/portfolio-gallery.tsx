@@ -80,11 +80,11 @@ export default function PortfolioGallery({
 
       {filteredItems.length === 0 && selectedMetaCategoryId !== "all-projects" && (
         <div className="text-center py-12">
-          <p className="text-heading-md text-gray-400">No projects found for the current filter.</p>
+          <p className="text-heading-md text-muted-foreground">No projects found for the current filter.</p>
           <Button 
             variant="ghost" 
             onClick={() => onMetaCategorySelect("all-projects")} 
-            className="text-cyberpunk-blue mt-2"
+            className="text-primary mt-2"
           >
             Show all projects
           </Button>
@@ -94,7 +94,7 @@ export default function PortfolioGallery({
       {displayedItems.length < filteredItems.length && (
         <div className="mt-12 text-center">
           <Button
-            className="cyberpunk-button py-6 px-10  relative overflow-hidden group"
+            className="btn-primary py-6 px-10  relative overflow-hidden group"
             onClick={() => setItemsToShow(prev => Math.min(prev + pageSize, filteredItems.length))}
           >
             <span className="relative z-10">Load More Projects</span>

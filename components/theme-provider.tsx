@@ -4,7 +4,7 @@ import type React from "react"
 
 import { createContext, useContext, useEffect, useState } from "react"
 
-type Theme = "cyberpunk" | "light"
+type Theme = "media" | "labs"
 
 type ThemeProviderProps = {
   children: React.ReactNode
@@ -18,7 +18,7 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
-export function ThemeProvider({ children, defaultTheme = "cyberpunk" }: ThemeProviderProps) {
+export function ThemeProvider({ children, defaultTheme = "media" }: ThemeProviderProps) {
   // Use state with no initial value
   const [theme, setTheme] = useState<Theme | null>(null)
   const [mounted, setMounted] = useState(false)
@@ -34,8 +34,7 @@ export function ThemeProvider({ children, defaultTheme = "cyberpunk" }: ThemePro
   useEffect(() => {
     if (!mounted || theme === null) return
 
-    document.documentElement.classList.remove("cyberpunk", "light")
-    document.documentElement.classList.add(theme)
+    document.documentElement.dataset.mode = theme
     localStorage.setItem("theme", theme)
   }, [theme, mounted])
 
@@ -64,4 +63,3 @@ export function useTheme() {
   }
   return context
 }
-

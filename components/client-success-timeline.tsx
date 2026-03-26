@@ -132,7 +132,7 @@ export default function ClientSuccessTimeline() {
       <div className="hidden md:block">
         <motion.div
           style={{ opacity }}
-          className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyberpunk-blue via-cyberpunk-pink to-cyberpunk-green"
+          className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-primary/50"
         ></motion.div>
 
         <div className="space-y-32">
@@ -146,7 +146,7 @@ export default function ClientSuccessTimeline() {
                 className={`relative ${isLeft ? "ml-auto mr-[50%]" : "ml-[50%]"} w-full max-w-[45%] ${isActive ? "z-10" : "z-0"}`}
               >
                 <div
-                  className={`absolute top-1/2 ${isLeft ? "right-0 translate-x-1/2" : "left-0 -translate-x-1/2"} -translate-y-1/2 w-6 h-6 rounded-full border-2 ${isActive ? "border-cyberpunk-blue bg-cyberpunk-blue/30 animate-pulse-glow" : "border-gray-600 bg-gray-800"}`}
+                  className={`absolute top-1/2 ${isLeft ? "right-0 translate-x-1/2" : "left-0 -translate-x-1/2"} -translate-y-1/2 w-6 h-6 rounded-full border-2 ${isActive ? "border-primary bg-primary/30" : "border-border/60 bg-background/80"}`}
                 ></div>
 
                 <motion.div
@@ -156,27 +156,27 @@ export default function ClientSuccessTimeline() {
                   viewport={{ once: true, amount: 0.2 }}
                   className={`p-6 rounded-lg ${
                     isActive
-                      ? "bg-black/80 backdrop-blur-md border border-cyberpunk-blue/50 shadow-[0_0_15px_rgba(var(--cp-blue-aqua-rgb), 0.3)]"
-                      : "bg-black/60 border border-gray-800"
+                      ? "bg-background/80 backdrop-blur-md border border-primary/50 shadow-md"
+                      : "bg-background/60 border border-border/60"
                   }`}
                 >
                   <div className="flex justify-between items-start mb-4">
                     <div>
                       <span
-                        className={`inline-block px-3 py-1 rounded-full text-body-sm font-emphasis mb-2 ${isActive ? "bg-cyberpunk-blue/20 text-cyberpunk-blue" : "bg-gray-800 text-gray-400"}`}
+                        className={`inline-block px-3 py-1 rounded-full text-body-sm font-emphasis mb-2 ${isActive ? "bg-primary/20 text-primary" : "bg-background/70 text-muted-foreground"}`}
                       >
                         {story.year}
                       </span>
-                      <h3 className={`text-heading-md font-heading ${isActive ? "text-white" : "text-gray-400"}`}>
+                      <h3 className={`text-heading-md font-heading ${isActive ? "text-foreground" : "text-muted-foreground"}`}>
                         {story.client}
                       </h3>
-                      <p className={`text-body-sm ${isActive ? "text-cyberpunk-pink" : "text-gray-500"}`}>
+                      <p className={`text-body-sm ${isActive ? "text-accent" : "text-muted-foreground"}`}>
                         {story.industry}
                       </p>
                     </div>
                     {isActive && (
-                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-cyberpunk-blue to-cyberpunk-purple flex items-center justify-center">
-                        <span className="text-white font-heading">{index + 1}</span>
+                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary flex items-center justify-center">
+                        <span className="text-foreground font-heading">{index + 1}</span>
                       </div>
                     )}
                   </div>
@@ -191,20 +191,20 @@ export default function ClientSuccessTimeline() {
                         />
                       </div>
 
-                      <h4 className="text-body-lg font-subheading text-white mb-2">{story.title}</h4>
-                      <p className="text-white mb-4">{story.description}</p>
+                      <h4 className="text-body-lg font-heading text-foreground mb-2">{story.title}</h4>
+                      <p className="text-foreground mb-4">{story.description}</p>
 
                       <div className="grid grid-cols-3 gap-2 mb-4">
                         {story.metrics.map((metric, idx) => (
-                          <div key={idx} className="bg-black/50 p-3 rounded-md text-center">
-                            <p className="text-body-lg font-heading text-white">{metric.value}</p>
-                            <p className="text-label-base text-white">{metric.label}</p>
-                            <p className="text-label-base text-cyberpunk-green">{metric.change}</p>
+                          <div key={idx} className="bg-background/70 p-3 rounded-md text-center">
+                            <p className="text-body-lg font-heading text-foreground">{metric.value}</p>
+                            <p className="text-label-base text-muted-foreground">{metric.label}</p>
+                            <p className="text-label-base text-primary">{metric.change}</p>
                           </div>
                         ))}
                       </div>
 
-                      <Button className="w-full cyberpunk-button" onClick={() => router.push(story.caseStudyLink)}>
+                      <Button className="w-full btn-primary" onClick={() => router.push(story.caseStudyLink)}>
                         View Case Study <ExternalLink className="ml-2 h-4 w-4" />
                       </Button>
                     </>
@@ -212,8 +212,8 @@ export default function ClientSuccessTimeline() {
 
                   {!isActive && (
                     <>
-                      <h4 className="text-body-lg font-subheading text-gray-300 mb-2">{story.title}</h4>
-                      <p className="text-gray-400 line-clamp-2">{story.description}</p>
+                      <h4 className="text-body-lg font-heading text-muted-foreground mb-2">{story.title}</h4>
+                      <p className="text-muted-foreground line-clamp-2">{story.description}</p>
                     </>
                   )}
                 </motion.div>
@@ -225,8 +225,8 @@ export default function ClientSuccessTimeline() {
 
       {/* Mobile version - card-based layout */}
       <div className="md:hidden space-y-6">
-        <div className="bg-black/80 backdrop-blur-sm p-4 rounded-lg border border-cyberpunk-blue/30 mb-6">
-          <p className="text-white text-center">Swipe through our success stories</p>
+        <div className="bg-background/80 backdrop-blur-sm p-4 rounded-lg border border-primary/30 mb-6">
+          <p className="text-foreground text-center">Swipe through our success stories</p>
         </div>
 
         {successStories.map((story, index) => (
@@ -236,19 +236,19 @@ export default function ClientSuccessTimeline() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
             viewport={{ once: true, amount: 0.2 }}
-            className="bg-black/80 backdrop-blur-sm border border-cyberpunk-blue/30 rounded-lg overflow-hidden shadow-lg"
+            className="bg-background/80 backdrop-blur-sm border border-primary/30 rounded-lg overflow-hidden shadow-lg"
           >
-            <div className="p-4 border-b border-gray-800">
+            <div className="p-4 border-b border-border/60">
               <div className="flex justify-between items-center">
-                <span className="px-3 py-1 rounded-full text-body-sm font-emphasis bg-cyberpunk-blue/20 text-cyberpunk-blue">
+                <span className="px-3 py-1 rounded-full text-body-sm font-emphasis bg-primary/20 text-primary">
                   {story.year}
                 </span>
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyberpunk-blue to-cyberpunk-purple flex items-center justify-center">
-                  <span className="text-white font-heading">{index + 1}</span>
+                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                  <span className="text-foreground font-heading">{index + 1}</span>
                 </div>
               </div>
-              <h3 className="text-heading-md font-heading text-white mt-2">{story.client}</h3>
-              <p className="text-body-sm text-cyberpunk-pink">{story.industry}</p>
+              <h3 className="text-heading-md font-heading text-foreground mt-2">{story.client}</h3>
+              <p className="text-body-sm text-accent">{story.industry}</p>
             </div>
 
             <div className="overflow-hidden">
@@ -256,20 +256,20 @@ export default function ClientSuccessTimeline() {
             </div>
 
             <div className="p-4">
-              <h4 className="text-body-lg font-subheading text-white mb-2">{story.title}</h4>
-              <p className="text-white mb-4 text-body-sm">{story.description}</p>
+              <h4 className="text-body-lg font-heading text-foreground mb-2">{story.title}</h4>
+              <p className="text-foreground mb-4 text-body-sm">{story.description}</p>
 
               <div className="grid grid-cols-3 gap-2 mb-4">
                 {story.metrics.map((metric, idx) => (
-                  <div key={idx} className="bg-black/50 p-2 rounded-md text-center">
-                    <p className=" font-heading text-white">{metric.value}</p>
-                    <p className="text-label-base text-white">{metric.label}</p>
-                    <p className="text-label-base text-cyberpunk-green">{metric.change}</p>
+                  <div key={idx} className="bg-background/70 p-2 rounded-md text-center">
+                    <p className="font-heading text-foreground">{metric.value}</p>
+                    <p className="text-label-base text-muted-foreground">{metric.label}</p>
+                    <p className="text-label-base text-primary">{metric.change}</p>
                   </div>
                 ))}
               </div>
 
-              <Button className="w-full cyberpunk-button text-body-sm py-2" onClick={() => router.push(story.caseStudyLink)}>
+              <Button className="w-full btn-primary text-body-sm py-2" onClick={() => router.push(story.caseStudyLink)}>
                 View Case Study <ExternalLink className="ml-1 h-3 w-3" />
               </Button>
             </div>
@@ -279,4 +279,3 @@ export default function ClientSuccessTimeline() {
     </div>
   )
 }
-
