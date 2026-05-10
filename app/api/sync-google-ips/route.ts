@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import dns from 'dns/promises';
 import nodemailer from 'nodemailer';
-import createSesTransport from 'nodemailer-ses-transport';
+import { createSesEmailTransport } from '@/lib/ses-email-transport';
 
 // --- Nodemailer/AWS SES Email Sending Config ---
 const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
@@ -10,18 +10,17 @@ const AWS_REGION = process.env.AWS_REGION;
 const SES_FROM_EMAIL_ADDRESS = process.env.SES_FROM_EMAIL_ADDRESS || '"Moons Out IP Sync Agent" <status@moonsoutmedia.com>';
 const STATUS_EMAIL_RECIPIENT = process.env.STATUS_EMAIL_RECIPIENT; // Your email address for status updates
 
-// Nodemailer transporter using SES transport
+// Nodemailer transporter using SESv2 transport
 let statusEmailTransporter: nodemailer.Transporter | null = null;
 
 if (AWS_ACCESS_KEY_ID && AWS_SECRET_ACCESS_KEY && AWS_REGION && SES_FROM_EMAIL_ADDRESS && STATUS_EMAIL_RECIPIENT) {
-  console.log('[SYNC_GOOGLE_IPS] Creating transporter with nodemailer-ses-transport');
+  console.log('[SYNC_GOOGLE_IPS] Creating transporter with SESv2');
   
-  // Create transporter with dedicated SES transport plugin
-  statusEmailTransporter = nodemailer.createTransport(createSesTransport({
+  statusEmailTransporter = createSesEmailTransport({
     accessKeyId: AWS_ACCESS_KEY_ID,
     secretAccessKey: AWS_SECRET_ACCESS_KEY,
     region: AWS_REGION,
-  } as any)); // Cast to any to silence TypeScript issues with the nodemailer-ses-transport types
+  });
 }
 
 async function sendStatusEmail(subject: string, textBody: string, htmlBody?: string) {
@@ -86,7 +85,7 @@ async function getGoogleSpfIps(): Promise<string[]> {
 }
 
 export async function GET(request: Request) { 
-  let statusSubject = 'Moons Out Media: Google SPF IP Report (nodemailer-ses-transport)';
+  let statusSubject = 'Moons Out Media: Google SPF IP Report (SESv2)';
   let statusTextBody = `Run at: ${new Date().toUTCString()}\n\n`;
 
   if (!statusEmailTransporter) {
@@ -117,9 +116,9 @@ export async function GET(request: Request) {
 
   } catch (error: any) {
     statusSubject = `CRITICAL ERROR: ${statusSubject}`;
-    statusTextBody += `Error in /api/sync-google-ips (nodemailer-ses-transport): ${(error as Error).message}\n\n${(error as Error).stack}`;
+    statusTextBody += `Error in /api/sync-google-ips (SESv2): ${(error as Error).message}\n\n${(error as Error).stack}`;
     console.error(statusTextBody);
     await sendStatusEmail(statusSubject, statusTextBody);
-    return NextResponse.json({ error: 'Internal server error while fetching Google SPF IPs (nodemailer-ses-transport).', details: (error as Error).message }, { status: 500 });
+    return NextResponse.json({ error: 'Internal server error while fetching Google SPF IPs (SESv2).', details: (error as Error).message }, { status: 500 });
   }
-} 
+}

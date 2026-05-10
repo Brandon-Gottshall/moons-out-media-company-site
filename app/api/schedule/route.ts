@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import nodemailer from 'nodemailer'
-import createSesTransport from 'nodemailer-ses-transport'
+import { createSesEmailTransport } from '@/lib/ses-email-transport'
 
 // Environment variables
 const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID
@@ -15,11 +15,11 @@ const TEAM_EMAIL = process.env.TEAM_EMAIL || 'team@moonsoutmedia.com'
 // Initialize nodemailer SES transporter
 let scheduleTransporter: nodemailer.Transporter | null = null
 if (AWS_ACCESS_KEY_ID && AWS_SECRET_ACCESS_KEY && AWS_REGION) {
-  scheduleTransporter = nodemailer.createTransport(createSesTransport({
+  scheduleTransporter = createSesEmailTransport({
     accessKeyId: AWS_ACCESS_KEY_ID,
     secretAccessKey: AWS_SECRET_ACCESS_KEY,
     region: AWS_REGION,
-  } as any))
+  })
 }
 
 interface ScheduleData {
@@ -66,4 +66,4 @@ export async function POST(request: NextRequest) {
     console.error('Error sending schedule email:', err)
     return NextResponse.json({ message: 'Failed to send schedule email' }, { status: 500 })
   }
-} 
+}
