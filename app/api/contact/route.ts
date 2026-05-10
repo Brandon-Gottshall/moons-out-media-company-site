@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 import type { NextRequest } from 'next/server'
-import createSesTransport from 'nodemailer-ses-transport'
+import { createSesEmailTransport } from '@/lib/ses-email-transport'
 
 // --- DIAGNOSTIC LOGS --- Start ---
 console.log('[CONTACT_ROUTE_INIT] AWS_REGION:', process.env.AWS_REGION);
@@ -32,20 +32,19 @@ const BRANDON_EMAIL = process.env.BRANDON_EMAIL || 'brandon@moonsoutmedia.com'
 const LEVI_EMAIL = process.env.LEVI_EMAIL || 'levi@moonsoutmedia.com'
 const TEAM_EMAIL = process.env.TEAM_EMAIL || 'team@moonsoutmedia.com'
 
-// Nodemailer transporter using SES transport
+// Nodemailer transporter using SESv2 transport
 let contactTransporter: nodemailer.Transporter | null = null;
 
 if (AWS_ACCESS_KEY_ID && AWS_SECRET_ACCESS_KEY && AWS_REGION && SES_FROM_EMAIL_ADDRESS) {
-  console.log('[CONTACT_ROUTE_INIT] Creating nodemailer-ses-transport...');
+  console.log('[CONTACT_ROUTE_INIT] Creating SESv2 nodemailer transport...');
   
-  // Create transporter with dedicated SES transport plugin
-  contactTransporter = nodemailer.createTransport(createSesTransport({
+  contactTransporter = createSesEmailTransport({
     accessKeyId: AWS_ACCESS_KEY_ID,
     secretAccessKey: AWS_SECRET_ACCESS_KEY,
     region: AWS_REGION,
-  } as any)); // Cast to any to silence TypeScript issues with the nodemailer-ses-transport types
+  });
   
-  console.log('[CONTACT_ROUTE_INIT] Nodemailer transporter created with nodemailer-ses-transport.');
+  console.log('[CONTACT_ROUTE_INIT] Nodemailer transporter created with SESv2.');
 } else {
   console.log('[CONTACT_ROUTE_INIT] Skipped SES transporter creation due to missing ENV VARS.');
 }

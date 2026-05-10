@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import createSesTransport from 'nodemailer-ses-transport';
+import { createSesEmailTransport } from '@/lib/ses-email-transport';
 
 // Environment variables for Nodemailer/AWS SES Email Sending
 const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
@@ -9,18 +9,17 @@ const AWS_REGION = process.env.AWS_REGION;
 const SES_FROM_EMAIL_ADDRESS = process.env.SES_FROM_EMAIL_ADDRESS || '"Moons Out Test Email Agent" <test@moonsoutmedia.com>';
 const TEST_EMAIL_RECIPIENT = process.env.STATUS_EMAIL_RECIPIENT;
 
-// Nodemailer transporter using SES transport
+// Nodemailer transporter using SESv2 transport
 let testEmailTransporter: nodemailer.Transporter | null = null;
 
 if (AWS_ACCESS_KEY_ID && AWS_SECRET_ACCESS_KEY && AWS_REGION && SES_FROM_EMAIL_ADDRESS && TEST_EMAIL_RECIPIENT) {
-  console.log('[TEST_EMAIL_ROUTE] Creating transporter with nodemailer-ses-transport');
+  console.log('[TEST_EMAIL_ROUTE] Creating transporter with SESv2');
   
-  // Create transporter with dedicated SES transport plugin
-  testEmailTransporter = nodemailer.createTransport(createSesTransport({
+  testEmailTransporter = createSesEmailTransport({
     accessKeyId: AWS_ACCESS_KEY_ID,
     secretAccessKey: AWS_SECRET_ACCESS_KEY,
     region: AWS_REGION,
-  } as any)); // Cast to any to silence TypeScript issues with the nodemailer-ses-transport types
+  });
 }
 
 export async function GET(request: Request) {
@@ -39,9 +38,9 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
   
-  const subject = `Test Email from Moons Out Media (SES Transport) @ ${timestamp}`;
-  const textContent = `This is a test email sent from the Vercel cron job at ${timestamp}. If you received this, Nodemailer with nodemailer-ses-transport is configured correctly.`;
-  const htmlContent = `<p>This is a test email sent from the Vercel cron job at <strong>${timestamp}</strong>.</p><p>If you received this, Nodemailer with nodemailer-ses-transport is configured correctly.</p>`;
+  const subject = `Test Email from Moons Out Media (SESv2 Transport) @ ${timestamp}`;
+  const textContent = `This is a test email sent from the Vercel cron job at ${timestamp}. If you received this, Nodemailer with SESv2 is configured correctly.`;
+  const htmlContent = `<p>This is a test email sent from the Vercel cron job at <strong>${timestamp}</strong>.</p><p>If you received this, Nodemailer with SESv2 is configured correctly.</p>`;
 
   try {
     await testEmailTransporter.sendMail({
@@ -65,4 +64,4 @@ export async function GET(request: Request) {
       }
     }, { status: 500 });
   }
-} 
+}
